@@ -80,19 +80,19 @@ mo_counties <- counties(state = 29, cb = FALSE, class = "sf") %>%
   select(GEOID) %>%
   st_transform(crs = 26915)
 
+metro_counties <- c("17005", "17013", "17027", "17083", "17117", 
+                    "17119", "17133", "17163", "29071", "29099", 
+                    "29113", "29183", "29189", "29219", "29510")
+
 rbind(il_counties, mo_counties) %>%
-  filter(GEOID %in% c("17005", "17013", "17027", "17083", "17117", 
-                      "17119", "17133", "17163", "29071", "29099", 
-                      "29113", "29183", "29189", "29219", "29510")) -> counties
+  filter(GEOID %in% metro_counties) -> counties
 
 # clean-up
 rm(il_counties, mo_counties)
 
 # combine attributes and mortality
 detailed_sub %>%
-  filter(geoid %in% c("17005", "17013", "17027", "17083", "17117", 
-                      "17119", "17133", "17163", "29071", "29099", 
-                      "29113", "29183", "29189", "29219", "29510")) %>%
+  filter(geoid %in% metro_counties) %>%
   left_join(counties, ., by = c("GEOID" = "geoid")) %>%
   mutate(report_data = as.character(report_date)) %>%
   select(GEOID, state_name, name, report_date, confirmed_rate) %>%
@@ -108,3 +108,10 @@ rm(counties, detailed_sub)
 
 # write data
 st_write(detailed_sf, "data/metro_data/metro_data.shp", delete_dsn = TRUE)
+
+# subset detailed data again
+detailed_sub <- filter(detailed_data, geoid %in% metro_counties)
+
+# clean-up
+rm(metro_counties)
+

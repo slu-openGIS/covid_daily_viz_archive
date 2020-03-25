@@ -50,7 +50,7 @@ detailed_sf <- mutate(detailed_sf, county = ifelse(GEOID %in% c("29189", "29510"
 
 ggplot(data = detailed_sf) +
   geom_sf(mapping = aes(fill = c_rate)) +
-  geom_sf_label(mapping = aes(label = county)) +
+  geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines")) +
   scale_fill_distiller(palette = "Reds", trans = "reverse", name = "Rate per 1,000") +
   labs(
     title = "Confirmed COVID-19 Cases by Metro St. Louis County",
@@ -60,6 +60,22 @@ ggplot(data = detailed_sf) +
   theme_void()
 
 ggsave(filename = "results/confirmed_rate_metro_map.png", width = 8, height = 6, units = "in", dpi = 500)
+
+# plot confirmed rate
+ggplot(data = detailed_sub, mapping = aes(x = report_date, y = confirmed_rate)) +
+  geom_line(mapping = aes(color = name))  +
+  gghighlight(geoid %in% c("29189", "29510", "17027")) +
+  scale_color_brewer(palette = "Set1") +
+  scale_x_date(date_breaks = "1 day", date_labels = "%d %b")  +
+  labs(
+    title = "Confirmed COVID-19 Cases by Metro St. Louis County",
+    subtitle = paste0("2020-03-22 through ", as.character(date)),
+    x = "Date",
+    y = "Rate of Confirmed Infections per 1,000",
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE COVID-19 Project\nConfirmed cases are those with a positive test as a proportion of the total population"
+  )
+
+ggsave(filename = "results/confirmed_rate_metro.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # clean-up
 rm(date)
