@@ -1,80 +1,14 @@
-# scrape data from Johns Hopkins
-
-# dependencies
-library(dplyr)
-library(purrr)
-library(readr)
-library(sf)
-library(tidycensus)
-library(tigris)
-
-# values
-date <- lubridate::mdy("03-24-2020")
-
-# define download function
-get_data <- function(file){
-  
-  # create values
-  url <- paste0("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/", file)
-  date <- lubridate::mdy(stringr::str_replace(string = file, pattern = ".csv", replacement = ""))
-  
-  # download data
-  response <- RCurl::getURL(url = url)
-  
-  # read data
-  df <- readr::read_csv(response)
-  
-  # tidy data
-  if (date > "2020-03-22"){
-    
-    df <- dplyr::filter(df, Province_State %in% c("Missouri", "Illinois"))
-    df <- dplyr::select(df, FIPS, Admin2, Province_State, Last_Update, Confirmed, Deaths, Recovered, Active)
-    df <- dplyr::rename(df,
-                        geoid = FIPS,
-                        name = Admin2,
-                        state_name = Province_State,
-                        last_update = Last_Update,
-                        confirmed = Confirmed,
-                        deaths = Deaths,
-                        recovered = Recovered,
-                        active = Active)
-    df <- dplyr::mutate(df, report_date = date)
-    df <- dplyr::select(df, geoid, name, state_name, report_date, dplyr::everything())
-    df <- dplyr::arrange(df, as.numeric(geoid))
-    
-  } else if (date <= "2020-03-22"){
-    
-    df <- dplyr::rename(df,
-                        state_name = `Province/State`,
-                        last_update = `Last Update`,
-                        confirmed = Confirmed,
-                        deaths = Deaths,
-                        recovered = Recovered)
-    df <- filter(df, state_name %in% c("Missouri", "Illinois"))
-    df <- select(df, state_name, last_update, confirmed, deaths, recovered)
-    df <- dplyr::mutate(df, report_date = date)
-    df <- dplyr::select(df, state_name, report_date, dplyr::everything())
-    df <- dplyr::arrange(df, state_name)
-    
-  }
-  
-  # return output
-  return(df)
-  
-}
+# scrape and tidy COVID-19 data
 
 # list file names before county-level data available through Johns Hopkins
-initial_days <- c("03-10-2020.csv", "03-11-2020.csv", "03-12-2020.csv", "03-13-2020.csv", "03-14-2020.csv", "03-15-2020.csv",
-                  "03-16-2020.csv", "03-17-2020.csv", "03-18-2020.csv", "03-19-2020.csv", "03-20-2020.csv", "03-21-2020.csv",
-                  "03-22-2020.csv")
+initial_days <- c("03-10-2020.csv", "03-11-2020.csv", "03-12-2020.csv", "03-13-2020.csv", 
+                  "03-14-2020.csv", "03-15-2020.csv", "03-16-2020.csv", "03-17-2020.csv", 
+                  "03-18-2020.csv", "03-19-2020.csv", "03-20-2020.csv", "03-21-2020.csv")
 
 # download initial data
 initial_days %>%
   unlist() %>%
   map_df(~ get_data(file = .x)) -> initial_data
-
-# list file names after county-level data available
-detailed_days <- c("03-23-2020.csv", "03-24-2020.csv")
 
 # download detailed data
 detailed_days %>%
@@ -135,7 +69,7 @@ write_csv(summary_data, "data/summary_data.csv")
 write_csv(detailed_data, "data/detailed_data.csv")
 
 # subset detailed data
-detailed_data <- filter(detailed_data, report_date == date)
+detailed_sub <- filter(detailed_data, report_date == date)
 
 # download geometry
 il_counties <- counties(state = 17, cb = FALSE, class = "sf") %>%
@@ -155,7 +89,7 @@ rbind(il_counties, mo_counties) %>%
 rm(il_counties, mo_counties)
 
 # combine attributes and mortality
-detailed_data %>%
+detailed_sub %>%
   filter(geoid %in% c("17005", "17013", "17027", "17083", "17117", 
                       "17119", "17133", "17163", "29071", "29099", 
                       "29113", "29183", "29189", "29219", "29510")) %>%
@@ -170,8 +104,7 @@ detailed_data %>%
     ) -> detailed_sf
 
 # clean-up
-rm(date, counties)
+rm(counties, detailed_sub)
 
 # write data
 st_write(detailed_sf, "data/metro_data/metro_data.shp", delete_dsn = TRUE)
-
