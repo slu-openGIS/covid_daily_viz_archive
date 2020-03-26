@@ -64,9 +64,10 @@ ggsave(filename = "results/confirmed_rate_metro_map.png", width = 8, height = 6,
 # plot confirmed rate
 ggplot(data = detailed_sub, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = name))  +
-  gghighlight(geoid %in% c("29189", "29510", "17027")) +
+  gghighlight(geoid %in% c("29189", "29510", "17027", "17133")) +
   scale_color_brewer(palette = "Set1") +
   scale_x_date(date_breaks = "1 day", date_labels = "%d %b")  +
+  scale_y_continuous(limits = c(0, 0.15)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0("2020-03-22 through ", as.character(date)),

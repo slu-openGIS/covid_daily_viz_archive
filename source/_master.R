@@ -1,13 +1,14 @@
 # scrape data from Johns Hopkins, tidy, and plot
 
 # UPDATE values
-date <- lubridate::mdy("03-24-2020")
+date <- lubridate::mdy("03-25-2020")
 
 # UPDATE list file names after county-level data available
-detailed_days <- c("03-22-2020.csv", "03-23-2020.csv", "03-24-2020.csv")
+detailed_days <- c("03-22-2020.csv", "03-23-2020.csv", "03-24-2020.csv", "03-25-2020.csv")
 
 # dependencies
 library(dplyr)
+library(gghighlight)
 library(ggplot2)
 library(lubridate)
 library(purrr)
