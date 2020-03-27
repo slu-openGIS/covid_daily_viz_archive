@@ -18,10 +18,10 @@ library(tidycensus)
 library(tigris)
 
 # load get_data function
-source("source/covid_get_data.R")
+source("source/functions/covid_get_data.R")
 
 # scrape and tidy data
-source("source/covid_tidy_data.R")
+source("source/workflow/covid_tidy_data.R")
 
 # update plots
-source("source/covid_plots.R")
+source("source/workflow/covid_plots.R")
