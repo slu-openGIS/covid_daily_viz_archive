@@ -93,12 +93,14 @@ ggplot(data = detailed_sf) +
 ggsave(filename = "results/case_fatality_metro_map.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # plot confirmed rate
+detailed_sub <- mutate(detailed_sub, case_fatality_rate = ifelse(is.na(case_fatality_rate) == TRUE, 0, case_fatality_rate))
+
 ggplot(data = detailed_sub, mapping = aes(x = report_date, y = case_fatality_rate)) +
   geom_line(mapping = aes(color = name))  +
   gghighlight(geoid %in% c("29189", "29510", "29183")) +
   scale_color_brewer(palette = "Set1") +
   scale_x_date(date_breaks = "1 day", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 5)) + 
+  scale_y_continuous(limits = c(0, 10), breaks = c(0,2,4,6,8,10)) + 
   labs(
     title = "COVID-19 Case Fatality by Metro St. Louis County",
     subtitle = paste0("2020-03-22 through ", as.character(date)),
