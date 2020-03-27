@@ -46,9 +46,9 @@ ggplot(data = summary_data, mapping = aes(x = report_date, y = mortality_rate)) 
 ggsave(filename = "results/mortality_rate.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # map confirmed rate
-detailed_sf <- mutate(detailed_sf, county = ifelse(GEOID %in% c("29189", "29510"), NA, county))
+detailed_metro_sf <- mutate(detailed_metro_sf, county = ifelse(GEOID %in% c("29189", "29510"), NA, county))
 
-ggplot(data = detailed_sf) +
+ggplot(data = detailed_metro_sf) +
   geom_sf(mapping = aes(fill = c_rate)) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines")) +
   scale_fill_distiller(palette = "Oranges", trans = "reverse", name = "Rate per 1,000") +
@@ -62,7 +62,7 @@ ggplot(data = detailed_sf) +
 ggsave(filename = "results/confirmed_rate_metro_map.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # plot confirmed rate
-ggplot(data = detailed_sub, mapping = aes(x = report_date, y = confirmed_rate)) +
+ggplot(data = detailed_metro, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = name))  +
   gghighlight(geoid %in% c("29189", "29510", "17027", "17133" , "29183")) +
   scale_color_brewer(palette = "Set1") +
@@ -79,7 +79,7 @@ ggplot(data = detailed_sub, mapping = aes(x = report_date, y = confirmed_rate)) 
 ggsave(filename = "results/confirmed_rate_metro.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # map case fatality rate
-ggplot(data = detailed_sf) +
+ggplot(data = detailed_metro_sf) +
   geom_sf(mapping = aes(fill = cf_rate)) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines")) +
   scale_fill_distiller(palette = "Reds", trans = "reverse", name = "Percent") +
@@ -92,10 +92,10 @@ ggplot(data = detailed_sf) +
 
 ggsave(filename = "results/case_fatality_metro_map.png", width = 8, height = 6, units = "in", dpi = 500)
 
-# plot confirmed rate
-detailed_sub <- mutate(detailed_sub, case_fatality_rate = ifelse(is.na(case_fatality_rate) == TRUE, 0, case_fatality_rate))
+# plot case fatality rate
+detailed_metro <- mutate(detailed_metro, case_fatality_rate = ifelse(is.na(case_fatality_rate) == TRUE, 0, case_fatality_rate))
 
-ggplot(data = detailed_sub, mapping = aes(x = report_date, y = case_fatality_rate)) +
+ggplot(data = detailed_metro, mapping = aes(x = report_date, y = case_fatality_rate)) +
   geom_line(mapping = aes(color = name))  +
   gghighlight(geoid %in% c("29189", "29510", "29183")) +
   scale_color_brewer(palette = "Set1") +

@@ -29,22 +29,27 @@ detailed_data %>%
   bind_rows(initial_data, .) -> summary_data
 
 # get population data
+## state populations
 state_pop <- get_acs(geography = "state", state = c("Illinois", "Missouri"), year = 2018,
                      variables = "B01001_001") %>%
   select(NAME, estimate) %>%
   rename(total_pop = estimate)
 
+## county populations from ACS for IL
 county_pop <- get_acs(geography = "county", state = c("Illinois"), year = 2018,
                      variables = "B01001_001") %>%
   select(GEOID, estimate) %>%
   rename(total_pop = estimate)
 
+## county populations with KC as county equivalent
 mo_pop <- read_csv("data/mo_county_plus/mo_county_plus.csv") %>%
   select(-NAME) %>%
   mutate(GEOID = as.character(GEOID))
 
+## combine county data
 county_pop <- bind_rows(county_pop, mo_pop)
 
+## clean-up
 rm(mo_pop)
 
 # join population to counts and calculate rate
@@ -80,23 +85,27 @@ write_csv(detailed_data, "data/detailed_data.csv")
 # subset detailed data
 detailed_sub <- filter(detailed_data, report_date == date)
 
-# download geometry
+# create detamiled metro data
+## download geometry for IL
 il_counties <- counties(state = 17, cb = FALSE, class = "sf") %>%
   select(GEOID) %>%
   st_transform(crs = 26915)
 
+## download geometry for MO
 mo_counties <- counties(state = 29, cb = FALSE, class = "sf") %>%
   select(GEOID) %>%
   st_transform(crs = 26915)
 
+## define metro counties
 metro_counties <- c("17005", "17013", "17027", "17083", "17117", 
                     "17119", "17133", "17163", "29071", "29099", 
                     "29113", "29183", "29189", "29219", "29510")
 
+## combine and subset geometric data
 rbind(il_counties, mo_counties) %>%
   filter(GEOID %in% metro_counties) -> counties
 
-# clean-up
+## clean-up
 rm(il_counties, mo_counties)
 
 # combine attributes and mortality
@@ -112,17 +121,16 @@ detailed_sub %>%
     c_rate = confirmed_rate,
     m_rate = mortality_rate,
     cf_rate = case_fatality_rate
-    ) -> detailed_sf
+   ) -> detailed_metro_sf
 
 # clean-up
-rm(counties, detailed_sub)
+rm(counties)
 
 # write data
-st_write(detailed_sf, "data/metro_data/metro_data.shp", delete_dsn = TRUE)
+st_write(detailed_metro_sf, "data/metro_data/metro_data.shp", delete_dsn = TRUE)
 
 # subset detailed data again
-detailed_sub <- filter(detailed_data, geoid %in% metro_counties)
+detailed_metro <- filter(detailed_data, geoid %in% metro_counties)
 
 # clean-up
 rm(metro_counties)
-
