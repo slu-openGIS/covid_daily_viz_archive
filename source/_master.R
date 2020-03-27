@@ -21,6 +21,7 @@ library(tigris)
 source("source/functions/covid_get_data.R")
 
 # scrape and tidy data
+source("source/workflow/01_scrape_and_tidy.R")
 source("source/workflow/covid_tidy_data.R")
 
 # update plots
