@@ -51,7 +51,7 @@ detailed_sf <- mutate(detailed_sf, county = ifelse(GEOID %in% c("29189", "29510"
 ggplot(data = detailed_sf) +
   geom_sf(mapping = aes(fill = c_rate)) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines")) +
-  scale_fill_distiller(palette = "Reds", trans = "reverse", name = "Rate per 1,000") +
+  scale_fill_distiller(palette = "Oranges", trans = "reverse", name = "Rate per 1,000") +
   labs(
     title = "Confirmed COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0("2020-03-10 through ", as.character(date)),
@@ -64,10 +64,10 @@ ggsave(filename = "results/confirmed_rate_metro_map.png", width = 8, height = 6,
 # plot confirmed rate
 ggplot(data = detailed_sub, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = name))  +
-  gghighlight(geoid %in% c("29189", "29510", "17027", "17133")) +
+  gghighlight(geoid %in% c("29189", "29510", "17027", "17133" , "29183")) +
   scale_color_brewer(palette = "Set1") +
   scale_x_date(date_breaks = "1 day", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 0.15)) + 
+  scale_y_continuous(limits = c(0, 0.25)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0("2020-03-22 through ", as.character(date)),
@@ -77,6 +77,37 @@ ggplot(data = detailed_sub, mapping = aes(x = report_date, y = confirmed_rate)) 
   )
 
 ggsave(filename = "results/confirmed_rate_metro.png", width = 8, height = 6, units = "in", dpi = 500)
+
+# map case fatality rate
+ggplot(data = detailed_sf) +
+  geom_sf(mapping = aes(fill = cf_rate)) +
+  geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines")) +
+  scale_fill_distiller(palette = "Reds", trans = "reverse", name = "Rate per 1,000") +
+  labs(
+    title = "COVID-19 Case Fatality by Metro St. Louis County",
+    subtitle = paste0("2020-03-10 through ", as.character(date)),
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE COVID-19 Project\nCase fatality is the percent of confirmed cases that result in death\nSt. Louis City and County are intentionally not labeled to increase readability of map"
+  ) +
+  theme_void()
+
+ggsave(filename = "results/case_fatality_metro_map.png", width = 8, height = 6, units = "in", dpi = 500)
+
+# plot confirmed rate
+ggplot(data = detailed_sub, mapping = aes(x = report_date, y = case_fatality_rate)) +
+  geom_line(mapping = aes(color = name))  +
+  gghighlight(geoid %in% c("29189", "29510", "29183")) +
+  scale_color_brewer(palette = "Set1") +
+  scale_x_date(date_breaks = "1 day", date_labels = "%d %b")  +
+  scale_y_continuous(limits = c(0, 5)) + 
+  labs(
+    title = "COVID-19 Case Fatality by Metro St. Louis County",
+    subtitle = paste0("2020-03-22 through ", as.character(date)),
+    x = "Date",
+    y = "Case Fatality (%)",
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE COVID-19 Project\nCase fatality is the percent of confirmed cases that result in death"
+  )
+
+ggsave(filename = "results/case_fatality_metro.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # clean-up
 rm(date)

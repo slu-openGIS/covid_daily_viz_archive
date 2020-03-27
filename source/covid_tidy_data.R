@@ -95,12 +95,14 @@ detailed_sub %>%
   filter(geoid %in% metro_counties) %>%
   left_join(counties, ., by = c("GEOID" = "geoid")) %>%
   mutate(report_data = as.character(report_date)) %>%
-  select(GEOID, state_name, name, report_date, confirmed_rate) %>%
+  select(GEOID, state_name, name, report_date, confirmed_rate, mortality_rate, case_fatality_rate) %>%
   rename(
     state = state_name,
     county = name,
     date = report_date,
-    c_rate = confirmed_rate
+    c_rate = confirmed_rate,
+    m_rate = mortality_rate,
+    cf_rate = case_fatality_rate
     ) -> detailed_sf
 
 # clean-up
