@@ -22,7 +22,6 @@ source("source/functions/historic_expand.R")
 source("source/workflow/01_scrape_and_tidy.R")
 source("source/workflow/02_add_rates.R")
 source("source/workflow/03_create_spatial.R")
-# source("source/workflow/covid_tidy_data.R")
 
 # update plots
-# source("source/workflow/covid_plots.R")
+source("source/workflow/04_summary_plots.R")
