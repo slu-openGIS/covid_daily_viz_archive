@@ -1,9 +1,10 @@
 # define download function for Hopkins data
-get_hopkins <- function(file){
+get_hopkins <- function(date){
   
   # create values
+  file <- paste0(format(date,'%m-%d-%Y'), ".csv")
   url <- paste0("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/", file)
-  date <- lubridate::mdy(stringr::str_replace(string = file, pattern = ".csv", replacement = ""))
+  # date <- lubridate::mdy(stringr::str_replace(string = file, pattern = ".csv", replacement = ""))
   
   # download data
   response <- RCurl::getURL(url = url)

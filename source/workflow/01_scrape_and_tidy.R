@@ -1,40 +1,12 @@
 # initial scrape and tidy of Johns Hopkins COVID-19 data
 
-# list file names before county-level data available through Johns Hopkins
-initial_days <- c("03-10-2020.csv", "03-11-2020.csv", "03-12-2020.csv", "03-13-2020.csv", 
-                  "03-14-2020.csv", "03-15-2020.csv", "03-16-2020.csv", "03-17-2020.csv", 
-                  "03-18-2020.csv", "03-19-2020.csv", "03-20-2020.csv", "03-21-2020.csv")
-
-# download initial data
-initial_days %>%
-  unlist() %>%
-  map_df(~ get_hopkins(file = .x)) -> initial_data
+# define days to scrape
+detailed_dates <- seq(as.Date("2020-03-22"), date, by="days")
 
 # download detailed data
-detailed_days %>%
+detailed_dates %>%
   unlist() %>%
-  map_df(~ get_hopkins(file = .x)) -> detailed_data
-
-# summarize detailed data
-detailed_data %>%
-  group_by(state, report_date) %>%
-  summarise(
-    last_update = first(last_update),
-    confirmed = sum(confirmed),
-    deaths = sum(deaths)
-  ) %>%
-  arrange(report_date, state) %>%
-  bind_rows(initial_data, .) -> summary_data
-
-# summarize detailed data
-detailed_data %>%
-  group_by(state, report_date) %>%
-  summarise(
-    last_update = first(last_update),
-    confirmed = sum(confirmed),
-    deaths = sum(deaths)
-  ) %>%
-  arrange(report_date, state) -> summary_data
+  map_df(~ get_hopkins(date = .x)) -> detailed_data
 
 # add historical data to detailed
 ## load data
@@ -43,12 +15,8 @@ historic_raw <- get_times(end_date = "2020-03-22")
 # get county master list
 counties_sf <- tigris::counties(state = c(17, 20, 29), cb = FALSE, class = "sf")
 
-# remove geometry
-counties <- counties_sf
-st_geometry(counties) <- NULL
-
 # tidy
-counties %>% 
+counties_sf %>% 
   select(GEOID, STATEFP, NAME) %>%
   rename(
          geoid = GEOID,
@@ -60,7 +28,11 @@ counties %>%
     state == 20 ~ "Kansas",
     state == 29 ~ "Missouri"
   )) %>%
-  arrange(state, geoid) -> counties
+  arrange(state, geoid) -> counties_sf
+
+# remove geometry
+counties <- counties_sf
+st_geometry(counties) <- NULL
 
 # create vector of dates
 historic_dates <- seq(as.Date("2020-01-24"), as.Date("2020-03-21"), by="days")
@@ -87,6 +59,16 @@ historic_data %>%
 # bind
 detailed_data <- bind_rows(historic_data, detailed_data)
 
+# summarize detailed data
+detailed_data %>%
+  group_by(state, report_date) %>%
+  summarise(
+    last_update = first(last_update),
+    confirmed = sum(confirmed),
+    deaths = sum(deaths)
+  ) %>%
+  arrange(report_date, state) -> summary_data
+
 # clean-up
-rm(initial_data, counties, historic_dates, detailed_days, initial_days, get_hopkins, get_times, 
+rm(counties, historic_dates, detailed_dates, get_hopkins, get_times, 
    historic_expand, update_dateTime, historic_data, historic_raw)

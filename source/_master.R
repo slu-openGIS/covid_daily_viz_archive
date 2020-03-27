@@ -1,10 +1,7 @@
 # scrape data from Johns Hopkins, tidy, and plot
 
-# UPDATE values
+# UPDATE date value
 date <- lubridate::mdy("03-26-2020")
-
-# UPDATE list file names after county-level data available
-detailed_days <- c("03-22-2020.csv", "03-23-2020.csv", "03-24-2020.csv", "03-25-2020.csv", "03-26-2020.csv")
 
 # dependencies
 library(dplyr)
@@ -23,7 +20,7 @@ source("source/functions/historic_expand.R")
 
 # scrape and tidy data
 source("source/workflow/01_scrape_and_tidy.R")
-source("source/workflow/covid_tidy_data.R")
+# source("source/workflow/covid_tidy_data.R")
 
 # update plots
-source("source/workflow/covid_plots.R")
+# source("source/workflow/covid_plots.R")
