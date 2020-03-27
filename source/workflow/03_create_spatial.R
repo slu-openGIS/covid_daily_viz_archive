@@ -57,7 +57,7 @@ kc_detail <- filter(detailed_data, geoid %in% kc_metro_counties)
 
 # clean-up
 rm(stl_metro_counties, il_metro_counties, kc_metro_counties, ks_metro_counties,
-   mo_counties, detailed_sub, counties_sf, detailed_data)
+   mo_counties, detailed_sub, counties_sf, detailed_data, mo_counties_xl)
 
 # write data
 st_write(mo_sf, "data/mo_daily_snapshot.geojson")
