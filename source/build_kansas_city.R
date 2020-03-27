@@ -2,6 +2,7 @@
 
 # tidyverse packages
 library(dplyr)
+library(readr)
 library(tibble)
 
 # spatial packages
@@ -83,4 +84,7 @@ county <- rbind(county, kc)
 county <- st_collection_extract(county, "POLYGON")
 
 # write
-st_write(county, "data/mo_county_plus/mo_county_plus.shp")
+st_write(county, "data/mo_county_plus/mo_county_plus.shp", delete_dsn = TRUE)
+st_geometry(county) <- NULL
+write_csv(county, "data/mo_county_plus/mo_county_plus.csv")
+

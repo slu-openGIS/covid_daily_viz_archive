@@ -13,7 +13,8 @@ initial_days %>%
 # download detailed data
 detailed_days %>%
   unlist() %>%
-  map_df(~ get_data(file = .x)) -> detailed_data
+  map_df(~ get_data(file = .x)) %>%
+  mutate(geoid = ifelse(name == "Kansas City", "29511", geoid)) -> detailed_data
 
 # summarize detailed data
 detailed_data %>%
@@ -33,10 +34,18 @@ state_pop <- get_acs(geography = "state", state = c("Illinois", "Missouri"), yea
   select(NAME, estimate) %>%
   rename(total_pop = estimate)
 
-county_pop <- get_acs(geography = "county", state = c("Illinois", "Missouri"), year = 2018,
+county_pop <- get_acs(geography = "county", state = c("Illinois"), year = 2018,
                      variables = "B01001_001") %>%
   select(GEOID, estimate) %>%
   rename(total_pop = estimate)
+
+mo_pop <- read_csv("data/mo_county_plus/mo_county_plus.csv") %>%
+  select(-NAME) %>%
+  mutate(GEOID = as.character(GEOID))
+
+county_pop <- bind_rows(county_pop, mo_pop)
+
+rm(mo_pop)
 
 # join population to counts and calculate rate
 left_join(summary_data, state_pop, by = c("state_name" = "NAME")) %>%
