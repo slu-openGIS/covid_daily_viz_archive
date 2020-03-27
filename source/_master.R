@@ -25,3 +25,5 @@ source("source/workflow/03_create_spatial.R")
 
 # update plots
 source("source/workflow/04_summary_plots.R")
+source("source/workflow/05_stl_plots.R")
+source("source/workflow/06_kc_plots.R")

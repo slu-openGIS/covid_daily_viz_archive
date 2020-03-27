@@ -320,7 +320,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-24,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-24,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-24,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-24,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-24,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-24,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-25,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-25,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-25,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -642,7 +643,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-25,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-25,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-25,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-25,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-25,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-25,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-26,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-26,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-26,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -964,7 +966,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-26,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-26,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-26,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-26,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-26,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-26,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-27,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-27,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-27,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -1286,7 +1289,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-27,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-27,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-27,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-27,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-27,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-27,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-28,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-28,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-28,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -1608,7 +1612,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-28,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-28,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-28,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-28,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-28,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-28,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-29,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-29,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-29,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -1930,7 +1935,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-29,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-29,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-29,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-29,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-29,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-29,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-30,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-30,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-30,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -2252,7 +2258,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-30,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-30,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-30,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-30,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-30,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-30,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-31,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-31,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-31,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -2574,7 +2581,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-31,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-31,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-31,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-31,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-31,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-31,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-01,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-01,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-01,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -2896,7 +2904,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-01,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-01,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-01,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-01,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-01,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-01,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-02,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-02,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-02,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -3218,7 +3227,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-02,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-02,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-02,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-02,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-02,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-02,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-03,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-03,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-03,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -3540,7 +3550,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-03,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-03,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-03,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-03,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-03,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-03,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-04,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-04,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-04,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -3862,7 +3873,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-04,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-04,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-04,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-04,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-04,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-04,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-05,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-05,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-05,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -4184,7 +4196,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-05,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-05,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-05,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-05,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-05,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-05,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-06,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-06,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-06,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -4506,7 +4519,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-06,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-06,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-06,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-06,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-06,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-06,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-07,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-07,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-07,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -4828,7 +4842,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-07,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-07,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-07,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-07,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-07,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-07,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-08,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-08,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-08,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -5150,7 +5165,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-08,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-08,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-08,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-08,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-08,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-08,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-09,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-09,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-09,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -5472,7 +5488,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-09,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-09,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-09,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-09,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-09,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-09,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-10,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-10,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-10,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -5794,7 +5811,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-10,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-10,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-10,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-10,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-10,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-10,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-11,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-11,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-11,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -6116,7 +6134,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-11,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-11,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-11,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-11,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-11,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-11,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-12,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-12,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-12,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -6438,7 +6457,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-12,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-12,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-12,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-12,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-12,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-12,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-13,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-13,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-13,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -6760,7 +6780,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-13,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-13,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-13,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-13,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-13,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-13,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-14,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-14,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-14,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -7082,7 +7103,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-14,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-14,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-14,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-14,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-14,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-14,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-15,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-15,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-15,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -7404,7 +7426,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-15,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-15,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-15,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-15,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-15,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-15,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-16,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-16,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-16,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -7726,7 +7749,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-16,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-16,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-16,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-16,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-16,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-16,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-17,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-17,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-17,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -8048,7 +8072,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-17,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-17,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-17,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-17,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-17,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-17,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-18,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-18,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-18,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -8370,7 +8395,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-18,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-18,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-18,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-18,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-18,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-18,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-19,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-19,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-19,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -8692,7 +8718,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-19,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-19,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-19,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-19,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-19,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-19,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-20,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-20,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-20,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -9014,7 +9041,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-20,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-20,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-20,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-20,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-20,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-20,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-21,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-21,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-21,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -9336,7 +9364,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-21,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-21,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-21,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-21,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-21,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-21,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-22,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-22,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-22,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -9658,7 +9687,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-22,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-22,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-22,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-22,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-22,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-22,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-23,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-23,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-23,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -9980,7 +10010,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-23,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-23,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-23,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-23,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-23,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-23,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-24,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-24,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-24,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -10302,7 +10333,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-24,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-24,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-24,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-24,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-24,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-24,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-25,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-25,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-25,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -10624,7 +10656,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-25,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-25,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-25,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-25,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-25,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-25,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-26,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-26,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-26,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -10946,7 +10979,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-26,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-26,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-26,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-26,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-26,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-26,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-27,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-27,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-27,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -11268,7 +11302,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-27,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-27,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-27,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-27,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-27,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-27,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-28,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-28,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-28,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -11590,7 +11625,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-28,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-28,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-28,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-28,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-28,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-28,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-29,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-29,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-29,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -11912,7 +11948,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-29,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-29,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-29,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-29,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-29,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-29,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-01,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-01,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-01,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -12234,7 +12271,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-01,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-01,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-01,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-01,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-01,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-01,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-02,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-02,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-02,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -12556,7 +12594,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-02,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-02,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-02,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-02,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-02,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-02,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-03,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-03,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-03,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -12878,7 +12917,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-03,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-03,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-03,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-03,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-03,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-03,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-04,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-04,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-04,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -13200,7 +13240,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-04,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-04,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-04,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-04,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-04,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-04,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-05,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-05,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-05,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -13522,7 +13563,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-05,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-05,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-05,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-05,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-05,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-05,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-06,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-06,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-06,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -13844,7 +13886,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-06,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-06,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-06,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-06,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-06,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-06,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-07,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-07,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-07,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -14166,7 +14209,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-07,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-07,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-07,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-07,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-07,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-07,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-08,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-08,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-08,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -14488,7 +14532,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-08,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-08,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-08,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-08,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-08,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-08,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-09,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-09,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-09,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -14810,7 +14855,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-09,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-09,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-09,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-09,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-09,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-09,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-10,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-10,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-10,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -15132,7 +15178,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-10,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-10,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-10,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-10,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-10,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-10,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-11,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-11,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-11,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -15454,7 +15501,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-11,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-11,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-11,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-11,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-11,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-11,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-12,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-12,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-12,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -15776,7 +15824,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-12,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-12,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-12,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-12,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-12,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-12,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-13,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-13,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-13,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -16098,7 +16147,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-13,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-13,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-13,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-13,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-13,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-13,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-14,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-14,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-14,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -16420,7 +16470,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-14,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-14,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-14,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-14,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-14,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-14,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-15,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-15,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-15,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -16742,7 +16793,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-15,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-15,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-15,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-15,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-15,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-15,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-16,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-16,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-16,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -17064,7 +17116,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-16,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-16,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-16,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-16,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-16,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-16,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-17,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-17,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-17,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -17386,7 +17439,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-17,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-17,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-17,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-17,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-17,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-17,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-18,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-18,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-18,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -17708,7 +17762,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-18,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-18,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-18,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-18,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,1,0.0032126140076395963,0,0,0
+2020-03-18,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,1,0.0032126140076395963,0,0,0
+2020-03-18,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-19,17001,Adams,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-19,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-19,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -18030,7 +18085,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-19,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-19,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-19,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-19,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,5,0.01606307003819798,0,0,0
+2020-03-19,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,5,0.01606307003819798,0,0,0
+2020-03-19,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-20,17001,Adams,Illinois,2020-03-26T05:00:01Z,1,0.015054119559817544,0,0,0
 2020-03-20,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-20,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -18352,7 +18408,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-20,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-20,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-20,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-20,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,6,0.019275684045837575,0,0,0
+2020-03-20,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,6,0.019275684045837575,0,0,0
+2020-03-20,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,12,0.025227944994670598,0,0,0
 2020-03-21,17001,Adams,Illinois,2020-03-26T05:00:01Z,1,0.015054119559817544,0,0,0
 2020-03-21,17003,Alexander,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-21,17005,Bond,Illinois,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -18674,7 +18731,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-21,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-21,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-21,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-21,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,10,0.03212614007639596,0,0,0
+2020-03-21,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,10,0.03212614007639596,0,0,0
+2020-03-21,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,13,0.027330273744226478,0,0,0
 2020-03-22,17001,Adams,Illinois,2020-03-22T23:45:00Z,1,0.015054119559817544,0,0,0
 2020-03-22,17003,Alexander,Illinois,2020-03-22T23:45:00Z,0,0,0,0,NaN
 2020-03-22,17005,Bond,Illinois,2020-03-22T23:45:00Z,0,0,0,0,NaN

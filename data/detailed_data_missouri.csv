@@ -113,7 +113,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-24,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-24,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-24,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-24,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-24,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-24,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-25,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-25,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-25,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -228,7 +229,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-25,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-25,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-25,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-25,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-25,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-25,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-26,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-26,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-26,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -343,7 +345,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-26,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-26,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-26,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-26,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-26,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-26,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-27,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-27,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-27,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -458,7 +461,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-27,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-27,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-27,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-27,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-27,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-27,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-28,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-28,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-28,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -573,7 +577,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-28,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-28,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-28,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-28,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-28,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-28,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-29,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-29,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-29,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -688,7 +693,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-29,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-29,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-29,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-29,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-29,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-29,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-30,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-30,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-30,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -803,7 +809,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-30,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-30,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-30,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-30,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-30,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-30,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-31,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-31,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-31,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -918,7 +925,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-01-31,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-31,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-01-31,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-01-31,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-31,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-01-31,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-01,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-01,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-01,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -1033,7 +1041,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-01,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-01,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-01,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-01,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-01,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-01,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-02,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-02,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-02,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -1148,7 +1157,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-02,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-02,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-02,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-02,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-02,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-02,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-03,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-03,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-03,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -1263,7 +1273,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-03,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-03,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-03,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-03,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-03,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-03,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-04,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-04,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-04,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -1378,7 +1389,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-04,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-04,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-04,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-04,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-04,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-04,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-05,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-05,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-05,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -1493,7 +1505,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-05,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-05,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-05,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-05,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-05,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-05,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-06,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-06,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-06,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -1608,7 +1621,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-06,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-06,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-06,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-06,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-06,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-06,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-07,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-07,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-07,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -1723,7 +1737,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-07,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-07,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-07,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-07,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-07,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-07,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-08,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-08,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-08,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -1838,7 +1853,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-08,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-08,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-08,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-08,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-08,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-08,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-09,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-09,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-09,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -1953,7 +1969,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-09,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-09,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-09,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-09,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-09,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-09,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-10,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-10,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-10,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -2068,7 +2085,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-10,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-10,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-10,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-10,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-10,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-10,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-11,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-11,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-11,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -2183,7 +2201,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-11,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-11,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-11,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-11,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-11,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-11,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-12,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-12,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-12,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -2298,7 +2317,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-12,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-12,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-12,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-12,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-12,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-12,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-13,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-13,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-13,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -2413,7 +2433,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-13,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-13,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-13,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-13,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-13,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-13,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-14,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-14,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-14,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -2528,7 +2549,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-14,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-14,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-14,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-14,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-14,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-14,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-15,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-15,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-15,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -2643,7 +2665,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-15,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-15,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-15,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-15,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-15,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-15,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-16,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-16,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-16,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -2758,7 +2781,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-16,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-16,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-16,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-16,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-16,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-16,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-17,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-17,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-17,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -2873,7 +2897,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-17,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-17,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-17,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-17,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-17,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-17,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-18,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-18,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-18,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -2988,7 +3013,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-18,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-18,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-18,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-18,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-18,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-18,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-19,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-19,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-19,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -3103,7 +3129,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-19,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-19,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-19,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-19,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-19,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-19,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-20,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-20,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-20,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -3218,7 +3245,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-20,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-20,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-20,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-20,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-20,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-20,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-21,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-21,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-21,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -3333,7 +3361,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-21,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-21,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-21,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-21,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-21,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-21,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-22,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-22,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-22,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -3448,7 +3477,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-22,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-22,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-22,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-22,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-22,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-22,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-23,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-23,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-23,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -3563,7 +3593,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-23,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-23,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-23,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-23,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-23,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-23,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-24,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-24,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-24,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -3678,7 +3709,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-24,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-24,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-24,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-24,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-24,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-24,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-25,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-25,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-25,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -3793,7 +3825,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-25,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-25,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-25,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-25,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-25,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-25,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-26,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-26,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-26,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -3908,7 +3941,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-26,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-26,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-26,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-26,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-26,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-26,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-27,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-27,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-27,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -4023,7 +4057,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-27,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-27,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-27,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-27,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-27,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-27,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-28,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-28,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-28,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -4138,7 +4173,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-28,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-28,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-28,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-28,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-28,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-28,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-29,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-29,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-29,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -4253,7 +4289,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-02-29,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-29,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-02-29,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-02-29,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-29,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-02-29,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-01,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-01,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-01,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -4368,7 +4405,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-01,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-01,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-01,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-01,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-01,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-01,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-02,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-02,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-02,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -4483,7 +4521,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-02,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-02,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-02,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-02,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-02,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-02,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-03,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-03,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-03,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -4598,7 +4637,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-03,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-03,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-03,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-03,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-03,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-03,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-04,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-04,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-04,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -4713,7 +4753,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-04,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-04,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-04,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-04,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-04,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-04,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-05,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-05,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-05,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -4828,7 +4869,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-05,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-05,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-05,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-05,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-05,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-05,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-06,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-06,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-06,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -4943,7 +4985,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-06,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-06,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-06,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-06,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-06,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-06,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-07,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-07,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-07,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -5058,7 +5101,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-07,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-07,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-07,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-07,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-07,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-07,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-08,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-08,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-08,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -5173,7 +5217,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-08,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-08,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-08,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-08,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-08,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-08,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-09,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-09,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-09,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -5288,7 +5333,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-09,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-09,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-09,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-09,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-09,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-09,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-10,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-10,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-10,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -5403,7 +5449,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-10,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-10,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-10,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-10,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-10,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-10,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-11,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-11,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-11,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -5518,7 +5565,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-11,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-11,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-11,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-11,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-11,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-11,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-12,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-12,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-12,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -5633,7 +5681,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-12,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-12,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-12,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-12,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-12,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-12,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-13,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-13,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-13,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -5748,7 +5797,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-13,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-13,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-13,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-13,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-13,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-13,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-14,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-14,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-14,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -5863,7 +5913,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-14,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-14,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-14,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-14,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-14,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-14,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-15,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-15,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-15,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -5978,7 +6029,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-15,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-15,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-15,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-15,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-15,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-15,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-16,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-16,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-16,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -6093,7 +6145,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-16,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-16,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-16,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-16,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-16,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-16,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-17,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-17,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-17,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -6208,7 +6261,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-17,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-17,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-17,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-17,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-17,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
+2020-03-17,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-18,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-18,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-18,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -6323,7 +6377,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-18,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-18,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-18,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-18,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,1,0.0032126140076395963,0,0,0
+2020-03-18,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,1,0.0032126140076395963,0,0,0
+2020-03-18,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-19,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-19,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-19,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -6438,7 +6493,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-19,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-19,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-19,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-19,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,5,0.01606307003819798,0,0,0
+2020-03-19,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,5,0.01606307003819798,0,0,0
+2020-03-19,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-20,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-20,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-20,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -6553,7 +6609,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-20,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-20,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-20,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-20,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,6,0.019275684045837575,0,0,0
+2020-03-20,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,6,0.019275684045837575,0,0,0
+2020-03-20,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,12,0.025227944994670598,0,0,0
 2020-03-21,29001,Adair,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-21,29003,Andrew,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-21,29005,Atchison,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
@@ -6668,7 +6725,8 @@ report_date,geoid,county,state,last_update,confirmed,confirmed_rate,deaths,morta
 2020-03-21,29225,Webster,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-21,29227,Worth,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
 2020-03-21,29229,Wright,Missouri,2020-03-26T05:00:01Z,0,0,0,0,NaN
-2020-03-21,29510,St. Louis,Missouri,2020-03-26T05:00:01Z,10,0.03212614007639596,0,0,0
+2020-03-21,29510,St. Louis City,Missouri,2020-03-26T05:00:01Z,10,0.03212614007639596,0,0,0
+2020-03-21,29511,Kansas City,Missouri,2020-03-26T05:00:01Z,13,0.027330273744226478,0,0,0
 2020-03-22,29001,Adair,Missouri,2020-03-22T23:45:00Z,1,0.03948667324777888,0,0,0
 2020-03-22,29003,Andrew,Missouri,2020-03-22T23:45:00Z,0,0,0,0,NaN
 2020-03-22,29005,Atchison,Missouri,2020-03-22T23:45:00Z,0,0,0,0,NaN

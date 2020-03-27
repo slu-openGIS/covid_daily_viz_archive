@@ -18,6 +18,13 @@ counties <- tigris::counties(state = c(17, 20, 29), cb = FALSE, class = "sf")
 # remove geometry
 st_geometry(counties) <- NULL
 
+# create kansas city row
+kc <- tibble(
+  geoid = "29511",
+  state = "Missouri",
+  county = "Kansas City"
+)
+
 # tidy
 counties %>% 
   select(GEOID, STATEFP, NAME) %>%
@@ -31,7 +38,9 @@ counties %>%
     state == 20 ~ "Kansas",
     state == 29 ~ "Missouri"
   )) %>%
-  arrange(state, geoid) -> counties
+  bind_rows(., kc) %>%
+  arrange(state, geoid) %>%
+  mutate(county = ifelse(geoid == "29510", "St. Louis City", county)) -> counties
 
 # create vector of dates
 historic_dates <- seq(as.Date("2020-01-24"), as.Date("2020-03-21"), by="days")
@@ -71,4 +80,4 @@ detailed_data %>%
 
 # clean-up
 rm(counties, historic_dates, detailed_dates, get_hopkins, get_times, 
-   historic_expand, update_dateTime, historic_data, historic_raw)
+   historic_expand, update_dateTime, historic_data, historic_raw, kc)

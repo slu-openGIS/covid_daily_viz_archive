@@ -47,7 +47,8 @@ mo_counties <- as.vector(mo_counties$GEOID)
 mo_counties_xl <- c(il_metro_counties, ks_metro_counties, mo_counties)
 
 # subset
-mo_sf <- filter(counties_sf, GEOID %in% mo_counties_xl)
+mo_sf <- filter(counties_sf, GEOID %in% mo_counties)
+mo_xl_sf <- filter(counties_sf, GEOID %in% mo_counties_xl)
 stl_sf <- filter(counties_sf, GEOID %in% stl_metro_counties)
 kc_sf <- filter(counties_sf, GEOID %in% kc_metro_counties)
 
@@ -60,9 +61,10 @@ rm(stl_metro_counties, il_metro_counties, kc_metro_counties, ks_metro_counties,
    mo_counties, detailed_sub, counties_sf, detailed_data, mo_counties_xl)
 
 # write data
-st_write(mo_sf, "data/mo_daily_snapshot.geojson")
-st_write(stl_sf, "data/stl_daily_snapshot.geojson")
-st_write(kc_sf, "data/kc_daily_snapshot.geojson")
+st_write(mo_sf, "data/mo_daily_snapshot.geojson", delete_dsn = TRUE)
+st_write(mo_xl_sf, "data/mo_xl_daily_snapshot.geojson", delete_dsn = TRUE)
+st_write(stl_sf, "data/stl_daily_snapshot.geojson", delete_dsn = TRUE)
+st_write(kc_sf, "data/kc_daily_snapshot.geojson", delete_dsn = TRUE)
 write_csv(mo_detail, "data/detailed_data_missouri.csv")
 write_csv(stl_detail, "data/detailed_data_stl.csv")
 write_csv(kc_detail, "data/detailed_data_kc.csv")
