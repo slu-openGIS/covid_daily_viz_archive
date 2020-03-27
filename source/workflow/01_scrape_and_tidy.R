@@ -13,10 +13,13 @@ detailed_dates %>%
 historic_raw <- get_times(end_date = "2020-03-22")
 
 # get county master list
-counties_sf <- tigris::counties(state = c(17, 20, 29), cb = FALSE, class = "sf")
+counties <- tigris::counties(state = c(17, 20, 29), cb = FALSE, class = "sf")
+
+# remove geometry
+st_geometry(counties) <- NULL
 
 # tidy
-counties_sf %>% 
+counties %>% 
   select(GEOID, STATEFP, NAME) %>%
   rename(
          geoid = GEOID,
@@ -28,11 +31,7 @@ counties_sf %>%
     state == 20 ~ "Kansas",
     state == 29 ~ "Missouri"
   )) %>%
-  arrange(state, geoid) -> counties_sf
-
-# remove geometry
-counties <- counties_sf
-st_geometry(counties) <- NULL
+  arrange(state, geoid) -> counties
 
 # create vector of dates
 historic_dates <- seq(as.Date("2020-01-24"), as.Date("2020-03-21"), by="days")
@@ -57,7 +56,7 @@ historic_data %>%
   select(report_date, geoid, county, state, last_update, confirmed, deaths) -> historic_data
 
 # bind
-detailed_data <- bind_rows(historic_data, detailed_data)
+detailed_data <- as_tibble(bind_rows(historic_data, detailed_data))
 
 # summarize detailed data
 detailed_data %>%
@@ -67,7 +66,8 @@ detailed_data %>%
     confirmed = sum(confirmed),
     deaths = sum(deaths)
   ) %>%
-  arrange(report_date, state) -> summary_data
+  arrange(report_date, state) %>%
+  select(report_date, everything()) -> summary_data
 
 # clean-up
 rm(counties, historic_dates, detailed_dates, get_hopkins, get_times, 

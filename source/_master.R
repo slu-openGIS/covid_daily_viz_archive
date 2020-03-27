@@ -20,6 +20,7 @@ source("source/functions/historic_expand.R")
 
 # scrape and tidy data
 source("source/workflow/01_scrape_and_tidy.R")
+source("source/workflow/02_add_rates.R")
 # source("source/workflow/covid_tidy_data.R")
 
 # update plots
