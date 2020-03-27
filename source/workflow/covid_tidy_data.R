@@ -48,7 +48,7 @@ left_join(detailed_data, county_pop, by = c("geoid" = "GEOID")) %>%
          recovered) -> detailed_data
 
 # clean-up
-rm(county_pop, state_pop, initial_data, initial_days, detailed_days, get_data)
+rm(county_pop, state_pop, initial_days, detailed_days, get_data)
 
 # export
 write_csv(summary_data, "data/summary_data.csv")
