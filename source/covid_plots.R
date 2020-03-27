@@ -82,7 +82,7 @@ ggsave(filename = "results/confirmed_rate_metro.png", width = 8, height = 6, uni
 ggplot(data = detailed_sf) +
   geom_sf(mapping = aes(fill = cf_rate)) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines")) +
-  scale_fill_distiller(palette = "Reds", trans = "reverse", name = "Rate per 1,000") +
+  scale_fill_distiller(palette = "Reds", trans = "reverse", name = "Percent") +
   labs(
     title = "COVID-19 Case Fatality by Metro St. Louis County",
     subtitle = paste0("2020-03-10 through ", as.character(date)),
