@@ -78,7 +78,7 @@ get_times <- function(end_date){
   df <- dplyr::mutate(df, geoid = ifelse(county == "Kansas City", "29511", geoid))
   df <- dplyr::select(df, geoid, report_date, confirmed, deaths)
   
-  if (is.null(filter) == FALSE){
+  if (is.null(end_date) == FALSE){
     
     df <- dplyr::filter(df, report_date < as.Date(end_date))
     
