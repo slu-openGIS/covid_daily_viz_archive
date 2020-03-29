@@ -65,10 +65,10 @@ historic_data %>%
   select(report_date, geoid, county, state, last_update, confirmed, deaths) -> historic_data
 
 # bind
-detailed_data <- as_tibble(bind_rows(historic_data, detailed_data))
+county_data <- as_tibble(bind_rows(historic_data, detailed_data))
 
 # summarize detailed data
-detailed_data %>%
+county_data %>%
   group_by(state, report_date) %>%
   summarise(
     last_update = first(last_update),
@@ -76,8 +76,10 @@ detailed_data %>%
     deaths = sum(deaths)
   ) %>%
   arrange(report_date, state) %>%
-  select(report_date, everything()) -> summary_data
+  select(report_date, everything()) -> state_data
 
 # clean-up
 rm(counties, historic_dates, detailed_dates, get_hopkins, get_times, 
-   historic_expand, update_dateTime, historic_data, historic_raw, kc)
+   historic_expand, update_dateTime, historic_data, historic_raw, kc,
+   detailed_data)
+

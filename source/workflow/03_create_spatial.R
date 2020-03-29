@@ -20,12 +20,12 @@ counties_sf <- arrange(counties_sf, GEOID)
 rm(mo_counties, il_ks_counties)
 
 # subset detailed data
-detailed_data %>% 
+county_data %>% 
   filter(report_date == date) %>%
-  select(-report_date, -last_update) -> detailed_sub
+  select(-report_date, -last_update) -> county_sub
 
 # combine with geometry
-counties_sf <- left_join(counties_sf, detailed_sub, by = c("GEOID" = "geoid"))
+counties_sf <- left_join(counties_sf, county_sub, by = c("GEOID" = "geoid"))
 
 ## define metro St. Louis counties
 stl_metro_counties <- c("17005", "17013", "17027", "17083", "17117", 
@@ -52,19 +52,19 @@ mo_xl_sf <- filter(counties_sf, GEOID %in% mo_counties_xl)
 stl_sf <- filter(counties_sf, GEOID %in% stl_metro_counties)
 kc_sf <- filter(counties_sf, GEOID %in% kc_metro_counties)
 
-mo_detail <- filter(detailed_data, geoid %in% mo_counties)
-stl_detail <- filter(detailed_data, geoid %in% stl_metro_counties)
-kc_detail <- filter(detailed_data, geoid %in% kc_metro_counties)
+mo_detail <- filter(county_data, geoid %in% mo_counties)
+stl_detail <- filter(county_data, geoid %in% stl_metro_counties)
+kc_detail <- filter(county_data, geoid %in% kc_metro_counties)
 
 # clean-up
 rm(stl_metro_counties, il_metro_counties, kc_metro_counties, ks_metro_counties,
-   mo_counties, detailed_sub, counties_sf, detailed_data, mo_counties_xl)
+   mo_counties, county_sub, counties_sf, county_data, mo_counties_xl)
 
 # write data
-st_write(mo_sf, "data/mo_daily_snapshot.geojson", delete_dsn = TRUE)
-st_write(mo_xl_sf, "data/mo_xl_daily_snapshot.geojson", delete_dsn = TRUE)
-st_write(stl_sf, "data/stl_daily_snapshot.geojson", delete_dsn = TRUE)
-st_write(kc_sf, "data/kc_daily_snapshot.geojson", delete_dsn = TRUE)
-write_csv(mo_detail, "data/detailed_data_missouri.csv")
-write_csv(stl_detail, "data/detailed_data_stl.csv")
-write_csv(kc_detail, "data/detailed_data_kc.csv")
+st_write(mo_sf, "data/county/daily_snapshot_mo.geojson", delete_dsn = TRUE)
+st_write(mo_xl_sf, "data/county/daily_snapshot_mo_xl.geojson", delete_dsn = TRUE)
+st_write(stl_sf, "data/metro/daily_snapshot_stl.geojson", delete_dsn = TRUE)
+st_write(kc_sf, "data/metro/daily_snapshot_kc.geojson", delete_dsn = TRUE)
+write_csv(mo_detail, "data/county/county_mo.csv")
+write_csv(stl_detail, "data/metro/county_stl.csv")
+write_csv(kc_detail, "data/metro/county_kc.csv")

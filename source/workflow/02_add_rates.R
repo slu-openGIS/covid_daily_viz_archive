@@ -25,7 +25,7 @@ county_pop <- bind_rows(county_pop, mo_county_pop)
 rm(mo_county_pop)
 
 # join population to counts and calculate rate
-left_join(summary_data, state_pop, by = c("state" = "NAME")) %>%
+left_join(state_data, state_pop, by = c("state" = "NAME")) %>%
   mutate(
     confirmed_rate = confirmed/total_pop*100000,
     mortality_rate = deaths/total_pop*100000,
@@ -33,10 +33,10 @@ left_join(summary_data, state_pop, by = c("state" = "NAME")) %>%
   ) %>% 
   select(-total_pop) %>%
   select(report_date, state, last_update, confirmed, confirmed_rate, deaths, 
-         mortality_rate, case_fatality_rate) -> summary_data
+         mortality_rate, case_fatality_rate) -> state_data
 
 # join population to counts and calculate rate
-left_join(detailed_data, county_pop, by = c("geoid" = "GEOID")) %>%
+left_join(county_data, county_pop, by = c("geoid" = "GEOID")) %>%
   mutate(
     confirmed_rate = confirmed/total_pop*1000,
     mortality_rate = deaths/total_pop*1000,
@@ -44,11 +44,66 @@ left_join(detailed_data, county_pop, by = c("geoid" = "GEOID")) %>%
   ) %>% 
   select(-total_pop) %>%
   select(report_date, geoid, county, state, last_update, confirmed, 
-         confirmed_rate, deaths, mortality_rate, case_fatality_rate) -> detailed_data
+         confirmed_rate, deaths, mortality_rate, case_fatality_rate) -> county_data
+
+# create days from first confirmed infection data, county-level data
+county_data %>%
+  filter(confirmed > 0) %>%
+  filter(county != "Unassigned") %>%
+  arrange(report_date) %>%
+  group_by(county) %>%
+  mutate(first_date = first(report_date)) %>%
+  ungroup() %>%
+  mutate(day = as.numeric(report_date-first_date+1)) %>%
+  select(day, report_date, geoid, county, state, last_update, 
+         confirmed, confirmed_rate) %>%
+  arrange(state, county, day) -> county_confirmed_days
+
+# create days from first death data, county-level data
+county_data %>%
+  filter(deaths > 0) %>%
+  filter(county != "Unassigned") %>%
+  arrange(report_date) %>%
+  group_by(county) %>%
+  mutate(first_date = first(report_date)) %>%
+  ungroup() %>%
+  mutate(day = as.numeric(report_date-first_date+1)) %>%
+  select(day, report_date, geoid, county, state, last_update, deaths, 
+         mortality_rate, case_fatality_rate) %>%
+  arrange(state, county, day) -> county_death_days
+
+# create days from first confirmed infection data, state-level data
+state_data %>%
+  filter(confirmed > 0) %>%
+  arrange(report_date) %>%
+  group_by(state) %>%
+  mutate(first_date = first(report_date)) %>%
+  ungroup() %>%
+  mutate(day = as.numeric(report_date-first_date+1)) %>%
+  select(day, report_date, state, last_update, 
+         confirmed, confirmed_rate) %>%
+  arrange(state, day) -> state_confirmed_days
+
+# create days from first death data, state-level data
+state_data %>%
+  filter(deaths > 0) %>%
+  arrange(report_date) %>%
+  group_by(state) %>%
+  mutate(first_date = first(report_date)) %>%
+  ungroup() %>%
+  mutate(day = as.numeric(report_date-first_date+1)) %>%
+  select(day, report_date, state, last_update, deaths, 
+         mortality_rate, case_fatality_rate) %>%
+  arrange(state, day) -> state_death_days
 
 # clean-up
 rm(county_pop, state_pop)
 
 # export
-write_csv(summary_data, "data/summary_data.csv")
-write_csv(detailed_data, "data/detailed_data.csv")
+write_csv(state_data, "data/state/state_full.csv")
+write_csv(state_confirmed_days, "data/state/state_confirm.csv")
+write_csv(state_death_days, "data/state/state_death.csv")
+
+write_csv(county_data, "data/county/county_full.csv")
+write_csv(county_confirmed_days, "data/county/county_confirm.csv")
+write_csv(county_death_days, "data/county/county_death.csv")
