@@ -66,10 +66,10 @@ county_death_days %>%
                       "29113", "29183", "29189", "29219", "29510")) %>%
   ggplot(data = ., mapping = aes(day, deaths)) +
   geom_line(mapping = aes(color = county)) +
-  gghighlight(geoid %in% c("29189", "29510", "29183")) +
+  gghighlight(geoid %in% c("29189", "29510")) +
   scale_color_brewer(palette = "Set1") +
-  scale_y_log10(limits = c(1, 1000)) +
-  scale_x_continuous(limits = c(1,25), breaks = c(1, 5, 10, 15, 20, 25))  +
+  scale_y_log10(limits = c(1, 10)) +
+  scale_x_continuous(limits = c(1,10), breaks = c(1, 2, 4, 6, 8, 10))  +
   labs(
     title = "Pace of COVID-19 Deaths by Metro St. Louis County",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -87,10 +87,10 @@ county_death_days %>%
                       "29095", "29107", "29165", "29177", "29511")) %>%
   ggplot(data = ., mapping = aes(day, deaths)) +
   geom_line(mapping = aes(color = county)) +
-  gghighlight(geoid %in% c("29511", "20091", "20209" , "29095")) +
+  gghighlight(geoid %in% c("20209")) +
   scale_color_brewer(palette = "Set1") +
-  scale_y_log10(limits = c(1, 1000)) +
-  scale_x_continuous(limits = c(1,25), breaks = c(1, 5, 10, 15, 20, 25))  +
+  scale_y_log10(limits = c(1, 20)) +
+  scale_x_continuous(limits = c(1,20), breaks = c(1, 5, 10, 15, 20))  +
   labs(
     title = "Pace of COVID-19 Deaths by Metro Kansas City County",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -106,8 +106,8 @@ ggplot(data = state_death_days, mapping = aes(day, deaths)) +
   geom_line(mapping = aes(color = state)) +
   gghighlight(state %in% c("Illinois", "Kansas", "Missouri")) +
   scale_color_brewer(palette = "Set1") +
-  scale_y_log10(limits = c(1, 10000)) +
-  scale_x_continuous(limits = c(1,75), breaks = c(0,15,30,45,60,75))  +
+  scale_y_log10(limits = c(1, 100)) +
+  scale_x_continuous(limits = c(1,20), breaks = c(1, 5, 10, 15, 20))  +
   labs(
     title = "Pace of COVID-19 Deaths by State",
     subtitle = paste0("Current as of ", as.character(date)),
