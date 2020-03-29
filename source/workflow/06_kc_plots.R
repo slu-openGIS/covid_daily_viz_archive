@@ -17,7 +17,7 @@ ggplot(data = kc_sf) +
   ) +
   theme_void()
 
-ggsave(filename = "results/kc_metro/confirmed_map.png", width = 8, height = 6, units = "in", dpi = 500)
+ggsave(filename = "results/kc_metro/a_confirmed_map.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # plot confirmed rate
 ggplot(data = kc_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
@@ -34,7 +34,7 @@ ggplot(data = kc_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population\nKansas City is treated as a distinct county due to reporting practices"
   )
 
-ggsave(filename = "results/kc_metro/confirmed_plot.png", width = 8, height = 6, units = "in", dpi = 500)
+ggsave(filename = "results/kc_metro/b_confirmed_plot.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # map case fatality rate
 ggplot(data = kc_sf) +
@@ -48,7 +48,7 @@ ggplot(data = kc_sf) +
   ) +
   theme_void()
 
-ggsave(filename = "results/kc_metro/case_fatality_map.png", width = 8, height = 6, units = "in", dpi = 500)
+ggsave(filename = "results/kc_metro/c_case_fatality_map.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # plot case fatality rate
 ggplot(data = kc_detail, mapping = aes(x = report_date, y = case_fatality_rate)) +
@@ -65,4 +65,4 @@ ggplot(data = kc_detail, mapping = aes(x = report_date, y = case_fatality_rate))
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nCase fatality is the percent of confirmed cases that result in death\nKansas City is treated as a distinct county due to reporting practices\nInitial values for Wyandotte County not shown to increase readability of plot"
   )
 
-ggsave(filename = "results/kc_metro/case_fatality_plot.png", width = 8, height = 6, units = "in", dpi = 500)
+ggsave(filename = "results/kc_metro/d_case_fatality_plot.png", width = 8, height = 6, units = "in", dpi = 500)

@@ -17,7 +17,7 @@ ggplot(data = stl_sf) +
   ) +
   theme_void()
 
-ggsave(filename = "results/stl_metro/confirmed_map.png", width = 8, height = 6, units = "in", dpi = 500)
+ggsave(filename = "results/stl_metro/a_confirmed_map.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # plot confirmed rate
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
@@ -25,7 +25,7 @@ ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   gghighlight(geoid %in% c("29189", "29510", "17027", "17133" , "29183")) +
   scale_color_brewer(palette = "Set1") +
   scale_x_date(date_breaks = "2 days", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 0.25)) + 
+  scale_y_continuous(limits = c(0, 0.35), breaks = c(0,.05,.1,.15,.2,.25,.3,.35)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -34,7 +34,7 @@ ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population"
   )
 
-ggsave(filename = "results/stl_metro/confirmed_plot.png", width = 8, height = 6, units = "in", dpi = 500)
+ggsave(filename = "results/stl_metro/b_confirmed_plot.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # map case fatality rate
 ggplot(data = stl_sf) +
@@ -48,7 +48,7 @@ ggplot(data = stl_sf) +
   ) +
   theme_void()
 
-ggsave(filename = "results/stl_metro/case_fatality_map.png", width = 8, height = 6, units = "in", dpi = 500)
+ggsave(filename = "results/stl_metro/c_case_fatality_map.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # plot case fatality rate
 # stl_detail <- mutate(stl_detail, case_fatality_rate = ifelse(is.na(case_fatality_rate) == TRUE, 0, case_fatality_rate))
@@ -67,4 +67,4 @@ ggplot(data = stl_detail, mapping = aes(x = report_date, y = case_fatality_rate)
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nCase fatality is the percent of confirmed cases that result in death"
   )
 
-ggsave(filename = "results/stl_metro/case_fatality_plot.png", width = 8, height = 6, units = "in", dpi = 500)
+ggsave(filename = "results/stl_metro/d_case_fatality_plot.png", width = 8, height = 6, units = "in", dpi = 500)
