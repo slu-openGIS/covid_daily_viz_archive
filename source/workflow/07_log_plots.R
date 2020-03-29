@@ -19,7 +19,7 @@ county_confirmed_days %>%
       y = "Count of Confirmed Cases"
     )
 
-ggsave(filename = "results/log_plots/b_st_louis.png", width = 8, height = 6, units = "in", dpi = 500)
+ggsave(filename = "results/log_confirmed/b_st_louis.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # kansas city days
 county_confirmed_days %>%
@@ -40,7 +40,7 @@ county_confirmed_days %>%
     y = "Count of Confirmed Cases"
   )
 
-ggsave(filename = "results/log_plots/c_kansas_city.png", width = 8, height = 6, units = "in", dpi = 500)
+ggsave(filename = "results/log_confirmed/c_kansas_city.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # state days
 ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
@@ -57,7 +57,7 @@ ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
     y = "Count of Confirmed Cases"
   )
 
-ggsave(filename = "results/log_plots/a_state.png", width = 8, height = 6, units = "in", dpi = 500)
+ggsave(filename = "results/log_confirmed/a_state.png", width = 8, height = 6, units = "in", dpi = 500)
 
 
   
