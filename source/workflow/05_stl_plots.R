@@ -23,7 +23,7 @@ ggsave(filename = "results/stl_metro/a_confirmed_map.png", width = 8, height = 6
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = county))  +
   gghighlight(geoid %in% c("29189", "29510", "17027", "17163" , "29183")) +
-  scale_color_brewer(palette = "Set1") +
+  scale_color_brewer(palette = "Dark2") +
   scale_x_date(date_breaks = "2 days", date_labels = "%d %b")  +
   scale_y_continuous(limits = c(0, 0.35), breaks = c(0,.05,.1,.15,.2,.25,.3,.35)) + 
   labs(
@@ -56,7 +56,7 @@ ggsave(filename = "results/stl_metro/c_case_fatality_map.png", width = 8, height
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = case_fatality_rate)) +
   geom_line(mapping = aes(color = county))  +
   gghighlight(geoid %in% c("29189", "29510", "29183", "17163")) +
-  scale_color_brewer(palette = "Set1") +
+  scale_color_brewer(palette = "Dark2") +
   scale_x_date(date_breaks = "2 days", date_labels = "%d %b")  +
   scale_y_continuous(limits = c(0, 10), breaks = c(0,2,4,6,8,10)) + 
   labs(

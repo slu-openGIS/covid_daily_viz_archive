@@ -7,7 +7,7 @@ state_data <- filter(state_data, report_date >= plot_date)
 # plot confirmed rate
 ggplot(data = state_data, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = state)) +
-  scale_color_brewer(palette = "Set1", name = "State") +
+  scale_color_brewer(palette = "Dark2", name = "State") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,40), breaks = c(0,5,10,15,20,25,30,35,40)) + 
   labs(
@@ -23,7 +23,7 @@ ggsave(filename = "results/state/b_confirmed_rate.png", width = 8, height = 6, u
 # plot case fatality rate
 ggplot(data = state_data, mapping = aes(x = report_date, y = case_fatality_rate)) +
   geom_line(mapping = aes(color = state)) +
-  scale_color_brewer(palette = "Set1", name = "State") +
+  scale_color_brewer(palette = "Dark2", name = "State") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b") +
   labs(
     title = "COVID-19 Case Fatality by State",
@@ -38,7 +38,7 @@ ggsave(filename = "results/state/c_case_fatality_rate.png", width = 8, height = 
 # plot mortality rate
 ggplot(data = state_data, mapping = aes(x = report_date, y = mortality_rate)) +
   geom_line(mapping = aes(color = state)) +
-  scale_color_brewer(palette = "Set1", name = "State") +
+  scale_color_brewer(palette = "Dark2", name = "State") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,.6), breaks = c(0,.1,.2,.3,.4,.5,.6)) +
   labs(

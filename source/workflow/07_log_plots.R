@@ -8,7 +8,7 @@ county_confirmed_days %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
     geom_line(mapping = aes(color = county)) +
     gghighlight(geoid %in% c("29189", "29510", "29183", "17163")) +
-    scale_color_brewer(palette = "Set1") +
+    scale_color_brewer(palette = "Dark2") +
     scale_y_log10(limits = c(1, 1000)) +
     scale_x_continuous(limits = c(1,25), breaks = c(1, 5, 10, 15, 20, 25))  +
     labs(
@@ -29,7 +29,7 @@ county_confirmed_days %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
   geom_line(mapping = aes(color = county)) +
   gghighlight(geoid %in% c("29511", "20091", "20209" , "29095")) +
-  scale_color_brewer(palette = "Set1") +
+  scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(1, 1000)) +
   scale_x_continuous(limits = c(1,25), breaks = c(1, 5, 10, 15, 20, 25))  +
   labs(
@@ -65,7 +65,7 @@ ggsave(filename = "results/log_confirmed/d_missouri.png", width = 8, height = 6,
 ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
   geom_line(mapping = aes(color = state)) +
   gghighlight(state %in% c("Illinois", "Kansas", "Missouri")) +
-  scale_color_brewer(palette = "Set1") +
+  scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(1, 10000)) +
   scale_x_continuous(limits = c(1,75), breaks = c(0,15,30,45,60,75))  +
   labs(
