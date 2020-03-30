@@ -14,7 +14,7 @@ county_confirmed_days %>%
     labs(
       title = "Pace of COVID-19 Cases by Metro St. Louis County",
       subtitle = paste0("Current as of ", as.character(date)),
-      caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population",
+      caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
       x = "Days Since First Case Confirmed",
       y = "Count of Confirmed Cases"
     )
@@ -35,7 +35,7 @@ county_confirmed_days %>%
   labs(
     title = "Pace of COVID-19 Cases by Metro Kansas City County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population",
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since First Case Confirmed",
     y = "Count of Confirmed Cases"
   )
@@ -54,7 +54,7 @@ county_confirmed_days %>%
     labs(
       title = "Pace of COVID-19 Cases by Missouri County",
       subtitle = paste0("Current as of ", as.character(date)),
-      caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population",
+      caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
       x = "Days Since First Case Confirmed",
       y = "Count of Confirmed Cases"
     )
@@ -71,7 +71,7 @@ ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
   labs(
     title = "Pace of COVID-19 Cases by State",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population",
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since First Case Confirmed",
     y = "Count of Confirmed Cases"
   )
@@ -92,7 +92,7 @@ county_death_days %>%
   labs(
     title = "Pace of COVID-19 Deaths by Metro St. Louis County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population",
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since First Confirmed Death",
     y = "Count of Deaths"
   )
@@ -113,7 +113,7 @@ county_death_days %>%
   labs(
     title = "Pace of COVID-19 Deaths by Metro Kansas City County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population",
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since First Confirmed Death",
     y = "Count of Deaths"
   )
@@ -130,7 +130,7 @@ ggplot(data = state_death_days, mapping = aes(day, deaths)) +
   labs(
     title = "Pace of COVID-19 Deaths by State",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population",
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since First Confirmed Death",
     y = "Count of Deaths"
   )
