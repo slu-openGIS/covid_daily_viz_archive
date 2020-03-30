@@ -9,7 +9,7 @@ kc_sf <- mutate(kc_sf, county = ifelse(GEOID %in% c("29511"), NA, county))
 ggplot(data = kc_sf) +
   geom_sf(mapping = aes(fill = confirmed_rate)) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines")) +
-  scale_fill_distiller(palette = "Oranges", trans = "reverse", name = "Rate per 1,000") +
+  scale_fill_distiller(palette = "GnBu", trans = "reverse", name = "Rate per 1,000") +
   labs(
     title = "Confirmed COVID-19 Cases by Metro Kansas City County",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -25,7 +25,7 @@ ggplot(data = kc_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   gghighlight(geoid %in% c("20107", "20209", "20103", "29511")) +
   scale_color_brewer(palette = "Set1") +
   scale_x_date(date_breaks = "2 days", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 0.5)) + 
+  scale_y_continuous(limits = c(0, 0.6), breaks = c(0,.1,.2,.3,.4,.5,.6)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Metro Kansas City County",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -40,7 +40,7 @@ ggsave(filename = "results/kc_metro/b_confirmed_plot.png", width = 8, height = 6
 ggplot(data = kc_sf) +
   geom_sf(mapping = aes(fill = case_fatality_rate)) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines")) +
-  scale_fill_distiller(palette = "Reds", trans = "reverse", name = "Percent") +
+  scale_fill_distiller(palette = "BuPu", trans = "reverse", name = "Percent") +
   labs(
     title = "COVID-19 Case Fatality by Metro Kansas City County",
     subtitle = paste0("2020-03-10 through ", as.character(date)),

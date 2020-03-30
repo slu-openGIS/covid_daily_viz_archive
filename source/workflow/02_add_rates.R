@@ -51,7 +51,7 @@ county_data %>%
   filter(confirmed > 0) %>%
   filter(county != "Unassigned") %>%
   arrange(report_date) %>%
-  group_by(county) %>%
+  group_by(state, county) %>%
   mutate(first_date = first(report_date)) %>%
   ungroup() %>%
   mutate(day = as.numeric(report_date-first_date+1)) %>%
@@ -64,7 +64,7 @@ county_data %>%
   filter(deaths > 0) %>%
   filter(county != "Unassigned") %>%
   arrange(report_date) %>%
-  group_by(county) %>%
+  group_by(state, county) %>%
   mutate(first_date = first(report_date)) %>%
   ungroup() %>%
   mutate(day = as.numeric(report_date-first_date+1)) %>%

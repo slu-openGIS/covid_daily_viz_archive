@@ -7,7 +7,7 @@ county_confirmed_days %>%
                       "29113", "29183", "29189", "29219", "29510")) %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
     geom_line(mapping = aes(color = county)) +
-    gghighlight(geoid %in% c("29189", "29510", "29183")) +
+    gghighlight(geoid %in% c("29189", "29510", "29183", "17163")) +
     scale_color_brewer(palette = "Set1") +
     scale_y_log10(limits = c(1, 1000)) +
     scale_x_continuous(limits = c(1,25), breaks = c(1, 5, 10, 15, 20, 25))  +
@@ -41,6 +41,25 @@ county_confirmed_days %>%
   )
 
 ggsave(filename = "results/log_confirmed/c_kansas_city.png", width = 8, height = 6, units = "in", dpi = 500)
+
+# missouri days
+county_confirmed_days %>%
+  filter(state == "Missouri") %>%
+  ggplot(data = ., mapping = aes(day, confirmed)) +
+    geom_line(mapping = aes(color = county)) +
+    gghighlight(geoid %in% c("29189", "29510", "29511", "29019", "29095", "29077", "29183")) +
+    scale_color_brewer(palette = "Dark2") +
+    scale_y_log10(limits = c(1, 1000)) +
+    scale_x_continuous(limits = c(1,25), breaks = c(1, 5, 10, 15, 20, 25))  +
+    labs(
+      title = "Pace of COVID-19 Cases by Missouri County",
+      subtitle = paste0("Current as of ", as.character(date)),
+      caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population",
+      x = "Days Since First Case Confirmed",
+      y = "Count of Confirmed Cases"
+    )
+
+ggsave(filename = "results/log_confirmed/d_missouri.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # state days
 ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +

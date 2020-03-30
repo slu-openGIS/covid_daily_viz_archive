@@ -9,7 +9,7 @@ ggplot(data = state_data, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = state)) +
   scale_color_brewer(palette = "Set1", name = "State") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,30), breaks = c(0,5,10,15,20,25,30)) + 
+  scale_y_continuous(limits = c(0,40), breaks = c(0,5,10,15,20,25,30,35,40)) + 
   labs(
     title = "Confirmed COVID-19 Cases by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -40,7 +40,7 @@ ggplot(data = state_data, mapping = aes(x = report_date, y = mortality_rate)) +
   geom_line(mapping = aes(color = state)) +
   scale_color_brewer(palette = "Set1", name = "State") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,.4), breaks = c(0,.05,.1, .15,.2,.25,.3,.35,.4)) +
+  scale_y_continuous(limits = c(0,.6), breaks = c(0,.1,.2,.3,.4,.5,.6)) +
   labs(
     title = "Confirmed COVID-19 Mortality by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -54,11 +54,11 @@ ggsave(filename = "results/state/d_mortality_rate.png", width = 8, height = 6, u
 # map missouri rates
 ggplot(data = mo_sf, mapping = aes(fill = confirmed_rate)) +
   geom_sf() +
-  scale_fill_distiller(palette = "Oranges", trans = "reverse", name = "Rate per 1,000") +
+  scale_fill_distiller(palette = "GnBu", trans = "reverse", name = "Rate per 1,000") +
   labs(
     title = "Confirmed COVID-19 Cases by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nKansas City is treated as a distinct county due to reporting practices\nConfirmed cases are those with a positive test as a proportion of the total population"
   ) +
   theme_void()
 

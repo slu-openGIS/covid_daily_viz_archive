@@ -9,7 +9,7 @@ stl_sf <- mutate(stl_sf, county = ifelse(GEOID %in% c("29189", "29510"), NA, cou
 ggplot(data = stl_sf) +
   geom_sf(mapping = aes(fill = confirmed_rate)) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines")) +
-  scale_fill_distiller(palette = "Oranges", trans = "reverse", name = "Rate per 1,000") +
+  scale_fill_distiller(palette = "GnBu", trans = "reverse", name = "Rate per 1,000") +
   labs(
     title = "Confirmed COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -22,7 +22,7 @@ ggsave(filename = "results/stl_metro/a_confirmed_map.png", width = 8, height = 6
 # plot confirmed rate
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = county))  +
-  gghighlight(geoid %in% c("29189", "29510", "17027", "17133" , "29183")) +
+  gghighlight(geoid %in% c("29189", "29510", "17027", "17163" , "29183")) +
   scale_color_brewer(palette = "Set1") +
   scale_x_date(date_breaks = "2 days", date_labels = "%d %b")  +
   scale_y_continuous(limits = c(0, 0.35), breaks = c(0,.05,.1,.15,.2,.25,.3,.35)) + 
@@ -40,7 +40,7 @@ ggsave(filename = "results/stl_metro/b_confirmed_plot.png", width = 8, height = 
 ggplot(data = stl_sf) +
   geom_sf(mapping = aes(fill = case_fatality_rate)) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines")) +
-  scale_fill_distiller(palette = "Reds", trans = "reverse", name = "Percent") +
+  scale_fill_distiller(palette = "BuPu", trans = "reverse", name = "Percent") +
   labs(
     title = "COVID-19 Case Fatality by Metro St. Louis County",
     subtitle = paste0("2020-03-10 through ", as.character(date)),
@@ -55,7 +55,7 @@ ggsave(filename = "results/stl_metro/c_case_fatality_map.png", width = 8, height
 
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = case_fatality_rate)) +
   geom_line(mapping = aes(color = county))  +
-  gghighlight(geoid %in% c("29189", "29510", "29183")) +
+  gghighlight(geoid %in% c("29189", "29510", "29183", "17163")) +
   scale_color_brewer(palette = "Set1") +
   scale_x_date(date_breaks = "2 days", date_labels = "%d %b")  +
   scale_y_continuous(limits = c(0, 10), breaks = c(0,2,4,6,8,10)) + 

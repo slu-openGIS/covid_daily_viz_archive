@@ -1,7 +1,7 @@
 # scrape data from Johns Hopkins, tidy, and plot
 
 # UPDATE date value
-date <- lubridate::mdy("03-28-2020")
+date <- lubridate::mdy("03-29-2020")
 
 # dependencies
 library(dplyr)
