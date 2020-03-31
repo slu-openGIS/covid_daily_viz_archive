@@ -25,7 +25,7 @@ This map is fully interactive. Clicking on a county will reveal some details abo
 ## CVOID-19 Confirmed Infection Rates
 
 
-```{r map, echo = FALSE, out.width = '100%'}
+```{r map, echo = FALSE, out.width = '100%', out.height='800px'}
 pal <- colorNumeric("BuGn", snapshot$confirmed_rate)
 
 leaflet() %>%
