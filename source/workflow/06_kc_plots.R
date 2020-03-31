@@ -22,7 +22,7 @@ ggsave(filename = "results/kc_metro/a_confirmed_map.png", width = 8, height = 6,
 # plot confirmed rate
 ggplot(data = kc_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = county))  +
-  gghighlight(geoid %in% c("20107", "20209", "20103", "29511")) +
+  gghighlight(geoid %in% c("20107", "20209", "20103", "29511", "29107")) +
   scale_color_brewer(palette = "Dark2") +
   scale_x_date(date_breaks = "2 days", date_labels = "%d %b")  +
   scale_y_continuous(limits = c(0, 0.6), breaks = c(0,.1,.2,.3,.4,.5,.6)) + 
@@ -66,3 +66,4 @@ ggplot(data = kc_detail, mapping = aes(x = report_date, y = case_fatality_rate))
   )
 
 ggsave(filename = "results/kc_metro/d_case_fatality_plot.png", width = 8, height = 6, units = "in", dpi = 500)
+

@@ -25,7 +25,7 @@ ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   gghighlight(geoid %in% c("29189", "29510", "17027", "17163" , "29183")) +
   scale_color_brewer(palette = "Dark2") +
   scale_x_date(date_breaks = "2 days", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 0.35), breaks = c(0,.05,.1,.15,.2,.25,.3,.35)) + 
+  scale_y_continuous(limits = c(0, 0.4), breaks = c(0,.1,.2,.3,.4)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
