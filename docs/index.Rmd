@@ -1,0 +1,48 @@
+---
+title: "Mapping COVID-19 in Missouri"
+author: "Christopher Prener, Ph.D."
+output: html_document
+params:
+  date: "Current as of 2020-03-29"
+date: '`r params$date`'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(leaflet)
+library(sf)
+library(here)
+
+snapshot <- st_read(here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 102003,
+                    stringsAsFactors = FALSE) %>%
+  st_transform(crs = 4326)
+```
+
+## How to Use This Map
+This map is fully interactive. Clicking on a county will reveal some details about that place. You can navigate around them just as you would with Google Maps. You can zoom with your mouse or the `plus` and `minus` buttons in the upper-left corner of each map. You may also move the map around by clicking with your mouse and dragging.
+
+## CVOID-19 Confirmed Infection Rates
+
+
+```{r map, echo = FALSE, out.width = '100%'}
+pal <- colorNumeric("BuGn", snapshot$confirmed_rate)
+
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = snapshot,
+    color = "#444444", 
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.5,
+    fillColor = ~pal(confirmed_rate),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste("<b>County:</b> ", snapshot$county, "<br>",
+                           "<b>Current Confirmed Count:</b> ", snapshot$confirmed, "<br>",
+                           "<b>Current Confirmed Rate per 1,000:</b> ", round(snapshot$confirmed_rate, digits = 2))
+    )  %>%
+    addLegend(pal = pal, values = snapshot$confirmed_rate, opacity = .5, title = "Rate")
+```
+
