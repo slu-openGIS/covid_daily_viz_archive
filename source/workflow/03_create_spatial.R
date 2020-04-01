@@ -2,7 +2,7 @@
 
 # create full county sf object
 ## MO geometry with KC as county equivalent
-mo_counties <- st_read("data/mo_county_plus/mo_county_plus.shp") %>%
+mo_counties <- st_read("data/source/mo_county_plus/mo_county_plus.shp") %>%
   select(GEOID) %>%
   mutate(GEOID = as.character(GEOID)) %>%
   st_transform(crs = 102003)
