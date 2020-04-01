@@ -18,6 +18,7 @@ ggplot(data = stl_sf) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
 save_plots(filename = "results/high_res/stl_metro/a_confirmed_map.png", preset = "lg")
+save_plots(filename = "results/low_res/stl_metro/a_confirmed_map.png", preset = "lg", dpi = 72)
 
 # plot confirmed rate
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
@@ -36,6 +37,7 @@ ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   sequoia_theme(base_size = 22, background = "white")
 
 save_plots(filename = "results/high_res/stl_metro/b_confirmed_plot.png", preset = "lg")
+save_plots(filename = "results/low_res/stl_metro/b_confirmed_plot.png", preset = "lg", dpi = 72)
 
 # map case fatality rate
 ggplot(data = stl_sf) +
@@ -50,6 +52,7 @@ ggplot(data = stl_sf) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
 save_plots(filename = "results/high_res/stl_metro/c_case_fatality_map.png", preset = "lg")
+save_plots(filename = "results/low_res/stl_metro/c_case_fatality_map.png", preset = "lg", dpi = 72)
 
 # plot case fatality rate
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = case_fatality_rate)) +
@@ -68,6 +71,7 @@ ggplot(data = stl_detail, mapping = aes(x = report_date, y = case_fatality_rate)
   sequoia_theme(base_size = 22, background = "white")
 
 save_plots(filename = "results/high_res/stl_metro/d_case_fatality_plot.png", preset = "lg")
+save_plots(filename = "results/low_res/stl_metro/d_case_fatality_plot.png", preset = "lg", dpi = 72)
 
 # clean-up
 rm(stl_detail, stl_sf, plot_date)

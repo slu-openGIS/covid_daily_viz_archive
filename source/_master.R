@@ -12,7 +12,6 @@ library(ggplot2)
 library(lubridate)
 library(purrr)
 library(readr)
-library(rmarkdown)
 library(sf)
 library(tidycensus)
 library(tigris)
@@ -76,4 +75,4 @@ rmarkdown::render(input = "docs/index.Rmd",
        ))
 
 # clean-up
-rm(date, date_str, mmode)
+rm(pal, snapshot, date, date_str, mode)

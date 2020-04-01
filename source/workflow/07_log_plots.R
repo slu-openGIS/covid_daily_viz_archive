@@ -21,6 +21,7 @@ county_confirmed_days %>%
     sequoia_theme(base_size = 22, background = "white")
 
 save_plots(filename = "results/high_res/log_confirmed/b_st_louis.png", preset = "lg")
+save_plots(filename = "results/low_res/log_confirmed/b_st_louis.png", preset = "lg", dpi = 72)
 
 # kansas city days
 county_confirmed_days %>%
@@ -43,6 +44,7 @@ county_confirmed_days %>%
   sequoia_theme(base_size = 22, background = "white")
 
 save_plots(filename = "results/high_res/log_confirmed/c_kansas_city.png", preset = "lg")
+save_plots(filename = "results/low_res/log_confirmed/c_kansas_city.png", preset = "lg", dpi = 72)
 
 # missouri days
 county_confirmed_days %>%
@@ -63,6 +65,7 @@ county_confirmed_days %>%
     sequoia_theme(base_size = 22, background = "white")
 
 save_plots(filename = "results/high_res/log_confirmed/d_missouri.png", preset = "lg")
+save_plots(filename = "results/low_res/log_confirmed/d_missouri.png", preset = "lg", dpi = 72)
 
 # state days
 ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
@@ -81,6 +84,7 @@ ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
   sequoia_theme(base_size = 22, background = "white")
 
 save_plots(filename = "results/high_res/log_confirmed/a_state.png", preset = "lg")
+save_plots(filename = "results/low_res/log_confirmed/a_state.png", preset = "lg", dpi = 72)
 
 # clean-up
 rm(state_confirmed_days, county_confirmed_days, save_plots, sequoia_theme)
