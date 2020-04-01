@@ -26,6 +26,10 @@ source("source/workflow/01_scrape_and_tidy.R")
 source("source/workflow/02_add_rates.R")
 source("source/workflow/03_create_spatial.R")
 
+# create reference object
+x <- mo_sf
+st_geometry(x) <- NULL
+
 # update plots
 source("source/workflow/04_summary_plots.R")
 source("source/workflow/05_stl_plots.R")

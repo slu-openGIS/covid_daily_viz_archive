@@ -6,7 +6,7 @@ county_confirmed_days %>%
                       "17119", "17133", "17163", "29071", "29099", 
                       "29113", "29183", "29189", "29219", "29510")) %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
-    geom_line(mapping = aes(color = county)) +
+    geom_line(mapping = aes(color = county), size = 2) +
     gghighlight(geoid %in% c("29189", "29510", "29183", "17163")) +
     scale_color_brewer(palette = "Dark2") +
     scale_y_log10(limits = c(1, 1000)) +
@@ -17,9 +17,10 @@ county_confirmed_days %>%
       caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
       x = "Days Since First Case Confirmed",
       y = "Count of Confirmed Cases"
-    )
+    ) +
+    sequoia_theme(base_size = 22, background = "white")
 
-ggsave(filename = "results/log_confirmed/b_st_louis.png", width = 8, height = 6, units = "in", dpi = 500)
+save_plots(filename = "results/log_confirmed/b_st_louis.png", preset = "lg")
 
 # kansas city days
 county_confirmed_days %>%
@@ -27,7 +28,7 @@ county_confirmed_days %>%
                       "29013", "29025", "29037", "29047", "29049", 
                       "29095", "29107", "29165", "29177", "29511")) %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
-  geom_line(mapping = aes(color = county)) +
+  geom_line(mapping = aes(color = county), size = 2) +
   gghighlight(geoid %in% c("29511", "20091", "20209" , "29095")) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(1, 1000)) +
@@ -38,15 +39,16 @@ county_confirmed_days %>%
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since First Case Confirmed",
     y = "Count of Confirmed Cases"
-  )
+  ) +
+  sequoia_theme(base_size = 22, background = "white")
 
-ggsave(filename = "results/log_confirmed/c_kansas_city.png", width = 8, height = 6, units = "in", dpi = 500)
+save_plots(filename = "results/log_confirmed/c_kansas_city.png", preset = "lg")
 
 # missouri days
 county_confirmed_days %>%
   filter(state == "Missouri") %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
-    geom_line(mapping = aes(color = county)) +
+    geom_line(mapping = aes(color = county), size = 2) +
     gghighlight(geoid %in% c("29189", "29510", "29511", "29019", "29095", "29077", "29183")) +
     scale_color_brewer(palette = "Dark2") +
     scale_y_log10(limits = c(1, 1000)) +
@@ -57,13 +59,14 @@ county_confirmed_days %>%
       caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
       x = "Days Since First Case Confirmed",
       y = "Count of Confirmed Cases"
-    )
+    ) +
+    sequoia_theme(base_size = 22, background = "white")
 
-ggsave(filename = "results/log_confirmed/d_missouri.png", width = 8, height = 6, units = "in", dpi = 500)
+save_plots(filename = "results/log_confirmed/d_missouri.png", preset = "lg")
 
 # state days
 ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
-  geom_line(mapping = aes(color = state)) +
+  geom_line(mapping = aes(color = state), size = 2) +
   gghighlight(state %in% c("Illinois", "Kansas", "Missouri")) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(1, 10000)) +
@@ -74,9 +77,10 @@ ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since First Case Confirmed",
     y = "Count of Confirmed Cases"
-  )
+  ) +
+  sequoia_theme(base_size = 22, background = "white")
 
-ggsave(filename = "results/log_confirmed/a_state.png", width = 8, height = 6, units = "in", dpi = 500)
+save_plots(filename = "results/log_confirmed/a_state.png", preset = "lg")
 
 # st. louis metro
 county_death_days %>%
