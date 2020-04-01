@@ -68,3 +68,7 @@ ggplot(data = kc_detail, mapping = aes(x = report_date, y = case_fatality_rate))
   sequoia_theme(base_size = 22, background = "white")
 
 save_plots(filename = "results/high_res/kc_metro/d_case_fatality_plot.png", preset = "lg")
+
+# clean-up
+rm(kc_sf, kc_detail, plot_date)
+

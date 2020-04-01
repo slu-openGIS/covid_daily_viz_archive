@@ -12,9 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(leaflet)
 library(sf)
-library(here)
 
-snapshot <- st_read(here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 102003,
+snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 102003,
                     stringsAsFactors = FALSE) %>%
   st_transform(crs = 4326)
 ```

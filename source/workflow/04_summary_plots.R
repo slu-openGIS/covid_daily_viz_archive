@@ -66,3 +66,6 @@ ggplot(data = mo_sf, mapping = aes(fill = confirmed_rate)) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
 save_plots(filename = "results/high_res/state/a_mo_map.png", preset = "lg")
+
+# clean-up
+rm(state_data, mo_sf, plot_date)

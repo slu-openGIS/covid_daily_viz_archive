@@ -68,3 +68,6 @@ ggplot(data = stl_detail, mapping = aes(x = report_date, y = case_fatality_rate)
   sequoia_theme(base_size = 22, background = "white")
 
 save_plots(filename = "results/high_res/stl_metro/d_case_fatality_plot.png", preset = "lg")
+
+# clean-up
+rm(stl_detail, stl_sf, plot_date)

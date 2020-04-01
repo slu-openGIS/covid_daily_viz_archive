@@ -82,4 +82,7 @@ ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
 
 save_plots(filename = "results/high_res/log_confirmed/a_state.png", preset = "lg")
 
+# clean-up
+rm(state_confirmed_days, county_confirmed_days, save_plots, sequoia_theme)
+
   
