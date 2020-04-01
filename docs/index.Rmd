@@ -19,13 +19,23 @@ snapshot <- st_read(here("data", "county", "daily_snapshot_mo_xl.geojson"), crs 
   st_transform(crs = 4326)
 ```
 
-## How to Use This Map
-This map is fully interactive. Clicking on a county will reveal some details about that place. You can navigate around them just as you would with Google Maps. You can zoom with your mouse or the `plus` and `minus` buttons in the upper-left corner of each map. You may also move the map around by clicking with your mouse and dragging.
+## Introduction
+These maps summarize the latest available COVID-19 outbreak data from Johns Hopkins University's [COVID-19 project](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data). Unlike other interactive maps, these maps include the counties in Illinois and Kansas that are part of the St. Louis and Kansas City metropolitan areas. Kansas City is displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
+
+### How to Use These Maps
+These maps are fully interactive. Clicking on a county will reveal some details about that place. You can navigate around them just as you would with Google Maps. You can zoom with your mouse or the `plus` and `minus` buttons in the upper-left corner of each map. You may also move the maps around by clicking with your mouse and dragging.
+
+### Caveats
+Due to lags in reporting, both at the public health department level and at Johns Hopkins itself, these numbers may lag behind other figures reported in the media. Data are based on confirmed tests and deaths, which are in turn biased by the lack of testing. The extent to which we are increasing testing may also make it seem like there are increases in cases, something known as "surveillance bias." While we are almost certainly seeing spreading infection in Missouri communities, it is important to understand that increased testing is driving some of the observed increases in confirmed cases.
+
+<br>
 
 ## CVOID-19 Confirmed Infection Rates
+This map shows confirmed infections as a rate per 1,000 residents. It is important not to map the raw counts themselves, but if you want to see those data, click on a county.
 
+<br>
 
-```{r map, echo = FALSE, out.width = '100%', out.height='800px'}
+```{r map-infections, echo = FALSE, out.width = '100%', out.height='600px'}
 pal <- colorNumeric("BuGn", snapshot$confirmed_rate)
 
 leaflet() %>%
@@ -46,3 +56,32 @@ leaflet() %>%
     addLegend(pal = pal, values = snapshot$confirmed_rate, opacity = .5, title = "Rate")
 ```
 
+<br>
+
+## CVOID-19 Mortality Rates
+This map shows confirmed mortality as a rate per 1,000 residents. As with the first map, raw counts of deaths are available by clicking on individual counties.
+
+<br>
+
+```{r map-mortality, echo = FALSE, out.width = '100%', out.height='600px'}
+pal <- colorNumeric("YlGn", snapshot$mortality_rate)
+
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = snapshot,
+    color = "#444444", 
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.5,
+    fillColor = ~pal(mortality_rate),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste("<b>County:</b> ", snapshot$county, "<br>",
+                           "<b>Current Mortality Count:</b> ", snapshot$deaths, "<br>",
+                           "<b>Current Mortality Rate per 1,000:</b> ", round(snapshot$mortality_rate, digits = 2))
+    )  %>%
+    addLegend(pal = pal, values = snapshot$mortality_rate, opacity = .5, title = "Rate")
+```
+
+<br>

@@ -1,7 +1,7 @@
 # scrape data from Johns Hopkins, tidy, and plot
 
 # UPDATE date value
-date <- lubridate::mdy("03-30-2020")
+date <- lubridate::mdy("03-31-2020")
 
 # dependencies
 library(dplyr)
@@ -10,6 +10,7 @@ library(ggplot2)
 library(lubridate)
 library(purrr)
 library(readr)
+library(rmarkdown)
 library(sf)
 library(tidycensus)
 library(tigris)
@@ -28,3 +29,12 @@ source("source/workflow/04_summary_plots.R")
 source("source/workflow/05_stl_plots.R")
 source("source/workflow/06_kc_plots.R")
 source("source/workflow/07_log_plots.R")
+
+# define date
+date_str <- paste0("Current as of ", as.character(date))
+
+# update interactive map
+render(here("docs", "index.Rmd"),
+       params = list(
+         date = date_str
+       ))
