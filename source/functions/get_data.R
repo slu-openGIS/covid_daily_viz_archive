@@ -1,5 +1,5 @@
 # define download function for Hopkins data
-get_hopkins <- function(date){
+get_hopkins <- function(date, ref){
   
   # create values
   file <- paste0(format(date,'%m-%d-%Y'), ".csv")
@@ -34,6 +34,25 @@ get_hopkins <- function(date){
       
       df <- dplyr::mutate(df, geoid = as.character(geoid))
       df <- dplyr::mutate(df, last_update = mdy_hm(last_update))
+      
+    } else if (date == "2020-03-31"){
+      
+      df <- dplyr::select(df, geoid, confirmed, deaths)
+      
+      counties <- historic_expand(ref, date = date)
+      
+      df <- dplyr::left_join(counties, df, by = "geoid")
+      
+      # define update date and time value
+      update_dateTime <- paste(date, "00:00:01")
+      
+      # fill in missing data
+      df %>%
+        dplyr::mutate(last_update = update_dateTime) %>%
+        dplyr::mutate(last_update = as.POSIXct(last_update)) %>%
+        dplyr::mutate(confirmed = ifelse(is.na(confirmed) == TRUE, 0, confirmed)) %>%
+        dplyr::mutate(deaths = ifelse(is.na(deaths) == TRUE, 0, deaths)) %>%
+        dplyr::select(report_date, geoid, county, state, last_update, confirmed, deaths) -> df
       
     }
     

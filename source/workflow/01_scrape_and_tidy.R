@@ -1,17 +1,5 @@
 # initial scrape and tidy of Johns Hopkins COVID-19 data
 
-# define days to scrape
-detailed_dates <- seq(as.Date("2020-03-22"), date, by="days")
-
-# download detailed data
-detailed_dates %>%
-  unlist() %>%
-  map_df(~ get_hopkins(date = .x)) -> detailed_data
-
-# add historical data to detailed
-## load data
-historic_raw <- get_times(end_date = "2020-03-22")
-
 # get county master list
 counties <- tigris::counties(state = c(17, 20, 29), cb = FALSE, class = "sf")
 
@@ -41,6 +29,18 @@ counties %>%
   bind_rows(., kc) %>%
   arrange(state, geoid) %>%
   mutate(county = ifelse(geoid == "29510", "St. Louis City", county)) -> counties
+
+# define days to scrape
+detailed_dates <- seq(as.Date("2020-03-22"), date, by="days")
+
+# download detailed data
+detailed_dates %>%
+  unlist() %>%
+  map_df(~ get_hopkins(date = .x, ref = counties)) -> detailed_data
+
+# add historical data to detailed
+## load data
+historic_raw <- get_times(end_date = "2020-03-22")
 
 # create vector of dates
 historic_dates <- seq(as.Date("2020-01-24"), as.Date("2020-03-21"), by="days")
