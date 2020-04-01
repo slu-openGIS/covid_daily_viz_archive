@@ -19,7 +19,7 @@ ggplot(data = state_data, mapping = aes(x = report_date, y = confirmed_rate)) +
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
-save_plots(filename = "results/state/b_confirmed_rate.png", preset = "lg")
+save_plots(filename = "results/high_res/state/b_confirmed_rate.png", preset = "lg")
 
 # plot case fatality rate
 ggplot(data = state_data, mapping = aes(x = report_date, y = case_fatality_rate)) +
@@ -35,7 +35,7 @@ ggplot(data = state_data, mapping = aes(x = report_date, y = case_fatality_rate)
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
-save_plots(filename = "results/state/c_case_fatality_rate.png", preset = "lg")
+save_plots(filename = "results/high_res/state/c_case_fatality_rate.png", preset = "lg")
 
 # plot mortality rate
 ggplot(data = state_data, mapping = aes(x = report_date, y = mortality_rate)) +
@@ -52,7 +52,7 @@ ggplot(data = state_data, mapping = aes(x = report_date, y = mortality_rate)) +
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
-save_plots(filename = "results/state/d_mortality_rate.png", preset = "lg")
+save_plots(filename = "results/high_res/state/d_mortality_rate.png", preset = "lg")
 
 # map missouri rates
 ggplot(data = mo_sf, mapping = aes(fill = confirmed_rate)) +
@@ -65,4 +65,4 @@ ggplot(data = mo_sf, mapping = aes(fill = confirmed_rate)) +
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
-save_plots(filename = "results/state/a_mo_map.png", preset = "lg")
+save_plots(filename = "results/high_res/state/a_mo_map.png", preset = "lg")
