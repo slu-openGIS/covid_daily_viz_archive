@@ -73,3 +73,11 @@ rbind(stl_city, stl_county, franklin) %>%
 
 st_write(region, "data/source/stl_zips/region_zip/region_zip.shp", delete_dsn = TRUE)
 st_write(region, "data/source/stl_zips/region_zip/region_zip.geojson", delete_dsn = TRUE)
+
+# get tract data
+get_acs(year = 2018, geography = "zcta", variables = "B01003_001") %>%
+  select(GEOID, estimate) %>%
+  filter(GEOID %in% region$zip) %>%
+  rename(total_pop = estimate)
+
+get_acs(state = 29, county = 510, year = 2018, geography = "tract", variables = "B01003_001")
