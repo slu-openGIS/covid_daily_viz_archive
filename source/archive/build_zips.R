@@ -25,9 +25,6 @@ stl_city <- st_intersection(zip, counties) %>%
   summarise() %>%
   filter(zip %in% c("63121", "63155") == FALSE)
 
-st_write(stl_city, "data/source/stl_zips/stl_city_zip/stl_city_zip.shp", delete_dsn = TRUE)
-st_write(stl_city, "data/source/stl_zips/stl_city_zip/stl_city_zip.geojson", delete_dsn = TRUE)
-
 # geoprocess St. Louis County Zips
 counties <- counties(state = 29, year = 2018, class = "sf") %>%
   filter(COUNTYFP %in% c("189")) %>%
@@ -100,7 +97,7 @@ zip %>%
 
 # interpolate
 stl_city %>%
-  aw_interpolate(tid = "zip", source = stl_city_demo, sid = "GEOID", weight = "sum", output = "sf", 
+  aw_interpolate(tid = "zip", source = stl_city_demo, sid = "GEOID", weight = "total", output = "sf", 
                  extensive = c("total_pop", "B17001_001E", "B17001_002E",
                                "B02001_001E", "B02001_002E", "B02001_003E")) %>%
   mutate(total_pop = round(total_pop)) %>%
