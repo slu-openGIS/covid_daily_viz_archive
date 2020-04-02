@@ -3,7 +3,7 @@
 # final data cleaning
 plot_date <- "2020-03-10"
 stl_detail <- filter(stl_detail, report_date >= plot_date)
-stl_sf <- mutate(stl_sf, county = ifelse(GEOID %in% c("29189", "29510"), NA, county))
+# stl_sf <- mutate(stl_sf, county = ifelse(GEOID %in% c("29189", "29510"), NA, county))
 
 # map confirmed rate
 ggplot(data = stl_sf) +
@@ -26,7 +26,7 @@ ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   gghighlight(geoid %in% c("29189", "29510", "17027", "17163" , "29183")) +
   scale_color_brewer(palette = "Dark2") +
   scale_x_date(date_breaks = "2 days", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 0.5), breaks = c(0,.1,.2,.3,.4,.5)) + 
+  scale_y_continuous(limits = c(0, 0.7), breaks = c(0,.1,.2,.3,.4,.5,.6,.7)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),

@@ -16,10 +16,16 @@ library(sf)
 snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 102003,
                     stringsAsFactors = FALSE) %>%
   st_transform(crs = 4326)
+
+zip_snapshot <- st_read(here::here("data", "zip", "zip_stl_city.geojson"), stringsAsFactors = FALSE)
 ```
 
 ## Introduction
-These maps summarize the latest available COVID-19 outbreak data from Johns Hopkins University's [COVID-19 project](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data). Unlike other interactive maps, these maps include the counties in Illinois and Kansas that are part of the St. Louis and Kansas City metropolitan areas. Kansas City is displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
+These maps summarize the latest available COVID-19 outbreak data from Johns Hopkins University's [COVID-19 project](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data) and the City of St. Louis. 
+
+Unlike other interactive maps, the initial two maps include the counties in Illinois and Kansas that are part of the St. Louis and Kansas City metropolitan areas. Kansas City is displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
+
+The final map shoes Zip Code Tabulation Areas (ZCTAs), which are generalized areas that are roughly equivalent to USPS zip-codes. They are not 100% the same, however, and some homes with a given zip code may fall outside of ZCTA boundaries.
 
 ### How to Use These Maps
 These maps are fully interactive. Clicking on a county will reveal some details about that place. You can navigate around them just as you would with Google Maps. You can zoom with your mouse or the `plus` and `minus` buttons in the upper-left corner of each map. You may also move the maps around by clicking with your mouse and dragging.
@@ -29,7 +35,7 @@ Due to lags in reporting, both at the public health department level and at John
 
 <br>
 
-## CVOID-19 Confirmed Infection Rates
+## CVOID-19 Confirmed Infection Rates by County
 This map shows confirmed infections as a rate per 1,000 residents. It is important not to map the raw counts themselves, but if you want to see those data, click on a county.
 
 <br>
@@ -57,7 +63,7 @@ leaflet() %>%
 
 <br>
 
-## CVOID-19 Mortality Rates
+## CVOID-19 Mortality Rates by County
 This map shows confirmed mortality as a rate per 1,000 residents. As with the first map, raw counts of deaths are available by clicking on individual counties.
 
 <br>
@@ -81,6 +87,34 @@ leaflet() %>%
                            "<b>Current Mortality Rate per 1,000:</b> ", round(snapshot$mortality_rate, digits = 2))
     )  %>%
     addLegend(pal = pal, values = snapshot$mortality_rate, opacity = .5, title = "Rate")
+```
+
+<br>
+
+## CVOID-19 Confirmed Infection Rates by St. Louis ZCTA
+This map shows confirmed infections as a rate per 1,000 residents. It is important not to map the raw counts themselves, but if you want to see those data, click on a ZCTA
+
+<br>
+
+```{r map-infections-zip, echo = FALSE, out.width = '100%', out.height='600px'}
+pal <- colorNumeric("BuGn", zip_snapshot$confirmed_rate)
+
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = zip_snapshot,
+    color = "#444444", 
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.5,
+    fillColor = ~pal(confirmed_rate),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste("<b>Zip:</b> ", zip_snapshot$zip, "<br>",
+                           "<b>Current Confirmed Count:</b> ", zip_snapshot$confirmed, "<br>",
+                           "<b>Current Confirmed Rate per 1,000:</b> ", round(zip_snapshot$confirmed_rate, digits = 2))
+    )  %>%
+    addLegend(pal = pal, values = zip_snapshot$confirmed_rate, opacity = .5, title = "Rate")
 ```
 
 <br>

@@ -9,7 +9,7 @@ ggplot(data = state_data, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2", name = "State") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,50), breaks = c(0,5,10,15,20,25,30,35,40,45,50)) + 
+  scale_y_continuous(limits = c(0,60), breaks = c(0,10,20,30,40,50,60)) + 
   labs(
     title = "Confirmed COVID-19 Cases by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -44,7 +44,7 @@ ggplot(data = state_data, mapping = aes(x = report_date, y = mortality_rate)) +
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2", name = "State") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,.8), breaks = c(0,.1,.2,.3,.4,.5,.6,.7,.8)) +
+  scale_y_continuous(limits = c(0,1.2), breaks = c(0,.2,.4,.6,.8,1,1.2)) +
   labs(
     title = "Confirmed COVID-19 Mortality by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),

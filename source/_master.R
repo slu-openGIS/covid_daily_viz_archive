@@ -1,9 +1,9 @@
 # scrape data from Johns Hopkins, tidy, and plot
 
 # UPDATE date value
-date <- lubridate::mdy("03-31-2020")
-# mode <- "build"
-mode <- "plot"
+date <- lubridate::mdy("04-01-2020")
+mode <- "build"
+# mode <- "plot"
 
 # dependencies
 library(dplyr)
@@ -64,6 +64,7 @@ source("source/workflow/04_summary_plots.R")
 source("source/workflow/05_stl_plots.R")
 source("source/workflow/06_kc_plots.R")
 source("source/workflow/07_log_plots.R")
+source("source/workflow/08_zip_plots.R")
 
 # define date
 date_str <- paste0("Current as of ", as.character(date))

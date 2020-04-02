@@ -14,7 +14,7 @@ county_pop <- get_acs(geography = "county", state = c("Kansas", "Illinois"), yea
   rename(total_pop = estimate)
 
 ## county populations with KC as county equivalent
-mo_county_pop <- read_csv("data/mo_county_plus/mo_county_plus.csv") %>%
+mo_county_pop <- read_csv("data/source/mo_county_plus/mo_county_plus.csv") %>%
   select(-NAME) %>%
   mutate(GEOID = as.character(GEOID))
 

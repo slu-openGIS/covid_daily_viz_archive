@@ -10,7 +10,7 @@ county_confirmed_days %>%
     gghighlight(geoid %in% c("29189", "29510", "29183", "17163")) +
     scale_color_brewer(palette = "Dark2") +
     scale_y_log10(limits = c(1, 1000)) +
-    scale_x_continuous(limits = c(1,25), breaks = c(1, 5, 10, 15, 20, 25))  +
+    scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25,30))  +
     labs(
       title = "Pace of COVID-19 Cases by Metro St. Louis County",
       subtitle = paste0("Current as of ", as.character(date)),
@@ -33,7 +33,7 @@ county_confirmed_days %>%
   gghighlight(geoid %in% c("29511", "20091", "20209" , "29095")) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(1, 1000)) +
-  scale_x_continuous(limits = c(1,25), breaks = c(1, 5, 10, 15, 20, 25))  +
+  scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25,30))  +
   labs(
     title = "Pace of COVID-19 Cases by Metro Kansas City County",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -54,7 +54,7 @@ county_confirmed_days %>%
     gghighlight(geoid %in% c("29189", "29510", "29511", "29019", "29095", "29077", "29183")) +
     scale_color_brewer(palette = "Dark2") +
     scale_y_log10(limits = c(1, 1000)) +
-    scale_x_continuous(limits = c(1,25), breaks = c(1, 5, 10, 15, 20, 25))  +
+    scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25, 30))  +
     labs(
       title = "Pace of COVID-19 Cases by Missouri County",
       subtitle = paste0("Current as of ", as.character(date)),
@@ -87,6 +87,4 @@ save_plots(filename = "results/high_res/log_confirmed/a_state.png", preset = "lg
 save_plots(filename = "results/low_res/log_confirmed/a_state.png", preset = "lg", dpi = 72)
 
 # clean-up
-rm(state_confirmed_days, county_confirmed_days, save_plots, sequoia_theme)
-
-  
+rm(state_confirmed_days, county_confirmed_days)
