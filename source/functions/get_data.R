@@ -35,7 +35,7 @@ get_hopkins <- function(date, ref){
       df <- dplyr::mutate(df, geoid = as.character(geoid))
       df <- dplyr::mutate(df, last_update = mdy_hm(last_update))
       
-    } else if (date == "2020-03-31" | date == "2020-04-01"){
+    } else if (date >= "2020-03-31"){
       
       df <- dplyr::select(df, geoid, confirmed, deaths)
       

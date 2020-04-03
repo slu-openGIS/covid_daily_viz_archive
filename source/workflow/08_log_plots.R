@@ -7,7 +7,8 @@ county_confirmed_days %>%
                       "29113", "29183", "29189", "29219", "29510")) %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
     geom_line(mapping = aes(color = county), size = 2) +
-    gghighlight(geoid %in% c("29189", "29510", "29183", "17163")) +
+    gghighlight(geoid %in% c("29189", "29510", "29183", "17163"),
+                label_params = list(size = 6)) +
     scale_color_brewer(palette = "Dark2") +
     scale_y_log10(limits = c(1, 1000)) +
     scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25,30))  +
@@ -30,7 +31,8 @@ county_confirmed_days %>%
                       "29095", "29107", "29165", "29177", "29511")) %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
   geom_line(mapping = aes(color = county), size = 2) +
-  gghighlight(geoid %in% c("29511", "20091", "20209" , "29095")) +
+  gghighlight(geoid %in% c("29511", "20091", "20209" , "29095"),
+              label_params = list(size = 6)) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(1, 1000)) +
   scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25,30))  +
@@ -51,7 +53,8 @@ county_confirmed_days %>%
   filter(state == "Missouri") %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
     geom_line(mapping = aes(color = county), size = 2) +
-    gghighlight(geoid %in% c("29189", "29510", "29511", "29019", "29095", "29077", "29183")) +
+    gghighlight(geoid %in% c("29189", "29510", "29511", "29019", "29095", "29077", "29183"),
+                label_params = list(size = 6)) +
     scale_color_brewer(palette = "Dark2") +
     scale_y_log10(limits = c(1, 1000)) +
     scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25, 30))  +
@@ -70,7 +73,6 @@ save_plots(filename = "results/low_res/log_confirmed/d_missouri.png", preset = "
 # state days
 ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
   geom_line(mapping = aes(color = state), size = 2) +
-  gghighlight(state %in% c("Illinois", "Kansas", "Missouri")) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(1, 10000)) +
   scale_x_continuous(limits = c(1,75), breaks = c(0,15,30,45,60,75))  +

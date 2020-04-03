@@ -2,13 +2,14 @@
 
 # UPDATE date value
 date <- lubridate::mdy("04-02-2020")
-mode <- "build"
-# mode <- "plot"
+# mode <- "build"
+mode <- "plot"
 
 # dependencies
 library(dplyr)
 library(gghighlight)
 library(ggplot2)
+library(ggrepel)
 library(lubridate)
 library(purrr)
 library(readr)
@@ -59,7 +60,7 @@ if (mode == "plot"){
   state_confirmed_days <- read_csv("data/state/state_confirm.csv")
   county_confirmed_days <- read_csv("data/county/county_confirm.csv")
   
-  stl_city_zip_sf <- st_read("data/zip/daily_snapshop_stl_city.geojson", crs = 4326,
+  stl_city_zip_sf <- st_read("data/zip/daily_snapshot_stl_city.geojson", crs = 4326,
                              stringsAsFactors = FALSE)
   
 }
@@ -81,4 +82,5 @@ rmarkdown::render(input = "docs/index.Rmd",
        ))
 
 # clean-up
-rm(pal, snapshot, date, date_str, mode)
+rm(pal, snapshot, date, date_str, mode, zip_snapshot, save_plots, 
+   sequoia_theme)

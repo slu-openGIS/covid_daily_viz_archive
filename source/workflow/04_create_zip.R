@@ -25,7 +25,7 @@ left_join(stl_city_zip_sf, stl_city_zip_sub, by = "zip") %>%
 
 # write data
 write_csv(stl_city_zip, "data/zip/zip_stl_city.csv")
-st_write(stl_city_zip_sf, "data/zip/daily_snapshop_stl_city.geojson",
+st_write(stl_city_zip_sf, "data/zip/daily_snapshot_stl_city.geojson",
          delete_dsn = TRUE)
 
 # clean-up

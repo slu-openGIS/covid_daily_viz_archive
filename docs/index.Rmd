@@ -17,7 +17,7 @@ snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson")
                     stringsAsFactors = FALSE) %>%
   st_transform(crs = 4326)
 
-zip_snapshot <- st_read(here::here("data", "zip", "zip_stl_city.geojson"), stringsAsFactors = FALSE)
+zip_snapshot <- st_read(here::here("data", "zip", "daily_snapshot_stl_city.geojson"), stringsAsFactors = FALSE)
 ```
 
 ## Introduction
