@@ -1,7 +1,7 @@
 # scrape data from Johns Hopkins, tidy, and plot
 
 # UPDATE date value
-date <- lubridate::mdy("04-01-2020")
+date <- lubridate::mdy("04-02-2020")
 mode <- "build"
 # mode <- "plot"
 
@@ -21,6 +21,7 @@ if (mode == "build"){
   
   source("source/functions/get_data.R")
   source("source/functions/historic_expand.R")
+  source("source/functions/wrangle_zip.R")
   
 }
 
@@ -33,6 +34,7 @@ if (mode == "build"){
   source("source/workflow/01_scrape_and_tidy.R")
   source("source/workflow/02_add_rates.R")
   source("source/workflow/03_create_spatial.R")
+  source("source/workflow/04_create_zip.R")
   
   # create reference object
   ref_county <- mo_sf
@@ -57,14 +59,17 @@ if (mode == "plot"){
   state_confirmed_days <- read_csv("data/state/state_confirm.csv")
   county_confirmed_days <- read_csv("data/county/county_confirm.csv")
   
+  stl_city_zip_sf <- st_read("data/zip/daily_snapshop_stl_city.geojson", crs = 4326,
+                             stringsAsFactors = FALSE)
+  
 }
 
 # update plots
-source("source/workflow/04_summary_plots.R")
-source("source/workflow/05_stl_plots.R")
-source("source/workflow/06_kc_plots.R")
-source("source/workflow/07_log_plots.R")
-source("source/workflow/08_zip_plots.R")
+source("source/workflow/05_summary_plots.R")
+source("source/workflow/06_stl_plots.R")
+source("source/workflow/07_kc_plots.R")
+source("source/workflow/08_log_plots.R")
+source("source/workflow/09_zip_plots.R")
 
 # define date
 date_str <- paste0("Current as of ", as.character(date))
