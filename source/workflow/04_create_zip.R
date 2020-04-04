@@ -1,7 +1,5 @@
 # build zip code data set
 
-date <- as.Date("2020-04-02")
-
 # load spatial data
 stl_city_zip_sf <- st_read("data/source/stl_zips/stl_city_zip/stl_city_zip.geojson", 
                            crs = 4326, stringsAsFactors = FALSE)

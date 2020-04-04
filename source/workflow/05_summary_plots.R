@@ -45,7 +45,7 @@ ggplot(data = state_data, mapping = aes(x = report_date, y = mortality_rate)) +
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2", name = "State") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,1.4), breaks = c(0,.2,.4,.6,.8,1,1.2,1.4)) +
+  scale_y_continuous(limits = c(0,2), breaks = c(0,.25,.5,.75,1,1.25,1.5,1.75,2)) +
   labs(
     title = "Confirmed COVID-19 Mortality by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
