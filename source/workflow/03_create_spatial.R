@@ -56,9 +56,13 @@ mo_detail <- filter(county_data, geoid %in% mo_counties)
 stl_detail <- filter(county_data, geoid %in% stl_metro_counties)
 kc_detail <- filter(county_data, geoid %in% kc_metro_counties)
 
+# add health care data
+icu <- read_excel(path = "data/source/kaiser_health_news_icu_bed_counts.csv")
+mo_xl_sf <- left_join(mo_xl_sf, icu, by = "GEOID")
+
 # clean-up
 rm(stl_metro_counties, il_metro_counties, kc_metro_counties, ks_metro_counties,
-   mo_counties, county_sub, counties_sf, county_data, mo_counties_xl)
+   mo_counties, county_sub, counties_sf, county_data, mo_counties_xl, icu)
 
 # write data
 st_write(mo_sf, "data/county/daily_snapshot_mo.geojson", delete_dsn = TRUE)
