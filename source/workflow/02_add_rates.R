@@ -97,7 +97,7 @@ state_data %>%
   arrange(state, day) -> state_death_days
 
 # clean-up
-rm(county_pop, state_pop)
+rm(state_pop)
 
 # export
 write_csv(state_data, "data/state/state_full.csv")

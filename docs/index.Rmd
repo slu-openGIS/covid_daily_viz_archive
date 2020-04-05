@@ -10,12 +10,16 @@ date: '`r params$date`'
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
+library(dplyr)
 library(leaflet)
+library(readr)
 library(sf)
+
 
 snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 102003,
                     stringsAsFactors = FALSE) %>%
-  st_transform(crs = 4326)
+  st_transform(crs = 4326) %>%
+  mutate(icu_rate = ifelse(hospitals == 0, NA, icu_rate))
 
 zip_snapshot <- st_read(here::here("data", "zip", "daily_snapshot_stl_city.geojson"), stringsAsFactors = FALSE)
 ```
@@ -23,9 +27,11 @@ zip_snapshot <- st_read(here::here("data", "zip", "daily_snapshot_stl_city.geojs
 ## Introduction
 These maps summarize the latest available COVID-19 outbreak data from Johns Hopkins University's [COVID-19 project](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data) and the City of St. Louis. 
 
-Unlike other interactive maps, the initial two maps include the counties in Illinois and Kansas that are part of the St. Louis and Kansas City metropolitan areas. Kansas City is displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
+Unlike other interactive maps, the initial three maps include the counties in Illinois and Kansas that are part of the St. Louis and Kansas City metropolitan areas. Kansas City is displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
 
 The final map shoes Zip Code Tabulation Areas (ZCTAs), which are generalized areas that are roughly equivalent to USPS zip-codes. They are not 100% the same, however, and some homes with a given zip code may fall outside of ZCTA boundaries.
+
+Data on 
 
 ### How to Use These Maps
 These maps are fully interactive. Clicking on a county will reveal some details about that place. You can navigate around them just as you would with Google Maps. You can zoom with your mouse or the `plus` and `minus` buttons in the upper-left corner of each map. You may also move the maps around by clicking with your mouse and dragging.
@@ -35,8 +41,39 @@ Due to lags in reporting, both at the public health department level and at John
 
 <br>
 
+## Health Care Infrastructure
+This first map uses data from the [Kaiser Health Network](https://khn.org/news/as-coronavirus-spreads-widely-millions-of-older-americans-live-in-counties-with-no-icu-beds/) to identify counties (in gray) without any hospitals as well as the number of ICU beds per 1,000 residents in counties that do have hospitals. Keep in mind that some hospitals may have expanded ICU bed capacity in anticipation of increased need. 
+
+For Kansas City, all hospital and ICU bed data have been allocated to Jackson, Clay, Cass, and Platte Counties. If you have a sense of number of beds in Kansas City, MO itself as opposed to the surrounding counties, please feel free to [drop me an email](mailto:chris.prener@slu.edu).
+
+<br>
+
+```{r map-icu, echo = FALSE, out.width = '100%', out.height='600px'}
+pal <- colorNumeric("PuRd", snapshot$icu_rate)
+
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = snapshot,
+    color = "#444444", 
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.5,
+    fillColor = ~pal(icu_rate),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste("<b>County:</b> ", snapshot$county, "<br>",
+                           "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
+                           "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds, "<br>",
+                           "<b>Baseline ICU Bed Rate per 1,000 Residents:</b> ", round(snapshot$icu_rate, digits = 3))
+    )  %>%
+    addLegend(pal = pal, values = snapshot$icu_rate, opacity = .5, title = "Rate")
+```
+
+<br>
+
 ## CVOID-19 Confirmed Infection Rates by County
-This map shows confirmed infections as a rate per 1,000 residents. It is important not to map the raw counts themselves, but if you want to see those data, click on a county.
+This map shows confirmed infections as a rate per 1,000 residents. It is important not to map the raw counts themselves, but if you want to see those data, click on a county. You can also view the hospital infrastructure details from the first map for each county by clicking on them.
 
 <br>
 
@@ -56,7 +93,9 @@ leaflet() %>%
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste("<b>County:</b> ", snapshot$county, "<br>",
                            "<b>Current Confirmed Count:</b> ", snapshot$confirmed, "<br>",
-                           "<b>Current Confirmed Rate per 1,000:</b> ", round(snapshot$confirmed_rate, digits = 2))
+                           "<b>Current Confirmed Rate per 1,000:</b> ", round(snapshot$confirmed_rate, digits = 2), "<br>",
+                           "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
+                           "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds)
     )  %>%
     addLegend(pal = pal, values = snapshot$confirmed_rate, opacity = .5, title = "Rate")
 ```
@@ -64,7 +103,7 @@ leaflet() %>%
 <br>
 
 ## CVOID-19 Mortality Rates by County
-This map shows confirmed mortality as a rate per 1,000 residents. As with the first map, raw counts of deaths are available by clicking on individual counties.
+This map shows confirmed mortality as a rate per 1,000 residents. As with the second map, raw counts of deaths and hospital infrastructure details are available by clicking on individual counties.
 
 <br>
 
@@ -84,7 +123,9 @@ leaflet() %>%
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste("<b>County:</b> ", snapshot$county, "<br>",
                            "<b>Current Mortality Count:</b> ", snapshot$deaths, "<br>",
-                           "<b>Current Mortality Rate per 1,000:</b> ", round(snapshot$mortality_rate, digits = 2))
+                           "<b>Current Mortality Rate per 1,000:</b> ", round(snapshot$mortality_rate, digits = 2), "<br>",
+                           "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
+                           "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds)
     )  %>%
     addLegend(pal = pal, values = snapshot$mortality_rate, opacity = .5, title = "Rate")
 ```
