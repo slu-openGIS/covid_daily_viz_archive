@@ -46,9 +46,9 @@ left_join(county_data, county_pop, by = c("geoid" = "GEOID")) %>%
   select(report_date, geoid, county, state, last_update, confirmed, 
          confirmed_rate, deaths, mortality_rate, case_fatality_rate) -> county_data
 
-# create days from first confirmed infection data, county-level data
+# create days from 10th confirmed infection data, county-level data
 county_data %>%
-  filter(confirmed > 0) %>%
+  filter(confirmed >= 10) %>%
   filter(county != "Unassigned") %>%
   arrange(report_date) %>%
   group_by(state, county) %>%
@@ -72,9 +72,9 @@ county_data %>%
          mortality_rate, case_fatality_rate) %>%
   arrange(state, county, day) -> county_death_days
 
-# create days from first confirmed infection data, state-level data
+# create days from 10th confirmed infection data, state-level data
 state_data %>%
-  filter(confirmed > 0) %>%
+  filter(confirmed >= 10) %>%
   arrange(report_date) %>%
   group_by(state) %>%
   mutate(first_date = first(report_date)) %>%
