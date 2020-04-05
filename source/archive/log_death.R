@@ -1,4 +1,6 @@
 
+state_death_days <- read_csv("data/state/state_death.csv")
+
 # st. louis metro
 county_death_days %>%
   filter(geoid %in% c("17005", "17013", "17027", "17083", "17117", 
@@ -46,8 +48,8 @@ ggplot(data = state_death_days, mapping = aes(day, deaths)) +
   geom_line(mapping = aes(color = state)) +
   gghighlight(state %in% c("Illinois", "Kansas", "Missouri")) +
   scale_color_brewer(palette = "Set1") +
-  scale_y_log10(limits = c(1, 100)) +
-  scale_x_continuous(limits = c(1,20), breaks = c(1, 5, 10, 15, 20))  +
+  scale_y_log10(limits = c(1, 1000)) +
+  scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25, 30))  +
   labs(
     title = "Pace of COVID-19 Deaths by State",
     subtitle = paste0("Current as of ", as.character(date)),
