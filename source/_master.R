@@ -1,9 +1,9 @@
 # scrape data from Johns Hopkins, tidy, and plot
 
 # UPDATE date value
-date <- lubridate::mdy("04-04-2020")
-mode <- "build"
-# mode <- "plot"
+date <- lubridate::mdy("04-05-2020")
+# mode <- "build"
+mode <- "plot"
 
 # dependencies
 library(dplyr)

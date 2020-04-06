@@ -31,8 +31,6 @@ Unlike other interactive maps, the initial three maps include the counties in Il
 
 The final map shoes Zip Code Tabulation Areas (ZCTAs), which are generalized areas that are roughly equivalent to USPS zip-codes. They are not 100% the same, however, and some homes with a given zip code may fall outside of ZCTA boundaries.
 
-Data on 
-
 ### How to Use These Maps
 These maps are fully interactive. Clicking on a county will reveal some details about that place. You can navigate around them just as you would with Google Maps. You can zoom with your mouse or the `plus` and `minus` buttons in the upper-left corner of each map. You may also move the maps around by clicking with your mouse and dragging.
 

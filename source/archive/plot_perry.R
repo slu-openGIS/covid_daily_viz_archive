@@ -1,3 +1,8 @@
+date <- lubridate::mdy("04-05-2020")
+
+source("source/functions/save_plots.R")
+source("source/functions/sequoia_theme.R")
+
 county_full <- read_csv("data/county/county_full.csv")
 county_confirmed_days <- read_csv("data/county/county_confirm.csv")
 
@@ -29,7 +34,8 @@ county_confirmed_days %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
   geom_line(mapping = aes(color = county), size = 2) +
   gghighlight(geoid %in% c("29189", "29510", "29511", "29157", "29077", "29019"),
-              label_params = list(size = 6, nudge_x = 1, nudge_y = .1)) +
+              label_params = list(size = 6, nudge_x = 1, nudge_y = .1),
+              use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(10, 1000)) +
   scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25, 30))  +

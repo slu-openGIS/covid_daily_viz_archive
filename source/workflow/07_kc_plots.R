@@ -24,7 +24,7 @@ save_plots(filename = "results/low_res/kc_metro/a_confirmed_map.png", preset = "
 ggplot(data = kc_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
   gghighlight(geoid %in% c("20107", "20209", "20103", "29511", "29107"),
-              label_params = list(size = 6, nudge_x = 1, nudge_y = .1),
+              label_params = list(size = 6),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b")  +
@@ -59,7 +59,7 @@ save_plots(filename = "results/low_res/kc_metro/c_case_fatality_map.png", preset
 # plot case fatality rate
 ggplot(data = kc_detail, mapping = aes(x = report_date, y = case_fatality_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
-  gghighlight(geoid %in% c("20209", "29095", "20091", "29107", "29037"),
+  gghighlight(geoid %in% c("20209", "29095", "20091", "29107", "29037", "29511"),
               label_params = list(size = 6, nudge_x = 1, nudge_y = .1),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +
