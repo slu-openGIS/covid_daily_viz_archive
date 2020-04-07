@@ -7,18 +7,18 @@ county_confirmed_days %>%
                       "29113", "29183", "29189", "29219", "29510")) %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
     geom_line(mapping = aes(color = county), size = 2) +
-    gghighlight(geoid %in% c("29189", "29510", "29183", "17163"),
+    gghighlight(geoid %in% c("29189", "29510", "29183", "17163", "29099"),
                 label_params = list(size = 6, nudge_x = 1, nudge_y = .1),
                 use_group_by = FALSE) +
     scale_color_brewer(palette = "Dark2") +
-    scale_y_log10(limits = c(10, 1000)) +
+    scale_y_log10(limits = c(10, 10000)) +
     scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25,30))  +
     labs(
       title = "Pace of COVID-19 Cases by Metro St. Louis County",
       subtitle = paste0("Current as of ", as.character(date)),
       caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
       x = "Days Since Tenth Case Confirmed",
-      y = "Count of Confirmed Cases"
+      y = "Count of Confirmed Cases (Log)"
     ) +
     sequoia_theme(base_size = 22, background = "white")
 
@@ -32,7 +32,7 @@ county_confirmed_days %>%
                       "29095", "29107", "29165", "29177", "29511")) %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
   geom_line(mapping = aes(color = county), size = 2) +
-  gghighlight(geoid %in% c("29511", "20091", "20209" , "29095"),
+  gghighlight(geoid %in% c("29511", "20091", "20209" , "29095", "20103"),
               label_params = list(size = 6, nudge_x = 1, nudge_y = .1),
               use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2") +
@@ -43,7 +43,7 @@ county_confirmed_days %>%
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since Tenth Case Confirmed",
-    y = "Count of Confirmed Cases"
+    y = "Count of Confirmed Cases (Log)"
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
@@ -59,14 +59,14 @@ county_confirmed_days %>%
                 label_params = list(size = 6, nudge_x = 1, nudge_y = .1),
                 use_group_by = FALSE) +
     scale_color_brewer(palette = "Dark2") +
-    scale_y_log10(limits = c(10, 1000)) +
+    scale_y_log10(limits = c(10, 10000)) +
     scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25, 30))  +
     labs(
       title = "Pace of COVID-19 Cases by Missouri County",
       subtitle = paste0("Current as of ", as.character(date)),
       caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
       x = "Days Since Tenth Case Confirmed",
-      y = "Count of Confirmed Cases"
+      y = "Count of Confirmed Cases (Log)"
     ) +
     sequoia_theme(base_size = 22, background = "white")
 
@@ -77,14 +77,14 @@ save_plots(filename = "results/low_res/log_confirmed/d_missouri.png", preset = "
 ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2") +
-  scale_y_log10(limits = c(10, 10000)) +
+  scale_y_log10(limits = c(10, 100000), labels = comma) +
   scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25,30)) +
   labs(
     title = "Pace of COVID-19 Cases by State",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since Tenth Case Confirmed",
-    y = "Count of Confirmed Cases"
+    y = "Count of Confirmed Cases (Log)"
   ) +
   sequoia_theme(base_size = 22, background = "white")
 

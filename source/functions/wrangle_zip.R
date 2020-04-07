@@ -23,7 +23,7 @@ wrangle_zip <- function(date, county){
   if (county == 510){
     pop <- readr::read_csv("data/source/stl_zips/stl_city_zip/stl_city_zip.csv") 
   } else if (county == 189){
-    pop <- readr::read_csv("data/source/stl_zips/stl_county_zip/stl_city_zip.csv") 
+    pop <- readr::read_csv("data/source/stl_zips/stl_county_zip/stl_county_zip.csv") 
   }
   
   # add new columns, modify existing

@@ -23,7 +23,7 @@ save_plots(filename = "results/low_res/stl_metro/a_confirmed_map.png", preset = 
 # plot confirmed rate
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
-  gghighlight(geoid %in% c("29189", "29510", "17163" , "29183"),
+  gghighlight(geoid %in% c("29189", "29510", "17163" , "29183", "29099"),
               label_params = list(size = 6),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +
@@ -48,7 +48,7 @@ ggplot(data = stl_sf) +
   scale_fill_distiller(palette = "BuPu", trans = "reverse", name = "Percent") +
   labs(
     title = "COVID-19 Case Fatality by Metro St. Louis County",
-    subtitle = paste0("2020-03-10 through ", as.character(date)),
+    subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nCase fatality is the percent of confirmed cases that result in death\nSt. Louis County is intentionally not labeled to increase readability of map"
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
@@ -59,12 +59,12 @@ save_plots(filename = "results/low_res/stl_metro/c_case_fatality_map.png", prese
 # plot case fatality rate
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = case_fatality_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
-  gghighlight(geoid %in% c("29189", "29510", "29183", "17163"),
+  gghighlight(geoid %in% c("29189", "29510", "29183", "17163", "29071", "29099"),
               label_params = list(size = 6),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 10), breaks = c(0,1,2,3,4,5,6,8,10)) + 
+  scale_y_continuous(limits = c(0, 10), breaks = c(0,1,2,3,4,5,6,7,8,9,10)) + 
   labs(
     title = "COVID-19 Case Fatality by Metro St. Louis County",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),

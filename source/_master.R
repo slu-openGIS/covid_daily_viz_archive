@@ -1,9 +1,10 @@
 # scrape data from Johns Hopkins, tidy, and plot
 
 # UPDATE date value
-date <- lubridate::mdy("04-05-2020")
+date <- lubridate::mdy("04-06-2020")
 # mode <- "build"
 mode <- "plot"
+city_lt5 <- c("63123", "63130", "63137")
 
 # dependencies
 library(dplyr)
@@ -13,6 +14,7 @@ library(ggrepel)
 library(lubridate)
 library(purrr)
 library(readr)
+library(scales)
 library(sf)
 library(tidycensus)
 library(tigris)
@@ -36,11 +38,7 @@ if (mode == "build"){
   source("source/workflow/02_add_rates.R")
   source("source/workflow/03_create_spatial.R")
   source("source/workflow/04_create_zip.R")
-  
-  # create reference object
-  ref_county <- mo_sf
-  st_geometry(ref_county) <- NULL
-  
+
 }
 
 # re-load data
@@ -60,10 +58,15 @@ if (mode == "plot"){
   state_confirmed_days <- read_csv("data/state/state_confirm.csv")
   county_confirmed_days <- read_csv("data/county/county_confirm.csv")
   
-  stl_city_zip_sf <- st_read("data/zip/daily_snapshot_stl_city.geojson", crs = 4326,
+  city_county_zip_sf <- st_read("data/zip/daily_snapshot_city_county.geojson", crs = 4326,
                              stringsAsFactors = FALSE)
   
+  rm(city_lt5)
 }
+
+# create reference object
+ref_county <- mo_sf
+st_geometry(ref_county) <- NULL
 
 # update plots
 source("source/workflow/05_summary_plots.R")

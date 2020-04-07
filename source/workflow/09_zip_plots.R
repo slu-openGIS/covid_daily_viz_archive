@@ -1,5 +1,8 @@
 # map st. louis zip codes
 
+stl_city_zip_sf <- city_county_zip_sf
+rm(city_county_zip_sf)
+
 # map confirmed rate
 ggplot(data = stl_city_zip_sf) +
   geom_sf(mapping = aes(fill = confirmed_rate)) +
@@ -8,7 +11,7 @@ ggplot(data = stl_city_zip_sf) +
   labs(
     title = "Confirmed COVID-19 Cases by \nSt. Louis ZCTA",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis\nConfirmed cases are those with a positive test as a proportion\n of the total population\nZCTA is a generalized version of a zip code used for mapping"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis and St. Louis County\nConfirmed cases are those with a positive test as a proportion\n of the total population\nZCTA is a generalized version of a zip code used for mapping"
   )  +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -37,7 +40,7 @@ ggplot() +
     subtitle = paste0("Current as of ", as.character(date)),
     x = "Confirmed Rate per 1,000 Residents",
     y = "Residents Below Poverty Line (%)",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis\nConfirmed cases are those with a positive test as a proportion of the total population\nZCTA is a generalized version of a zip code used for mapping\nZip 63103 is an outlier due to a nursing home outbreak; it is not included in the trend line"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis and St. Louis County\nConfirmed cases are those with a positive test as a proportion of the total population\nZCTA is a generalized version of a zip code used for mapping\nZip 63103 is an outlier due to a nursing home outbreak; it is not included in the trend line"
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
@@ -62,7 +65,7 @@ ggplot() +
     subtitle = paste0("Current as of ", as.character(date)),
     x = "Confirmed Rate per 1,000 Residents",
     y = "African American Residents (%)",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis\nConfirmed cases are those with a positive test as a proportion of the total population\nZCTA is a generalized version of a zip code used for mappingn\nZip 63103 is an outlier due to a nursing home outbreak; it is not included in the trend line"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis and St. Louis County\nConfirmed cases are those with a positive test as a proportion of the total population\nZCTA is a generalized version of a zip code used for mappingn\nZip 63103 is an outlier due to a nursing home outbreak; it is not included in the trend line"
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
