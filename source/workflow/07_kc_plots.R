@@ -5,15 +5,21 @@ plot_date <- "2020-03-10"
 kc_detail <- filter(kc_detail, report_date >= plot_date)
 kc_sf <- mutate(kc_sf, county = ifelse(GEOID %in% c("29511"), NA, county))
 
+# create breaks
+kc_sf <- map_breaks(kc_sf, var = "confirmed_rate", newvar = "confirmed_breaks",
+                     style = "fisher", classes = 5, dig_lab = 2)
+kc_sf <- map_breaks(kc_sf, var = "case_fatality_rate", newvar = "case_fatality_breaks",
+                     style = "fisher", classes = 5, dig_lab = 2)
+
 # map confirmed rate
 ggplot(data = kc_sf) +
-  geom_sf(mapping = aes(fill = confirmed_rate)) +
+  geom_sf(mapping = aes(fill = confirmed_breaks)) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines"), size = 6) +
-  scale_fill_distiller(palette = "GnBu", trans = "reverse", name = "Rate per 1,000") +
+  scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
   labs(
     title = "Confirmed COVID-19 Cases by\nKansas City Metro County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population\nKansas City is intentionally not labeled to increase readability of map\nKansas City is treated as a distinct county due to reporting practices"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population\nKansas City is intentionally not labeled to increase readability of map\nFisher style breaks used to calculate legend categories\nKansas City is treated as a distinct county due to reporting practices"
   )  +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -43,13 +49,13 @@ save_plots(filename = "results/low_res/kc_metro/b_confirmed_plot.png", preset = 
 
 # map case fatality rate
 ggplot(data = kc_sf) +
-  geom_sf(mapping = aes(fill = case_fatality_rate)) +
+  geom_sf(mapping = aes(fill = case_fatality_breaks)) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines"), size = 6) +
-  scale_fill_distiller(palette = "BuPu", trans = "reverse", name = "Percent") +
+  scale_fill_brewer(palette = "BuPu", name = "Percent") +
   labs(
     title = "COVID-19 Case Fatality by\nKansas City Metro County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nCase fatality is the percent of confirmed cases that result in death\nKansas City is intentionally not labeled to increase readability of map\nKansas City is treated as a distinct county due to reporting practices"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nCase fatality is the percent of confirmed cases that result in death\nKansas City is intentionally not labeled to increase readability of map\nFisher style breaks used to calculate legend categories\nKansas City is treated as a distinct county due to reporting practices"
   )  +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -59,7 +65,7 @@ save_plots(filename = "results/low_res/kc_metro/c_case_fatality_map.png", preset
 # plot case fatality rate
 ggplot(data = kc_detail, mapping = aes(x = report_date, y = case_fatality_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
-  gghighlight(geoid %in% c("20209", "29095", "20091", "29107", "29037"),
+  gghighlight(geoid %in% c("20209", "29095", "20091", "29107", "29037", "29511"),
               label_params = list(size = 6, nudge_x = 1, nudge_y = .1),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +

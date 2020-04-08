@@ -15,6 +15,7 @@ library(leaflet)
 library(readr)
 library(sf)
 
+source(here::here("source", "functions", "map_breaks.R"))
 
 snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 102003,
                     stringsAsFactors = FALSE) %>%
@@ -25,11 +26,11 @@ zip_snapshot <- st_read(here::here("data", "zip", "daily_snapshot_city_county.ge
 ```
 
 ## Introduction
-These maps summarize the latest available COVID-19 outbreak data from Johns Hopkins University's [COVID-19 project](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data) and the City of St. Louis. 
+These maps summarize the latest available COVID-19 outbreak data from Johns Hopkins University's [COVID-19 project](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data), the City of St. Louis, and St. Louis County. 
 
-Unlike other interactive maps, the initial three maps include the counties in Illinois and Kansas that are part of the St. Louis and Kansas City metropolitan areas. Kansas City is displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
+Unlike other interactive maps being used to track the outbreak, the initial three maps include the counties in Illinois and Kansas that are part of the St. Louis and Kansas City metropolitan areas. Kansas City is displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
 
-The final map shoes Zip Code Tabulation Areas (ZCTAs), which are generalized areas that are roughly equivalent to USPS zip-codes. They are not 100% the same, however, and some homes with a given zip code may fall outside of ZCTA boundaries.
+The final map is also unique - it includes both the City of St. Louis and St. Louis County on one map and with a shared set of legend values, making direct comparisons possible. It shows Zip Code Tabulation Areas (ZCTAs), which are generalized areas that are roughly equivalent to USPS zip-codes. They are not 100% the same, however, and some homes with a given zip code may fall outside of ZCTA boundaries.
 
 ### How to Use These Maps
 These maps are fully interactive. Clicking on a county will reveal some details about that place. You can navigate around them just as you would with Google Maps. You can zoom with your mouse or the `plus` and `minus` buttons in the upper-left corner of each map. You may also move the maps around by clicking with your mouse and dragging.
@@ -46,9 +47,15 @@ For Kansas City, all hospital and ICU bed data have been allocated to Jackson, C
 
 <br>
 
-```{r map-icu, echo = FALSE, out.width = '100%', out.height='600px'}
-pal <- colorNumeric("PuRd", snapshot$icu_rate)
+```{r map-icu, echo = FALSE, out.width = '100%', out.height='600px' , warning=FALSE}
+# calculate breaks
+bins <- map_bins(snapshot, var = "icu_rate", style = "fisher", classes = 5, dig_lab = 2,
+                 round = 2)
 
+# create color palette
+pal <- colorBin("PuRd", domain = snapshot$icu_rate, bins = bins)
+
+# map
 leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolygons(
@@ -76,8 +83,14 @@ This map shows confirmed infections as a rate per 1,000 residents. It is importa
 <br>
 
 ```{r map-infections, echo = FALSE, out.width = '100%', out.height='600px'}
-pal <- colorNumeric("BuGn", snapshot$confirmed_rate)
+# calculate breaks
+bins <- map_bins(snapshot, var = "confirmed_rate", style = "fisher", classes = 5, dig_lab = 2,
+                 round = 2)
 
+# create color palette
+pal <- colorBin("BuGn", domain = snapshot$confirmed_rate, bins = bins)
+
+# map
 leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolygons(
@@ -86,7 +99,7 @@ leaflet() %>%
     weight = 1, 
     opacity = 1.0, 
     smoothFactor = 0.5,
-    fillOpacity = 0.5,
+    fillOpacity = 0.75,
     fillColor = ~pal(confirmed_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste("<b>County:</b> ", snapshot$county, "<br>",
@@ -95,7 +108,7 @@ leaflet() %>%
                            "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
                            "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds)
     )  %>%
-    addLegend(pal = pal, values = snapshot$confirmed_rate, opacity = .5, title = "Rate")
+    addLegend(pal = pal, values = snapshot$confirmed_rate, opacity = .75, title = "Rate")
 ```
 
 <br>
@@ -106,8 +119,15 @@ This map shows confirmed mortality as a rate per 1,000 residents. As with the se
 <br>
 
 ```{r map-mortality, echo = FALSE, out.width = '100%', out.height='600px'}
-pal <- colorNumeric("YlGn", snapshot$mortality_rate)
+# calculate breaks
+bins <- map_bins(snapshot, var = "mortality_rate", style = "fisher", classes = 5, dig_lab = 2,
+                 round = 2)
+bins[length(bins)] <- 0.17
 
+# create color palette
+pal <- colorBin("YlGn", domain = snapshot$mortality_rate, bins = bins)
+
+# map
 leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolygons(
@@ -116,7 +136,7 @@ leaflet() %>%
     weight = 1, 
     opacity = 1.0, 
     smoothFactor = 0.5,
-    fillOpacity = 0.5,
+    fillOpacity = 0.75,
     fillColor = ~pal(mortality_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste("<b>County:</b> ", snapshot$county, "<br>",
@@ -125,19 +145,25 @@ leaflet() %>%
                            "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
                            "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds)
     )  %>%
-    addLegend(pal = pal, values = snapshot$mortality_rate, opacity = .5, title = "Rate")
+    addLegend(pal = pal, values = snapshot$mortality_rate, opacity = .75, title = "Rate")
 ```
 
 <br>
 
 ## CVOID-19 Confirmed Infection Rates by St. Louis ZCTA
-This map shows confirmed infections as a rate per 1,000 residents. It is important not to map the raw counts themselves, but if you want to see those data, click on a ZCTA
+This map shows confirmed infections as a rate per 1,000 residents for all ZCTAs with five or more patients. It is important not to map the raw counts themselves, but if you want to see those data, click on a ZCTA. If a ZCTA. straddles the city and the county, and only has confirmed infection numbers in one entity, its estimated partial population will be displayed. Similarly, estimated partial populations for zip codes that straddle outlying counties are used.
 
 <br>
 
-```{r map-infections-zip, echo = FALSE, out.width = '100%', out.height='600px'}
-pal <- colorNumeric("BuGn", zip_snapshot$confirmed_rate)
+```{r map-infections-zip, echo = FALSE, out.width = '100%', out.height='600px', warning=FALSE}
+# calculate breaks
+bins <- map_bins(zip_snapshot, var = "confirmed_rate", style = "fisher", classes = 5, dig_lab = 2,
+                 round = 2)
 
+# create color palette
+pal <- colorBin("BuGn", domain = zip_snapshot$confirmed_rate, bins = bins)
+
+# map
 leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolygons(
@@ -146,14 +172,19 @@ leaflet() %>%
     weight = 1, 
     opacity = 1.0, 
     smoothFactor = 0.5,
-    fillOpacity = 0.5,
+    fillOpacity = 0.75,
     fillColor = ~pal(confirmed_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste("<b>Zip:</b> ", zip_snapshot$zip, "<br>",
                            "<b>Current Confirmed Count:</b> ", zip_snapshot$confirmed, "<br>",
                            "<b>Current Confirmed Rate per 1,000:</b> ", round(zip_snapshot$confirmed_rate, digits = 2))
     )  %>%
-    addLegend(pal = pal, values = zip_snapshot$confirmed_rate, opacity = .5, title = "Rate")
+    addLegend(pal = pal, values = zip_snapshot$confirmed_rate, opacity = .75, title = "Rate")
 ```
 
 <br>
+
+## Technical Notes
+* The Fisher breaks algorithm (Fisher 1958, Slocum et al. 2005) is used to identify legend categories
+* Estimated populations for the the four counties around Kansas City as well as Kansas City itself were created using areal weighted interpolation (see Prener and Revord 2019)
+* Estimated populations for partial zip codes are also created using areal weighted interpolation (see Prener and Revord 2019)

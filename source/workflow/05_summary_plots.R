@@ -4,6 +4,13 @@
 plot_date <- "2020-03-01"
 state_data <- filter(state_data, report_date >= plot_date)
 
+if (date == "2020-04-07"){
+  state_data <- mutate(state_data, 
+                       confirmed_rate = ifelse(report_date == "2020-04-07" & state == "Illinois", NA, confirmed_rate),
+                       mortality_rate = ifelse(report_date == "2020-04-07" & state == "Illinois", NA, mortality_rate),
+                       case_fatality_rate = ifelse(report_date == "2020-04-07" & state == "Illinois", NA, case_fatality_rate))
+}
+
 # plot confirmed rate
 ggplot(data = state_data, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = state), size = 2) +
@@ -58,14 +65,18 @@ ggplot(data = state_data, mapping = aes(x = report_date, y = mortality_rate)) +
 save_plots(filename = "results/high_res/state/d_mortality_rate.png", preset = "lg")
 save_plots(filename = "results/low_res/state/d_mortality_rate.png", preset = "lg", dpi = 72)
 
+# create breaks
+mo_sf <- map_breaks(mo_sf, var = "confirmed_rate", newvar = "confirmed_breaks",
+                   style = "fisher", classes = 5, dig_lab = 2)
+
 # map missouri rates
-ggplot(data = mo_sf, mapping = aes(fill = confirmed_rate)) +
+ggplot(data = mo_sf, mapping = aes(fill = confirmed_breaks)) +
   geom_sf() +
-  scale_fill_distiller(palette = "GnBu", trans = "reverse", name = "Rate per 1,000") +
+  scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
   labs(
     title = "Confirmed COVID-19 Cases by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nKansas City is treated as a distinct county due to reporting practices\nConfirmed cases are those with a positive test as a proportion of the total population"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nKansas City is treated as a distinct county due to reporting practices\nConfirmed cases are those with a positive test as a proportion of the total population\nFisher style breaks used to calculate legend categories"
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 

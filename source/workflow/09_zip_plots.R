@@ -1,17 +1,20 @@
 # map st. louis zip codes
 
-stl_city_zip_sf <- city_county_zip_sf
-rm(city_county_zip_sf)
+# create breaks
+zip_valid <- filter(city_county_zip_sf, is.na(confirmed_rate) == FALSE)
+zip_na <- filter(city_county_zip_sf, is.na(confirmed_rate) == TRUE)
+zip_valid <- map_breaks(zip_valid, var = "confirmed_rate", newvar = "confirmed_breaks",
+                    style = "fisher", classes = 5, dig_lab = 1)
 
 # map confirmed rate
-ggplot(data = stl_city_zip_sf) +
-  geom_sf(mapping = aes(fill = confirmed_rate)) +
-  # geom_sf_label(mapping = aes(label = zip), label.padding = unit(0.15, "lines")) +
-  scale_fill_distiller(palette = "GnBu", trans = "reverse", name = "Rate per 1,000") +
+ggplot() +
+  geom_sf(data = zip_na, fill = "#9d9d9d") +
+  geom_sf(data = zip_valid, mapping = aes(fill = confirmed_breaks)) +
+  scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
   labs(
     title = "Confirmed COVID-19 Cases by \nSt. Louis ZCTA",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis and St. Louis County\nConfirmed cases are those with a positive test as a proportion\n of the total population\nZCTA is a generalized version of a zip code used for mapping"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis and St. Louis County\nConfirmed cases are those with a positive test as a proportion of the total population\nZCTA is a generalized version of a zip code used for mapping"
   )  +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -19,16 +22,16 @@ save_plots(filename = "results/high_res/zip/a_confirmed_map.png", preset = "lg")
 save_plots(filename = "results/low_res/zip/a_confirmed_map.png", preset = "lg", dpi = 72)
 
 # make copy for plotting
-stl_city_zip_sf2 <- filter(stl_city_zip_sf, zip == "63103")
-stl_city_zip_sf <- filter(stl_city_zip_sf, zip != "63103")
+city_county_zip_sf2 <- filter(city_county_zip_sf, zip == "63103")
+city_county_zip_sf <- filter(city_county_zip_sf, zip != "63103")
 
 # plot poverty
 ggplot() +
-  geom_point(data = stl_city_zip_sf2, mapping = aes(x = confirmed_rate, pvty_pct), color = "#515151", size = 4) +
-  geom_smooth(data = stl_city_zip_sf, mapping = aes(x = confirmed_rate, pvty_pct), 
+  geom_point(data = city_county_zip_sf2, mapping = aes(x = confirmed_rate, pvty_pct), color = "#515151", size = 4) +
+  geom_smooth(data = city_county_zip_sf, mapping = aes(x = confirmed_rate, pvty_pct), 
               method = "lm", color = "#D95F02", size = 1.5, linetype = "dashed") +
-  geom_point(data = stl_city_zip_sf, mapping = aes(x = confirmed_rate, pvty_pct), color = "#1B9E77", size = 4) +
-  geom_label_repel(data = stl_city_zip_sf2, mapping = aes(x = confirmed_rate, pvty_pct, label = zip),
+  geom_point(data = city_county_zip_sf, mapping = aes(x = confirmed_rate, pvty_pct), color = "#1B9E77", size = 4) +
+  geom_label_repel(data = city_county_zip_sf2, mapping = aes(x = confirmed_rate, pvty_pct, label = zip),
                    size = 6,
                    box.padding   = 0.35, 
                    point.padding = 0.5,
@@ -49,11 +52,11 @@ save_plots(filename = "results/low_res/zip/b_poverty_plot.png", preset = "lg", d
 
 # plot race
 ggplot() +
-  geom_point(data = stl_city_zip_sf2, mapping = aes(x = confirmed_rate, blk_pct), color = "#515151", size = 4) +
-  geom_smooth(data = stl_city_zip_sf, mapping = aes(x = confirmed_rate, blk_pct), 
+  geom_point(data = city_county_zip_sf2, mapping = aes(x = confirmed_rate, blk_pct), color = "#515151", size = 4) +
+  geom_smooth(data = city_county_zip_sf, mapping = aes(x = confirmed_rate, blk_pct), 
               method = "lm", color = "#D95F02", size = 1.5, linetype = "dashed") +
-  geom_point(data = stl_city_zip_sf, mapping = aes(x = confirmed_rate, blk_pct), color = "#1B9E77", size = 4) +
-  geom_label_repel(data = stl_city_zip_sf2, mapping = aes(x = confirmed_rate, blk_pct, label = zip),
+  geom_point(data = city_county_zip_sf, mapping = aes(x = confirmed_rate, blk_pct), color = "#1B9E77", size = 4) +
+  geom_label_repel(data = city_county_zip_sf2, mapping = aes(x = confirmed_rate, blk_pct, label = zip),
                    size = 6,
                    box.padding   = 0.35, 
                    point.padding = 0.5,
@@ -73,4 +76,4 @@ save_plots(filename = "results/high_res/zip/c_race_plot.png", preset = "lg")
 save_plots(filename = "results/low_res/zip/c_race_plot.png", preset = "lg", dpi = 72)
 
 # clean-up
-rm(stl_city_zip_sf, stl_city_zip_sf2)
+rm(city_county_zip_sf, city_county_zip_sf2, zip_na, zip_valid)

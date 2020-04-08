@@ -28,6 +28,7 @@ if (mode == "build"){
   
 } else if (mode == "plot"){
   
+  source("source/functions/map_breaks.R")
   source("source/functions/save_plots.R")
   source("source/functions/sequoia_theme.R")
   
@@ -101,4 +102,4 @@ rmarkdown::render(input = "docs/index.Rmd",
        ))
 
 # clean-up
-rm(pal, snapshot, date, date_str, mode, zip_snapshot)
+rm(pal, snapshot, date, date_str, mode, zip_snapshot, map_breaks, map_bins, bins)
