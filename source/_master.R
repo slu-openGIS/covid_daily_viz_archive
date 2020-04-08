@@ -1,10 +1,10 @@
 # scrape data from Johns Hopkins, tidy, and plot
 
 # UPDATE date value
-date <- lubridate::mdy("04-06-2020")
+date <- lubridate::mdy("04-07-2020")
 # mode <- "build"
 mode <- "plot"
-city_lt5 <- c("63123", "63130", "63137")
+city_lt5 <- c("63105", "63123", "63130", "63137")
 
 # dependencies
 library(dplyr)
@@ -26,10 +26,12 @@ if (mode == "build"){
   source("source/functions/historic_expand.R")
   source("source/functions/wrangle_zip.R")
   
+} else if (mode == "plot"){
+  
+  source("source/functions/save_plots.R")
+  source("source/functions/sequoia_theme.R")
+  
 }
-
-source("source/functions/save_plots.R")
-source("source/functions/sequoia_theme.R")
 
 # scrape and tidy data
 if (mode == "build"){
@@ -39,6 +41,10 @@ if (mode == "build"){
   source("source/workflow/03_create_spatial.R")
   source("source/workflow/04_create_zip.R")
 
+  # clean-up
+  rm(city_county_zip_sf, county_confirmed_days, kc_detail, kc_sf, mo_sf,
+     state_confirmed_days, state_data, stl_detail, stl_sf)
+  
 }
 
 # re-load data
@@ -62,18 +68,28 @@ if (mode == "plot"){
                              stringsAsFactors = FALSE)
   
   rm(city_lt5)
+  
+  # create reference object
+  ref_county <- mo_sf
+  st_geometry(ref_county) <- NULL
+
+   
 }
 
-# create reference object
-ref_county <- mo_sf
-st_geometry(ref_county) <- NULL
-
-# update plots
-source("source/workflow/05_summary_plots.R")
-source("source/workflow/06_stl_plots.R")
-source("source/workflow/07_kc_plots.R")
-source("source/workflow/08_log_plots.R")
-source("source/workflow/09_zip_plots.R")
+# plot data
+if (mode == "plot"){
+  
+  # update plots
+  source("source/workflow/05_summary_plots.R")
+  source("source/workflow/06_stl_plots.R")
+  source("source/workflow/07_kc_plots.R")
+  source("source/workflow/08_log_plots.R")
+  source("source/workflow/09_zip_plots.R")
+  
+  # clean-up
+  rm(save_plots, sequoia_theme)
+  
+}
 
 # define date
 date_str <- paste0("Current as of ", as.character(date))
@@ -85,5 +101,4 @@ rmarkdown::render(input = "docs/index.Rmd",
        ))
 
 # clean-up
-rm(pal, snapshot, date, date_str, mode, zip_snapshot, save_plots, 
-   sequoia_theme)
+rm(pal, snapshot, date, date_str, mode, zip_snapshot)

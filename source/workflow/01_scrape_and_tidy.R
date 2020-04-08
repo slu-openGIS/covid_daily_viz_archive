@@ -59,7 +59,7 @@ update_dateTime <- paste(date, "00:00:01")
 # fill in missing data
 historic_data %>%
   mutate(last_update = update_dateTime) %>%
-  mutate(last_update = as.POSIXct(last_update)) %>%
+  # mutate(last_update = as.POSIXct(last_update)) %>%
   mutate(confirmed = ifelse(is.na(confirmed) == TRUE, 0, confirmed)) %>%
   mutate(deaths = ifelse(is.na(deaths) == TRUE, 0, deaths)) %>%
   select(report_date, geoid, county, state, last_update, confirmed, deaths) -> historic_data
