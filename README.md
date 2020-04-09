@@ -1,6 +1,8 @@
 covid\_daily\_viz
 ================
 
+[![DOI](https://zenodo.org/badge/249867864.svg)](https://zenodo.org/badge/latestdoi/249867864)
+
 ## Introduction
 
 This is a collection of resources for tracking the COVID-19 outbreak in
@@ -20,6 +22,12 @@ single table containing “long” versions of these raw data, and daily
 snapshots are available in the `data/` folder as well. Maps and plots
 tracking these in relation to race and poverty are available in
 `results/`.
+
+## Citing This Repository
+
+All data and code here are released under a [CC-BY 4.0
+license](LICENSE). Citation details, including a DOI number, are
+available via [Zenodo](https://zenodo.org/badge/latestdoi/249867864).
 
 ## Notes
 

@@ -7,11 +7,16 @@ output: github_document
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+[![DOI](https://zenodo.org/badge/249867864.svg)](https://zenodo.org/badge/latestdoi/249867864)
+
 ## Introduction
 
 This is a collection of resources for tracking the COVID-19 outbreak in the Kansas City and St. Louis metropolitan areas. It is currently being actively maintained and updated nightly with new data from the [Johns Hopkins CSSE COVID-19 project](https://github.com/CSSEGISandData/COVID-19). Summaries of their data for Missouri, Kansas, and Illinois are available in the `data/` folder, and the most recent visualizations are available in the `results/` folder. Historic data prior to March 22nd are now being obtained from the [New York Times COVD-19 project](https://github.com/nytimes/covid-19-data).
 
 Separately, zip code data are being collected as of 2020-04-01 for the City of St. Louis and 2020-04-06 for St. Louis County. Daily raw data, a single table containing "long" versions of these raw data, and daily snapshots are available in the `data/` folder as well. Maps and plots tracking these in relation to race and poverty are available in `results/`. 
+
+## Citing This Repository
+All data and code here are released under a [CC-BY 4.0 license](LICENSE). Citation details, including a DOI number, are available via [Zenodo](https://zenodo.org/badge/latestdoi/249867864).
 
 ## Notes
 
