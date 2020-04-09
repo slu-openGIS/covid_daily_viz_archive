@@ -2,7 +2,7 @@
 
 # final data cleaning
 plot_date <- "2020-03-10"
-stl_detail <- filter(stl_detail, report_date >= plot_date)
+stl_detail <- filter(stl_detail, report_date >= plot_date) 
 stl_sf <- mutate(stl_sf, county = ifelse(GEOID %in% c("29189"), NA, county))
 
 # create breaks

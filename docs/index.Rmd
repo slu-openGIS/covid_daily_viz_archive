@@ -86,6 +86,7 @@ This map shows confirmed infections as a rate per 1,000 residents. It is importa
 # calculate breaks
 bins <- map_bins(snapshot, var = "confirmed_rate", style = "fisher", classes = 5, dig_lab = 2,
                  round = 2)
+bins[length(bins)] <- 1.65
 
 # create color palette
 pal <- colorBin("BuGn", domain = snapshot$confirmed_rate, bins = bins)

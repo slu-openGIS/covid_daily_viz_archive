@@ -1,5 +1,6 @@
 
 state_death_days <- read_csv("data/state/state_death.csv")
+county_death_days <- read_csv("data/county/county_death.csv")
 
 # st. louis metro
 county_death_days %>%
@@ -8,19 +9,17 @@ county_death_days %>%
                       "29113", "29183", "29189", "29219", "29510")) %>%
   ggplot(data = ., mapping = aes(day, deaths)) +
   geom_line(mapping = aes(color = county)) +
-  gghighlight(geoid %in% c("29189", "29510")) +
-  scale_color_brewer(palette = "Set1") +
-  scale_y_log10(limits = c(1, 10)) +
-  scale_x_continuous(limits = c(1,10), breaks = c(1, 2, 4, 6, 8, 10))  +
+  scale_color_brewer(palette = "Dark2") +
+  scale_y_log10(limits = c(3, 100)) +
+  scale_x_continuous(limits = c(1,20), breaks = c(1,5,10,15,20))  +
   labs(
     title = "Pace of COVID-19 Deaths by Metro St. Louis County",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
-    x = "Days Since First Confirmed Death",
-    y = "Count of Deaths"
+    x = "Days Since Third Confirmed Death",
+    y = "Count of Deaths (Log)"
   )
 
-ggsave(filename = "results/log_deaths/b_st_louis.png", width = 8, height = 6, units = "in", dpi = 500)
 
 # kansas city days
 county_death_days %>%
@@ -29,33 +28,43 @@ county_death_days %>%
                       "29095", "29107", "29165", "29177", "29511")) %>%
   ggplot(data = ., mapping = aes(day, deaths)) +
   geom_line(mapping = aes(color = county)) +
-  gghighlight(geoid %in% c("20209")) +
   scale_color_brewer(palette = "Set1") +
-  scale_y_log10(limits = c(1, 20)) +
+  scale_y_log10(limits = c(3, 100)) +
   scale_x_continuous(limits = c(1,20), breaks = c(1, 5, 10, 15, 20))  +
   labs(
     title = "Pace of COVID-19 Deaths by Metro Kansas City County",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
-    x = "Days Since First Confirmed Death",
-    y = "Count of Deaths"
+    x = "Days Since Third Confirmed Death",
+    y = "Count of Deaths (Log)"
   )
 
-ggsave(filename = "results/log_deaths/c_kansas_city.png", width = 8, height = 6, units = "in", dpi = 500)
+# kansas city days
+county_death_days %>%
+  filter(state == "Missouri") %>%
+  ggplot(data = ., mapping = aes(day, deaths)) +
+  geom_line(mapping = aes(color = county)) +
+  scale_color_brewer(palette = "Dark2") +
+  scale_y_log10(limits = c(10, 100)) +
+  scale_x_continuous(limits = c(1,20), breaks = c(1, 5, 10, 15, 20))  +
+  labs(
+    title = "Pace of COVID-19 Deaths by Metro Kansas City County",
+    subtitle = paste0("Current as of ", as.character(date)),
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
+    x = "Days Since Tenth Confirmed Death",
+    y = "Count of Deaths (Log)"
+  )
 
 # state days
 ggplot(data = state_death_days, mapping = aes(day, deaths)) +
   geom_line(mapping = aes(color = state)) +
-  gghighlight(state %in% c("Illinois", "Kansas", "Missouri")) +
-  scale_color_brewer(palette = "Set1") +
-  scale_y_log10(limits = c(1, 1000)) +
-  scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25, 30))  +
+  scale_color_brewer(palette = "Dark2") +
+  scale_y_log10(limits = c(10, 1000)) +
+  scale_x_continuous(limits = c(1,20), breaks = c(1, 5, 10, 15, 20))  +
   labs(
     title = "Pace of COVID-19 Deaths by State",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
-    x = "Days Since First Confirmed Death",
-    y = "Count of Deaths"
+    x = "Days Since Tenth Confirmed Death",
+    y = "Count of Deaths (Log)"
   )
-
-ggsave(filename = "results/log_deaths/a_state.png", width = 8, height = 6, units = "in", dpi = 500)

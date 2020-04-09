@@ -4,19 +4,12 @@
 plot_date <- "2020-03-01"
 state_data <- filter(state_data, report_date >= plot_date)
 
-if (date == "2020-04-07"){
-  state_data <- mutate(state_data, 
-                       confirmed_rate = ifelse(report_date == "2020-04-07" & state == "Illinois", NA, confirmed_rate),
-                       mortality_rate = ifelse(report_date == "2020-04-07" & state == "Illinois", NA, mortality_rate),
-                       case_fatality_rate = ifelse(report_date == "2020-04-07" & state == "Illinois", NA, case_fatality_rate))
-}
-
 # plot confirmed rate
 ggplot(data = state_data, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2", name = "State") +
   scale_x_date(date_breaks = "5 days", date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,100), breaks = c(0,20,40,60,80,100)) + 
+  scale_y_continuous(limits = c(0,120), breaks = c(0,20,40,60,80,100,120)) + 
   labs(
     title = "Confirmed COVID-19 Cases by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -52,7 +45,7 @@ ggplot(data = state_data, mapping = aes(x = report_date, y = mortality_rate)) +
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2", name = "State") +
   scale_x_date(date_breaks = "5 days", date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,3), breaks = c(0,.5,1,1.5,2,2.5,3)) +
+  scale_y_continuous(limits = c(0,4), breaks = c(0,.5,1,1.5,2,2.5,3,3.5,4)) +
   labs(
     title = "Confirmed COVID-19 Mortality by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),

@@ -52,4 +52,3 @@ save_plots(filename = "results/high_res/misc/perry_log_plot.png", preset = "lg")
 save_plots(filename = "results/low_res/misc/perry_log_plot.png", preset = "lg", dpi = 72)
 
 rm(county_full, county_confirmed_days, plot_date)
-

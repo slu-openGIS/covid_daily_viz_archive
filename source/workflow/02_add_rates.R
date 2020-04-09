@@ -59,9 +59,9 @@ county_data %>%
          confirmed, confirmed_rate) %>%
   arrange(state, county, day) -> county_confirmed_days
 
-# create days from first death data, county-level data
+# create days from 5th death data, county-level data
 county_data %>%
-  filter(deaths > 0) %>%
+  filter(deaths >= 10) %>%
   filter(county != "Unassigned") %>%
   arrange(report_date) %>%
   group_by(state, county) %>%
@@ -84,9 +84,9 @@ state_data %>%
          confirmed, confirmed_rate) %>%
   arrange(state, day) -> state_confirmed_days
 
-# create days from first death data, state-level data
+# create days from fifth death data, state-level data
 state_data %>%
-  filter(deaths > 0) %>%
+  filter(deaths >= 10) %>%
   arrange(report_date) %>%
   group_by(state) %>%
   mutate(first_date = first(report_date)) %>%
