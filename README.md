@@ -1,4 +1,4 @@
-covid\_rates
+covid\_daily\_viz
 ================
 
 ## Introduction
@@ -10,9 +10,18 @@ Hopkins CSSE COVID-19
 project](https://github.com/CSSEGISandData/COVID-19). Summaries of their
 data for Missouri, Kansas, and Illinois are available in the `data/`
 folder, and the most recent visualizations are available in the
-`results/` folder. Historic data prior to March 22nd is now being
+`results/` folder. Historic data prior to March 22nd are now being
 obtained from the [New York Times COVD-19
 project](https://github.com/nytimes/covid-19-data).
+
+Separately, zip code data are being collected as of 2020-04-01 for the
+City of St. Louis and 2020-04-06 for St. Louis County. Daily raw data, a
+single table containing “long” versions of these raw data, and daily
+snapshots are available in the `data/` folder as well. Maps and plots
+tracking these in relation to race and poverty are available in
+`results/`.
+
+## Notes
 
 ### Mortality
 
@@ -25,8 +34,7 @@ his 70s](https://www.stltoday.com/news/local/metro/live-stl-area-coronavirus-upd
 died the same day, the first death for that county. The first death in
 St. Louis County occured several days earlier on
 [March 20](https://www.stltoday.com/news/local/metro/live-stl-area-coronavirus-updates-march-here-s-what-we/article_183103d8-d6ed-5f64-8f0d-a990479266b5.html),
-when a women in her 60s passed
-away.
+when a women in her 60s passed away.
 
 ### Mitigation Measures
 
