@@ -29,12 +29,12 @@ save_plots(filename = "results/low_res/kc_metro/a_confirmed_map.png", preset = "
 # plot confirmed rate
 ggplot(data = kc_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
-  gghighlight(geoid %in% c("20107", "20209", "20103", "29511", "29107"),
+  gghighlight(geoid %in% c("20209", "20103", "29511", "29107"),
               label_params = list(size = 6),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 1.6), breaks = c(0,.2,.4,.6,.8,1,1.2,1.4,1.6)) + 
+  scale_y_continuous(limits = c(0, 1.8), breaks = c(0,.2,.4,.6,.8,1,1.2,1.4,1.6,1.8)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Kansas City Metro County",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),

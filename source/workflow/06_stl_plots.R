@@ -29,12 +29,12 @@ save_plots(filename = "results/low_res/stl_metro/a_confirmed_map.png", preset = 
 # plot confirmed rate
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
-  gghighlight(geoid %in% c("29189", "29510", "29183", "29099", "29113"), # "17163" , 
+  gghighlight(geoid %in% c("29189", "29510", "29183", "29099", "29113", "29071"), # "17163" , 
               label_params = list(size = 6),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 1.6), breaks = c(0,.2,.4,.6,.8,1,1.2,1.4,1.6)) + 
+  scale_y_continuous(limits = c(0, 1.8), breaks = c(0,.2,.4,.6,.8,1,1.2,1.4,1.6,1.8)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -65,7 +65,7 @@ save_plots(filename = "results/low_res/stl_metro/c_case_fatality_map.png", prese
 # plot case fatality rate
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = case_fatality_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
-  gghighlight(geoid %in% c("29189", "29510", "29183", "17163", "29071", "29099"),
+  gghighlight(geoid %in% c("29189", "29510", "29183"),
               label_params = list(size = 6),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +

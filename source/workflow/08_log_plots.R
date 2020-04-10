@@ -55,7 +55,7 @@ county_confirmed_days %>%
   filter(state == "Missouri") %>%
   ggplot(data = ., mapping = aes(day, confirmed)) +
     geom_line(mapping = aes(color = county), size = 2) +
-    gghighlight(geoid %in% c("29189", "29510", "29511", "29019", "29095", "29077", "29183"),
+    gghighlight(geoid %in% c("29189", "29510", "29511", "29019", "29095", "29077", "29183", "29099"),
                 label_params = list(size = 6, nudge_x = 1, nudge_y = .1),
                 use_group_by = FALSE) +
     scale_color_brewer(palette = "Dark2") +
@@ -78,7 +78,7 @@ ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(10, 100000), labels = comma) +
-  scale_x_continuous(limits = c(1,30), breaks = c(1, 5, 10, 15, 20, 25,30)) +
+  scale_x_continuous(limits = c(1,35), breaks = c(1, 5, 10, 15, 20, 25,30,35)) +
   labs(
     title = "Pace of COVID-19 Cases by State",
     subtitle = paste0("Current as of ", as.character(date)),

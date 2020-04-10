@@ -4,6 +4,14 @@
 plot_date <- "2020-03-01"
 state_data <- filter(state_data, report_date >= plot_date)
 
+# remove IL
+if (date == "2020-04-09"){
+  state_data <- mutate(state_data, 
+                       confirmed_rate = ifelse(state == "Illinois" & report_date == "2020-04-09", NA, confirmed_rate),
+                       mortality_rate = ifelse(state == "Illinois" & report_date == "2020-04-09", NA, mortality_rate),
+                       case_fatality_rate = ifelse(state == "Illinois" & report_date == "2020-04-09", NA, case_fatality_rate))
+}
+
 # plot confirmed rate
 ggplot(data = state_data, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = state), size = 2) +

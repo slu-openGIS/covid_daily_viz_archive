@@ -57,7 +57,7 @@ county_death_days %>%
 
 # state days
 ggplot(data = state_death_days, mapping = aes(day, deaths)) +
-  geom_line(mapping = aes(color = state)) +
+  geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(10, 1000)) +
   scale_x_continuous(limits = c(1,20), breaks = c(1, 5, 10, 15, 20))  +
@@ -67,4 +67,8 @@ ggplot(data = state_death_days, mapping = aes(day, deaths)) +
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since Tenth Confirmed Death",
     y = "Count of Deaths (Log)"
-  )
+  ) +
+  sequoia_theme(base_size = 22, background = "white")
+
+save_plots(filename = "results/high_res/misc/log_mortality_plot.png", preset = "lg")
+save_plots(filename = "results/low_res/misc/log_mortality_plot.png", preset = "lg", dpi = 72)
