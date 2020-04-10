@@ -86,7 +86,7 @@ This map shows confirmed infections as a rate per 1,000 residents. It is importa
 # calculate breaks
 bins <- map_bins(snapshot, var = "confirmed_rate", style = "fisher", classes = 5, dig_lab = 2,
                  round = 2)
-bins[length(bins)] <- 1.65
+bins[length(bins)] <- 1.66
 
 # create color palette
 pal <- colorBin("BuGn", domain = snapshot$confirmed_rate, bins = bins)
@@ -160,6 +160,7 @@ This map shows confirmed infections as a rate per 1,000 residents for all ZCTAs 
 # calculate breaks
 bins <- map_bins(zip_snapshot, var = "confirmed_rate", style = "fisher", classes = 5, dig_lab = 2,
                  round = 2)
+# bins[length(bins)] <- 3.62
 
 # create color palette
 pal <- colorBin("BuGn", domain = zip_snapshot$confirmed_rate, bins = bins)
@@ -176,9 +177,11 @@ leaflet() %>%
     fillOpacity = 0.75,
     fillColor = ~pal(confirmed_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
-    popup = paste("<b>Zip:</b> ", zip_snapshot$zip, "<br>",
-                           "<b>Current Confirmed Count:</b> ", zip_snapshot$confirmed, "<br>",
-                           "<b>Current Confirmed Rate per 1,000:</b> ", round(zip_snapshot$confirmed_rate, digits = 2))
+    popup = paste0("<b>Zip:</b> ", zip_snapshot$zip, " <br> ",
+                 "<b>Current Confirmed Count:</b> ", zip_snapshot$confirmed, "<br>",
+                 "<b>Current Confirmed Rate per 1,000:</b> ", round(zip_snapshot$confirmed_rate, digits = 2), " <br> ",
+                 "<b>Population Below Poverty Line:</b> ", round(zip_snapshot$pvty_pct, digits = 2), "% <br> ",
+                 "<b>African American Population:</b> ", round(zip_snapshot$blk_pct, digits = 2), "% ")
     )  %>%
     addLegend(pal = pal, values = zip_snapshot$confirmed_rate, opacity = .75, title = "Rate")
 ```
