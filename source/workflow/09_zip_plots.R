@@ -36,7 +36,7 @@ ggplot() +
                    box.padding   = 0.35, 
                    point.padding = 0.5,
                    segment.color = 'grey50') +
-  scale_x_continuous(limits = c(0,4), breaks = c(0,.5,1,1.5,2,2.5,3,3.5,4)) +
+  scale_x_continuous(limits = c(0,5), breaks = c(0,.5,1,1.5,2,2.5,3,3.5,4,4.5,5)) +
   scale_y_continuous(limits = c(0,60), breaks = c(0,10,20,30,40,50,60)) +
   labs(
     title = "Confirmed COVID-19 Cases by St. Louis ZCTA",
@@ -61,7 +61,7 @@ ggplot() +
                    box.padding   = 0.35, 
                    point.padding = 0.5,
                    segment.color = 'grey50') +
-  scale_x_continuous(limits = c(0,4), breaks = c(0,.5,1,1.5,2,2.5,3,3.5,4)) +
+  scale_x_continuous(limits = c(0,5), breaks = c(0,.5,1,1.5,2,2.5,3,3.5,4,4.5,5)) +
   scale_y_continuous(limits = c(0,100), breaks = c(0,20,40,60,80,100)) +
   labs(
     title = "Confirmed COVID-19 Cases by St. Louis ZCTA",
