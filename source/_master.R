@@ -19,7 +19,7 @@ library(sf)
 library(tidycensus)
 library(tigris)
 
-# load get_data function
+# load functions
 if (mode == "build"){
   
   source("source/functions/get_data.R")
@@ -28,13 +28,13 @@ if (mode == "build"){
   
 } else if (mode == "plot"){
   
-  round_any <- function(x, accuracy, f=round){f(x/ accuracy) * accuracy}
-  
   source("source/functions/map_breaks.R")
   source("source/functions/save_plots.R")
   source("source/functions/sequoia_theme.R")
   
 }
+
+round_any <- function(x, accuracy, f=round){f(x/ accuracy) * accuracy}
 
 # scrape and tidy data
 if (mode == "build"){
@@ -104,4 +104,4 @@ rmarkdown::render(input = "docs/index.Rmd",
        ))
 
 # clean-up
-rm(pal, snapshot, date, date_str, mode, zip_snapshot, map_breaks, map_bins, bins)
+rm(pal, snapshot, date, date_str, mode, zip_snapshot, map_breaks, map_bins, bins, round_any)
