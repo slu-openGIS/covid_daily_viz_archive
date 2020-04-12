@@ -2,8 +2,8 @@
 
 # UPDATE date value
 date <- lubridate::mdy("04-11-2020")
-mode <- "build"
-# mode <- "plot"
+# mode <- "build"
+mode <- "plot"
 city_lt5 <- c("63105", "63117", "63119", "63123", "63125", "63130", "63133", "63137", "63143")
 
 # dependencies
@@ -27,6 +27,8 @@ if (mode == "build"){
   source("source/functions/wrangle_zip.R")
   
 } else if (mode == "plot"){
+  
+  round_any <- function(x, accuracy, f=round){f(x/ accuracy) * accuracy}
   
   source("source/functions/map_breaks.R")
   source("source/functions/save_plots.R")

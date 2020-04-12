@@ -12,12 +12,15 @@ if (date == "2020-04-10"){
                        case_fatality_rate = ifelse(state == "Kansas" & report_date == "2020-04-10", NA, case_fatality_rate))
 }
 
+# define top_val
+top_val <- round_any(x = max(state_data$confirmed_rate), accuracy = 20, f = ceiling)
+
 # plot confirmed rate
 ggplot(data = state_data, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2", name = "State") +
   scale_x_date(date_breaks = "5 days", date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,140), breaks = c(0,20,40,60,80,100,120,140)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 20)) + 
   labs(
     title = "Confirmed COVID-19 Cases by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -48,12 +51,15 @@ ggplot(data = state_data, mapping = aes(x = report_date, y = case_fatality_rate)
 save_plots(filename = "results/high_res/state/c_case_fatality_rate.png", preset = "lg")
 save_plots(filename = "results/low_res/state/c_case_fatality_rate.png", preset = "lg", dpi = 72)
 
+# define top_val
+top_val <- round_any(x = max(state_data$mortality_rate), accuracy = .5, f = ceiling)
+
 # plot mortality rate
 ggplot(data = state_data, mapping = aes(x = report_date, y = mortality_rate)) +
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2", name = "State") +
   scale_x_date(date_breaks = "5 days", date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,5), breaks = c(0,.5,1,1.5,2,2.5,3,3.5,4,4.5,5)) +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .5)) +
   labs(
     title = "Confirmed COVID-19 Mortality by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -85,4 +91,4 @@ save_plots(filename = "results/high_res/state/a_mo_map.png", preset = "lg")
 save_plots(filename = "results/low_res/state/a_mo_map.png", preset = "lg", dpi = 72)
 
 # clean-up
-rm(state_data, mo_sf, plot_date)
+rm(state_data, mo_sf, plot_date, top_val)

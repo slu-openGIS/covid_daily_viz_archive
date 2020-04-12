@@ -26,6 +26,9 @@ ggplot(data = stl_sf) +
 save_plots(filename = "results/high_res/stl_metro/a_confirmed_map.png", preset = "lg")
 save_plots(filename = "results/low_res/stl_metro/a_confirmed_map.png", preset = "lg", dpi = 72)
 
+# define top_val
+top_val <- round_any(x = max(stl_detail$confirmed_rate), accuracy = 1, f = ceiling)
+
 # plot confirmed rate
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
@@ -34,7 +37,7 @@ ggplot(data = stl_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 2), breaks = c(0,.2,.4,.6,.8,1,1.2,1.4,1.6,1.8,2)) + 
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = .25)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -84,4 +87,4 @@ save_plots(filename = "results/high_res/stl_metro/d_case_fatality_plot.png", pre
 save_plots(filename = "results/low_res/stl_metro/d_case_fatality_plot.png", preset = "lg", dpi = 72)
 
 # clean-up
-rm(stl_detail, stl_sf, plot_date)
+rm(stl_detail, stl_sf, plot_date, top_val)

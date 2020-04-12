@@ -26,6 +26,9 @@ ggplot(data = kc_sf) +
 save_plots(filename = "results/high_res/kc_metro/a_confirmed_map.png", preset = "lg")
 save_plots(filename = "results/low_res/kc_metro/a_confirmed_map.png", preset = "lg", dpi = 72)
 
+# define top_val
+top_val <- round_any(x = max(kc_detail$confirmed_rate), accuracy = 1, f = ceiling)
+
 # plot confirmed rate
 ggplot(data = kc_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
@@ -34,7 +37,7 @@ ggplot(data = kc_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 1.8), breaks = c(0,.2,.4,.6,.8,1,1.2,1.4,1.6,1.8)) + 
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = .25)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Kansas City Metro County",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -84,5 +87,5 @@ save_plots(filename = "results/high_res/kc_metro/d_case_fatality_plot.png", pres
 save_plots(filename = "results/low_res/kc_metro/d_case_fatality_plot.png", preset = "lg", dpi = 72)
 
 # clean-up
-rm(kc_sf, kc_detail, plot_date)
+rm(kc_sf, kc_detail, plot_date, top_val, round_any)
 
