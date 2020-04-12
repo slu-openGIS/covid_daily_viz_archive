@@ -6,6 +6,7 @@ output:
     toc: true
     toc_depth: 2
     toc_float: true
+    df_print: paged
 params:
   date: "Current as of 2020-03-29"
 date: '`r params$date`'
@@ -46,30 +47,40 @@ These maps are fully interactive. Clicking on a county will reveal some details 
 ### Caveats
 Due to lags in reporting, both at the public health department level and at Johns Hopkins itself, these numbers may lag behind other figures reported in the media. Data are based on confirmed tests and deaths, which are in turn biased by the lack of testing. The extent to which we are increasing testing may also make it seem like there are increases in cases, something known as "surveillance bias." While we are almost certainly seeing spreading infection in Missouri communities, it is important to understand that increased testing is driving some of the observed increases in confirmed cases.
 
-## Static Maps and Plots
-In addition to the interactive maps below, I regularly update a range of static maps and plots that capture the progression of the COVID-19 outbreak in Missouri, several metro areas, and at the ZCTA (zip code) level in St. Louis City and County. The most recent versions of each plot can be viewed by clicking on the links below.
+## Static Maps and Plots {.tabset}
+In addition to the interactive maps below, I regularly update a range of static maps and plots that capture the progression of the COVID-19 outbreak in Missouri, several metro areas, and at the ZCTA (zip code) level in St. Louis City and County. The most recent versions of each plot can be viewed by clicking on the links within the tabs below.
 
-| State-level Plots    |  |  |
-|----------------------|--|--|
+### State
+
+| Links |  |  |
+|-------------------------|--|--|
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/b_confirmed_rate.png" target="_blanl">Confirmed Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/log_confirmed/a_state.png" target="_blanl">Confirmed Cases (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/c_case_fatality_rate.png" target="_blanl">Case Fatality (Rate)</a> |
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/d_mortality_rate.png" target="_blanl">Mortality (Rate)</a> |
 
-| County-level Plots   |  |  |
-|----------------------|--|--|
+### County
+
+| Links |  |  |
+|-------------------------|--|--|
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/a_mo_map.png" target="_blank">Confirmed Cases Map</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/log_confirmed/d_missouri.png" target="_blank">Confirmed Cases (Log)</a> | |
 
-| St. Louis Metro Plots |  |  |
-|-----------------------|--|--|
+### St. Louis Metro
+
+| Links |  |  |
+|-------------------------|--|--|
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/a_confirmed_map.png" target="_blank">Confirmed Cases Map</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/b_confirmed_plot.png" target="_blank">Confirmed Cases Plot (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/log_confirmed/b_st_louis.png" target="_blank">Confirmed Cases Plot (Log)</a> | 
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/c_case_fatality_rate.png" target="_blank">Case Fatality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/d_case_fatality_plot.png" target="_blank">Mortality (Rate)</a> | |
 
-| Kansas City Metro Plots |  |  |
+### Kansas City Metro
+
+| Links |  |  |
 |-------------------------|--|--|
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/a_confirmed_map.png" target="_blank">Confirmed Cases Map</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/b_confirmed_plot.png" target="_blank">Confirmed Cases Plot (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/log_confirmed/c_kansas_city.png" target="_blank">Confirmed Cases Plot (Log)</a> | 
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/c_case_fatality_rate.png" target="_blank">Case Fatality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/d_case_fatality_plot.png" target="_blank">Mortality (Rate)</a> | |
 
-| St. Louis ZCTA (Zip Code) Plots |  |  |
-|---------------------------------|--|--|
+### St. Louis ZCTA (Zip Code) 
+
+| Links |  |  |
+|-------------------------|--|--|
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/zip/a_confirmed_map.png" target="_blank">Confirmed Cases Map</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/zip/b_poverty_plot.png" target="_blank">% Poverty Plot</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/zip/c_race_plot.png" target="_blank">% African American Plot</a> | 
 
 <br>
@@ -106,7 +117,7 @@ leaflet() %>%
                            "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds, "<br>",
                            "<b>Baseline ICU Bed Rate per 1,000 Residents:</b> ", round(snapshot$icu_rate, digits = 3))
     )  %>%
-    addLegend(pal = pal, values = snapshot$icu_rate, opacity = .5, title = "Rate")
+    addLegend(pal = pal, values = snapshot$icu_rate, opacity = .5, title = "ICU Rate")
 ```
 
 <br>
@@ -148,6 +159,29 @@ leaflet() %>%
 
 <br>
 
+### Data Table
+
+```{r confirmed-data-table, echo=FALSE, out.width = '100%'}
+snapshot %>%
+  select(state, county, confirmed, confirmed_rate) %>%
+  mutate(
+    confirmed_rate = round(confirmed_rate, digits = 2)
+  ) %>%
+  rename(
+    State = state,
+    County = county,
+    Count = confirmed,
+    `Rate per 1,000 Residents` = confirmed_rate
+  ) %>%
+  arrange(State, County) -> data_table
+
+st_geometry(data_table) <- NULL
+
+data_table
+```
+
+<br>
+
 ## Mortality Rates by County
 This map shows confirmed mortality as a rate per 1,000 residents. As with the second map, raw counts of deaths and hospital infrastructure details are available by clicking on individual counties.
 
@@ -181,6 +215,31 @@ leaflet() %>%
                            "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds)
     )  %>%
     addLegend(pal = pal, values = snapshot$mortality_rate, opacity = .75, title = "Rate")
+```
+
+<br>
+
+### Data Table
+
+```{r mortality-data-table, echo=FALSE, out.width = '100%'}
+snapshot %>%
+  select(state, county, deaths, mortality_rate, case_fatality_rate) %>%
+  mutate(
+    mortality_rate = round(mortality_rate, digits = 2),
+    case_fatality_rate = round(case_fatality_rate, digits = 2)
+  ) %>%
+  rename(
+    State = state,
+    County = county,
+    Deaths = deaths,
+    `Rate per 1,000 Residents` = mortality_rate,
+    `Case Fatality (%)` = case_fatality_rate
+  ) %>%
+  arrange(State, County) -> data_table
+
+st_geometry(data_table) <- NULL
+
+data_table
 ```
 
 <br>
@@ -219,6 +278,31 @@ leaflet() %>%
                  "<b>African American Population:</b> ", round(zip_snapshot$blk_pct, digits = 2), "% ")
     )  %>%
     addLegend(pal = pal, values = zip_snapshot$confirmed_rate, opacity = .75, title = "Rate")
+```
+
+<br>
+
+### Data Table
+
+```{r zip-data-table, echo=FALSE, out.width = '100%'}
+zip_snapshot %>%
+  select(zip, confirmed, confirmed_rate, pvty_pct, blk_pct) %>%
+  mutate(
+    confirmed_rate = round(confirmed_rate, digits = 2),
+    pvty_pct = round(pvty_pct, digits = 2),
+    blk_pct = round(blk_pct, digits = 2)
+  ) %>%
+  rename(
+    `Zip Code` = zip,
+    Count = confirmed,
+    `Rate per 1,000 Residents` = confirmed_rate,
+    `Poverty Rate (%)` = pvty_pct,
+    `% African American` = blk_pct
+  ) -> data_table
+
+st_geometry(data_table) <- NULL
+
+data_table
 ```
 
 <br>

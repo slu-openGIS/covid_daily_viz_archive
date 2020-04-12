@@ -104,4 +104,5 @@ rmarkdown::render(input = "docs/index.Rmd",
        ))
 
 # clean-up
-rm(pal, snapshot, date, date_str, mode, zip_snapshot, map_breaks, map_bins, bins, round_any)
+rm(pal, snapshot, date, date_str, mode, zip_snapshot, map_breaks, map_bins, bins, round_any,
+   data_table)
