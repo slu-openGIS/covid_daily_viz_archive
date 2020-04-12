@@ -83,3 +83,5 @@ rm(counties, historic_dates, detailed_dates, get_hopkins, get_times,
    historic_expand, update_dateTime, historic_data, historic_raw, kc,
    detailed_data)
 
+# add daily new cases and deaths, 
+
