@@ -31,19 +31,21 @@ counties %>%
   mutate(county = ifelse(geoid == "29510", "St. Louis City", county)) -> counties
 
 # define days to scrape
-detailed_dates <- seq(as.Date("2020-03-22"), date, by="days")
+# detailed_dates <- seq(as.Date("2020-03-22"), date, by="days")
 
 # download detailed data
-detailed_dates %>%
-  unlist() %>%
-  map_df(~ get_hopkins(date = .x, ref = counties)) -> detailed_data
+# detailed_dates %>%
+#  unlist() %>%
+#  map_df(~ get_hopkins(date = .x, ref = counties)) -> detailed_data
+
+detailed_data <- get_hopkins(date = date, ref = counties)
 
 # add historical data to detailed
 ## load data
-historic_raw <- get_times(end_date = "2020-03-22")
+historic_raw <- get_times(end_date = date)
 
 # create vector of dates
-historic_dates <- seq(as.Date("2020-01-24"), as.Date("2020-03-21"), by="days")
+historic_dates <- seq(as.Date("2020-01-24")-7, date-1, by="days")
 
 # create full counties data set for historic data
 historic_dates %>%
@@ -79,9 +81,36 @@ county_data %>%
   select(report_date, everything()) -> state_data
 
 # clean-up
-rm(counties, historic_dates, detailed_dates, get_hopkins, get_times, 
+rm(counties, historic_dates, get_hopkins, get_times, 
    historic_expand, update_dateTime, historic_data, historic_raw, kc,
    detailed_data)
 
-# add daily new cases and deaths, 
+# add daily new cases and deaths, county
+county_data %>%
+  group_by(state, county) %>%
+  mutate(
+    new_confirmed = confirmed - lag(confirmed),
+    new_deaths = deaths - lag(deaths)
+  ) %>%
+  mutate(
+    confirmed_avg = rollmean(new_confirmed, k = 7, align = "right", fill = NA),
+    deaths_avg = rollmean(new_deaths, k = 7, align = "right", fill = NA)) %>%
+  filter(report_date >= "2020-01-24") %>%
+  select(report_date, geoid, county, state, last_update,
+         confirmed, new_confirmed, confirmed_avg,
+         deaths, new_deaths, deaths_avg) -> county_data
 
+# add daily new cases and deaths, county
+state_data %>%
+  group_by(state) %>%
+  mutate(
+    new_confirmed = confirmed - lag(confirmed),
+    new_deaths = deaths - lag(deaths)
+  ) %>%
+  mutate(
+    confirmed_avg = rollmean(new_confirmed, k = 7, align = "right", fill = NA),
+    deaths_avg = rollmean(new_deaths, k = 7, align = "right", fill = NA)) %>%
+  filter(report_date >= "2020-01-24") %>%
+  select(report_date, state, last_update,
+         confirmed, new_confirmed, confirmed_avg,
+         deaths, new_deaths, deaths_avg) -> state_data

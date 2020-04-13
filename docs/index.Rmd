@@ -26,6 +26,11 @@ library(plotly)
 source(here::here("source", "functions", "map_breaks.R"))
 round_any <- function(x, accuracy, f=round){f(x/ accuracy) * accuracy}
 
+state_data <- read_csv(here::here("data", "state", "state_full.csv")) %>%
+  filter(state == "Missouri") %>%
+  filter(report_date >= "2020-03-07") %>%
+  arrange(desc(report_date))
+
 snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 102003,
                     stringsAsFactors = FALSE) %>%
   st_transform(crs = 4326) %>%
@@ -35,8 +40,11 @@ zip_snapshot <- st_read(here::here("data", "zip", "daily_snapshot_city_county.ge
 ```
 
 ## Introduction
-These maps summarize the latest available COVID-19 outbreak data from Johns Hopkins University's [COVID-19 project](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data), the City of St. Louis, and St. Louis County. 
+These maps summarize the latest available COVID-19 outbreak data from Johns Hopkins University's [COVID-19 project](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data), the New York Time's [COVID-19 project](http://github.com/nytimes/covid-19-data), the City of St. Louis, and St. Louis County. 
 
+For state and county-level data, this site uses the most recent Johns Hopkins University daily release. For all prior days, the New York Times' data are used. The Johns Hopkins data are published on a faster schedule but sometimes are not updated for all states or counties. Conversely, the New York Times' data are published on a slower schedule but have more consistent updates across states and counties. Using the latest Johns Hopkins release allows for faster updates, while using the New York Times' data for all prior days balances our need for recent data with consistency.
+
+### What Makes These Maps Unique?
 Unlike other interactive maps being used to track the outbreak, the initial three maps include the counties in Illinois and Kansas that are part of the St. Louis and Kansas City metropolitan areas. Kansas City is displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
 
 The final map is also unique - it includes both the City of St. Louis and St. Louis County on one map and with a shared set of legend values, making direct comparisons possible. It shows Zip Code Tabulation Areas (ZCTAs), which are generalized areas that are roughly equivalent to USPS zip-codes. They are not 100% the same, however, and some homes with a given zip code may fall outside of ZCTA boundaries.
@@ -82,6 +90,33 @@ In addition to the interactive maps below, I regularly update a range of static 
 | Links |  |  |
 |-------------------------|--|--|
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/zip/a_confirmed_map.png" target="_blank">Confirmed Cases Map</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/zip/b_poverty_plot.png" target="_blank">% Poverty Plot</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/zip/c_race_plot.png" target="_blank">% African American Plot</a> | 
+
+<br>
+
+## Daily Data for Missouri
+While both [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/) and [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1) provide day-by-day tracking of cumulative cases and new cases on their respective dashboards, the State of Missouri does not. The two average columns for confirmed cases and deaths are both 7-day rolling averages.
+
+<br>
+
+```{r missouri-data-table, echo=FALSE, out.width = '100%'}
+state_data %>%
+  select(report_date, confirmed, new_confirmed, confirmed_avg, deaths, new_deaths, deaths_avg) %>%
+  mutate(
+    confirmed_avg = round(confirmed_avg, digits = 2),
+    deaths_avg = round(deaths_avg, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    `Cumulative Cases` = confirmed,
+    `New Cases` = new_confirmed,
+    `Average New Cases` = confirmed_avg,
+    `Cumulative Deaths` = deaths,
+    `New Deaths` = new_deaths,
+    `Average New Deaths` = deaths_avg
+  ) -> data_table
+
+data_table
+```
 
 <br>
 

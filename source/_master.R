@@ -1,7 +1,7 @@
 # scrape data from Johns Hopkins, tidy, and plot
 
 # UPDATE date value
-date <- lubridate::mdy("04-11-2020")
+date <- lubridate::mdy("04-12-2020")
 mode <- "build"
 # mode <- "plot"
 city_lt5 <- c("63105", "63117", "63119", "63123", "63125", "63130", "63133", "63137", "63143")
@@ -18,6 +18,7 @@ library(scales)
 library(sf)
 library(tidycensus)
 library(tigris)
+library(zoo)
 
 # load functions
 if (mode == "build"){
@@ -41,8 +42,9 @@ if (mode == "build"){
   
   source("source/workflow/01_scrape_and_tidy.R")
   source("source/workflow/02_add_rates.R")
-  source("source/workflow/03_create_spatial.R")
-  source("source/workflow/04_create_zip.R")
+  source("source/workflow/03_count_days.R")
+  source("source/workflow/04_create_spatial.R")
+  source("source/workflow/05_create_zip.R")
 
   # clean-up
   rm(city_county_zip_sf, county_confirmed_days, kc_detail, kc_sf, mo_sf,
@@ -83,11 +85,11 @@ if (mode == "plot"){
 if (mode == "plot"){
   
   # update plots
-  source("source/workflow/05_summary_plots.R")
-  source("source/workflow/06_stl_plots.R")
-  source("source/workflow/07_kc_plots.R")
-  source("source/workflow/08_log_plots.R")
-  source("source/workflow/09_zip_plots.R")
+  source("source/workflow/06_summary_plots.R")
+  source("source/workflow/07_stl_plots.R")
+  source("source/workflow/08_kc_plots.R")
+  source("source/workflow/09_log_confirm_plots.R")
+  source("source/workflow/12_zip_plots.R")
   
   # clean-up
   rm(save_plots, sequoia_theme)
@@ -105,4 +107,4 @@ rmarkdown::render(input = "docs/index.Rmd",
 
 # clean-up
 rm(pal, snapshot, date, date_str, mode, zip_snapshot, map_breaks, map_bins, bins, round_any,
-   data_table)
+   data_table, state_data)
