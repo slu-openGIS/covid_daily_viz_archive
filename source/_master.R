@@ -2,8 +2,8 @@
 
 # UPDATE date value
 date <- lubridate::mdy("04-12-2020")
-mode <- "build"
-# mode <- "plot"
+# mode <- "build"
+mode <- "plot"
 city_lt5 <- c("63105", "63117", "63119", "63123", "63125", "63130", "63133", "63137", "63143")
 
 # dependencies
@@ -67,7 +67,9 @@ if (mode == "plot"){
                    stringsAsFactors = FALSE) 
   
   state_confirmed_days <- read_csv("data/state/state_confirm.csv")
+  state_avg_confirmed_days <- read_csv("data/state/state_confirm_avg.csv")
   county_confirmed_days <- read_csv("data/county/county_confirm.csv")
+  county_avg_confirmed_days <- read_csv("data/county/county_confirm_avg.csv")
   
   city_county_zip_sf <- st_read("data/zip/daily_snapshot_city_county.geojson", crs = 4326,
                              stringsAsFactors = FALSE)
@@ -89,22 +91,22 @@ if (mode == "plot"){
   source("source/workflow/07_stl_plots.R")
   source("source/workflow/08_kc_plots.R")
   source("source/workflow/09_log_confirm_plots.R")
-  source("source/workflow/12_zip_plots.R")
+  source("source/workflow/11_log_confirm_avg_plots.R")
+  source("source/workflow/13_zip_plots.R")
   
   # clean-up
   rm(save_plots, sequoia_theme)
   
 }
 
-# define date
-date_str <- paste0("Current as of ", as.character(date))
-
 # update interactive map
 rmarkdown::render(input = "docs/index.Rmd",
        params = list(
-         date = date_str
+         date = paste0("Current as of ", as.character(date)),
+         date_val = as.character(date),
+         prior_date_val = as.character(date-7)
        ))
 
 # clean-up
-rm(pal, snapshot, date, date_str, mode, zip_snapshot, map_breaks, map_bins, bins, round_any,
-   data_table, state_data)
+rm(pal, snapshot, date, mode, zip_snapshot, map_breaks, map_bins, bins, round_any,
+   data_table, state_data, stl_city_data, stl_county_data, kc_city_data)
