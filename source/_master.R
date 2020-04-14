@@ -2,8 +2,8 @@
 
 # UPDATE date value
 date <- lubridate::mdy("04-13-2020")
-mode <- "build"
-# mode <- "plot"
+# mode <- "build"
+mode <- "plot"
 city_lt5 <- c("63105", "63117", "63119", "63123", "63125", "63130", "63133", "63137", "63143")
 
 # dependencies
@@ -83,7 +83,10 @@ if (mode == "plot"){
   source("source/workflow/07_stl_plots.R")
   source("source/workflow/08_kc_plots.R")
   source("source/workflow/09_log_confirm_plots.R")
+  source("source/workflow/09_perry_plots.R")
+  source("source/workflow/10_log_mortality_plots.R")
   source("source/workflow/11_log_confirm_avg_plots.R")
+  source("source/workflow/12_log_mortality_avg_plots.R")
   source("source/workflow/13_zip_plots.R")
   
   # clean-up

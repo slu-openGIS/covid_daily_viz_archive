@@ -91,4 +91,4 @@ save_plots(filename = "results/high_res/state/a_mo_map.png", preset = "lg")
 save_plots(filename = "results/low_res/state/a_mo_map.png", preset = "lg", dpi = 72)
 
 # clean-up
-rm(state_data, mo_sf, plot_date, top_val)
+rm(mo_sf, plot_date, top_val)

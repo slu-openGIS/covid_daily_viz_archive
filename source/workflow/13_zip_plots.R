@@ -79,4 +79,4 @@ save_plots(filename = "results/high_res/zip/c_race_plot.png", preset = "lg")
 save_plots(filename = "results/low_res/zip/c_race_plot.png", preset = "lg", dpi = 72)
 
 # clean-up
-rm(city_county_zip_sf, city_county_zip_sf2, zip_na, zip_valid)
+rm(city_county_zip_sf, city_county_zip_sf2, zip_na, zip_valid, top_val)

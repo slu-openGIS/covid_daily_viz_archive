@@ -29,7 +29,7 @@ ggplot(data = county_subset, mapping = aes(day, confirmed)) +
               use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(10, 10000)) +
-  scale_x_continuous(limits = c(1, top_val), breaks = seq(0, top_val, by = 5)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -58,7 +58,7 @@ ggplot(data = county_subset, mapping = aes(day, confirmed)) +
               use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(10, 1000)) +
-  scale_x_continuous(limits = c(1, top_val), breaks = seq(0, top_val, by = 5)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Cases by Metro Kansas City County",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -85,7 +85,7 @@ ggplot(data = county_subset, mapping = aes(day, confirmed)) +
               use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(10, 10000)) +
-  scale_x_continuous(limits = c(1, top_val), breaks = seq(0, top_val, by = 5)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Cases by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -117,7 +117,7 @@ ggplot(data = state_confirmed_days, mapping = aes(day, confirmed)) +
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(10, 100000), labels = comma) +
-  scale_x_continuous(limits = c(1, top_val), breaks = seq(0, top_val, by = 5)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Cases by State",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -131,4 +131,4 @@ save_plots(filename = "results/high_res/log_confirmed/a_state.png", preset = "lg
 save_plots(filename = "results/low_res/log_confirmed/a_state.png", preset = "lg", dpi = 72)
 
 # clean-up
-rm(state_confirmed_days, county_confirmed_days, county_subset, top_val)
+rm(state_confirmed_days, county_subset, top_val)
