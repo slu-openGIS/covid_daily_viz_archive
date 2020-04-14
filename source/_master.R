@@ -1,9 +1,9 @@
 # scrape data from Johns Hopkins, tidy, and plot
 
 # UPDATE date value
-date <- lubridate::mdy("04-12-2020")
-# mode <- "build"
-mode <- "plot"
+date <- lubridate::mdy("04-13-2020")
+mode <- "build"
+# mode <- "plot"
 city_lt5 <- c("63105", "63117", "63119", "63123", "63125", "63130", "63133", "63137", "63143")
 
 # dependencies
@@ -42,13 +42,8 @@ if (mode == "build"){
   
   source("source/workflow/01_scrape_and_tidy.R")
   source("source/workflow/02_add_rates.R")
-  source("source/workflow/03_count_days.R")
-  source("source/workflow/04_create_spatial.R")
-  source("source/workflow/05_create_zip.R")
-
-  # clean-up
-  rm(city_county_zip_sf, county_confirmed_days, kc_detail, kc_sf, mo_sf,
-     state_confirmed_days, state_data, stl_detail, stl_sf)
+  source("source/workflow/03_create_spatial.R")
+  source("source/workflow/04_create_zip.R")
   
 }
 
@@ -59,17 +54,14 @@ if (mode == "plot"){
   mo_sf <- st_read("data/county/daily_snapshot_mo.geojson", crs = 102003,
                    stringsAsFactors = FALSE) 
   
+  county_data <- read_csv("data/county/county_full.csv")
+  
   stl_detail <- read_csv("data/metro/county_stl.csv")
   stl_sf <- st_read("data/metro/daily_snapshot_stl.geojson", crs = 102003,
                     stringsAsFactors = FALSE) 
   kc_detail <- read_csv("data/metro/county_kc.csv")
   kc_sf <- st_read("data/metro/daily_snapshot_kc.geojson", crs = 102003,
                    stringsAsFactors = FALSE) 
-  
-  state_confirmed_days <- read_csv("data/state/state_confirm.csv")
-  state_avg_confirmed_days <- read_csv("data/state/state_confirm_avg.csv")
-  county_confirmed_days <- read_csv("data/county/county_confirm.csv")
-  county_avg_confirmed_days <- read_csv("data/county/county_confirm_avg.csv")
   
   city_county_zip_sf <- st_read("data/zip/daily_snapshot_city_county.geojson", crs = 4326,
                              stringsAsFactors = FALSE)

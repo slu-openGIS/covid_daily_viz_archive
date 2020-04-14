@@ -1,5 +1,17 @@
 # log plots
 
+# create days from first day where average confirmed infections were at least 10, county-level data
+county_data %>%
+  filter(confirmed_avg >= 10) %>%
+  filter(county != "Unassigned") %>%
+  arrange(report_date) %>%
+  group_by(state, county) %>%
+  mutate(first_date = first(report_date)) %>%
+  ungroup() %>%
+  mutate(day = as.numeric(report_date-first_date)) %>%
+  select(day, report_date, geoid, county, state, last_update, confirmed_avg) %>%
+  arrange(state, county, day) -> county_avg_confirmed_days
+
 # st. louis metro
 ## subset
 county_avg_confirmed_days %>%
@@ -81,7 +93,7 @@ ggplot(data = county_subset, mapping = aes(day, confirmed_avg)) +
   scale_y_log10(limits = c(10, 300)) +
   scale_x_continuous(limits = c(1, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
-    title = "Pace of COVID-19 Cases by Missouri County",
+    title = "Pace of New COVID-19 Cases by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since Average of Ten Cases Confirmed",
@@ -93,6 +105,17 @@ ggplot(data = county_subset, mapping = aes(day, confirmed_avg)) +
 save_plots(filename = "results/high_res/log_confirmed_avg/d_missouri.png", preset = "lg")
 save_plots(filename = "results/low_res/log_confirmed_avg/d_missouri.png", preset = "lg", dpi = 72)
 
+# create days from first day where average confirmed infections were at least 10, state-level data
+state_data %>%
+  filter(confirmed_avg >= 10) %>%
+  arrange(report_date) %>%
+  group_by(state) %>%
+  mutate(first_date = first(report_date)) %>%
+  ungroup() %>%
+  mutate(day = as.numeric(report_date-first_date)) %>%
+  select(day, report_date, state, last_update, confirmed_avg) %>%
+  arrange(state, day) -> state_avg_confirmed_days
+
 # define top_val
 top_val <- round_any(x = max(state_avg_confirmed_days$day), accuracy = 10, f = ceiling)
 
@@ -103,7 +126,7 @@ ggplot(data = state_avg_confirmed_days, mapping = aes(day, confirmed_avg)) +
   scale_y_log10(limits = c(10, 1000), labels = comma) +
   scale_x_continuous(limits = c(1, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
-    title = "Pace of COVID-19 Cases by State",
+    title = "Pace of New COVID-19 Cases by State",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since Average of Ten Cases Confirmed",

@@ -1,5 +1,18 @@
 # log plots
 
+# create days from 10th confirmed infection data, county-level data
+county_data %>%
+  filter(confirmed >= 10) %>%
+  filter(county != "Unassigned") %>%
+  arrange(report_date) %>%
+  group_by(state, county) %>%
+  mutate(first_date = first(report_date)) %>%
+  ungroup() %>%
+  mutate(day = as.numeric(report_date-first_date)) %>%
+  select(day, report_date, geoid, county, state, last_update, 
+         confirmed, confirmed_rate) %>%
+  arrange(state, county, day) -> county_confirmed_days
+
 # st. louis metro
 county_confirmed_days %>%
   filter(geoid %in% c("17005", "17013", "17027", "17083", "17117", 
@@ -84,6 +97,17 @@ ggplot(data = county_subset, mapping = aes(day, confirmed)) +
 
 save_plots(filename = "results/high_res/log_confirmed/d_missouri.png", preset = "lg")
 save_plots(filename = "results/low_res/log_confirmed/d_missouri.png", preset = "lg", dpi = 72)
+
+# create days from 10th confirmed infection data, state-level data
+state_data %>%
+  filter(confirmed >= 10) %>%
+  arrange(report_date) %>%
+  group_by(state) %>%
+  mutate(first_date = first(report_date)) %>%
+  ungroup() %>%
+  mutate(day = as.numeric(report_date-first_date)) %>%
+  select(day, report_date, state, last_update, confirmed) %>%
+  arrange(state, day) -> state_confirmed_days
 
 # define top_val
 top_val <- round_any(x = max(state_confirmed_days$day), accuracy = 10, f = ceiling)
