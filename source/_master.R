@@ -102,6 +102,12 @@ rmarkdown::render(input = "docs/index.Rmd",
          prior_date_val = as.character(date-7)
        ))
 
+# update readme
+rmarkdown::render(input = "README.Rmd",
+                  params = list(
+                    date_val = as.character(date)
+                  ))
+
 # clean-up
 rm(pal, snapshot, date, mode, zip_snapshot, map_breaks, map_bins, bins, round_any,
    data_table, state_data, stl_city_data, stl_county_data, kc_city_data)
