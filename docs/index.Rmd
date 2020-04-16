@@ -25,7 +25,7 @@ library(sf)
 library(ggplot2)
 
 source(here::here("source", "functions", "map_breaks.R"))
-round_any <- function(x, accuracy, f=round){f(x/ accuracy) * accuracy}
+source(here::here("source", "functions", "round_any.R"))
 
 state_data <- read_csv(here::here("data", "state", "state_full.csv")) %>%
   filter(state == "Missouri") %>%

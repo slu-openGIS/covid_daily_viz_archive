@@ -27,7 +27,7 @@ save_plots(filename = "results/high_res/kc_metro/a_confirmed_map.png", preset = 
 save_plots(filename = "results/low_res/kc_metro/a_confirmed_map.png", preset = "lg", dpi = 72)
 
 # define top_val
-top_val <- round_any(x = max(kc_detail$confirmed_rate), accuracy = 1, f = ceiling)
+top_val <- round_any(x = max(kc_detail$confirmed_rate), accuracy = .25, f = ceiling)
 
 # plot confirmed rate
 ggplot(data = kc_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
