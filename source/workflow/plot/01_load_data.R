@@ -1,0 +1,22 @@
+
+state_data <- read_csv("data/state/state_full.csv")
+mo_sf <- st_read("data/county/daily_snapshot_mo.geojson", crs = 102003,
+                 stringsAsFactors = FALSE) 
+
+county_data <- read_csv("data/county/county_full.csv")
+
+stl_detail <- read_csv("data/metro/county_stl.csv")
+stl_sf <- st_read("data/metro/daily_snapshot_stl.geojson", crs = 102003,
+                  stringsAsFactors = FALSE) 
+kc_detail <- read_csv("data/metro/county_kc.csv")
+kc_sf <- st_read("data/metro/daily_snapshot_kc.geojson", crs = 102003,
+                 stringsAsFactors = FALSE) 
+
+city_county_zip_sf <- st_read("data/zip/daily_snapshot_city_county.geojson", crs = 4326,
+                              stringsAsFactors = FALSE)
+
+rm(city_lt5)
+
+# create reference object
+ref_county <- mo_sf
+st_geometry(ref_county) <- NULL

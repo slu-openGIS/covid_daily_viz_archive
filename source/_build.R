@@ -20,10 +20,11 @@ source("source/functions/historic_expand.R")
 source("source/functions/wrangle_zip.R")
 
 # workflow
-source("source/workflow/01_scrape_and_tidy.R")
-source("source/workflow/02_add_rates.R")
-source("source/workflow/03_create_spatial.R")
-source("source/workflow/04_create_zip.R")
+source("source/workflow/build/01_scrape_and_tidy.R")
+source("source/workflow/build/02_add_rates.R")
+source("source/workflow/build/03_create_spatial.R")
+# source("source/workflow/build/04_create_msa.R")
+source("source/workflow/build/05_create_zip.R")
 
 # update interactive map
 rmarkdown::render(input = "docs/index.Rmd",
