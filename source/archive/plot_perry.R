@@ -1,21 +1,34 @@
 # date <- lubridate::mdy("04-05-2020")
 
+date <- lubridate::mdy("04-15-2020")
+
+round_any <- function(x, accuracy, f=round){f(x/ accuracy) * accuracy}
+
 source("source/functions/save_plots.R")
 source("source/functions/sequoia_theme.R")
 
 county_full <- read_csv("data/county/county_full.csv")
-county_confirmed_days <- read_csv("data/county/county_confirm.csv")
 
 plot_date <- "2020-03-10"
 county_full <- filter(county_full, report_date >= plot_date) %>%
-  filter(geoid %in% c(29189, 29510, 29157))
+  filter(state == "Missouri")
+
+
+# %>%
+#  filter(geoid %in% c(29189, 29510, 29157, 29195))
+
+# define top_val
+top_val <- round_any(x = max(county_full$confirmed_rate), accuracy = .25, f = ceiling)
 
 # plot confirmed rate
 ggplot(data = county_full, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
+  gghighlight(geoid %in% c(29189, 29510, 29157, 29195), 
+              label_params = list(size = 6),
+              use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2") +
   scale_x_date(date_breaks = "3 days", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 1.8), breaks = c(0,.2,.4,.6,.8,1,1.2,1.4,1.6,1.8)) + 
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = .25)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Select MO Counties",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -25,8 +38,8 @@ ggplot(data = county_full, mapping = aes(x = report_date, y = confirmed_rate)) +
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
-save_plots(filename = "results/high_res/misc/perry_confirmed_plot.png", preset = "lg")
-save_plots(filename = "results/low_res/misc/perry_confirmed_plot.png", preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/misc/perry_saline_confirmed_plot.png", preset = "lg")
+save_plots(filename = "results/low_res/misc/perry_saline_confirmed_plot.png", preset = "lg", dpi = 72)
 
 # missouri days
 county_confirmed_days %>%
