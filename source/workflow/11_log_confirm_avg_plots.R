@@ -123,7 +123,7 @@ top_val <- round_any(x = max(state_avg_confirmed_days$day), accuracy = 10, f = c
 ggplot(data = state_avg_confirmed_days, mapping = aes(day, confirmed_avg)) +
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2") +
-  scale_y_log10(limits = c(10, 1000), labels = comma) +
+  scale_y_log10(limits = c(10, 2000), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of New COVID-19 Cases by State",
