@@ -68,7 +68,7 @@ save_plots(filename = "results/low_res/stl_metro/c_case_fatality_map.png", prese
 # plot case fatality rate
 ggplot(data = stl_detail, mapping = aes(x = report_date, y = case_fatality_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
-  gghighlight(geoid %in% c("29189", "29510", "29183"),
+  gghighlight(geoid %in% c("29189", "29510", "29183", "29071"),
               label_params = list(size = 6),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +

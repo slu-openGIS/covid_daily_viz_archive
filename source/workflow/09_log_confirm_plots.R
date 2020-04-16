@@ -24,7 +24,7 @@ top_val <- round_any(x = max(county_subset$day), accuracy = 10, f = ceiling)
 
 ggplot(data = county_subset, mapping = aes(day, confirmed)) +
   geom_line(mapping = aes(color = county), size = 2) +
-  gghighlight(geoid %in% c("29189", "29510", "29183", "17163", "29099"),
+  gghighlight(geoid %in% c("29189", "29510", "29183", "17163", "29099", "29071"),
               label_params = list(size = 6, nudge_x = 1, nudge_y = .1),
               use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2") +

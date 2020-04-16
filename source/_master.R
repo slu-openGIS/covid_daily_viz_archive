@@ -1,9 +1,9 @@
 # scrape data from Johns Hopkins, tidy, and plot
 
 # UPDATE date value
-date <- lubridate::mdy("04-14-2020")
-# mode <- "build"
-mode <- "plot"
+date <- lubridate::mdy("04-15-2020")
+mode <- "build"
+# mode <- "plot"
 city_lt5 <- c("63105", "63117", "63119", "63123", "63125", "63130", "63133", "63137", "63143")
 
 # dependencies
@@ -107,6 +107,9 @@ rmarkdown::render(input = "README.Rmd",
                   params = list(
                     date_val = as.character(date)
                   ))
+
+# delete README.html
+fs::file_delete("README.html")
 
 # clean-up
 rm(pal, snapshot, date, mode, zip_snapshot, map_breaks, map_bins, bins, round_any,

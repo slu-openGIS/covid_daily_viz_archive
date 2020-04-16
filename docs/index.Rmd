@@ -418,7 +418,7 @@ This map shows confirmed infections as a rate per 1,000 residents for all ZCTAs 
 # calculate breaks
 bins <- map_bins(zip_snapshot, var = "confirmed_rate", style = "fisher", classes = 5, dig_lab = 2,
                  round = 2)
-bins[1] <- round_any(x = min(zip_snapshot$confirmed_rate, na.rm = TRUE), accuracy = .01, f = ceiling)
+bins[1] <- round_any(x = min(zip_snapshot$confirmed_rate, na.rm = TRUE), accuracy = .01, f = floor)
 bins[length(bins)] <- round_any(x = max(zip_snapshot$confirmed_rate, na.rm = TRUE), accuracy = .01, f = ceiling)
 
 # create color palette
