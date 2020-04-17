@@ -5,6 +5,7 @@ date <- lubridate::mdy("04-15-2020")
 
 # dependencies
 library(dplyr)
+library(forcats)
 library(gghighlight)
 library(ggplot2)
 library(ggrepel)
@@ -31,9 +32,6 @@ source("source/workflow/plot/11_log_confirm_avg_plots.R")
 source("source/workflow/plot/12_log_mortality_avg_plots.R")
 source("source/workflow/plot/13_zip_plots.R")
 
-# clean-up
-rm(save_plots, sequoia_theme)
-
 # update interactive map
 rmarkdown::render(input = "docs/index.Rmd",
                   params = list(
@@ -50,3 +48,6 @@ rmarkdown::render(input = "README.Rmd",
 
 # delete README.html
 fs::file_delete("README.html")
+
+# clean-up
+rm(save_plots, sequoia_theme)

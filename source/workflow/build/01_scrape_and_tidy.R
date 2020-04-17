@@ -95,8 +95,7 @@ county_data %>%
   mutate(
     confirmed_avg = rollmean(new_confirmed, k = 7, align = "right", fill = NA),
     deaths_avg = rollmean(new_deaths, k = 7, align = "right", fill = NA)) %>%
-  filter(report_date >= "2020-01-24") %>%
-  select(report_date, geoid, county, state, last_update,
+  select(report_date, geoid, county, state, 
          confirmed, new_confirmed, confirmed_avg,
          deaths, new_deaths, deaths_avg) -> county_data
 
@@ -111,6 +110,6 @@ state_data %>%
     confirmed_avg = rollmean(new_confirmed, k = 7, align = "right", fill = NA),
     deaths_avg = rollmean(new_deaths, k = 7, align = "right", fill = NA)) %>%
   filter(report_date >= "2020-01-24") %>%
-  select(report_date, state, last_update,
+  select(report_date, state,
          confirmed, new_confirmed, confirmed_avg,
          deaths, new_deaths, deaths_avg) -> state_data

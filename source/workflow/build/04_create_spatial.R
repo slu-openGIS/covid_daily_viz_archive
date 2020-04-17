@@ -22,7 +22,7 @@ rm(mo_counties, il_ks_counties)
 # subset detailed data
 county_data %>% 
   filter(report_date == date) %>%
-  select(-report_date, -last_update) -> county_sub
+  select(-report_date) -> county_sub
 
 # combine with geometry
 counties_sf <- left_join(counties_sf, county_sub, by = c("GEOID" = "geoid"))
@@ -41,9 +41,13 @@ kc_metro_counties <- c("20091", "20103", "20107", "20121", "20209",
 
 ks_metro_counties <- c("20091", "20103", "20107", "20121", "20209")
 
+# create vector of needed counties
 mo_counties <- filter(counties_sf, state == "Missouri")
 mo_counties <- as.vector(mo_counties$GEOID)
 
+# create vector of mo counties and adjacent counties in metros
+# mo_counties_xl <- c(metro_counties$cape_girardeau_il, metro_counties$joplin_ok, metro_counties$kansas_city_ks, 
+#                     metro_counties$st_joseph_ks, metro_counties$st_louis_il, mo_counties)
 mo_counties_xl <- c(il_metro_counties, ks_metro_counties, mo_counties)
 
 # subset
@@ -67,7 +71,7 @@ mo_xl_sf <- select(mo_xl_sf, GEOID, county, state, total_pop, hospitals,
 
 # clean-up
 rm(stl_metro_counties, il_metro_counties, kc_metro_counties, ks_metro_counties,
-   mo_counties, county_sub, counties_sf, county_data, mo_counties_xl, icu,
+   mo_counties, county_sub, counties_sf, mo_counties_xl, icu,
    county_pop)
 
 # write data
@@ -80,4 +84,5 @@ write_csv(stl_detail, "data/metro/county_stl.csv")
 write_csv(kc_detail, "data/metro/county_kc.csv")
 
 # clean-up
-rm(mo_sf, mo_xl_sf, stl_sf, kc_sf, mo_detail, stl_detail, kc_detail, state_data)
+rm(mo_sf, mo_xl_sf, stl_sf, kc_sf, mo_detail, stl_detail, kc_detail, state_data,
+   metro_counties, county_data)
