@@ -1,17 +1,22 @@
 
 
 plot_date <- "2020-03-10"
-perry_data <- filter(county_data, report_date >= plot_date) %>%
-  filter(geoid %in% c(29189, 29510, 29157))
+
+county_data %>%
+  filter(state == "Missouri") %>%
+  filter(report_date >= plot_date) -> county_subset
 
 # define top_val
-top_val <- round_any(x = max(perry_data$confirmed_rate), accuracy = 1, f = ceiling)
+top_val <- round_any(x = max(county_subset$confirmed_rate), accuracy = .25, f = ceiling)
 
 # plot confirmed rate
-ggplot(data = perry_data, mapping = aes(x = report_date, y = confirmed_rate)) +
+ggplot(data = county_subset, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
+  gghighlight(geoid %in% c(29189, 29510, 29157, 29195), 
+              label_params = list(size = 6),
+              use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2") +
-  scale_x_date(date_breaks = "3 days", date_labels = "%d %b")  +
+  scale_x_date(date_breaks = "5 days", date_labels = "%d %b")  +
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = .25)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Select MO Counties",
@@ -22,8 +27,8 @@ ggplot(data = perry_data, mapping = aes(x = report_date, y = confirmed_rate)) +
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
-save_plots(filename = "results/high_res/misc/perry_confirmed_plot.png", preset = "lg")
-save_plots(filename = "results/low_res/misc/perry_confirmed_plot.png", preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/misc/perry_saline_confirmed_plot.png", preset = "lg")
+save_plots(filename = "results/low_res/misc/perry_saline_confirmed_plot.png", preset = "lg", dpi = 72)
 
 # missouri days
 county_confirmed_days %>%
@@ -34,7 +39,7 @@ top_val <- round_any(x = max(county_subset$day), accuracy = 10, f = ceiling)
 
 ggplot(data = county_subset, mapping = aes(day, confirmed)) +
   geom_line(mapping = aes(color = county), size = 2) +
-  gghighlight(geoid %in% c("29189", "29510", "29511", "29157", "29077", "29019"),
+  gghighlight(geoid %in% c("29189", "29510", "29511", "29157", "29195"),
               label_params = list(size = 6, nudge_x = 1, nudge_y = .1),
               use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2") +
@@ -52,5 +57,5 @@ ggplot(data = county_subset, mapping = aes(day, confirmed)) +
 save_plots(filename = "results/high_res/misc/perry_log_plot.png", preset = "lg")
 save_plots(filename = "results/low_res/misc/perry_log_plot.png", preset = "lg", dpi = 72)
 
-rm(perry_data, county_confirmed_days, top_val)
+rm(county_confirmed_days, top_val)
 

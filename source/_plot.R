@@ -1,7 +1,7 @@
 # Plot data
 
 # UPDATE date value
-date <- lubridate::mdy("04-15-2020")
+date <- lubridate::mdy("04-16-2020")
 
 # dependencies
 library(dplyr)
@@ -9,6 +9,7 @@ library(forcats)
 library(gghighlight)
 library(ggplot2)
 library(ggrepel)
+library(readr)
 library(scales)
 library(sf)
 
@@ -31,6 +32,7 @@ source("source/workflow/plot/10_log_mortality_plots.R")
 source("source/workflow/plot/11_log_confirm_avg_plots.R")
 source("source/workflow/plot/12_log_mortality_avg_plots.R")
 source("source/workflow/plot/13_zip_plots.R")
+source("source/workflow/plot/14_individual.R")
 
 # update interactive map
 rmarkdown::render(input = "docs/index.Rmd",
@@ -50,4 +52,5 @@ rmarkdown::render(input = "README.Rmd",
 fs::file_delete("README.html")
 
 # clean-up
-rm(save_plots, sequoia_theme)
+rm(pal, snapshot, date, zip_snapshot, map_breaks, map_bins, bins, round_any,
+   data_table, state_data, stl_city_data, stl_county_data, kc_city_data)

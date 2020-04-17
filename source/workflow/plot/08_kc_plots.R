@@ -36,7 +36,7 @@ ggplot(data = kc_detail, mapping = aes(x = report_date, y = confirmed_rate)) +
               label_params = list(size = 6),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +
-  scale_x_date(date_breaks = "3 days", date_labels = "%d %b")  +
+  scale_x_date(date_breaks = "5 days", date_labels = "%d %b")  +
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = .25)) + 
   labs(
     title = "Confirmed COVID-19 Cases by Kansas City Metro County",
@@ -73,7 +73,7 @@ ggplot(data = kc_detail, mapping = aes(x = report_date, y = case_fatality_rate))
               label_params = list(size = 6, nudge_x = 1, nudge_y = .1),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +
-  scale_x_date(date_breaks = "3 days", date_labels = "%d %b")  +
+  scale_x_date(date_breaks = "5 days", date_labels = "%d %b")  +
   scale_y_continuous(limits = c(0, 10), breaks = c(0,1,2,3,4,5,6,7,8,9,10)) + 
   labs(
     title = "COVID-19 Case Fatality by Metro Kansas City County",

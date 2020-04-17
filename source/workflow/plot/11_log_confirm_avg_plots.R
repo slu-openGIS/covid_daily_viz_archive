@@ -9,7 +9,7 @@ county_data %>%
   mutate(first_date = first(report_date)) %>%
   ungroup() %>%
   mutate(day = as.numeric(report_date-first_date)) %>%
-  select(day, report_date, geoid, county, state, last_update, confirmed_avg) %>%
+  select(day, report_date, geoid, county, state, confirmed_avg) %>%
   arrange(state, county, day) -> county_avg_confirmed_days
 
 # st. louis metro
@@ -113,7 +113,7 @@ state_data %>%
   mutate(first_date = first(report_date)) %>%
   ungroup() %>%
   mutate(day = as.numeric(report_date-first_date)) %>%
-  select(day, report_date, state, last_update, confirmed_avg) %>%
+  select(day, report_date, state, confirmed_avg) %>%
   arrange(state, day) -> state_avg_confirmed_days
 
 # define top_val

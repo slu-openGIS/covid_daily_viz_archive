@@ -1,7 +1,7 @@
 # plot summary data
 
 # final data cleaning
-plot_date <- "2020-03-01"
+plot_date <- "2020-03-10"
 state_data <- filter(state_data, report_date >= plot_date)
 
 # remove IL
@@ -38,7 +38,7 @@ ggplot(data = state_data, mapping = aes(x = report_date, y = case_fatality_rate)
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2", name = "State") +
   scale_x_date(date_breaks = "5 days", date_labels = "%d %b") +
-  scale_y_continuous(breaks = c(0,1,2,3,4,5,10,15,20)) +
+  scale_y_continuous(limits = c(0,10), breaks = seq(0, 10, by = 1)) +
   labs(
     title = "COVID-19 Case Fatality by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),

@@ -9,7 +9,7 @@ county_data %>%
   mutate(first_date = first(report_date)) %>%
   ungroup() %>%
   mutate(day = as.numeric(report_date-first_date)) %>%
-  select(day, report_date, geoid, county, state, last_update, 
+  select(day, report_date, geoid, county, state, 
          confirmed, confirmed_rate) %>%
   arrange(state, county, day) -> county_confirmed_days
 
@@ -106,7 +106,7 @@ state_data %>%
   mutate(first_date = first(report_date)) %>%
   ungroup() %>%
   mutate(day = as.numeric(report_date-first_date)) %>%
-  select(day, report_date, state, last_update, confirmed) %>%
+  select(day, report_date, state, confirmed) %>%
   arrange(state, day) -> state_confirmed_days
 
 # define top_val

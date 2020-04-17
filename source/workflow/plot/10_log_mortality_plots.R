@@ -11,7 +11,7 @@ state_data %>%
   mutate(first_date = first(report_date)) %>%
   ungroup() %>%
   mutate(day = as.numeric(report_date-first_date)) %>%
-  select(day, report_date, state, last_update, deaths) %>%
+  select(day, report_date, state, deaths) %>%
   arrange(state, day) -> state_death_days
 
 # define top_val
