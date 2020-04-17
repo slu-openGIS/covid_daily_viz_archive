@@ -15,7 +15,7 @@ kc_sf <- st_read("data/metro/daily_snapshot_kc.geojson", crs = 102003,
 city_county_zip_sf <- st_read("data/zip/daily_snapshot_city_county.geojson", crs = 4326,
                               stringsAsFactors = FALSE)
 
-metro_data <- read_csv("data/metro_all/metro_all.csv")
+metro_data <- read_csv("data/metro_all/metro_full.csv")
 
 covid_race <-  read_csv("data/individual/stl_race_rates.csv")
 

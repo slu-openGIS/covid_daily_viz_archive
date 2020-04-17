@@ -51,4 +51,4 @@ rm(state_pop, metros_geoid)
 # export
 write_csv(state_data, "data/state/state_full.csv")
 write_csv(county_data, "data/county/county_full.csv")
-write_csv(metro_data, "data/metro_all/metro_full")
+write_csv(metro_data, "data/metro_all/metro_full.csv")

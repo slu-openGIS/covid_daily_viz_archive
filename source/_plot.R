@@ -23,7 +23,9 @@ source("source/functions/sequoia_theme.R")
 source("source/workflow/plot/01_load_data.R")
 
 # update plots
-source("source/workflow/plot/06_summary_plots.R")
+source("source/workflow/plot/02_state_plots.R")
+source("source/workflow/plot/03_metro_plots.R")
+
 source("source/workflow/plot/07_stl_plots.R")
 source("source/workflow/plot/08_kc_plots.R")
 source("source/workflow/plot/09_log_confirm_plots.R")
