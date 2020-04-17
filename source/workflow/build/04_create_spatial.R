@@ -79,7 +79,6 @@ st_write(mo_sf, "data/county/daily_snapshot_mo.geojson", delete_dsn = TRUE)
 st_write(mo_xl_sf, "data/county/daily_snapshot_mo_xl.geojson", delete_dsn = TRUE)
 st_write(stl_sf, "data/metro/daily_snapshot_stl.geojson", delete_dsn = TRUE)
 st_write(kc_sf, "data/metro/daily_snapshot_kc.geojson", delete_dsn = TRUE)
-# write_csv(mo_detail, "data/county/county_mo.csv")
 write_csv(stl_detail, "data/metro/county_stl.csv")
 write_csv(kc_detail, "data/metro/county_kc.csv")
 
