@@ -85,4 +85,4 @@ write_csv(kc_detail, "data/metro/county_kc.csv")
 
 # clean-up
 rm(mo_sf, mo_xl_sf, stl_sf, kc_sf, mo_detail, stl_detail, kc_detail, state_data,
-   metro_counties, county_data)
+   metro_counties, county_data, metro_data)

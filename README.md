@@ -69,8 +69,7 @@ his 70s](https://www.stltoday.com/news/local/metro/live-stl-area-coronavirus-upd
 died the same day, the first death for that county. The first death in
 St. Louis County occured several days earlier on
 [March 20](https://www.stltoday.com/news/local/metro/live-stl-area-coronavirus-updates-march-here-s-what-we/article_183103d8-d6ed-5f64-8f0d-a990479266b5.html),
-when a women in her 60s passed
-away.
+when a women in her 60s passed away.
 
 ### Mitigation Measures
 

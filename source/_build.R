@@ -17,7 +17,6 @@ library(lubridate)
 library(purrr)
 library(readr)
 library(sf)
-library(tidycensus)
 library(tigris)
 library(zoo)
 
@@ -28,7 +27,7 @@ source("source/functions/wrangle_zip.R")
 
 # workflow
 source("source/workflow/build/01_scrape_and_tidy.R")
-source("source/workflow/build/02_create_msa.R")
+source("source/workflow/build/02_create_state_msa.R")
 source("source/workflow/build/03_add_rates.R")
 source("source/workflow/build/04_create_spatial.R")
 source("source/workflow/build/05_create_zip.R")

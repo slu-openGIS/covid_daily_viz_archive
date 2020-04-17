@@ -15,7 +15,7 @@ get_hopkins <- function(date, ref){
   # tidy data
   if (date >= "2020-03-22"){
     
-    df <- dplyr::filter(df, Province_State %in% c("Kansas", "Missouri", "Illinois"))
+    df <- dplyr::filter(df, Province_State %in% c("Kansas", "Missouri", "Illinois", "Oklahoma"))
     df <- dplyr::select(df, FIPS, Admin2, Province_State, Last_Update, Confirmed, Deaths)
     df <- dplyr::rename(df,
                         geoid = FIPS,
@@ -66,7 +66,7 @@ get_hopkins <- function(date, ref){
                         last_update = `Last Update`,
                         confirmed = Confirmed,
                         deaths = Deaths)
-    df <- dplyr::filter(df, state %in% c("Kansas", "Missouri", "Illinois"))
+    df <- dplyr::filter(df, state %in% c("Kansas", "Missouri", "Illinois", "Oklahoma"))
     df <- dplyr::select(df, state, last_update, confirmed, deaths)
     df <- dplyr::mutate(df, report_date = date)
     df <- dplyr::select(df, report_date, state, dplyr::everything())
@@ -95,7 +95,7 @@ get_times <- function(end_date){
   df <- readr::read_csv(response)
   
   # tidy data
-  df <- dplyr::filter(df, state %in% c("Kansas", "Missouri", "Illinois"))
+  df <- dplyr::filter(df, state %in% c("Kansas", "Missouri", "Illinois", "Oklahoma"))
   df <- dplyr::rename(df,
                       confirmed = cases,
                       report_date = date,

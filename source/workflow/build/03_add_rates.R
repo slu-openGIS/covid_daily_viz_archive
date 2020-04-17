@@ -1,17 +1,12 @@
 # add rates
 
-# get population data
-## state populations
-state_pop <- get_acs(geography = "state", state = c("Kansas", "Illinois", "Missouri"), year = 2018,
-                     variables = "B01001_001") %>%
-  select(NAME, estimate) %>%
-  rename(total_pop = estimate)
+# load state reference data
+state_pop <- read_csv("data/source/state_pop.csv")
 
-## county populations from ACS for IL and KS
-county_pop <- get_acs(geography = "county", state = c("Kansas", "Illinois"), year = 2018,
-                      variables = "B01001_001") %>%
-  select(GEOID, estimate) %>%
-  rename(total_pop = estimate)
+# load county reference data
+## county populations
+county_pop <- read_csv("data/source/county_pop.csv") %>%
+  mutate(GEOID = as.character(GEOID))
 
 ## county populations with KC as county equivalent
 mo_county_pop <- read_csv("data/source/mo_county_plus/mo_county_plus.csv") %>%
@@ -56,5 +51,4 @@ rm(state_pop, metros_geoid)
 # export
 write_csv(state_data, "data/state/state_full.csv")
 write_csv(county_data, "data/county/county_full.csv")
-# write_csv(metro_data, "data/metro/metro_full")
-rm(metro_data)
+write_csv(metro_data, "data/metro_all/metro_full")
