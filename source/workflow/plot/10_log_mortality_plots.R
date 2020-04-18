@@ -21,7 +21,7 @@ top_val <- round_any(x = max(state_death_days$day), accuracy = 10, f = ceiling)
 ggplot(data = state_death_days, mapping = aes(day, deaths)) +
   geom_line(mapping = aes(color = state), size = 2) +
   scale_color_brewer(palette = "Dark2") +
-  scale_y_log10(limits = c(5, 1000), breaks = c(5, 10, 100, 1000), labels = comma) +
+  scale_y_log10(limits = c(5, 1500), breaks = c(5, 50, 100, 500, 1000, 1500), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Deaths by State",

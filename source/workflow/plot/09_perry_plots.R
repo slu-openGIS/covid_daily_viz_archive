@@ -12,7 +12,7 @@ top_val <- round_any(x = max(county_subset$confirmed_rate), accuracy = .25, f = 
 # plot confirmed rate
 ggplot(data = county_subset, mapping = aes(x = report_date, y = confirmed_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
-  gghighlight(geoid %in% c(29189, 29510, 29157, 29195), 
+  gghighlight(geoid %in% c(29189, 29510, 29157, 29195, 29135, 29201), 
               label_params = list(size = 6),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2") +

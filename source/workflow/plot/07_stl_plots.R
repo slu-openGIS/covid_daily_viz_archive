@@ -73,7 +73,7 @@ ggplot(data = stl_detail, mapping = aes(x = report_date, y = case_fatality_rate)
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +
   scale_x_date(date_breaks = "5 days", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 11), breaks = seq(0, 11, by = 1)) + 
+  scale_y_continuous(limits = c(0, 20), breaks = seq(0, 20, by = 2)) + 
   labs(
     title = "COVID-19 Case Fatality by Metro St. Louis County",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),

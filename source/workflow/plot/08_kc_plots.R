@@ -68,13 +68,12 @@ save_plots(filename = "results/low_res/kc_metro/c_case_fatality_map.png", preset
 # plot case fatality rate
 ggplot(data = kc_detail, mapping = aes(x = report_date, y = case_fatality_rate)) +
   geom_line(mapping = aes(color = county), size = 2)  +
-  gghighlight(geoid %in% c("20209", "29095", "20091", "29107", "29037", "29511", 
-                           "29047", "20103"),
+  gghighlight(geoid %in% c("29511", "29095", "20091", "20209"),
               label_params = list(size = 6, nudge_x = 1, nudge_y = .1),
               use_direct_label = FALSE, use_group_by = FALSE) +
   scale_color_brewer(palette = "Dark2", name = "County") +
   scale_x_date(date_breaks = "5 days", date_labels = "%d %b")  +
-  scale_y_continuous(limits = c(0, 10), breaks = c(0,1,2,3,4,5,6,7,8,9,10)) + 
+  scale_y_continuous(limits = c(0, 20), breaks = seq(0, 20, by = 2)) + 
   labs(
     title = "COVID-19 Case Fatality by Metro Kansas City County",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),

@@ -1,7 +1,7 @@
 # Plot data
 
 # UPDATE date value
-date <- lubridate::mdy("04-16-2020")
+date <- lubridate::mdy("04-17-2020")
 
 # dependencies
 library(dplyr)

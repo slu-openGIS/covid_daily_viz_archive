@@ -1,19 +1,23 @@
 
 state_data <- read_csv("data/state/state_full.csv")
-mo_sf <- st_read("data/county/daily_snapshot_mo.geojson", crs = 102003,
-                 stringsAsFactors = FALSE) 
+mo_sf <- st_read("data/county/daily_snapshot_mo.geojson", crs = 4326,
+                 stringsAsFactors = FALSE) %>%
+  st_transform(crs = 102003)
 
 county_data <- read_csv("data/county/county_full.csv")
 
 stl_detail <- read_csv("data/metro/county_stl.csv")
-stl_sf <- st_read("data/metro/daily_snapshot_stl.geojson", crs = 102003,
-                  stringsAsFactors = FALSE) 
+stl_sf <- st_read("data/metro/daily_snapshot_stl.geojson", crs = 4326,
+                  stringsAsFactors = FALSE) %>%
+  st_transform(crs = 102003)
 kc_detail <- read_csv("data/metro/county_kc.csv")
-kc_sf <- st_read("data/metro/daily_snapshot_kc.geojson", crs = 102003,
-                 stringsAsFactors = FALSE) 
+kc_sf <- st_read("data/metro/daily_snapshot_kc.geojson", crs = 4326,
+                 stringsAsFactors = FALSE) %>%
+  st_transform(crs = 102003)
 
 city_county_zip_sf <- st_read("data/zip/daily_snapshot_city_county.geojson", crs = 4326,
-                              stringsAsFactors = FALSE)
+                              stringsAsFactors = FALSE) %>%
+  st_transform(crs = 26915)
 
 metro_data <- read_csv("data/metro_all/metro_full.csv")
 
