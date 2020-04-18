@@ -1,15 +1,15 @@
 # Scape Data and Construct Data Sets
 
 # UPDATE date value
-date <- lubridate::mdy("04-16-2020")
+date <- lubridate::mdy("04-17-2020")
 
 # UPDATE city zip's with < 5 or 0 cases
 city_lt5 <- c("63105", "63117", "63119", "63123", "63125", "63130", "63133", "63137", "63143")
 
 # UPDATE city and county race data
 # white, black, asian, 2+
-county_race_counts <- c(527, 730, 22, 65)
-city_race_counts <- c(162, 500, 18, NA)
+county_race_counts <- c(544, 760, 22, 66)
+city_race_counts <- c(164, 502, 17, NA)
 
 # dependencies
 library(dplyr)
