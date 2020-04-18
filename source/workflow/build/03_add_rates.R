@@ -45,10 +45,10 @@ left_join(county_data, county_pop, by = c("geoid" = "GEOID")) %>%
   select(report_date, geoid, county, state, confirmed, confirmed_rate, new_confirmed, confirmed_avg,
          deaths, mortality_rate, new_deaths, deaths_avg, case_fatality_rate) -> county_data
 
-# clean-up
-rm(state_pop, metros_geoid)
-
 # export
 write_csv(state_data, "data/state/state_full.csv")
 write_csv(county_data, "data/county/county_full.csv")
 write_csv(metro_data, "data/metro_all/metro_full.csv")
+
+# clean-up
+rm(state_pop, metros_geoid, metro_data)

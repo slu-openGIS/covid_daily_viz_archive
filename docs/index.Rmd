@@ -47,9 +47,8 @@ kc_city_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
   filter(report_date >= "2020-03-20") %>%
   arrange(desc(report_date))
 
-snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 102003,
+snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 4326,
                     stringsAsFactors = FALSE) %>%
-  st_transform(crs = 4326) %>%
   mutate(icu_rate = ifelse(hospitals == 0, NA, icu_rate)) %>%
   mutate(avg_rate = (confirmed_avg/total_pop)*1000)
 
