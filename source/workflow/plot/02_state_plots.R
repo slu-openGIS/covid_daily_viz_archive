@@ -1,82 +1,93 @@
 # plot summary data
 
-# final data cleaning
+# define first date for plotting
 plot_date <- "2020-03-10"
+date_breaks <- "5 days"
+
+# prep state data
 state_data <- filter(state_data, report_date >= plot_date)
 
-# remove IL
-if (date == "2020-04-10"){
-  state_data <- mutate(state_data, 
-                       confirmed_rate = ifelse(state == "Kansas" & report_date == "2020-04-10", NA, confirmed_rate),
-                       mortality_rate = ifelse(state == "Kansas" & report_date == "2020-04-10", NA, mortality_rate),
-                       case_fatality_rate = ifelse(state == "Kansas" & report_date == "2020-04-10", NA, case_fatality_rate))
-}
-
-# define top_val
-top_val <- round_any(x = max(state_data$confirmed_rate), accuracy = 20, f = ceiling)
+# define colors
+cols <- c("Illinois" = "#1B9E77", "Kansas" = "#D95F02", "Missouri" = "#7570B3", "Oklahoma" = "#E7298A")
 
 # plot confirmed rate
-ggplot(data = state_data, mapping = aes(x = report_date, y = confirmed_rate)) +
-  geom_line(mapping = aes(color = state), size = 2) +
-  scale_color_brewer(palette = "Dark2", name = "State") +
-  scale_x_date(date_breaks = "5 days", date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 20)) + 
-  labs(
-    title = "Confirmed COVID-19 Cases by State",
-    subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
-    x = "Date",
-    y = "Rate of Confirmed Infections per 100,000",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population"
-  ) +
-  sequoia_theme(base_size = 22, background = "white")
+## define top_val
+top_val <- round_any(x = max(state_data$confirmed_rate), accuracy = 20, f = ceiling)
 
+## create plot
+state_data %>%
+  mutate(factor_var = fct_reorder2(state, report_date, confirmed_rate)) %>%
+  ggplot(., mapping = aes(x = report_date, y = confirmed_rate)) +
+    geom_line(mapping = aes(color = factor_var), size = 2) +
+    scale_colour_manual(values = cols, name = "State") +
+    scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
+    scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 20)) + 
+    labs(
+      title = "Confirmed COVID-19 Cases by State",
+      subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
+      x = "Date",
+      y = "Rate of Confirmed Infections per 100,000",
+      caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nConfirmed cases are those with a positive test as a proportion of the total population"
+    ) +
+    sequoia_theme(base_size = 22, background = "white")
+
+## save plot
 save_plots(filename = "results/high_res/state/b_confirmed_rate.png", preset = "lg")
 save_plots(filename = "results/low_res/state/b_confirmed_rate.png", preset = "lg", dpi = 72)
 
 # plot case fatality rate
-ggplot(data = state_data, mapping = aes(x = report_date, y = case_fatality_rate)) +
-  geom_line(mapping = aes(color = state), size = 2) +
-  scale_color_brewer(palette = "Dark2", name = "State") +
-  scale_x_date(date_breaks = "5 days", date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,10), breaks = seq(0, 10, by = 1)) +
-  labs(
-    title = "COVID-19 Case Fatality by State",
-    subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
-    x = "Date",
-    y = "Case Fatality (%)",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nCase fatality is the percent of confirmed cases that result in death"
-  ) +
-  sequoia_theme(base_size = 22, background = "white")
+## create plot
+state_data %>%
+  mutate(factor_var = fct_reorder2(state, report_date, case_fatality_rate)) %>%
+  ggplot(data = ., mapping = aes(x = report_date, y = case_fatality_rate)) +
+    geom_line(mapping = aes(color = factor_var), size = 2) +
+    scale_colour_manual(values = cols, name = "State") +
+    scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
+    scale_y_continuous(limits = c(0,10), breaks = seq(0, 10, by = 1)) +
+    labs(
+      title = "COVID-19 Case Fatality by State",
+      subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
+      x = "Date",
+      y = "Case Fatality (%)",
+      caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nCase fatality is the percent of confirmed cases that result in death"
+    ) +
+    sequoia_theme(base_size = 22, background = "white")
 
+## save plot
 save_plots(filename = "results/high_res/state/c_case_fatality_rate.png", preset = "lg")
 save_plots(filename = "results/low_res/state/c_case_fatality_rate.png", preset = "lg", dpi = 72)
 
-# define top_val
+# plot mortality rate
+## define top_val
 top_val <- round_any(x = max(state_data$mortality_rate), accuracy = .5, f = ceiling)
 
-# plot mortality rate
-ggplot(data = state_data, mapping = aes(x = report_date, y = mortality_rate)) +
-  geom_line(mapping = aes(color = state), size = 2) +
-  scale_color_brewer(palette = "Dark2", name = "State") +
-  scale_x_date(date_breaks = "5 days", date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .5)) +
-  labs(
-    title = "Confirmed COVID-19 Mortality by State",
-    subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
-    x = "Date",
-    y = "Mortality Rate per 100,000",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nMortality rate is the number of deaths as a proportion of the total population"
-  ) +
-  sequoia_theme(base_size = 22, background = "white")
+## create plot
+state_data %>%
+  mutate(factor_var = fct_reorder2(state, report_date, mortality_rate)) %>%
+  ggplot(data = ., mapping = aes(x = report_date, y = mortality_rate)) +
+    geom_line(mapping = aes(color = factor_var), size = 2) +
+    scale_colour_manual(values = cols, name = "State") +
+    scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
+    scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .5)) +
+    labs(
+      title = "Confirmed COVID-19 Mortality by State",
+      subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
+      x = "Date",
+      y = "Mortality Rate per 100,000",
+      caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nMortality rate is the number of deaths as a proportion of the total population"
+    ) +
+    sequoia_theme(base_size = 22, background = "white")
 
+## save plot
 save_plots(filename = "results/high_res/state/d_mortality_rate.png", preset = "lg")
 save_plots(filename = "results/low_res/state/d_mortality_rate.png", preset = "lg", dpi = 72)
 
-# create breaks
+# map missouri rates
+## create breaks
 mo_sf <- map_breaks(mo_sf, var = "confirmed_rate", newvar = "confirmed_breaks",
                    style = "fisher", classes = 5, dig_lab = 2)
 
-# map missouri rates
+## create map
 ggplot(data = mo_sf, mapping = aes(fill = confirmed_breaks)) +
   geom_sf() +
   scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
@@ -87,8 +98,9 @@ ggplot(data = mo_sf, mapping = aes(fill = confirmed_breaks)) +
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
+## save map
 save_plots(filename = "results/high_res/state/a_mo_map.png", preset = "lg")
 save_plots(filename = "results/low_res/state/a_mo_map.png", preset = "lg", dpi = 72)
 
 # clean-up
-rm(mo_sf, plot_date, top_val)
+rm(mo_sf, plot_date, top_val, date_breaks)
