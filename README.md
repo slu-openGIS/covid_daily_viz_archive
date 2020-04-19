@@ -20,10 +20,12 @@ County.
 
 From these raw data, the following core data sets are being generated:
 
-  - `state_full.csv` - State-level data for MO, IL, and KS beginning
+  - `state_full.csv` - State-level data for MO, IL, KS, and OK beginning
     2020-01-24
-  - `county_full.csv` - County-level data for MO, IL, and KS beginning
-    2020-01-24
+  - `metro_full.csv` - Metro-level data for MO (including portions of
+    metros in IL, KS, and OK) beginning 2020-01-24
+  - `county_full.csv` - County-level data for MO, IL, KS, and OK
+    beginning 2020-01-24
   - `zip_stl_city.csv` - St. Louis City ZACTA (zip code) level data
     beginning 2020-04-01
   - `zip_stl_county.csv` - St. Louis County ZACTA (zip code) leve data
@@ -34,8 +36,8 @@ data. They are used to generate daily snapshots for mapping:
 
   - `daily_snapshot_mo.geojson` - County-level data for MO
   - `daily_snapshot_mo_xl.geojson` - County-level data for MO along with
-    IL and KS counties in the St. Louis and Kansas City Metropolitain
-    Statistical Areas (MSA)
+    IL, OK, and KS counties in Missouri’s Metropolitain Statistical
+    Areas (MSAs)
   - `daily_snapshot_kc.geojson` - County-level data for MO and KS
     counties in the Kansas City MSA
   - `daily_snapshot_stl.geojson` - County-level data for MO and IL
@@ -43,7 +45,7 @@ data. They are used to generate daily snapshots for mapping:
   - `daily_snapshot_city_county.geojson` - ZACTA (zip code) data for the
     City of St. Louis and St. Louis County
 
-All of the daily snapshot data were last updated on 2020-04-17.
+All of the daily snapshot data were last updated on 2020-04-18.
 
 There are several additional data sets, including convenience summaries
 of county-level data for the St. Louis and Kansas City MSAs and separate
