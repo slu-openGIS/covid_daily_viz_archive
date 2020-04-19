@@ -105,37 +105,5 @@ ggplot(data = county_subset, mapping = aes(day, confirmed_avg)) +
 save_plots(filename = "results/high_res/log_confirmed_avg/d_missouri.png", preset = "lg")
 save_plots(filename = "results/low_res/log_confirmed_avg/d_missouri.png", preset = "lg", dpi = 72)
 
-# create days from first day where average confirmed infections were at least 10, state-level data
-state_data %>%
-  filter(confirmed_avg >= 10) %>%
-  arrange(report_date) %>%
-  group_by(state) %>%
-  mutate(first_date = first(report_date)) %>%
-  ungroup() %>%
-  mutate(day = as.numeric(report_date-first_date)) %>%
-  select(day, report_date, state, confirmed_avg) %>%
-  arrange(state, day) -> state_avg_confirmed_days
-
-# define top_val
-top_val <- round_any(x = max(state_avg_confirmed_days$day), accuracy = 10, f = ceiling)
-
-# state days
-ggplot(data = state_avg_confirmed_days, mapping = aes(day, confirmed_avg)) +
-  geom_line(mapping = aes(color = state), size = 2) +
-  scale_color_brewer(palette = "Dark2") +
-  scale_y_log10(limits = c(10, 2000), labels = comma) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
-  labs(
-    title = "Pace of New COVID-19 Cases by State",
-    subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
-    x = "Days Since Average of Ten Cases Confirmed",
-    y = "7-day Average of New Cases (Log)"
-  ) +
-  sequoia_theme(base_size = 22, background = "white")
-
-save_plots(filename = "results/high_res/log_confirmed_avg/a_state.png", preset = "lg")
-save_plots(filename = "results/low_res/log_confirmed_avg/a_state.png", preset = "lg", dpi = 72)
-
 # clean-up
-rm(county_subset, county_avg_confirmed_days, state_avg_confirmed_days, top_val)
+rm(county_subset, county_avg_confirmed_days, top_val)
