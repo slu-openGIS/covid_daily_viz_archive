@@ -1,7 +1,6 @@
 # create county master list
 
 library(dplyr)
-library(tigris)
 library(readr)
 library(sf)
 library(tigris)
@@ -60,3 +59,17 @@ county_pop <- get_acs(geography = "county", state = c("Kansas", "Illinois", "Okl
 
 ## write
 write_csv(county_pop, "data/source/county_pop.csv")
+
+# get metro population
+### create vector of MSA GEOIDs
+metros_geoid <- c("16020", "17860", "27620", "27900", "28140", "44180", "41140", "41180")
+
+## state populations
+msa_pop <- get_acs(geography = "metropolitan statistical area/micropolitan statistical area", 
+                     year = 2018, variables = "B01001_001") %>%
+  select(GEOID, NAME, estimate) %>%
+  filter(GEOID %in% metros_geoid) %>%
+  rename(total_pop = estimate) 
+
+## write
+write_csv(msa_pop, "data/source/msa_pop.csv")

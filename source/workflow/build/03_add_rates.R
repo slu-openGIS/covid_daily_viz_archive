@@ -20,10 +20,11 @@ county_pop <- bind_rows(county_pop, mo_county_pop)
 rm(mo_county_pop)
 
 ## MSA populations
-### create vector of MSA GEOIDs
-metros_geoid <- c("16020", "17860", "27620", "27900", "28140", "44180", "41140", "41180")
+msa_pop <- read_csv("data/source/msa_pop.csv") %>%
+  mutate(GEOID = as.character(GEOID)) %>%
+  rename(full_name = NAME)
 
-# join population to counts and calculate rate
+# calculate state rates
 left_join(state_data, state_pop, by = c("state" = "NAME")) %>%
   mutate(
     confirmed_rate = confirmed/total_pop*100000,
@@ -34,7 +35,7 @@ left_join(state_data, state_pop, by = c("state" = "NAME")) %>%
   select(report_date, state, confirmed, confirmed_rate, new_confirmed, confirmed_avg,
          deaths, mortality_rate, new_deaths, deaths_avg, case_fatality_rate) -> state_data
 
-# join population to counts and calculate rate
+# calculate county rates
 left_join(county_data, county_pop, by = c("geoid" = "GEOID")) %>%
   mutate(
     confirmed_rate = confirmed/total_pop*1000,
@@ -45,10 +46,21 @@ left_join(county_data, county_pop, by = c("geoid" = "GEOID")) %>%
   select(report_date, geoid, county, state, confirmed, confirmed_rate, new_confirmed, confirmed_avg,
          deaths, mortality_rate, new_deaths, deaths_avg, case_fatality_rate) -> county_data
 
+# calculate msa rate
+left_join(metro_data, msa_pop, by = c("geoid" = "GEOID")) %>%
+  mutate(
+    confirmed_rate = confirmed/total_pop*1000,
+    mortality_rate = deaths/total_pop*1000,
+    case_fatality_rate = deaths/confirmed*100
+  ) %>% 
+  select(-total_pop) %>%
+  select(report_date, geoid, short_name, full_name, confirmed, confirmed_rate, new_confirmed, confirmed_avg,
+         deaths, mortality_rate, new_deaths, deaths_avg, case_fatality_rate) -> metro_data
+
 # export
 write_csv(state_data, "data/state/state_full.csv")
 write_csv(county_data, "data/county/county_full.csv")
 write_csv(metro_data, "data/metro_all/metro_full.csv")
 
 # clean-up
-rm(state_pop, metros_geoid, metro_data)
+rm(state_pop, metro_data, msa_pop)

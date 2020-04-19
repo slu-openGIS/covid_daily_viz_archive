@@ -8,8 +8,8 @@ city_lt5 <- c("63105", "63117", "63119", "63123", "63125", "63130", "63133", "63
 
 # UPDATE city and county race data
 # white, black, asian, 2+
-county_race_counts <- c(544, 760, 22, 66)
-city_race_counts <- c(164, 502, 17, NA)
+county_race_counts <- c(578, 796, 25, 69)
+city_race_counts <- c(177, 546, 18, NA)
 
 # dependencies
 library(dplyr)

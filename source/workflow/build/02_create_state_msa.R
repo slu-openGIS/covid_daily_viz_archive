@@ -49,18 +49,18 @@ metro_counties <- list(
 
 # create MSA object
 county_data %>%
-  mutate(msa = case_when(
-    geoid %in% metro_counties$jeff_city ~ "Jefferson City",
-    geoid %in% metro_counties$columbia ~ "Columbia",
-    geoid %in% metro_counties$springfield ~ "Springfield",
-    geoid %in% metro_counties$joplin ~ "Joplin",
-    geoid %in% metro_counties$st_joseph ~ "St. Joseph",
+  mutate(short_name = case_when(
     geoid %in% metro_counties$cape_girardeau ~ "Cape Girardeau",
-    geoid %in% metro_counties$st_louis ~ "St. Louis",
-    geoid %in% metro_counties$kansas_city ~ "Kansas City"
+    geoid %in% metro_counties$columbia ~ "Columbia",
+    geoid %in% metro_counties$jeff_city ~ "Jefferson City",
+    geoid %in% metro_counties$joplin ~ "Joplin",
+    geoid %in% metro_counties$kansas_city ~ "Kansas City",
+    geoid %in% metro_counties$springfield ~ "Springfield",
+    geoid %in% metro_counties$st_joseph ~ "St. Joseph",
+    geoid %in% metro_counties$st_louis ~ "St. Louis"
   )) %>%
-  filter(is.na(msa) == FALSE) %>%
-  group_by(msa, report_date) %>%
+  filter(is.na(short_name) == FALSE) %>%
+  group_by(short_name, report_date) %>%
   summarise(
     confirmed = sum(confirmed),
     new_confirmed = sum(new_confirmed),
@@ -71,7 +71,20 @@ county_data %>%
     confirmed_avg = rollmean(new_confirmed, k = 7, align = "right", fill = NA),
     deaths_avg = rollmean(new_deaths, k = 7, align = "right", fill = NA)
   ) %>%
-  filter(report_date >= "2020-01-24") -> metro_data
+  filter(report_date >= "2020-01-24") %>%
+  ungroup() %>%
+  mutate(geoid = case_when(
+    short_name == "Cape Girardeau" ~ "16020",
+    short_name == "Columbia" ~ "17860",
+    short_name == "Jefferson City" ~ "27620",
+    short_name == "Joplin" ~ "27900",
+    short_name == "Kansas City" ~ "28140",
+    short_name == "Springfield" ~ "44180",
+    short_name == "St. Joseph" ~ "41140",
+    short_name == "St. Louis" ~ "41180"
+  )) %>%
+  select(report_date, geoid, short_name, confirmed, new_confirmed,
+         confirmed_avg, deaths, new_deaths, deaths_avg) -> metro_data
 
 # remove early reports from county data
 county_data <- filter(county_data, report_date >= "2020-01-24")
