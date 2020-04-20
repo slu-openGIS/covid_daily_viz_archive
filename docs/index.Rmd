@@ -61,7 +61,7 @@ These maps summarize the latest available COVID-19 outbreak data from Johns Hopk
 For state and county-level data, this site uses the most recent Johns Hopkins University daily release. For all prior days, the New York Times' data are used. The Johns Hopkins data are published on a faster schedule but sometimes are not updated for all states or counties. Conversely, the New York Times' data are published on a slower schedule but have more consistent updates across states and counties. Using the latest Johns Hopkins release allows for faster updates, while using the New York Times' data for all prior days balances our need for recent data with consistency.
 
 ### What Makes These Maps Unique?
-Unlike other interactive maps being used to track the outbreak, the initial three maps include the counties in Illinois and Kansas that are part of the St. Louis and Kansas City metropolitan areas. Kansas City is displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
+Unlike other interactive maps being used to track the outbreak, the initial three maps include the counties in Illinois, Kansas, and Oklahoma that are part of Missouri's metropolitan areas. Kansas City itself is also displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
 
 The final map is also unique - it includes both the City of St. Louis and St. Louis County on one map and with a shared set of legend values, making direct comparisons possible. It shows Zip Code Tabulation Areas (ZCTAs), which are generalized areas that are roughly equivalent to USPS zip-codes. They are not 100% the same, however, and some homes with a given zip code may fall outside of ZCTA boundaries.
 
@@ -69,7 +69,11 @@ The final map is also unique - it includes both the City of St. Louis and St. Lo
 These maps are fully interactive. Clicking on a county will reveal some details about that place. You can navigate around them just as you would with Google Maps. You can zoom with your mouse or the `plus` and `minus` buttons in the upper-left corner of each map. You may also move the maps around by clicking with your mouse and dragging.
 
 ### Caveats
-Due to lags in reporting, both at the public health department level and at Johns Hopkins itself, these numbers may lag behind other figures reported in the media. Data are based on confirmed tests and deaths, which are in turn biased by the lack of testing. The extent to which we are increasing testing may also make it seem like there are increases in cases, something known as "surveillance bias." While we are almost certainly seeing spreading infection in Missouri communities, it is important to understand that increased testing is driving some of the observed increases in confirmed cases.
+Due to lags in reporting, both at the public health department level and at Johns Hopkins itself, these numbers may lag behind other figures reported in the media. 
+
+**As of April 14th, the CDC began requesting data on presumed positive cases.** This means that individuals who physicians believe are infected with COVID-19, but who cannot get access to testing, should be reported. Beginning on April 17th, signs in Missouri's data appeared that suggested at least one county, Moniteau, was reporting both confirmed and presumed positives. This change was confirmed on the Moniteau County's Public Department [COVID-19 website](https://moniteaucovid19.com).
+
+This complicates the data picture, since the data for Moniteau County are now not directly comparable to data for any county in Missouri that is still only reporting those cases that have a confirmed positive test result. **In the short term, this change is going to distort all of the county-level maps and plots on this site.** Please keep that in mind. In an ideal world, all counties would have begun reporting probable cases at the same time in Missouri. Hopefully we are able to get a clearer data picture in the coming days as more counties change their reporting processes.
 
 ## Static Maps and Plots {.tabset}
 In addition to the interactive maps below, I regularly update a range of static maps and plots that capture the progression of the COVID-19 outbreak in Missouri, several metro areas, and at the ZCTA (zip code) level in St. Louis City and County. The most recent versions of each plot can be viewed by clicking on the links within the tabs below.
@@ -110,7 +114,7 @@ In addition to the interactive maps below, I regularly update a range of static 
 <br>
 
 ## Daily Data {.tabset}
-While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1), and [Kansas City](https://www.kcmo.gov/city-hall/departments/health/coronavirus-covid-19/covid-19-totals) provide day-by-day tracking of cumulative cases on their respective dashboards, the State of Missouri does not. The following tabs provide daily breakdowns of COVIV data as well as additional statistics not included in the existing dashboards. Please note that the two average columns for confirmed cases and deaths are both seven-day rolling averages.
+While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1), and [Kansas City](https://www.kcmo.gov/city-hall/departments/health/coronavirus-covid-19/covid-19-totals) provide day-by-day tracking of cumulative cases on their respective dashboards, the State of Missouri does not. The following tabs provide daily breakdowns of COVIV data as well as additional statistics not included in the existing dashboards. Please note that the two average columns for reported cases and deaths are both seven-day rolling averages.
 
 ### Missouri
 
@@ -235,8 +239,8 @@ leaflet() %>%
     addLegend(pal = pal, values = snapshot$icu_rate, opacity = .5, title = "ICU Rate")
 ```
 
-## Confirmed Infection Rates by County {.tabset}
-This map shows confirmed infections as a rate per 1,000 residents. It is important not to map the raw counts themselves, but if you want to see those data, click on a county. You can also view the hospital infrastructure details from the first map for each county by clicking on them or by viewing the data table.
+## Infection Rates by County {.tabset}
+This map shows infections as a rate per 1,000 residents. It is important not to map the raw counts themselves, but if you want to see those data, click on a county. You can also view the hospital infrastructure details from the first map for each county by clicking on them or by viewing the data table.
 
 ### Map
 
@@ -262,8 +266,8 @@ leaflet() %>%
     fillColor = ~pal(confirmed_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste("<b>County:</b> ", snapshot$county, "<br>",
-                           "<b>Current Confirmed Count:</b> ", snapshot$confirmed, "<br>",
-                           "<b>Current Confirmed Rate per 1,000:</b> ", round(snapshot$confirmed_rate, digits = 2), "<br>",
+                           "<b>Current Cumulative Count:</b> ", snapshot$confirmed, "<br>",
+                           "<b>Current Cumulative Rate per 1,000:</b> ", round(snapshot$confirmed_rate, digits = 2), "<br>",
                            "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
                            "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds)
     )  %>%
@@ -291,8 +295,8 @@ st_geometry(data_table) <- NULL
 data_table
 ```
 
-## Average New Confirmed Cases by County {.tabset}
-This map shows a seven-day rolling average of new confirmed cases. For this map, this covers `r params$date_val` back through `r params$prior_date_val`. There is not a threshold for what constitutes a high or low average, but the higher the average number of new cases, the more new spread we can infer. For mapping purposes, these are displayed as a rate per 1,000 residents. As with the prior maps, additional details are available by clicking on each county or on the data table.
+## Average New Cases by County {.tabset}
+This map shows a seven-day rolling average of new cases. For this map, this covers `r params$date_val` back through `r params$prior_date_val`. There is not a threshold for what constitutes a high or low average, but the higher the average number of new cases, the more new spread we can infer. For mapping purposes, these are displayed as a rate per 1,000 residents. As with the prior maps, additional details are available by clicking on each county or on the data table.
 
 ### Map
 
@@ -318,7 +322,7 @@ leaflet() %>%
     fillColor = ~pal(avg_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste("<b>County:</b> ", snapshot$county, "<br>",
-                           "<b>Current Confirmed Count:</b> ", snapshot$confirmed, "<br>",
+                           "<b>Current Cumulative Count:</b> ", snapshot$confirmed, "<br>",
                            "<b>7-day Average of New Cases:</b> ", round(snapshot$confirmed_avg, digits = 2), "<br>",
                            "<b>Average New Cases per 1,000 Residents:</b> ", round(snapshot$avg_rate, digits = 2), "<br>",
                            "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
@@ -351,7 +355,7 @@ data_table
 ```
 
 ## Mortality Rates by County {.tabset}
-This map shows confirmed mortality as a rate per 1,000 residents. As with the prior maps, raw counts of deaths and hospital infrastructure details are available by clicking on individual counties or on the data table.
+This map shows mortality as a rate per 1,000 residents. As with the prior maps, raw counts of deaths and hospital infrastructure details are available by clicking on individual counties or on the data table.
 
 ### Map
 
@@ -408,8 +412,8 @@ st_geometry(data_table) <- NULL
 data_table
 ```
 
-## Confirmed Infection Rates by St. Louis ZCTA (Zip Code) {.tabset}
-This map shows confirmed infections as a rate per 1,000 residents for all ZCTAs with five or more patients. It is important not to map the raw counts themselves, but if you want to see those data, click on a ZCTA or the data table. If a ZCTA straddles the city and the county, and only has confirmed infection numbers in one entity, its estimated partial population will be displayed. Similarly, estimated partial populations for zip codes that straddle outlying counties are used.
+## Infection Rates by St. Louis ZCTA (Zip Code) {.tabset}
+This map shows infections as a rate per 1,000 residents for all ZCTAs with five or more patients. It is important not to map the raw counts themselves, but if you want to see those data, click on a ZCTA or the data table. If a ZCTA straddles the city and the county, and only has reported infection numbers in one entity, its estimated partial population will be displayed. Similarly, estimated partial populations for zip codes that straddle outlying counties are used.
 
 ### Map
 
@@ -436,8 +440,8 @@ leaflet() %>%
     fillColor = ~pal(confirmed_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste0("<b>Zip:</b> ", zip_snapshot$zip, " <br> ",
-                 "<b>Current Confirmed Count:</b> ", zip_snapshot$confirmed, "<br>",
-                 "<b>Current Confirmed Rate per 1,000:</b> ", round(zip_snapshot$confirmed_rate, digits = 2), " <br> ",
+                 "<b>Current Cumulative Count:</b> ", zip_snapshot$confirmed, "<br>",
+                 "<b>Current Cumulative Rate per 1,000:</b> ", round(zip_snapshot$confirmed_rate, digits = 2), " <br> ",
                  "<b>Population Below Poverty Line:</b> ", round(zip_snapshot$pvty_pct, digits = 2), "% <br> ",
                  "<b>African American Population:</b> ", round(zip_snapshot$blk_pct, digits = 2), "% ")
     )  %>%
