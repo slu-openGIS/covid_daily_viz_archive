@@ -71,7 +71,7 @@ state_data %>%
   arrange(state, day) -> state_subset
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$day), accuracy = 10, f = ceiling)
+top_val <- round_any(x = max(state_subset$day), accuracy = 5, f = ceiling)
 
 ## identify max day
 state_subset %>%
@@ -122,7 +122,7 @@ state_data %>%
   arrange(state, day) -> state_subset
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$day), accuracy = 10, f = ceiling)
+top_val <- round_any(x = max(state_subset$day), accuracy = 5, f = ceiling)
 
 ## identify max day
 state_subset %>%
@@ -207,7 +207,7 @@ state_data %>%
   arrange(state, day) -> state_subset
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$day), accuracy = 10, f = ceiling)
+top_val <- round_any(x = max(state_subset$day), accuracy = 5, f = ceiling)
 
 ## identify max day
 state_subset %>%
@@ -258,7 +258,7 @@ state_data %>%
   arrange(state, day) -> state_subset
 
 # define top_val
-top_val <- round_any(x = max(state_subset$day), accuracy = 10, f = ceiling)
+top_val <- round_any(x = max(state_subset$day), accuracy = 5, f = ceiling)
 
 ## identify max day
 state_subset %>%
