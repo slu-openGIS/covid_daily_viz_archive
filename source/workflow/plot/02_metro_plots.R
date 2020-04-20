@@ -1,3 +1,27 @@
+# plot metro level data
+
+# =============================================================================
+
+# load data
+metro_data <- read_csv("data/metro_all/metro_full.csv")
+
+# =============================================================================
+
+# define colors
+# pal <- brewer.pal(n = 4, name = "Set1")
+# cols <- c("Illinois" = pal[1], "Kansas" = pal[2], "Missouri" = pal[3], "Oklahoma" = pal[4])
+
+# subset data
+## limit dates included
+metro_subset <- filter(metro_data, report_date >= plot_date)
+
+## create end points
+metro_points <- filter(metro_data, report_date == date)
+
+# =============================================================================
+
+
+# =============================================================================
 
 metro_data %>%
   filter(confirmed >= 10) %>%
@@ -117,5 +141,5 @@ ggplot(data = metro_avg_death_days, mapping = aes(day, deaths_avg)) +
 save_plots(filename = "results/high_res/metro/d_avg_mortality_log.png", preset = "lg")
 save_plots(filename = "results/low_res/metro/d_avg_mortality_log.png", preset = "lg", dpi = 72)
 
-rm(metro_data, msa_avg_confirmed_days, msa_confirmed_days, metro_avg_death_days, metro_death_days,
-   top_val)
+rm(metro_data, metro_subset, metro_points, msa_avg_confirmed_days, msa_confirmed_days, 
+   metro_avg_death_days, metro_death_days, top_val)
