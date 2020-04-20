@@ -87,5 +87,5 @@ save_plots(filename = "results/high_res/kc_metro/d_case_fatality_plot.png", pres
 save_plots(filename = "results/low_res/kc_metro/d_case_fatality_plot.png", preset = "lg", dpi = 72)
 
 # clean-up
-rm(kc_sf, kc_detail, plot_date, top_val)
+rm(kc_sf, kc_detail, top_val)
 

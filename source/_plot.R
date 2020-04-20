@@ -3,7 +3,7 @@
 # =============================================================================
 
 # UPDATE date value
-date <- lubridate::mdy("04-18-2020")
+date <- lubridate::mdy("04-19-2020")
 
 # define first date for plotting
 plot_date <- "2020-03-10"
@@ -14,8 +14,8 @@ date_breaks <- "5 days"
 # dependencies
 library(dplyr)
 library(forcats)
-library(gghighlight)
 library(ggplot2)
+library(gghighlight)
 library(ggrepel)
 library(RColorBrewer)
 library(readr)
@@ -38,7 +38,7 @@ source("source/workflow/plot/01_load_data.R")
 # update plots
 source("source/workflow/plot/01_state_plots.R")
 source("source/workflow/plot/02_metro_plots.R")
-source("source/workflow/plot/03_metro_plots.R")
+source("source/workflow/plot/03_county_plots.R")
 
 source("source/workflow/plot/07_stl_plots.R")
 source("source/workflow/plot/08_kc_plots.R")

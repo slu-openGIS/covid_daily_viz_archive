@@ -116,19 +116,19 @@ metro_points <- select(metro_points, -day)
 # =============================================================================
 
 metro_data %>%
-  filter(confirmed >= 10) %>%
+  filter(cases >= 10) %>%
   arrange(report_date) %>%
   group_by(short_name) %>%
   mutate(first_date = first(report_date)) %>%
   ungroup() %>%
   mutate(day = as.numeric(report_date-first_date)) %>%
-  select(day, report_date, short_name, confirmed) %>%
+  select(day, report_date, short_name, cases) %>%
   arrange(short_name, day) -> msa_confirmed_days
 
 # define top_val
 top_val <- round_any(x = max(msa_confirmed_days$day), accuracy = 10, f = ceiling)
 
-ggplot(data = msa_confirmed_days, mapping = aes(day, confirmed)) +
+ggplot(data = msa_confirmed_days, mapping = aes(day, cases)) +
   geom_line(mapping = aes(color = short_name), size = 2) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(10, 10000)) +
@@ -146,19 +146,19 @@ save_plots(filename = "results/high_res/metro/a_log_confirmed.png", preset = "lg
 save_plots(filename = "results/low_res/metro/a_log_confirmed.png", preset = "lg", dpi = 72)
 
 metro_data %>%
-  filter(confirmed_avg >= 10) %>%
+  filter(case_avg >= 10) %>%
   arrange(report_date) %>%
   group_by(short_name) %>%
   mutate(first_date = first(report_date)) %>%
   ungroup() %>%
   mutate(day = as.numeric(report_date-first_date)) %>%
-  select(day, report_date, short_name, confirmed_avg) %>%
+  select(day, report_date, short_name, case_avg) %>%
   arrange(short_name, day) -> msa_avg_confirmed_days
 
 # define top_val
 top_val <- round_any(x = max(msa_avg_confirmed_days$day), accuracy = 10, f = ceiling)
 
-ggplot(data = msa_avg_confirmed_days, mapping = aes(day, confirmed_avg)) +
+ggplot(data = msa_avg_confirmed_days, mapping = aes(day, case_avg)) +
   geom_line(mapping = aes(color = short_name), size = 2) +
   scale_color_brewer(palette = "Dark2") +
   scale_y_log10(limits = c(10, 1000), labels = comma) +

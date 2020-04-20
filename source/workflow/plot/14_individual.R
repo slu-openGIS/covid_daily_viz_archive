@@ -13,7 +13,7 @@ ggplot(data = covid_race, mapping = aes(x = value, y = rate, fill = county)) +
     subtitle = paste0("Current as of ", as.character(date)),
     x = "Race",
     y = "Rate per 1,000 Individuals",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis and St. Louis County\nConfirmed cases are those with a positive test as a proportion of each group's population\nSt. Louis County's data are missing race for ~40% of cases\nSt. Louis City's data are missing race for 6% of cases"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis and St. Louis County\nConfirmed cases are those with a positive test as a proportion of each group's population\nSt. Louis County's data are missing race for ~40% of cases\nSt. Louis City's data are missing race for ~6% of cases"
   ) +
   sequoia_theme(base_size = 22, background = "white", map = FALSE)
 

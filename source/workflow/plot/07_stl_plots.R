@@ -87,4 +87,4 @@ save_plots(filename = "results/high_res/stl_metro/d_case_fatality_plot.png", pre
 save_plots(filename = "results/low_res/stl_metro/d_case_fatality_plot.png", preset = "lg", dpi = 72)
 
 # clean-up
-rm(stl_detail, stl_sf, plot_date, top_val)
+rm(stl_detail, stl_sf, top_val)

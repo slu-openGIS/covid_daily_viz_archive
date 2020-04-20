@@ -75,44 +75,6 @@ Due to lags in reporting, both at the public health department level and at John
 
 This complicates the data picture, since the data for Moniteau County are now not directly comparable to data for any county in Missouri that is still only reporting those cases that have a confirmed positive test result. **In the short term, this change is going to distort all of the county-level maps and plots on this site.** Please keep that in mind. In an ideal world, all counties would have begun reporting probable cases at the same time in Missouri. Hopefully we are able to get a clearer data picture in the coming days as more counties change their reporting processes.
 
-## Static Maps and Plots {.tabset}
-In addition to the interactive maps below, I regularly update a range of static maps and plots that capture the progression of the COVID-19 outbreak in Missouri, several metro areas, and at the ZCTA (zip code) level in St. Louis City and County. The most recent versions of each plot can be viewed by clicking on the links within the tabs below.
-
-### State
-
-| Links |  |  |
-|-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/b_confirmed_rate.png" target="_blanl">Confirmed Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/log_confirmed/a_state.png" target="_blanl">Confirmed Cases (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/c_case_fatality_rate.png" target="_blanl">Case Fatality (Rate)</a> |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/d_mortality_rate.png" target="_blanl">Mortality (Rate)</a> |
-
-### County
-
-| Links |  |  |
-|-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/a_mo_map.png" target="_blank">Confirmed Cases Map</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/log_confirmed/d_missouri.png" target="_blank">Confirmed Cases (Log)</a> | |
-
-### St. Louis Metro
-
-| Links |  |  |
-|-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/a_confirmed_map.png" target="_blank">Confirmed Cases Map</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/b_confirmed_plot.png" target="_blank">Confirmed Cases Plot (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/log_confirmed/b_st_louis.png" target="_blank">Confirmed Cases Plot (Log)</a> | 
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/c_case_fatality_rate.png" target="_blank">Case Fatality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/d_case_fatality_plot.png" target="_blank">Mortality (Rate)</a> | |
-
-### Kansas City Metro
-
-| Links |  |  |
-|-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/a_confirmed_map.png" target="_blank">Confirmed Cases Map</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/b_confirmed_plot.png" target="_blank">Confirmed Cases Plot (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/log_confirmed/c_kansas_city.png" target="_blank">Confirmed Cases Plot (Log)</a> | 
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/c_case_fatality_rate.png" target="_blank">Case Fatality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/d_case_fatality_plot.png" target="_blank">Mortality (Rate)</a> | |
-
-### St. Louis ZCTA (Zip Code) 
-
-| Links |  |  |
-|-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/zip/a_confirmed_map.png" target="_blank">Confirmed Cases Map</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/zip/b_poverty_plot.png" target="_blank">% Poverty Plot</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/zip/c_race_plot.png" target="_blank">% African American Plot</a> | 
-
-<br>
-
 ## Daily Data {.tabset}
 While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1), and [Kansas City](https://www.kcmo.gov/city-hall/departments/health/coronavirus-covid-19/covid-19-totals) provide day-by-day tracking of cumulative cases on their respective dashboards, the State of Missouri does not. The following tabs provide daily breakdowns of COVIV data as well as additional statistics not included in the existing dashboards. Please note that the two average columns for reported cases and deaths are both seven-day rolling averages.
 

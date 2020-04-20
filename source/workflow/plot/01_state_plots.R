@@ -25,6 +25,10 @@ state_subset <- filter(state_data, report_date >= plot_date)
 ## create end points
 state_points <- filter(state_data, report_date == date)
 
+## create reporting change points
+report_points <- filter(state_data, report_date == as.Date("2020-04-15")) %>%
+  mutate(text = ifelse(state == "Illinois", "reporting change", NA))
+
 # =============================================================================
 
 # plot confirmed rate
@@ -40,6 +44,9 @@ p <- ggplot() +
   geom_line(state_subset, mapping = aes(x = report_date, y = case_rate, color = factor_var), size = 2) +
   geom_point(state_points, mapping = aes(x = report_date, y = case_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
+  geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
+  geom_text(aes(as.Date("2020-04-15"), y = 225, label = "repoting change"), 
+            angle = 90, vjust = -1) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 25)) + 
@@ -79,6 +86,13 @@ state_subset %>%
   summarise(day = max(day)) %>%
   left_join(state_points, ., by = "state") -> state_points
 
+## add day to report points
+state_subset %>%
+  select(state, report_date, day) %>%
+  left_join(report_points, ., by = c("state", "report_date")) -> report_points
+
+report_label <- filter(report_points, state == "Illinois")
+
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, day, cases))
 state_points <- mutate(state_points, factor_var = fct_reorder2(state, day, cases))
@@ -88,6 +102,9 @@ p <- ggplot() +
   geom_line(state_subset, mapping = aes(x = day, y = cases, color = factor_var), size = 2) +
   geom_point(state_points, mapping = aes(x = day, y = cases, color = factor_var), 
              size = 4, show.legend = FALSE) +
+  geom_point(report_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
+  geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
+                  nudge_y = .3, nudge_x = -1) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(10, 100000), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
@@ -104,8 +121,9 @@ p <- ggplot() +
 save_plots(filename = "results/high_res/state/c_case_log.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/state/c_case_log.png", plot = p, preset = "lg", dpi = 72)
 
-## clean-up state_points
+## clean-up data objects
 state_points <- select(state_points, -day)
+report_points <- select(report_points, -day)
 
 # =============================================================================
 
@@ -130,6 +148,13 @@ state_subset %>%
   summarise(day = max(day)) %>%
   left_join(state_points, ., by = "state") -> state_points
 
+## add day to report points
+state_subset %>%
+  select(state, report_date, day) %>%
+  left_join(report_points, ., by = c("state", "report_date")) -> report_points
+
+report_label <- filter(report_points, state == "Illinois")
+
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, day, case_avg))
 state_points <- mutate(state_points, factor_var = fct_reorder2(state, day, case_avg))
@@ -139,6 +164,9 @@ p <- ggplot() +
   geom_line(state_subset, mapping = aes(x = day, y = case_avg, color = factor_var), size = 2) +
   geom_point(state_points, mapping = aes(x = day, y = case_avg, color = factor_var), 
              size = 4, show.legend = FALSE) +
+  geom_point(report_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
+  geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
+                  nudge_y = .2, nudge_x = -1) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(10, 2000), breaks = c(10, 30, 100, 300, 1000), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
@@ -155,8 +183,9 @@ p <- ggplot() +
 save_plots(filename = "results/high_res/state/d_case_log_avg.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/state/d_case_log_avg.png", plot = p, preset = "lg", dpi = 72)
 
-## clean-up state_points
+## clean-up data objects
 state_points <- select(state_points, -day)
+report_points <- select(report_points, -day)
 
 # =============================================================================
 
@@ -176,6 +205,9 @@ p <- ggplot() +
   geom_line(state_subset, mapping = aes(x = report_date, y = mortality_rate, color = factor_var), size = 2) +
   geom_point(state_points, mapping = aes(x = report_date, y = mortality_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
+  geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
+  geom_text(aes(as.Date("2020-04-15"), y = 9, label = "repoting change"), 
+            angle = 90, vjust = -1) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) +
@@ -215,6 +247,13 @@ state_subset %>%
   summarise(day = max(day)) %>%
   left_join(state_points, ., by = "state") -> state_points
 
+## add day to report points
+state_subset %>%
+  select(state, report_date, day) %>%
+  left_join(report_points, ., by = c("state", "report_date")) -> report_points
+
+report_label <- filter(report_points, state == "Illinois")
+
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, day, deaths))
 state_points <- mutate(state_points, factor_var = fct_reorder2(state, day, deaths))
@@ -224,6 +263,9 @@ p <- ggplot() +
   geom_line(state_subset, mapping = aes(x = day, y = deaths, color = factor_var), size = 2) +
   geom_point(state_points, mapping = aes(x = day, y = deaths, color = factor_var), 
              size = 4, show.legend = FALSE) +
+  geom_point(report_points, mapping = aes(x = day, y = deaths), size = 4, shape = 18) +
+  geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths, label = text),
+                  nudge_y = .2, nudge_x = -1) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(3, 2000), breaks = c(3, 10, 30, 100, 300, 1000), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
@@ -240,8 +282,9 @@ p <- ggplot() +
 save_plots(filename = "results/high_res/state/g_mortality_log.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/state/g_mortality_log.png", plot = p, preset = "lg", dpi = 72)
 
-## clean-up state_points
+## clean-up data objects
 state_points <- select(state_points, -day)
+report_points <- select(report_points, -day)
 
 # =============================================================================
 
@@ -266,6 +309,13 @@ state_subset %>%
   summarise(day = max(day)) %>%
   left_join(state_points, ., by = "state") -> state_points
 
+## add day to report points
+state_subset %>%
+  select(state, report_date, day) %>%
+  left_join(report_points, ., by = c("state", "report_date")) -> report_points
+
+report_label <- filter(report_points, state == "Illinois")
+
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, day, deaths_avg))
 state_points <- mutate(state_points, factor_var = fct_reorder2(state, day, deaths_avg))
@@ -275,6 +325,9 @@ p <- ggplot() +
   geom_line(state_subset, mapping = aes(x = day, y = deaths_avg, color = factor_var), size = 2) +
   geom_point(state_points, mapping = aes(x = day, y = deaths_avg, color = factor_var), 
              size = 4, show.legend = FALSE) +
+  geom_point(report_points, mapping = aes(x = day, y = deaths_avg), size = 4, shape = 18) +
+  geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths_avg, label = text),
+                  nudge_y = .12, nudge_x = -1) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(3, 100), breaks = c(3,10,30,100)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
@@ -290,6 +343,10 @@ p <- ggplot() +
 ## save plots
 save_plots(filename = "results/high_res/state/h_mortality_log_avg.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/state/h_mortality_log_avg.png", plot = p, preset = "lg", dpi = 72)
+
+## clean-up data objects
+state_points <- select(state_points, -day)
+report_points <- select(report_points, -day)
 
 # =============================================================================
 
@@ -307,6 +364,9 @@ p <- ggplot() +
   geom_line(state_subset, mapping = aes(x = report_date, y = case_fatality_rate, color = factor_var), size = 2) +
   geom_point(state_points, mapping = aes(x = report_date, y = case_fatality_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
+  geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
+  geom_text(aes(as.Date("2020-04-15"), y = 9, label = "repoting change"), 
+            angle = 90, vjust = -1) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,10), breaks = seq(0, 10, by = 1)) +
@@ -326,6 +386,6 @@ save_plots(filename = "results/low_res/state/j_case_fatality_rate.png", plot = p
 # =============================================================================
 
 # clean-up
-rm(state_data, state_subset, state_points)
-rm(plot_date, top_val, date_breaks, pal, cols, p)
+rm(state_data, state_subset, state_points, report_points, report_label)
+rm(top_val, pal, cols, p)
 

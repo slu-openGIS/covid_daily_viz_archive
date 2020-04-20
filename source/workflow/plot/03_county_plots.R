@@ -45,7 +45,7 @@ mo_sf <- map_breaks(mo_sf, var = "mortality_rate", newvar = "map_breaks",
 ## create map
 p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   geom_sf() +
-  scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
+  scale_fill_brewer(palette = "YlGn", name = "Rate per 1,000") +
   labs(
     title = "Reported COVID-19 Mortality by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -67,9 +67,9 @@ mo_sf <- map_breaks(mo_sf, var = "case_fatality_rate", newvar = "map_breaks",
 ## create map
 p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   geom_sf() +
-  scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
+  scale_fill_brewer(palette = "BuGn", name = "Rate per 1,000") +
   labs(
-    title = "Reported COVID-19 Mortality by Missouri County",
+    title = "Reported COVID-19 Case Fatality by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
   ) +
@@ -78,6 +78,12 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
 ## save map
 save_plots(filename = "results/high_res/county/i_case_fatality_map.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/county/i_case_fatality_map.png", plot = p, preset = "lg", dpi = 72)
+
+# =============================================================================
+
+# create reference object
+ref_county <- mo_sf
+st_geometry(ref_county) <- NULL
 
 # =============================================================================
 
