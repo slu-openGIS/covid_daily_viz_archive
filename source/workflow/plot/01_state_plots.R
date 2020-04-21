@@ -18,20 +18,22 @@ state_data <- read_csv("data/state/state_full.csv") %>%
 pal <- brewer.pal(n = 4, name = "Set1")
 cols <- c("Illinois" = pal[1], "Kansas" = pal[2], "Missouri" = pal[3], "Oklahoma" = pal[4])
 
-# subset data
-## limit dates included
-state_subset <- filter(state_data, report_date >= plot_date)
+# =============================================================================
 
+# create points
 ## create end points
 state_points <- filter(state_data, report_date == date)
 
 ## create reporting change points
 report_points <- filter(state_data, report_date == as.Date("2020-04-15")) %>%
-  mutate(text = ifelse(state == "Illinois", "reporting change", NA))
+  mutate(text = ifelse(state == "Illinois", "reporting change on 15 Apr", NA))
 
 # =============================================================================
 
 # plot confirmed rate
+## subset data
+state_subset <- filter(state_data, report_date >= plot_date)
+
 ## define top_val
 top_val <- round_any(x = max(state_subset$case_rate), accuracy = 25, f = ceiling)
 
@@ -45,8 +47,8 @@ p <- ggplot() +
   geom_point(state_points, mapping = aes(x = report_date, y = case_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
-  geom_text(aes(as.Date("2020-04-15"), y = 225, label = "repoting change"), 
-            angle = 90, vjust = -1) +
+  geom_text(aes(as.Date("2020-04-15"), y = 225, label = "reporting change on 15 Apr"), 
+            angle = 90, vjust = -1, size = 4.5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 25)) + 
@@ -104,7 +106,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
-                  nudge_y = .3, nudge_x = -1) +
+                  nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(10, 100000), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
@@ -112,8 +114,8 @@ p <- ggplot() +
     title = "Pace of COVID-19 Cases by State",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
-    x = "Days Since Tenth Case Confirmed",
-    y = "Count of Confirmed Cases (Log)"
+    x = "Days Since Tenth Case Reported",
+    y = "Count of Reports Cases (Log)"
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
@@ -166,7 +168,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = .2, nudge_x = -1) +
+                  nudge_y = .2, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(10, 2000), breaks = c(10, 30, 100, 300, 1000), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
@@ -174,7 +176,7 @@ p <- ggplot() +
     title = "Pace of New COVID-19 Cases by State",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
-    x = "Days Since Average of Ten Cases Confirmed",
+    x = "Days Since Average of Ten Cases Reported",
     y = "7-day Average of New Cases (Log)"
   ) +
   sequoia_theme(base_size = 22, background = "white")
@@ -190,7 +192,7 @@ report_points <- select(report_points, -day)
 # =============================================================================
 
 # plot mortality rate
-## re-subset data
+## subset data
 state_subset <- filter(state_data, report_date >= plot_date)
 
 ## define top_val
@@ -206,8 +208,8 @@ p <- ggplot() +
   geom_point(state_points, mapping = aes(x = report_date, y = mortality_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
-  geom_text(aes(as.Date("2020-04-15"), y = 9, label = "repoting change"), 
-            angle = 90, vjust = -1) +
+  geom_text(aes(as.Date("2020-04-15"), y = 9.25, label = "reporting change on 15 Apr"), 
+            angle = 90, vjust = -1, size = 4.5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) +
@@ -265,7 +267,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_points, mapping = aes(x = day, y = deaths), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths, label = text),
-                  nudge_y = .2, nudge_x = -1) +
+                  nudge_y = .2, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(3, 2000), breaks = c(3, 10, 30, 100, 300, 1000), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
@@ -273,8 +275,8 @@ p <- ggplot() +
     title = "Pace of COVID-19 Deaths by State",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
-    x = "Days Since Third Death Confirmed",
-    y = "Count of Confirmed Deaths (Log)"
+    x = "Days Since Third Death Reports",
+    y = "Count of Reported Deaths (Log)"
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
@@ -327,7 +329,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_points, mapping = aes(x = day, y = deaths_avg), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths_avg, label = text),
-                  nudge_y = .12, nudge_x = -1) +
+                  nudge_y = .12, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(3, 100), breaks = c(3,10,30,100)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
@@ -335,8 +337,8 @@ p <- ggplot() +
     title = "Pace of New COVID-19 Deaths by State",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
-    x = "Days Since Average of Three Deaths Confirmed",
-    y = "7-day Average of New Cases (Log)"
+    x = "Days Since Average of Three Deaths Reported",
+    y = "7-day Average of New Deaths (Log)"
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
@@ -365,8 +367,8 @@ p <- ggplot() +
   geom_point(state_points, mapping = aes(x = report_date, y = case_fatality_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
-  geom_text(aes(as.Date("2020-04-15"), y = 9, label = "repoting change"), 
-            angle = 90, vjust = -1) +
+  geom_text(aes(as.Date("2020-04-15"), y = 9, label = "reporting change on 15 Apr"), 
+            angle = 90, vjust = -1, size = 4.5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,10), breaks = seq(0, 10, by = 1)) +
