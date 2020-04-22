@@ -1,5 +1,7 @@
 # log plots
 
+county_data <- read_csv("data/county/county_full.csv")
+
 # create days from 10th confirmed infection data, county-level data
 county_data %>%
   filter(confirmed >= 10) %>%

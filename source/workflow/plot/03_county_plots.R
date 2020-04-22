@@ -13,6 +13,25 @@ mo_sf <- st_read("data/county/daily_snapshot_mo.geojson", crs = 4326,
     case_avg = confirmed_avg
   )
 
+county_data <- read_csv("data/county/county_full.csv") %>%
+  rename(
+    cases = confirmed,
+    case_rate = confirmed_rate,
+    new_cases = new_confirmed,
+    case_avg = confirmed_avg
+  ) %>%
+  mutate(geoid = as.character(geoid))
+
+# =============================================================================
+
+# define colors
+pal <- brewer.pal(n = 8, name = "Set1")
+cols <- c("29201" = pal[6], "29157" = pal[3], "29195" = pal[4],
+          "29189" = pal[2], "29135" = pal[5], "29510" = pal[1])
+
+# define focal metros
+county_focal <- c("29510", "29189", "29157", "29195", "29135", "29201")
+
 # =============================================================================
 
 # map missouri rates
@@ -88,4 +107,5 @@ st_geometry(ref_county) <- NULL
 # =============================================================================
 
 # clean-up
-rm(mo_sf, p)
+rm(county_data, mo_sf, county_focal)
+rm(top_val, pal, cols, p)

@@ -1,5 +1,7 @@
 # log plots
 
+county_data <- read_csv("data/county/county_full.csv")
+
 # create days from first day where average confirmed infections were at least 10, county-level data
 county_data %>%
   filter(confirmed_avg >= 10) %>%

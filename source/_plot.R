@@ -3,11 +3,22 @@
 # =============================================================================
 
 # UPDATE date value
-date <- lubridate::mdy("04-20-2020")
+date <- lubridate::mdy("04-21-2020")
 
 # define first date for plotting
 plot_date <- "2020-03-10"
 date_breaks <- "5 days"
+
+# =============================================================================
+
+# label positions on rate plots
+state_case_rate_y <- 245
+state_mortality_rate_y <- 10
+state_case_fatality_rate_y <- 9
+
+metro_case_rate_y <- 1.75
+metro_mortality_rate_y <- .065
+metro_case_fatality_rate_y <- 10.75
 
 # =============================================================================
 

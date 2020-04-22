@@ -54,13 +54,13 @@ p <- ggplot(metro_subset) +
              size = 4, show.legend = FALSE) +
   gghighlight(short_name %in% metro_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
-  geom_text(aes(as.Date("2020-04-15"), y = 1.75, label = "reporting change on 15 Apr"), 
+  geom_text(aes(as.Date("2020-04-15"), y = metro_case_rate_y, label = "reporting change on 15 Apr"), 
             angle = 90, vjust = -1, size = 4.5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .25)) + 
   labs(
-    title = "Reported COVID-19 Cases by State",
+    title = "Reported COVID-19 Cases by Metro Area",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
     x = "Date",
     y = "Rate per 1,000",
@@ -185,7 +185,7 @@ p <- ggplot(data = metro_subset) +
   scale_y_log10(limits = c(10, 1000), breaks = c(10, 30, 100, 300, 1000), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
-    title = "Pace of New COVID-19 Cases by Missouri Metro",
+    title = "Pace of New COVID-19 Cases by Metro Area",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since Average of Ten Cases Reached",
@@ -203,68 +203,160 @@ report_points <- select(report_points, -day)
 
 # =============================================================================
 
+# plot mortality rate
+## subset data
+metro_subset <- filter(metro_data, report_date >= plot_date)
+
+## define top_val
+top_val <- round_any(x = max(metro_subset$mortality_rate), accuracy = .02, f = ceiling)
+
+## create factors
+metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, mortality_rate))
+
 metro_data %>%
-  filter(deaths >= 5) %>%
+  filter(report_date == date) %>%
+  filter(short_name %in% metro_focal) %>%
+  mutate(factor_var = fct_reorder2(short_name, report_date, mortality_rate)) -> metro_points
+
+## create plot
+p <- ggplot() +
+  geom_line(metro_subset, mapping = aes(x = report_date, y = mortality_rate, color = factor_var), size = 2) +
+  geom_point(metro_points, mapping = aes(x = report_date, y = mortality_rate, color = factor_var), 
+             size = 4, show.legend = FALSE) +
+  gghighlight(short_name %in% metro_focal, use_direct_label = FALSE, use_group_by = FALSE) +
+  geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
+  geom_text(aes(as.Date("2020-04-15"), y = metro_mortality_rate_y, label = "reporting change on 15 Apr"), 
+            angle = 90, vjust = -1, size = 4.5) +
+  scale_colour_manual(values = cols, name = "Metro Area") +
+  scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .02)) +
+  labs(
+    title = "Reported COVID-19 Mortality by Metro Area",
+    subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
+    x = "Date",
+    y = "Mortality Rate per 1,000",
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
+  ) +
+  sequoia_theme(base_size = 22, background = "white")
+
+## save plot
+save_plots(filename = "results/high_res/metro/f_mortality_rate.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/metro/f_mortality_rate.png", plot = p, preset = "lg", dpi = 72)
+
+# =============================================================================
+
+# plot days from 3rd confirmed death data
+
+## subset data
+metro_data %>%
+  filter(deaths >= 3) %>%
   arrange(report_date) %>%
   group_by(short_name) %>%
   mutate(first_date = first(report_date)) %>%
   ungroup() %>%
   mutate(day = as.numeric(report_date-first_date)) %>%
   select(day, report_date, short_name, deaths) %>%
-  arrange(short_name, day) -> metro_death_days
+  arrange(short_name, day) -> metro_subset
 
-top_val <- round_any(x = max(metro_death_days$day), accuracy = 10, f = ceiling)
+## define top_val
+top_val <- round_any(x = max(metro_subset$day), accuracy = 10, f = ceiling)
 
-ggplot(data = metro_death_days, mapping = aes(day, deaths)) +
-  geom_line(mapping = aes(color = short_name), size = 2) +
-  scale_color_brewer(palette = "Dark2") +
-  scale_y_log10(limits = c(5, 1000), breaks = c(5, 10, 100, 1000), labels = comma) +
+## identify max day
+metro_subset %>%
+  group_by(short_name) %>%
+  summarise(day = max(day)) %>%
+  left_join(metro_points, ., by = "short_name") %>%
+  filter(short_name %in% unique(metro_subset$short_name)) -> metro_points
+
+## re-create reporting change points
+report_points <- filter(metro_data, report_date == as.Date("2020-04-15")) %>%
+  filter(short_name %in% metro_focal) %>%
+  mutate(text = ifelse(short_name == "St. Louis", "reporting change on 15 Apr", NA))
+
+## add day to report points
+metro_subset %>%
+  select(short_name, report_date, day) %>%
+  left_join(report_points, ., by = c("short_name", "report_date")) %>%
+  filter(short_name %in% unique(metro_subset$short_name)) -> report_points
+
+report_label <- filter(report_points, short_name == "St. Louis")
+
+## create factors
+metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, day, deaths))
+metro_points <- mutate(metro_points, factor_var = fct_reorder2(short_name, day, deaths))
+
+## create plot
+ggplot(data = metro_subset) +
+  geom_line(mapping = aes(x = day, y = deaths, color = factor_var), size = 2) +
+  geom_point(metro_points, mapping = aes(x = day, y = deaths, color = factor_var), 
+             size = 4, show.legend = FALSE) +
+  gghighlight(short_name %in% metro_focal, use_direct_label = FALSE, use_group_by = FALSE) +
+  geom_point(report_points, mapping = aes(x = day, y = deaths), size = 4, shape = 18) +
+  geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths, label = text),
+                  nudge_y = .3, nudge_x = -1, size = 5) +
+  scale_colour_manual(values = cols, name = "Metro Area") +
+  scale_y_log10(limits = c(3, 1000), breaks = c(3, 10, 30, 100, 300, 1000), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
-    title = "Pace of COVID-19 Deaths by Missouri Metro",
+    title = "Pace of COVID-19 Deaths by Metro Area",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
-    x = "Days Since Fifth Death Reported",
+    x = "Days Since Third Death Reported",
     y = "Count of Reported Deaths (Log)"
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
-save_plots(filename = "results/high_res/metro/c_mortality_log.png", preset = "lg")
-save_plots(filename = "results/low_res/metro/c_mortality_log.png", preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/metro/g_mortality_log.png", preset = "lg")
+save_plots(filename = "results/low_res/metro/g_mortality_log.png", preset = "lg", dpi = 72)
+
+## clean-up data objects
+metro_points <- select(metro_points, -day)
+report_points <- select(report_points, -day)
 
 # =============================================================================
 
-metro_data %>%
-  filter(deaths_avg >= 5) %>%
-  arrange(report_date) %>%
-  group_by(short_name) %>%
-  mutate(first_date = first(report_date)) %>%
-  ungroup() %>%
-  mutate(day = as.numeric(report_date-first_date)) %>%
-  select(day, report_date, short_name, deaths_avg) %>%
-  arrange(short_name, day) -> metro_avg_death_days
+# plot case fatality rate
 
-top_val <- round_any(x = max(metro_avg_death_days$day), accuracy = 10, f = ceiling)
+## re-subset data
+metro_subset <- filter(metro_data, report_date >= plot_date)
 
-ggplot(data = metro_avg_death_days, mapping = aes(day, deaths_avg)) +
-  geom_line(mapping = aes(color = short_name), size = 2) +
-  scale_color_brewer(palette = "Dark2") +
-  scale_y_log10(limits = c(5, 100), breaks = c(5, 10, 100), labels = comma) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
+## re-create metro points
+metro_points <- filter(metro_data, report_date == date) %>%
+  filter(short_name %in% metro_focal)
+
+## create factors
+metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, case_fatality_rate))
+metro_points <- mutate(metro_points, factor_var = fct_reorder2(short_name, report_date, case_fatality_rate))
+
+## create plot
+p <- ggplot() +
+  geom_line(metro_subset, mapping = aes(x = report_date, y = case_fatality_rate, color = factor_var), size = 2) +
+  geom_point(metro_points, mapping = aes(x = report_date, y = case_fatality_rate, color = factor_var), 
+             size = 4, show.legend = FALSE) +
+  gghighlight(short_name %in% metro_focal, use_direct_label = FALSE, use_group_by = FALSE) +
+  geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
+  geom_text(aes(as.Date("2020-04-15"), y = metro_case_fatality_rate_y, label = "reporting change on 15 Apr"), 
+            angle = 90, vjust = -1, size = 4.5) +
+  scale_colour_manual(values = cols, name = "Metro Area") +
+  scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
+  scale_y_continuous(limits = c(0,12), breaks = seq(0, 12, by = 1)) +
   labs(
-    title = "Pace of New COVID-19 Deaths by Missouri Metro",
-    subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
-    x = "Days Since Average of Five Deaths Reached",
-    y = "7-day Average of Reported Deaths (Log)"
+    title = "COVID-19 Case Fatality by Metro Area",
+    subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
+    x = "Date",
+    y = "Case Fatality (%)",
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
-save_plots(filename = "results/high_res/metro/d_avg_mortality_log.png", preset = "lg")
-save_plots(filename = "results/low_res/metro/d_avg_mortality_log.png", preset = "lg", dpi = 72)
+## save plot
+save_plots(filename = "results/high_res/metro/j_case_fatality_rate.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/metro/j_case_fatality_rate.png", plot = p, preset = "lg", dpi = 72)
 
-rm(metro_avg_death_days, metro_death_days)
+# =============================================================================
 
-rm(metro_data, metro_subset, metro_points, metro_focal, report_points, report_label)
+# clean-up
+rm(metro_data, metro_subset, metro_points, metro_focal, report_points, report_label,
+   metro_case_rate_y, metro_mortality_rate_y, metro_case_fatality_rate_y)
 rm(top_val, pal, cols, p)
 
