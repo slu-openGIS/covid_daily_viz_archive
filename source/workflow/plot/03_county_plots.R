@@ -225,6 +225,6 @@ st_geometry(ref_county) <- NULL
 # =============================================================================
 
 # clean-up
-rm(county_data, mo_sf, county_focal, county_points, report_points, report_label, county_subset,
+rm(mo_sf, county_focal, county_points, report_points, report_label, county_subset,
    county_case_rate_y)
 rm(top_val, pal, cols, p)
