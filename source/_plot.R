@@ -22,6 +22,8 @@ metro_case_fatality_rate_y <- 10.75
 
 county_case_rate_y <- 4.25
 
+stl_case_rate_y <- 3
+
 # =============================================================================
 
 # dependencies

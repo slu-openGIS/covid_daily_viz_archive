@@ -49,9 +49,17 @@ save_plots(filename = "results/low_res/county/a_case_map.png", plot = p, preset 
 
 # define colors
 pal <- brewer.pal(n = 8, name = "Set1")
+pal_a <- pal[c(1:5)]
+pal_c <- pal[c(7:8)]
+pal_b <- brewer.pal(n = 6, name = "Reds")
+pal_b <- pal_b[c(6)]
+pal <- c(pal_a, pal_b, pal_c)
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "St. Charles" = pal[3],
           "Kansas City" = pal[4], "Saline" = pal[5], "Moniteau" = pal[6],
           "Scott" = pal[7], "Perry" = pal[8])
+
+## clean-up
+rm(pal_a, pal_b, pal_c)
 
 # define focal metros
 county_focal <- c("29510", "29189", "29157", "29195", "29135", "29201",
@@ -137,7 +145,7 @@ county_subset %>%
   select(county, report_date, day) %>%
   left_join(report_points, ., by = c("county", "report_date")) -> report_points
 
-report_label <- filter(report_points, county == "Boone")
+report_label <- filter(report_points, county == "St. Louis")
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, day, cases))
@@ -196,6 +204,48 @@ save_plots(filename = "results/low_res/county/e_mortality_map.png", plot = p, pr
 
 # =============================================================================
 
+# plot confirmed rate
+## subset data
+# county_subset <- filter(county_data, report_date >= plot_date)
+
+## define top_val
+# top_val <- round_any(x = max(county_subset$mortality_rate), accuracy = .2, f = ceiling)
+
+## create factors
+# county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, mortality_rate))
+# county_points <- mutate(county_points, factor_var = fct_reorder2(county, report_date, mortality_rate))
+
+## create plot
+# p <- ggplot() +
+#  geom_line(county_subset, mapping = aes(x = report_date, y = mortality_rate, color = factor_var), size = 2) +
+#  geom_point(county_points, mapping = aes(x = report_date, y = mortality_rate, color = factor_var), 
+#             size = 4, show.legend = FALSE) +
+#  gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
+#  geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
+#  geom_text(aes(as.Date("2020-04-15"), y = .15, label = "reporting change on 15 Apr"), 
+#            angle = 90, vjust = -1, size = 4.5) +
+#  scale_colour_manual(values = cols, name = "County") +
+#  scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
+#  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .05)) + 
+#  labs(
+#    title = "COVID-19 Mortality by Missouri County",
+#    subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
+#    x = "Date",
+#    y = "Rate per 1,000",
+#    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
+#  ) +
+#  sequoia_theme(base_size = 22, background = "white")
+
+## save plot
+# save_plots(filename = "results/high_res/county/f_mortality_rate.png", plot = p, preset = "lg")
+# save_plots(filename = "results/low_res/county/f_mortality_rate.png", plot = p, preset = "lg", dpi = 72)
+
+# =============================================================================
+
+
+
+# =============================================================================
+
 # map case fatality rate
 ## create breaks
 mo_sf <- map_breaks(mo_sf, var = "case_fatality_rate", newvar = "map_breaks",
@@ -226,5 +276,5 @@ st_geometry(ref_county) <- NULL
 
 # clean-up
 rm(mo_sf, county_focal, county_points, report_points, report_label, county_subset,
-   county_case_rate_y)
+   county_data, county_case_rate_y)
 rm(top_val, pal, cols, p)
