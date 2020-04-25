@@ -254,7 +254,7 @@ mo_sf <- map_breaks(mo_sf, var = "case_fatality_rate", newvar = "map_breaks",
 ## create map
 p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   geom_sf() +
-  scale_fill_brewer(palette = "BuGn", name = "Rate per 1,000") +
+  scale_fill_brewer(palette = "BuGn", name = "Percent") +
   labs(
     title = "Reported COVID-19 Case Fatality by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),

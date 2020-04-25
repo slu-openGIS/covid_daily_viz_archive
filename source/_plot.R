@@ -3,7 +3,7 @@
 # =============================================================================
 
 # UPDATE date value
-date <- lubridate::mdy("04-23-2020")
+date <- lubridate::mdy("04-24-2020")
 
 # define first date for plotting
 plot_date <- "2020-03-10"
@@ -12,15 +12,15 @@ date_breaks <- "5 days"
 # =============================================================================
 
 # label positions on rate plots
-state_case_rate_y <- 255
+state_case_rate_y <- 270
 state_mortality_rate_y <- 12
 state_case_fatality_rate_y <- 8.75
 
 metro_case_rate_y <- 1.75
-metro_mortality_rate_y <- .08
+metro_mortality_rate_y <- .085
 metro_case_fatality_rate_y <- 10.75
 
-county_case_rate_y <- 4.25
+county_case_rate_y <- 5.75
 
 stl_case_rate_y <- 3
 
@@ -60,11 +60,7 @@ source("source/workflow/plot/04_stl_county_plots.R")
 # source("source/workflow/plot/07_kc_county_plots.R")
 # source("source/workflow/plot/08_jeff_city_county_plots.R")
 
-source("source/workflow/plot/07_stl_plots.R")
 source("source/workflow/plot/08_kc_plots.R")
-source("source/workflow/plot/09_log_confirm_plots.R")
-source("source/workflow/plot/09_perry_plots.R")
-source("source/workflow/plot/11_log_confirm_avg_plots.R")
 source("source/workflow/plot/13_zip_plots.R")
 source("source/workflow/plot/14_individual.R")
 
