@@ -32,6 +32,16 @@ state_data <- read_csv(here::here("data", "state", "state_full.csv")) %>%
   filter(report_date >= "2020-03-07") %>%
   arrange(desc(report_date))
 
+stl_metro_data <- read_csv(here::here("data", "metro_all", "metro_full.csv")) %>%
+  filter(short_name == "St. Louis") %>%
+  filter(report_date >= "2020-03-07") %>%
+  arrange(desc(report_date))
+
+kc_metro_data <- read_csv(here::here("data", "metro_all", "metro_full.csv")) %>%
+  filter(short_name == "Kansas City") %>%
+  filter(report_date >= "2020-03-07") %>%
+  arrange(desc(report_date))
+
 stl_city_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
   filter(geoid == "29510") %>%
   filter(report_date >= "2020-03-18") %>%
@@ -76,12 +86,34 @@ Due to lags in reporting, both at the public health department level and at John
 This complicates the data picture, since the data for Moniteau County are now not directly comparable to data for any county in Missouri that is still only reporting those cases that have a confirmed positive test result. **In the short term, this change is going to distort all of the county-level maps and plots on this site.** Please keep that in mind. In an ideal world, all counties would have begun reporting probable cases at the same time in Missouri. Hopefully we are able to get a clearer data picture in the coming days as more counties change their reporting processes.
 
 ## Daily Data {.tabset}
-While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1), and [Kansas City](https://www.kcmo.gov/city-hall/departments/health/coronavirus-covid-19/covid-19-totals) provide day-by-day tracking of cumulative cases on their respective dashboards, the State of Missouri does not. The following tabs provide daily breakdowns of COVIV data as well as additional statistics not included in the existing dashboards. Please note that the two average columns for reported cases and deaths are both seven-day rolling averages.
+While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1), and [Kansas City](https://www.kcmo.gov/city-hall/departments/health/coronavirus-covid-19/covid-19-totals) provide day-by-day tracking of cumulative cases on their respective dashboards, the State of Missouri does not. The following tabs provide daily breakdowns of COVIV data as well as additional statistics not included in the existing dashboards. Data are also provided for the wider St. Louis and Kansas City metro areas. Please note that the two average columns for reported cases and deaths are both seven-day rolling averages.
 
 ### Missouri
 
 ```{r missouri-data-table, echo=FALSE, out.width = '100%'}
 state_data %>%
+  select(report_date, confirmed, new_confirmed, confirmed_avg, deaths, new_deaths, deaths_avg) %>%
+  mutate(
+    confirmed_avg = round(confirmed_avg, digits = 2),
+    deaths_avg = round(deaths_avg, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    `Cumulative Cases` = confirmed,
+    `New Cases` = new_confirmed,
+    `Average New Cases` = confirmed_avg,
+    `Cumulative Deaths` = deaths,
+    `New Deaths` = new_deaths,
+    `Average New Deaths` = deaths_avg
+  ) -> data_table
+
+data_table
+```
+
+### St. Louis Metro
+
+```{r metro-stl-data-table, echo=FALSE, out.width = '100%'}
+stl_metro_data %>%
   select(report_date, confirmed, new_confirmed, confirmed_avg, deaths, new_deaths, deaths_avg) %>%
   mutate(
     confirmed_avg = round(confirmed_avg, digits = 2),
@@ -126,6 +158,28 @@ data_table
 
 ```{r stl-county-data-table, echo=FALSE, out.width = '100%'}
 stl_county_data %>%
+  select(report_date, confirmed, new_confirmed, confirmed_avg, deaths, new_deaths, deaths_avg) %>%
+  mutate(
+    confirmed_avg = round(confirmed_avg, digits = 2),
+    deaths_avg = round(deaths_avg, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    `Cumulative Cases` = confirmed,
+    `New Cases` = new_confirmed,
+    `Average New Cases` = confirmed_avg,
+    `Cumulative Deaths` = deaths,
+    `New Deaths` = new_deaths,
+    `Average New Deaths` = deaths_avg
+  ) -> data_table
+
+data_table
+```
+
+### Kansas City Metro
+
+```{r metro-kc-data-table, echo=FALSE, out.width = '100%'}
+kc_metro_data %>%
   select(report_date, confirmed, new_confirmed, confirmed_avg, deaths, new_deaths, deaths_avg) %>%
   mutate(
     confirmed_avg = round(confirmed_avg, digits = 2),
@@ -432,6 +486,67 @@ st_geometry(data_table) <- NULL
 
 data_table
 ```
+
+## Health Disparities in St. Louis {.tabset}
+One striking facet of the COVID-19 outbreak is the effect it has had on communities that have been historically been marginalized in the United States, including African Americans, indigenous nations (the Navajo Nation has one of the <a href="https://www.npr.org/2020/04/24/842945050/navajo-nation-sees-high-rate-of-covid-19-and-contact-tracing-is-a-challenge" target="_blank">highest infection rates in country</a>), and people incarcerated in jails/prisons. What ties these groups together is not inherent biological risk. Rather, disinvestment at the community level means the agencies and organizations that serve these communities often lack the resources needed to prevent the spread of infectious disease. This is long-standing social and health disparities that potentially leave individuals more susceptible to severe illness. The following plots trace emerging health disparities in the St. Louis region both by poverty and race.
+
+### Poverty (Zip Code)
+
+```{r poverty-zip-plot, echo=FALSE, out.width = '100%'}
+knitr::include_graphics(here::here("results", "high_res", "zip", "b_poverty_plot.png"))
+```
+
+### Race (Zip Code)
+
+```{r race-zip-plot, echo=FALSE, out.width = '100%'}
+knitr::include_graphics(here::here("results", "high_res", "zip", "c_race_plot.png"))
+```
+
+### Race, Morbidity (Individual)
+
+```{r race-individual-morbidity, echo=FALSE, out.width = '100%'}
+knitr::include_graphics(here::here("results", "high_res", "individual", "a_race_case.png"))
+```
+
+### Race, Mortality (Individual)
+
+```{r race-individual-mortality, echo=FALSE, out.width = '100%'}
+knitr::include_graphics(here::here("results", "high_res", "individual", "a_race_mortality.png"))
+```
+
+## Other Static Maps and Plots {.tabset}
+In addition to the interactive maps above, I regularly update a range of static maps and plots that capture the progression of the COVID-19 outbreak in Missouri, several metro areas, and at the ZCTA (zip code) level in St. Louis City and County. The most recent versions of each plot can be viewed by clicking on the links within the tabs below.
+
+### State
+
+| Links |  |  |
+|-------------------------|--|--|
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/b_case_rate.png" target="_blanl">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/c_case_log.png" target="_blanl">Reported Cases (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/d_case_log_avg.png" target="_blanl">Average New Cases (Log)</a> |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/f_mortality_rate.png" target="_blanl">Mortality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/g_mortality_log.png" target="_blanl">Mortality (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/h_mortality_log_avg.png" target="_blanl">Average New Mortality (Log)</a> |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/j_case_fatality_rate.png" target="_blanl">Case Fatality (Percent)</a> | | |
+
+### Metro Areas
+
+| Links |  |  |
+|-------------------------|--|--|
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/b_case_rate.png" target="_blanl">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/c_case_log.png" target="_blanl">Reported Cases (Log)</a> | |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/f_mortality_rate.png" target="_blanl">Mortality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/g_mortality_log.png" target="_blanl">Mortality (Log)</a> | |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/j_case_fatality_rate.png" target="_blanl">Case Fatality (Percent)</a> | | |
+
+### Counties
+
+| Links |  |  |
+|-------------------------|--|--|
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/a_case_map.png" target="_blanl">Reported Cases (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/b_case_rate.png" target="_blanl">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/c_case_log.png" target="_blanl">Reported Cases (Log)</a> |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/e_mortality_map.png" target="_blanl">Mortality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/i_case_fatality.png" target="_blanl">Case Fatality (Map)</a> | |
+
+### St. Louis Metro
+
+| Links |  |  |
+|-------------------------|--|--|
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/a_confirmed_map.png" target="_blanl">Reported Cases (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/b_case_rate.png" target="_blanl">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/c_case_log.png" target="_blanl">Reported Cases (Log)</a> |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/d_case_log_avg.png" target="_blanl">Average New Cases (Log)</a> | | |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/e_mortality_map.png" target="_blanl">Mortality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/i_case_fatality.png" target="_blanl">Case Fatality (Map)</a> | |
 
 ## Technical Notes
 * The Fisher breaks algorithm (Fisher 1958, Slocum et al. 2005) is used to identify legend categories
