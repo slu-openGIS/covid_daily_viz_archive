@@ -18,8 +18,15 @@ calculate_days <- function(.data, group_var, stat_var, val){
     sty <- "geoid"
   }
   
+  ## pre-process
+  if (sty == "geoid"){
+    out <- dplyr::filter(.data, geoid %in% date_tibble$geoid) 
+  } else{
+    out <- .data
+  }
+  
   ## subset data
-  .data %>%
+  out %>%
     dplyr::group_split(!!group_varQ) %>%
     purrr::map_df(~filter_date(.x, y = date_tibble, style = sty)) -> out
   

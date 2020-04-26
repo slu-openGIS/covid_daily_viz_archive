@@ -201,21 +201,9 @@ report_points <- select(report_points, -day)
 
 # create days from first day where average confirmed infections were at least 10
 
-## create date_tibble object
-county_data %>%
-  filter(case_avg >= 10) %>%
-  group_by(geoid) %>%
-  summarise(first_day = first(report_date)) -> date_tibble
-
 ## subset data
 county_data %>%
-  filter(geoid %in% date_tibble$geoid) %>%
-  group_split(geoid) %>%
-  map_df(~filter_date(.x, y = date_tibble, style = "county")) %>%
-  group_by(geoid) %>%
-  mutate(first_date = first(report_date)) %>%
-  ungroup() %>%
-  mutate(day = as.numeric(report_date-first_date)) %>%
+  calculate_days(group_var = "geoid", stat_var = "case_avg", val = 10) %>%
   select(day, report_date, geoid, county, case_avg) %>%
   arrange(county, day) -> county_subset
 
