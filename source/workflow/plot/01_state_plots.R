@@ -30,6 +30,17 @@ report_points <- filter(state_data, report_date == as.Date("2020-04-15")) %>%
 
 # =============================================================================
 
+# create line label
+report_line <- tibble(
+  date = as.Date("2020-04-15"),
+  case_rate = state_case_rate_y,
+  mortality_rate = state_mortality_rate_y,
+  case_fatality_rate = state_case_fatality_rate_y,
+  text = "reporting change on 15 Apr"
+)
+
+# =============================================================================
+
 # plot confirmed rate
 ## subset data
 state_subset <- filter(state_data, report_date >= plot_date)
@@ -47,8 +58,8 @@ p <- ggplot() +
   geom_point(state_points, mapping = aes(x = report_date, y = case_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
-  geom_text(aes(as.Date("2020-04-15"), y = state_case_rate_y, label = "reporting change on 15 Apr"), 
-            angle = 90, vjust = -1, size = 4.5) +
+  geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
+                  nudge_y = 10, nudge_x = -10, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 25)) + 
@@ -166,7 +177,7 @@ p <- ggplot() +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = .2, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(1, 3000), breaks = c(1, 3, 10, 30, 100, 300, 1000, 3000), labels = comma) +
+  scale_y_log10(limits = c(1, 3000), breaks = c(1, 3, 10, 30, 100, 300, 1000, 3000), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of New COVID-19 Cases by State",
@@ -204,8 +215,8 @@ p <- ggplot() +
   geom_point(state_points, mapping = aes(x = report_date, y = mortality_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
-  geom_text(aes(as.Date("2020-04-15"), y = state_mortality_rate_y, label = "reporting change on 15 Apr"), 
-            angle = 90, vjust = -1, size = 4.5) +
+  geom_text_repel(data = report_line, mapping = aes(x = date, y = mortality_rate, label = text),
+                  nudge_y = 1.5, nudge_x = -10, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) +
@@ -288,20 +299,9 @@ report_points <- select(report_points, -day)
 
 # create days from first day where average deaths were over 3, state-level data
 
-## create date_tibble object
-state_data %>%
-  filter(deaths_avg >= 3) %>%
-  group_by(state) %>%
-  summarise(first_day = first(report_date)) -> date_tibble
-
 ## subset data
 state_data %>%
-  group_split(state) %>%
-  map_df(~filter_date(.x, y = date_tibble, style = "state")) %>%
-  group_by(state) %>%
-  mutate(first_date = first(report_date)) %>%
-  ungroup() %>%
-  mutate(day = as.numeric(report_date-first_date)) %>%
+  calculate_days(group_var = "state", stat_var = "deaths_avg", val = 3) %>%
   select(day, report_date, state, deaths_avg) %>%
   arrange(state, day) -> state_subset
 
@@ -334,7 +334,7 @@ p <- ggplot() +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths_avg, label = text),
                   nudge_y = .12, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(1, 100), breaks = c(1,3,10,30,100)) +
+  scale_y_log10(limits = c(1, 100), breaks = c(1,3,10,30,100), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of New COVID-19 Deaths by State",
@@ -370,8 +370,8 @@ p <- ggplot() +
   geom_point(state_points, mapping = aes(x = report_date, y = case_fatality_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
-  geom_text(aes(as.Date("2020-04-15"), y = state_case_fatality_rate_y, label = "reporting change on 15 Apr"), 
-            angle = 90, vjust = -1, size = 4.5) +
+  geom_text_repel(data = report_line, mapping = aes(x = date, y = case_fatality_rate, label = text),
+                  nudge_y = 1.5, nudge_x = -10, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,10), breaks = seq(0, 10, by = 1)) +
@@ -391,7 +391,7 @@ save_plots(filename = "results/low_res/state/j_case_fatality_rate.png", plot = p
 # =============================================================================
 
 # clean-up
-rm(state_data, state_subset, state_points, report_points, report_label, 
+rm(state_data, state_subset, state_points, report_points, report_label, report_line, report_line,
    state_case_rate_y, state_mortality_rate_y, state_case_fatality_rate_y)
 rm(top_val, pal, cols, p)
 

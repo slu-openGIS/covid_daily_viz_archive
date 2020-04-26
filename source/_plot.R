@@ -14,7 +14,7 @@ date_breaks <- "5 days"
 # label positions on rate plots
 state_case_rate_y <- 270
 state_mortality_rate_y <- 12
-state_case_fatality_rate_y <- 8.75
+state_case_fatality_rate_y <- 7
 
 metro_case_rate_y <- 1.75
 metro_mortality_rate_y <- .085

@@ -35,6 +35,17 @@ report_points <- filter(metro_data, report_date == as.Date("2020-04-15")) %>%
 
 # =============================================================================
 
+# create line label
+report_line <- tibble(
+  date = as.Date("2020-04-15"),
+  case_rate = metro_case_rate_y,
+  mortality_rate = metro_mortality_rate_y,
+  case_fatality_rate = metro_case_fatality_rate_y,
+  text = "reporting change on 15 Apr"
+)
+
+# =============================================================================
+
 # plot confirmed rate
 
 ## subset data
