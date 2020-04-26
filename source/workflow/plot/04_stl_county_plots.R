@@ -181,7 +181,7 @@ p <- ggplot(data = county_subset) +
   scale_y_log10(limits = c(10, 3000), breaks = c(10,30,100,300,1000,3000), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
-    title = "Pace of COVID-19 Cases by County",
+    title = "Pace of COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
     x = "Days Since Tenth Case Reported",
@@ -201,10 +201,17 @@ report_points <- select(report_points, -day)
 
 # create days from first day where average confirmed infections were at least 10
 
-## subset data
+## create date_tibble object
 county_data %>%
   filter(case_avg >= 10) %>%
-  arrange(report_date) %>%
+  group_by(geoid) %>%
+  summarise(first_day = first(report_date)) -> date_tibble
+
+## subset data
+county_data %>%
+  filter(geoid %in% date_tibble$geoid) %>%
+  group_split(geoid) %>%
+  map_df(~filter_date(.x, y = date_tibble, style = "county")) %>%
   group_by(geoid) %>%
   mutate(first_date = first(report_date)) %>%
   ungroup() %>%
@@ -243,7 +250,7 @@ p <- ggplot(data = county_subset) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(10, 300), breaks = c(10, 30, 100, 300), labels = comma) +
+  scale_y_log10(limits = c(1, 300), breaks = c(1, 3, 10, 30, 100, 300), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of New COVID-19 Cases by Metro St. Louis County",
@@ -322,6 +329,6 @@ save_plots(filename = "results/low_res/stl_metro/i_case_fatality_map.png", prese
 
 # clean-up
 rm(stl_sf, county_focal, county_points, report_points, report_label, county_subset,
-   county_data, stl_case_rate_y)
+   county_data, stl_case_rate_y, date_tibble)
 rm(top_val, pal, cols, p)
 

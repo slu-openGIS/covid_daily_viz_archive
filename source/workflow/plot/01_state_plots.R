@@ -130,14 +130,10 @@ report_points <- select(report_points, -day)
 # =============================================================================
 
 # create days from first day where average confirmed infections were at least 10, state-level data
+
 ## subset data
 state_data %>%
-  filter(case_avg >= 10) %>%
-  arrange(report_date) %>%
-  group_by(state) %>%
-  mutate(first_date = first(report_date)) %>%
-  ungroup() %>%
-  mutate(day = as.numeric(report_date-first_date)) %>%
+  calculate_days(group_var = "state", stat_var = "case_avg", val = 10) %>%
   select(day, report_date, state, case_avg) %>%
   arrange(state, day) -> state_subset
 
@@ -170,7 +166,7 @@ p <- ggplot() +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = .2, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(10, 3000), breaks = c(10, 30, 100, 300, 1000, 3000), labels = comma) +
+  scale_y_log10(limits = c(1, 3000), breaks = c(1, 3, 10, 30, 100, 300, 1000, 3000), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of New COVID-19 Cases by State",
@@ -291,10 +287,17 @@ report_points <- select(report_points, -day)
 # =============================================================================
 
 # create days from first day where average deaths were over 3, state-level data
-## subset data
+
+## create date_tibble object
 state_data %>%
   filter(deaths_avg >= 3) %>%
-  arrange(report_date) %>%
+  group_by(state) %>%
+  summarise(first_day = first(report_date)) -> date_tibble
+
+## subset data
+state_data %>%
+  group_split(state) %>%
+  map_df(~filter_date(.x, y = date_tibble, style = "state")) %>%
   group_by(state) %>%
   mutate(first_date = first(report_date)) %>%
   ungroup() %>%
@@ -331,7 +334,7 @@ p <- ggplot() +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths_avg, label = text),
                   nudge_y = .12, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(3, 100), breaks = c(3,10,30,100)) +
+  scale_y_log10(limits = c(1, 100), breaks = c(1,3,10,30,100)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of New COVID-19 Deaths by State",
