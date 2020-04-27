@@ -11,11 +11,6 @@ date_breaks <- "5 days"
 
 # =============================================================================
 
-# label positions on rate plots
-stl_case_rate_y <- 3
-
-# =============================================================================
-
 # dependencies
 library(dplyr)
 library(forcats)

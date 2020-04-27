@@ -5,8 +5,6 @@
 
 county_data <- read_csv("data/county/county_full.csv")
 
-stl_detail <- read_csv("data/metro/county_stl.csv")
-
 kc_detail <- read_csv("data/metro/county_kc.csv")
 kc_sf <- st_read("data/metro/daily_snapshot_kc.geojson", crs = 4326,
                  stringsAsFactors = FALSE) %>%
