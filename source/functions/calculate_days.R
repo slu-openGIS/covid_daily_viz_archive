@@ -28,7 +28,7 @@ calculate_days <- function(.data, group_var, stat_var, val){
   ## subset data
   out %>%
     dplyr::group_split(!!group_varQ) %>%
-    purrr::map_df(~filter_date(.x, y = date_tibble, style = sty)) -> out
+    purrr::map_df(~filter_date(target = .x, ref = date_tibble, style = sty)) -> out
   
   ## calculate days
   out <- dplyr::group_by(out, !!group_varQ)
@@ -41,18 +41,19 @@ calculate_days <- function(.data, group_var, stat_var, val){
   
 }
 
-filter_date <- function(x, y, style){
+filter_date <- function(target, ref, style){
   
   if (style == "state"){
-    y <- filter(y, state == first(x$state)) 
+    ref_sub <- dplyr::filter(ref, state == first(target$state)) 
   } else if (style == "geoid"){
-    y <- filter(y, geoid == first(x$geoid)) 
+    ref_sub <- dplyr::filter(ref, geoid == first(target$geoid)) 
   }
   
-  filter_date <- y["first_day"][[1]]
+  filter_date <- ref_sub["first_day"][[1]]
   
-  x <- filter(x, report_date >= filter_date)
+  out <- dplyr::arrange(target, report_date)
+  out <- dplyr::filter(out, report_date >= filter_date)
   
-  return(x)
+  return(out)
   
 }

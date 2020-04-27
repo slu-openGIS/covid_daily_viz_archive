@@ -12,16 +12,6 @@ date_breaks <- "5 days"
 # =============================================================================
 
 # label positions on rate plots
-state_case_rate_y <- 270
-state_mortality_rate_y <- 12
-state_case_fatality_rate_y <- 7
-
-metro_case_rate_y <- 1.75
-metro_mortality_rate_y <- .085
-metro_case_fatality_rate_y <- 10.75
-
-county_case_rate_y <- 5.75
-
 stl_case_rate_y <- 3
 
 # =============================================================================
@@ -39,7 +29,7 @@ library(scales)
 library(sf)
 
 # functions
-source("source/functions/filter_date.R")
+source("source/functions/calculate_days.R")
 source("source/functions/map_breaks.R")
 source("source/functions/round_any.R")
 source("source/functions/save_plots.R")
@@ -53,14 +43,19 @@ source("source/workflow/plot/01_load_data.R")
 # =============================================================================
 
 # update plots
+## overview plots
 source("source/workflow/plot/01_state_plots.R")
 source("source/workflow/plot/02_metro_plots.R")
 source("source/workflow/plot/03_county_plots.R")
-source("source/workflow/plot/04_stl_county_plots.R")
+
+## regional plots
+source("source/workflow/plot/04_county_plots_semo.R")
+source("source/workflow/plot/05_county_plots_midmo.R")
+
+source("source/workflow/plot/06_stl_county_plots.R")
 # source("source/workflow/plot/05_stl_zip_plots.R")
 # source("source/workflow/plot/06_stl_individual_plots.R")
 # source("source/workflow/plot/07_kc_county_plots.R")
-# source("source/workflow/plot/08_jeff_city_county_plots.R")
 
 source("source/workflow/plot/08_kc_plots.R")
 source("source/workflow/plot/13_zip_plots.R")
