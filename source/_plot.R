@@ -3,7 +3,7 @@
 # =============================================================================
 
 # UPDATE date value
-date <- lubridate::mdy("04-25-2020")
+date <- lubridate::mdy("04-26-2020")
 
 # define first date for plotting
 plot_date <- "2020-03-10"
@@ -81,4 +81,5 @@ fs::file_delete("README.html")
 
 # clean-up
 rm(pal, snapshot, date, zip_snapshot, map_breaks, map_bins, bins, round_any,
-   data_table, state_data, stl_city_data, stl_county_data, kc_city_data)
+   data_table, state_data, stl_city_data, stl_county_data, kc_city_data,
+   kc_metro_data, stl_metro_data, date_breaks, calculate_days, filter_date)

@@ -4,7 +4,7 @@
 zip_valid <- filter(city_county_zip_sf, is.na(confirmed_rate) == FALSE)
 zip_na <- filter(city_county_zip_sf, is.na(confirmed_rate) == TRUE)
 zip_valid <- map_breaks(zip_valid, var = "confirmed_rate", newvar = "confirmed_breaks",
-                    style = "fisher", classes = 5, dig_lab = 1)
+                    style = "fisher", classes = 5, dig_lab = 2)
 
 # map confirmed rate
 ggplot() +

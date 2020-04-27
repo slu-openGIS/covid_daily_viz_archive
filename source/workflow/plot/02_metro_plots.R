@@ -135,7 +135,7 @@ save_plots(filename = "results/low_res/metro/c_case_log.png", plot = p, preset =
 
 # =============================================================================
 
-# create days from first day where average confirmed infections were at least 10
+# create days from first day where average confirmed infections were at least 5
 
 ## subset data
 metro_data %>%
@@ -174,7 +174,7 @@ p <- ggplot(data = metro_subset) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
-  scale_y_log10(limits = c(1, 1000), breaks = c(1, 3, 10, 30, 100, 300, 1000), 
+  scale_y_log10(limits = c(.3, 1000), breaks = c(.3, 1, 3, 10, 30, 100, 300, 1000), 
                 labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
