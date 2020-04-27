@@ -537,8 +537,10 @@ In addition to the interactive maps above, I regularly update a range of static 
 
 | Links |  |  |
 |-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/a_case_map.png" target="_blanl">Reported Cases (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/b_case_rate.png" target="_blanl">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/c_case_log.png" target="_blanl">Reported Cases (Log)</a> |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/e_mortality_map.png" target="_blanl">Mortality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/i_case_fatality.png" target="_blanl">Case Fatality (Map)</a> | |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/a_case_map.png" target="_blanl">Reported Cases (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/e_mortality_map.png" target="_blanl">Mortality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/i_case_fatality.png" target="_blanl">Case Fatality (Map)</a> | 
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_midmo/b_case_rate.png" target="_blanl">Reported Cases, Mid-MO (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_midmo/c_case_log.png" target="_blanl">Reported Cases, Mid-MO (Log)</a> | |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_semo/b_case_rate.png" target="_blanl">Reported Cases, Southeast MO (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_semo/c_case_log.png" target="_blanl">Reported Cases, Southeast MO (Log)</a> | |
+
 
 ### St. Louis Metro
 
