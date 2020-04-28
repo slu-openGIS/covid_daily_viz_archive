@@ -320,6 +320,9 @@ p <- ggplot() +
 save_plots(filename = "results/high_res/state/d_case_count_avg_mo_only.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/state/d_case_count_avg_mo_only.png", plot = p, preset = "lg", dpi = 72)
 
+## write data out
+readr::write_csv(state_subset, "data/state/state_trend.csv")
+
 # clean-up
 rm(peak_val, peak_point, current_point, peak_val_nostl, peak_point_nostl, current_point_nostl,
    non_stl_data, non_stl_subset)
