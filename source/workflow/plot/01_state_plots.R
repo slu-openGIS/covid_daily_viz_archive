@@ -267,9 +267,9 @@ p <- ggplot() +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = -.25, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = -.4, nudge_x = -1, size = 5) +
+                  nudge_y = -.4, nudge_x = 0, size = 5) +
   geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = -.35, nudge_x = -1, size = 5) +
+                  nudge_y = -.5, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
   scale_y_log10(limits = c(3, 500), breaks = c(3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +

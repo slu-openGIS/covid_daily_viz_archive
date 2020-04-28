@@ -3,7 +3,7 @@
 # =============================================================================
 
 # UPDATE date value
-date <- lubridate::mdy("04-26-2020")
+date <- lubridate::mdy("04-27-2020")
 
 # define first date for plotting
 plot_date <- "2020-03-10"

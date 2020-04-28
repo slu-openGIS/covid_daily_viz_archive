@@ -25,7 +25,7 @@ covid_race %>%
   ggplot(data = ., mapping = aes(x = value, y = mortality_rate, fill = county)) +
   geom_bar(position = "dodge", stat = "identity") +
   scale_fill_brewer(palette = "Dark2", name = "County") +
-  scale_y_continuous(limits = c(0, .25), breaks = seq(0, .25, by = .05)) +
+  scale_y_continuous(limits = c(0, .3), breaks = seq(0, .3, by = .05)) +
   labs(
     title = "Confirmed Deaths by Race, St. Louis City & County",
     subtitle = paste0("Current as of ", as.character(date)),
