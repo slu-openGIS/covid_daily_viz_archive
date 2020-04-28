@@ -22,6 +22,8 @@ library(RColorBrewer)
 library(readr)
 library(scales)
 library(sf)
+library(tibble)
+library(zoo)
 
 # functions
 source("source/functions/calculate_days.R")
