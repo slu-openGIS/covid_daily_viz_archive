@@ -50,12 +50,11 @@ source("source/workflow/plot/04_county_plots_semo.R")
 source("source/workflow/plot/05_county_plots_midmo.R")
 
 source("source/workflow/plot/06_stl_county_plots.R")
-# source("source/workflow/plot/05_stl_zip_plots.R")
+source("source/workflow/plot/07_stl_zip_plots.R")
 # source("source/workflow/plot/06_stl_individual_plots.R")
 # source("source/workflow/plot/07_kc_county_plots.R")
 
 source("source/workflow/plot/08_kc_plots.R")
-source("source/workflow/plot/13_zip_plots.R")
 source("source/workflow/plot/14_individual.R")
 
 # =============================================================================
