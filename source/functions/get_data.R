@@ -105,7 +105,7 @@ get_times <- function(end_date){
   
   if (is.null(end_date) == FALSE){
     
-    df <- dplyr::filter(df, report_date < as.Date(end_date))
+    df <- dplyr::filter(df, report_date <= as.Date(end_date))
     
   }
   

@@ -4,7 +4,7 @@
 county_data %>%
   group_by(state, report_date) %>%
   summarise(
-    confirmed = sum(confirmed),
+    cases = sum(cases),
     deaths = sum(deaths)
   ) %>%
   arrange(report_date, state) %>%
@@ -14,15 +14,15 @@ county_data %>%
 state_data %>%
   group_by(state) %>%
   mutate(
-    new_confirmed = confirmed - lag(confirmed),
+    new_cases = cases - lag(cases),
     new_deaths = deaths - lag(deaths)
   ) %>%
   mutate(
-    confirmed_avg = rollmean(new_confirmed, k = 7, align = "right", fill = NA),
+    case_avg = rollmean(new_cases, k = 7, align = "right", fill = NA),
     deaths_avg = rollmean(new_deaths, k = 7, align = "right", fill = NA)) %>%
   filter(report_date >= "2020-01-24") %>%
   select(report_date, state,
-         confirmed, new_confirmed, confirmed_avg,
+         cases, new_cases, case_avg,
          deaths, new_deaths, deaths_avg) -> state_data
 
 # create list with vectors of metro counties by GEOID
@@ -62,13 +62,13 @@ county_data %>%
   filter(is.na(short_name) == FALSE) %>%
   group_by(short_name, report_date) %>%
   summarise(
-    confirmed = sum(confirmed),
-    new_confirmed = sum(new_confirmed),
+    cases = sum(cases),
+    new_cases = sum(new_cases),
     deaths = sum(deaths),
     new_deaths = sum(new_deaths)
   ) %>%
   mutate(
-    confirmed_avg = rollmean(new_confirmed, k = 7, align = "right", fill = NA),
+    case_avg = rollmean(new_cases, k = 7, align = "right", fill = NA),
     deaths_avg = rollmean(new_deaths, k = 7, align = "right", fill = NA)
   ) %>%
   filter(report_date >= "2020-01-24") %>%
@@ -83,8 +83,8 @@ county_data %>%
     short_name == "St. Joseph" ~ "41140",
     short_name == "St. Louis" ~ "41180"
   )) %>%
-  select(report_date, geoid, short_name, confirmed, new_confirmed,
-         confirmed_avg, deaths, new_deaths, deaths_avg) -> metro_data
+  select(report_date, geoid, short_name, cases, new_cases, case_avg, 
+         deaths, new_deaths, deaths_avg) -> metro_data
 
 # remove early reports from county data
 county_data <- filter(county_data, report_date >= "2020-01-24")

@@ -12,14 +12,15 @@ counties <- read_csv("data/source/counties.csv") %>%
 #  unlist() %>%
 #  map_df(~ get_hopkins(date = .x, ref = counties)) -> detailed_data
 
-detailed_data <- get_hopkins(date = date, ref = counties)
+# detailed_data <- get_hopkins(date = date, ref = counties)
 
 # add historical data to detailed
 ## load data
 historic_raw <- get_times(end_date = date)
 
 # create vector of dates
-historic_dates <- seq(as.Date("2020-01-24")-7, date-1, by="days")
+# historic_dates <- seq(as.Date("2020-01-24")-7, date-1, by="days")
+historic_dates <- seq(as.Date("2020-01-24")-7, date, by="days")
 
 # create full counties data set for historic data
 historic_dates %>%
@@ -36,28 +37,29 @@ historic_data <- left_join(historic_dates, historic_raw, by = c("geoid", "report
 historic_data %>%
   # mutate(last_update = update_dateTime) %>%
   # mutate(last_update = as.POSIXct(last_update)) %>%
-  mutate(confirmed = ifelse(is.na(confirmed) == TRUE, 0, confirmed)) %>%
+  rename(cases = confirmed) %>%
+  mutate(cases = ifelse(is.na(cases) == TRUE, 0, cases)) %>%
   mutate(deaths = ifelse(is.na(deaths) == TRUE, 0, deaths)) %>%
-  select(report_date, geoid, county, state, confirmed, deaths) -> historic_data
+  select(report_date, geoid, county, state, cases, deaths) -> historic_data
 
 # bind
-county_data <- as_tibble(bind_rows(historic_data, detailed_data))
+# county_data <- as_tibble(bind_rows(historic_data, detailed_data))
+county_data <- as_tibble(historic_data)
 
 # add daily new cases and deaths, county
 county_data %>%
   group_by(state, county) %>%
   mutate(
-    new_confirmed = confirmed - lag(confirmed),
+    new_cases = cases - lag(cases),
     new_deaths = deaths - lag(deaths)
   ) %>%
   mutate(
-    confirmed_avg = rollmean(new_confirmed, k = 7, align = "right", fill = NA),
+    case_avg = rollmean(new_cases, k = 7, align = "right", fill = NA),
     deaths_avg = rollmean(new_deaths, k = 7, align = "right", fill = NA)) %>%
   select(report_date, geoid, county, state, 
-         confirmed, new_confirmed, confirmed_avg,
+         cases, new_cases, case_avg,
          deaths, new_deaths, deaths_avg) -> county_data
 
 # clean-up
 rm(counties, historic_dates, get_hopkins, get_times, 
-   historic_expand, historic_data, historic_raw,
-   detailed_data)
+   historic_expand, historic_data, historic_raw) # detailed_data

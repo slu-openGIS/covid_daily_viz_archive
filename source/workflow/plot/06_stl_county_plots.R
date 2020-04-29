@@ -6,21 +6,9 @@
 stl_sf <- st_read("data/metro/daily_snapshot_stl.geojson", crs = 4326,
                   stringsAsFactors = FALSE) %>%
   st_transform(crs = 102003) %>%
-  rename(
-    cases = confirmed,
-    case_rate = confirmed_rate,
-    new_cases = new_confirmed,
-    case_avg = confirmed_avg
-  ) %>%
   mutate(county = ifelse(GEOID %in% c("29189"), NA, county))
 
 county_data <- read_csv("data/county/county_full.csv") %>%
-  rename(
-    cases = confirmed,
-    case_rate = confirmed_rate,
-    new_cases = new_confirmed,
-    case_avg = confirmed_avg
-  ) %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(geoid %in% c("17005", "17013", "17027", "17083", "17117", 
                       "17119", "17133", "17163", "29071", "29099", 
@@ -83,7 +71,7 @@ p <- ggplot(data = stl_sf) +
   labs(
     title = "Confirmed COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
+    caption = caption_text_census
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -110,9 +98,9 @@ p <- ggplot() +
   geom_point(county_points, mapping = aes(x = report_date, y = case_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
-  geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
-                  nudge_y = .15, nudge_x = -10, size = 5) +
+  # geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
+  # geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
+  #                nudge_y = .15, nudge_x = -10, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .5)) + 
@@ -121,7 +109,7 @@ p <- ggplot() +
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
     x = "Date",
     y = "Rate per 1,000",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
+    caption = caption_text_census
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
@@ -165,16 +153,16 @@ p <- ggplot(data = county_subset) +
   geom_point(county_day_points, mapping = aes(x = day, y = cases, color = factor_var), 
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  geom_point(report_day_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
-  geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
-                  nudge_y = .3, nudge_x = -1, size = 5) +
+  # geom_point(report_day_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
+  # geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
+  #                nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(5, 3000), breaks = c(5,10,30,100,300,1000,3000), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
+    caption = caption_text,
     x = "Days Since Fifth Case Reported",
     y = "Count of Reported Cases (Log)"
   ) +
@@ -222,16 +210,16 @@ p <- ggplot(data = county_subset) +
   geom_point(county_day_points, mapping = aes(x = day, y = case_avg, color = factor_var), 
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  geom_point(report_day_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
-  geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = .3, nudge_x = -1, size = 5) +
+  # geom_point(report_day_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
+  # geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
+  #                nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(.3, 300), breaks = c(.3, 1, 3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of New COVID-19 Cases by Metro St. Louis County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
+    caption = caption_text,
     x = "Days Since Average of Five Cases Reached",
     y = "7-day Average of Reported Cases (Log)"
   ) +
@@ -256,7 +244,7 @@ p <- ggplot(data = stl_sf) +
   labs(
     title = "COVID-19 Mortality by Metro St. Louis County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
+    caption = caption_text_census
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -287,7 +275,7 @@ p <- ggplot(data = stl_sf) +
   labs(
     title = "COVID-19 Case Fatality by Metro St. Louis County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
+    caption = caption_text
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 

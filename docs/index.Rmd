@@ -60,7 +60,7 @@ kc_city_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
 snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 4326,
                     stringsAsFactors = FALSE) %>%
   mutate(icu_rate = ifelse(hospitals == 0, NA, icu_rate)) %>%
-  mutate(avg_rate = (confirmed_avg/total_pop)*1000)
+  mutate(avg_rate = (case_avg/total_pop)*1000)
 
 zip_snapshot <- st_read(here::here("data", "zip", "daily_snapshot_city_county.geojson"), stringsAsFactors = FALSE)
 ```
@@ -92,16 +92,16 @@ While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. L
 
 ```{r missouri-data-table, echo=FALSE, out.width = '100%'}
 state_data %>%
-  select(report_date, confirmed, new_confirmed, confirmed_avg, deaths, new_deaths, deaths_avg) %>%
+  select(report_date, cases, new_cases, case_avg, deaths, new_deaths, deaths_avg) %>%
   mutate(
-    confirmed_avg = round(confirmed_avg, digits = 2),
+    case_avg = round(case_avg, digits = 2),
     deaths_avg = round(deaths_avg, digits = 2)
   ) %>%
   rename(
     `Report Date` = report_date,
-    `Cumulative Cases` = confirmed,
-    `New Cases` = new_confirmed,
-    `Average New Cases` = confirmed_avg,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
     `Cumulative Deaths` = deaths,
     `New Deaths` = new_deaths,
     `Average New Deaths` = deaths_avg
@@ -114,16 +114,16 @@ data_table
 
 ```{r metro-stl-data-table, echo=FALSE, out.width = '100%'}
 stl_metro_data %>%
-  select(report_date, confirmed, new_confirmed, confirmed_avg, deaths, new_deaths, deaths_avg) %>%
+  select(report_date, cases, new_cases, case_avg, deaths, new_deaths, deaths_avg) %>%
   mutate(
-    confirmed_avg = round(confirmed_avg, digits = 2),
+    case_avg = round(case_avg, digits = 2),
     deaths_avg = round(deaths_avg, digits = 2)
   ) %>%
   rename(
     `Report Date` = report_date,
-    `Cumulative Cases` = confirmed,
-    `New Cases` = new_confirmed,
-    `Average New Cases` = confirmed_avg,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
     `Cumulative Deaths` = deaths,
     `New Deaths` = new_deaths,
     `Average New Deaths` = deaths_avg
@@ -136,16 +136,16 @@ data_table
 
 ```{r stl-city-data-table, echo=FALSE, out.width = '100%'}
 stl_city_data %>%
-  select(report_date, confirmed, new_confirmed, confirmed_avg, deaths, new_deaths, deaths_avg) %>%
+  select(report_date, cases, new_cases, case_avg, deaths, new_deaths, deaths_avg) %>%
   mutate(
-    confirmed_avg = round(confirmed_avg, digits = 2),
+    case_avg = round(case_avg, digits = 2),
     deaths_avg = round(deaths_avg, digits = 2)
   ) %>%
   rename(
     `Report Date` = report_date,
-    `Cumulative Cases` = confirmed,
-    `New Cases` = new_confirmed,
-    `Average New Cases` = confirmed_avg,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
     `Cumulative Deaths` = deaths,
     `New Deaths` = new_deaths,
     `Average New Deaths` = deaths_avg
@@ -158,16 +158,16 @@ data_table
 
 ```{r stl-county-data-table, echo=FALSE, out.width = '100%'}
 stl_county_data %>%
-  select(report_date, confirmed, new_confirmed, confirmed_avg, deaths, new_deaths, deaths_avg) %>%
+  select(report_date, cases, new_cases, case_avg, deaths, new_deaths, deaths_avg) %>%
   mutate(
-    confirmed_avg = round(confirmed_avg, digits = 2),
+    case_avg = round(case_avg, digits = 2),
     deaths_avg = round(deaths_avg, digits = 2)
   ) %>%
   rename(
     `Report Date` = report_date,
-    `Cumulative Cases` = confirmed,
-    `New Cases` = new_confirmed,
-    `Average New Cases` = confirmed_avg,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
     `Cumulative Deaths` = deaths,
     `New Deaths` = new_deaths,
     `Average New Deaths` = deaths_avg
@@ -180,16 +180,16 @@ data_table
 
 ```{r metro-kc-data-table, echo=FALSE, out.width = '100%'}
 kc_metro_data %>%
-  select(report_date, confirmed, new_confirmed, confirmed_avg, deaths, new_deaths, deaths_avg) %>%
+  select(report_date, cases, new_cases, case_avg, deaths, new_deaths, deaths_avg) %>%
   mutate(
-    confirmed_avg = round(confirmed_avg, digits = 2),
+    case_avg = round(case_avg, digits = 2),
     deaths_avg = round(deaths_avg, digits = 2)
   ) %>%
   rename(
     `Report Date` = report_date,
-    `Cumulative Cases` = confirmed,
-    `New Cases` = new_confirmed,
-    `Average New Cases` = confirmed_avg,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
     `Cumulative Deaths` = deaths,
     `New Deaths` = new_deaths,
     `Average New Deaths` = deaths_avg
@@ -202,16 +202,16 @@ data_table
 
 ```{r kansas-city-data-table, echo=FALSE, out.width = '100%'}
 kc_city_data %>%
-  select(report_date, confirmed, new_confirmed, confirmed_avg, deaths, new_deaths, deaths_avg) %>%
+  select(report_date, cases, new_cases, case_avg, deaths, new_deaths, deaths_avg) %>%
   mutate(
-    confirmed_avg = round(confirmed_avg, digits = 2),
+    case_avg = round(case_avg, digits = 2),
     deaths_avg = round(deaths_avg, digits = 2)
   ) %>%
   rename(
     `Report Date` = report_date,
-    `Cumulative Cases` = confirmed,
-    `New Cases` = new_confirmed,
-    `Average New Cases` = confirmed_avg,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
     `Cumulative Deaths` = deaths,
     `New Deaths` = new_deaths,
     `Average New Deaths` = deaths_avg
@@ -262,12 +262,12 @@ This map shows infections as a rate per 1,000 residents. It is important not to 
 
 ```{r map-infections, echo = FALSE, out.width = '100%', out.height='600px'}
 # calculate breaks
-bins <- map_bins(snapshot, var = "confirmed_rate", style = "fisher", classes = 5, dig_lab = 2,
+bins <- map_bins(snapshot, var = "case_rate", style = "fisher", classes = 5, dig_lab = 2,
                  round = 2)
-bins[length(bins)] <- round_any(x = max(snapshot$confirmed_rate), accuracy = .01, f = ceiling)
+bins[length(bins)] <- round_any(x = max(snapshot$case_rate), accuracy = .01, f = ceiling)
 
 # create color palette
-pal <- colorBin("BuGn", domain = snapshot$confirmed_rate, bins = bins)
+pal <- colorBin("BuGn", domain = snapshot$case_rate, bins = bins)
 
 # map
 leaflet() %>%
@@ -279,30 +279,30 @@ leaflet() %>%
     opacity = 1.0, 
     smoothFactor = 0.5,
     fillOpacity = 0.75,
-    fillColor = ~pal(confirmed_rate),
+    fillColor = ~pal(case_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste("<b>County:</b> ", snapshot$county, "<br>",
-                           "<b>Current Cumulative Count:</b> ", snapshot$confirmed, "<br>",
-                           "<b>Current Cumulative Rate per 1,000:</b> ", round(snapshot$confirmed_rate, digits = 2), "<br>",
+                           "<b>Current Cumulative Count:</b> ", snapshot$cases, "<br>",
+                           "<b>Current Cumulative Rate per 1,000:</b> ", round(snapshot$case_rate, digits = 2), "<br>",
                            "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
                            "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds)
     )  %>%
-    addLegend(pal = pal, values = snapshot$confirmed_rate, opacity = .75, title = "Rate")
+    addLegend(pal = pal, values = snapshot$case_rate, opacity = .75, title = "Rate")
 ```
 
 ### Data Table
 
 ```{r confirmed-data-table, echo=FALSE, out.width = '100%'}
 snapshot %>%
-  select(state, county, confirmed, confirmed_rate) %>%
+  select(state, county, cases, case_rate) %>%
   mutate(
-    confirmed_rate = round(confirmed_rate, digits = 2)
+    case_rate = round(case_rate, digits = 2)
   ) %>%
   rename(
     State = state,
     County = county,
-    `Cumulative Cases` = confirmed,
-    `Rate per 1,000 Residents` = confirmed_rate
+    `Cumulative Cases` = cases,
+    `Rate per 1,000 Residents` = case_rate
   ) %>%
   arrange(State, County) -> data_table
 
@@ -339,7 +339,7 @@ leaflet() %>%
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste("<b>County:</b> ", snapshot$county, "<br>",
                            "<b>Current Cumulative Count:</b> ", snapshot$confirmed, "<br>",
-                           "<b>7-day Average of New Cases:</b> ", round(snapshot$confirmed_avg, digits = 2), "<br>",
+                           "<b>7-day Average of New Cases:</b> ", round(snapshot$case_avg, digits = 2), "<br>",
                            "<b>Average New Cases per 1,000 Residents:</b> ", round(snapshot$avg_rate, digits = 2), "<br>",
                            "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
                            "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds)
@@ -352,15 +352,15 @@ leaflet() %>%
 
 ```{r confirmed-avg-data-table, echo=FALSE, out.width = '100%'}
 snapshot %>%
-  select(state, county, confirmed, confirmed_avg, avg_rate) %>%
+  select(state, county, cases, case_avg, avg_rate) %>%
   mutate(
-    confirmed_avg = round(confirmed_avg, digits = 2)
+    case_avg = round(case_avg, digits = 2)
   ) %>%
   rename(
     State = state,
     County = county,
-    `Cumulative Cases` = confirmed,
-    `7-day Average New Cases` = confirmed_avg,
+    `Cumulative Cases` = cases,
+    `7-day Average New Cases` = case_avg,
     `Average New Cases per 1,000 Residents` = avg_rate
   ) %>%
   arrange(State, County) -> data_table
@@ -435,13 +435,13 @@ This map shows infections as a rate per 1,000 residents for all ZCTAs with five 
 
 ```{r map-infections-zip, echo = FALSE, out.width = '100%', out.height='600px', warning=FALSE}
 # calculate breaks
-bins <- map_bins(zip_snapshot, var = "confirmed_rate", style = "fisher", classes = 5, dig_lab = 2,
+bins <- map_bins(zip_snapshot, var = "case_rate", style = "fisher", classes = 5, dig_lab = 2,
                  round = 2)
-bins[1] <- round_any(x = min(zip_snapshot$confirmed_rate, na.rm = TRUE), accuracy = .01, f = floor)
-bins[length(bins)] <- round_any(x = max(zip_snapshot$confirmed_rate, na.rm = TRUE), accuracy = .01, f = ceiling)
+bins[1] <- round_any(x = min(zip_snapshot$case_rate, na.rm = TRUE), accuracy = .01, f = floor)
+bins[length(bins)] <- round_any(x = max(zip_snapshot$case_rate, na.rm = TRUE), accuracy = .01, f = ceiling)
 
 # create color palette
-pal <- colorBin("BuGn", domain = zip_snapshot$confirmed_rate, bins = bins)
+pal <- colorBin("BuGn", domain = zip_snapshot$case_rate, bins = bins)
 
 # map
 leaflet() %>%
@@ -453,31 +453,31 @@ leaflet() %>%
     opacity = 1.0, 
     smoothFactor = 0.5,
     fillOpacity = 0.75,
-    fillColor = ~pal(confirmed_rate),
+    fillColor = ~pal(case_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste0("<b>Zip:</b> ", zip_snapshot$zip, " <br> ",
-                 "<b>Current Cumulative Count:</b> ", zip_snapshot$confirmed, "<br>",
-                 "<b>Current Cumulative Rate per 1,000:</b> ", round(zip_snapshot$confirmed_rate, digits = 2), " <br> ",
+                 "<b>Current Cumulative Count:</b> ", zip_snapshot$cases, "<br>",
+                 "<b>Current Cumulative Rate per 1,000:</b> ", round(zip_snapshot$case_rate, digits = 2), " <br> ",
                  "<b>Population Below Poverty Line:</b> ", round(zip_snapshot$pvty_pct, digits = 2), "% <br> ",
                  "<b>African American Population:</b> ", round(zip_snapshot$blk_pct, digits = 2), "% ")
     )  %>%
-    addLegend(pal = pal, values = zip_snapshot$confirmed_rate, opacity = .75, title = "Rate")
+    addLegend(pal = pal, values = zip_snapshot$case_rate, opacity = .75, title = "Rate")
 ```
 
 ### Data Table
 
 ```{r zip-data-table, echo=FALSE, out.width = '100%'}
 zip_snapshot %>%
-  select(zip, confirmed, confirmed_rate, pvty_pct, blk_pct) %>%
+  select(zip, cases, case_rate, pvty_pct, blk_pct) %>%
   mutate(
-    confirmed_rate = round(confirmed_rate, digits = 2),
+    confirmed_rate = round(case_rate, digits = 2),
     pvty_pct = round(pvty_pct, digits = 2),
     blk_pct = round(blk_pct, digits = 2)
   ) %>%
   rename(
     `Zip Code` = zip,
-    `Cumulative Cases` = confirmed,
-    `Rate per 1,000 Residents` = confirmed_rate,
+    `Cumulative Cases` = cases,
+    `Rate per 1,000 Residents` = case_rate,
     `Poverty Rate (%)` = pvty_pct,
     `% African American` = blk_pct
   ) -> data_table
@@ -511,7 +511,7 @@ knitr::include_graphics(here::here("results", "high_res", "stl_individual", "a_r
 ### Race, Mortality (Individual)
 
 ```{r race-individual-mortality, echo=FALSE, out.width = '100%'}
-knitr::include_graphics(here::here("results", "high_res", "stl_individual", "a_race_mortality.png"))
+knitr::include_graphics(here::here("results", "high_res", "stl_individual", "b_race_mortality.png"))
 ```
 
 ## Other Static Maps and Plots {.tabset}

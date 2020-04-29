@@ -13,6 +13,10 @@ city_dates <- seq(as.Date("2020-04-01"), date, by="days")
 city_dates %>%
   unlist() %>%
   map_df(~ wrangle_zip(date = .x, county = 510)) %>%
+  rename(
+    cases = confirmed,
+    case_rate = confirmed_rate
+  ) %>%
   mutate(zip = as.character(zip)) -> stl_city_zip
 
 # subset detailed data
@@ -21,7 +25,7 @@ stl_city_zip_sub <- filter(stl_city_zip, report_date == date)
 # combine with geometry
 left_join(stl_city_zip_sf, stl_city_zip_sub, by = "zip") %>%
   select(report_date, zip, geoid, county, state, last_update, 
-         pvty_pct, wht_pct, blk_pct, confirmed, confirmed_rate) -> stl_city_zip_sf
+         pvty_pct, wht_pct, blk_pct, cases, case_rate) -> stl_city_zip_sf
 
 # write data
 write_csv(stl_city_zip, "data/zip/zip_stl_city.csv")
@@ -42,6 +46,10 @@ county_dates <- seq(as.Date("2020-04-06"), date, by="days")
 county_dates %>%
   unlist() %>%
   map_df(~ wrangle_zip(date = .x, county = 189)) %>%
+  rename(
+    cases = confirmed,
+    case_rate = confirmed_rate
+  ) %>%
   mutate(zip = as.character(zip)) -> stl_county_zip
 
 # subset detailed data
@@ -50,7 +58,7 @@ stl_county_zip_sub <- filter(stl_county_zip, report_date == date)
 # combine with geometry
 left_join(stl_county_zip_sf, stl_county_zip_sub, by = "zip") %>%
   select(report_date, zip, geoid, county, state, last_update, 
-         pvty_pct, wht_pct, blk_pct, confirmed, confirmed_rate) -> stl_county_zip_sf
+         pvty_pct, wht_pct, blk_pct, cases, case_rate) -> stl_county_zip_sf
 
 # write data
 write_csv(stl_county_zip, "data/zip/zip_stl_county.csv")
@@ -72,22 +80,22 @@ stl_county_zip_sf <- left_join(stl_county_zip_sf, pop_county, by = "zip")
 
 # subset city less than 5
 city_na <- filter(stl_city_zip_sf, zip %in% city_lt5 == TRUE) %>%
-  select(zip, total_pop, pvty_pct, wht_pct, blk_pct, confirmed)
+  select(zip, total_pop, pvty_pct, wht_pct, blk_pct, cases)
 county_na <- filter(stl_county_zip_sf, zip %in% city_lt5 == TRUE) %>%
-  select(zip, total_pop, pvty_pct, wht_pct, blk_pct, confirmed)
+  select(zip, total_pop, pvty_pct, wht_pct, blk_pct, cases)
 
 city_county_zip_sf <- filter(city_county_zip_sf, zip %in% city_lt5 == FALSE)
 
 # isolate counts
-stl_city_zip <- select(stl_city_zip_sf, zip, confirmed)
+stl_city_zip <- select(stl_city_zip_sf, zip, cases)
 st_geometry(stl_city_zip) <- NULL
-stl_county_zip <- select(stl_county_zip_sf, zip, confirmed)
+stl_county_zip <- select(stl_county_zip_sf, zip, cases)
 st_geometry(stl_county_zip) <- NULL
 
 stl_zip <- bind_rows(stl_city_zip, stl_county_zip) %>%
   group_by(zip) %>%
-  summarise(confirmed = sum(confirmed, na.rm = TRUE)) %>%
-  mutate(confirmed = ifelse(confirmed == 0, NA, confirmed)) %>%
+  summarise(cases = sum(cases, na.rm = TRUE)) %>%
+  mutate(cases = ifelse(cases == 0, NA, cases)) %>%
   filter(zip %in% city_lt5 == FALSE)
 
 city_county_zip_sf <- left_join(city_county_zip_sf, stl_zip, by = "zip")
@@ -95,7 +103,7 @@ city_county_zip_sf <- rbind(city_county_zip_sf, city_na, county_na) %>%
   arrange(zip)
 
 # calculate rate
-city_county_zip_sf <- mutate(city_county_zip_sf, confirmed_rate = confirmed/total_pop*1000)
+city_county_zip_sf <- mutate(city_county_zip_sf, case_rate = cases/total_pop*1000)
 
 # clean-up
 rm(stl_city_zip_sf, stl_county_zip_sf, stl_city_zip, stl_county_zip, pop_city, pop_county,

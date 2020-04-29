@@ -4,12 +4,6 @@
 
 # load data
 county_data <- read_csv("data/county/county_full.csv") %>%
-  rename(
-    cases = confirmed,
-    case_rate = confirmed_rate,
-    new_cases = new_confirmed,
-    case_avg = confirmed_avg
-  ) %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(state == "Missouri")
 
@@ -68,9 +62,9 @@ p <- ggplot() +
   geom_point(county_points, mapping = aes(x = report_date, y = case_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
-  geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
-                  nudge_y = .15, nudge_x = -10, size = 5) +
+  # geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
+  # geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
+  #                nudge_y = .15, nudge_x = -10, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .5)) + 
@@ -79,7 +73,7 @@ p <- ggplot() +
     subtitle = paste0("Mid-Missouri Focus\n", as.character(plot_date), " through ", as.character(date)),
     x = "Date",
     y = "Rate per 1,000",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
+    caption = caption_text_census
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
@@ -123,9 +117,9 @@ p <- ggplot(data = county_subset) +
   geom_point(county_day_points, mapping = aes(x = day, y = cases, color = factor_var), 
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  geom_point(report_day_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
-  geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
-                  nudge_y = .3, nudge_x = -1, size = 5) +
+  # geom_point(report_day_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
+  # geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
+  #                nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(5, 3000), breaks = c(5,10,30,100,300,1000,3000), 
                 labels = comma_format(accuracy = 1)) +
@@ -133,7 +127,7 @@ p <- ggplot(data = county_subset) +
   labs(
     title = "Pace of COVID-19 Cases by Select Missouri Counties",
     subtitle = paste0("Mid-Missouri Focus\n", "Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects",
+    caption = caption_text,
     x = "Days Since Tenth Case Reported",
     y = "Count of Reported Cases (Log)"
   ) +

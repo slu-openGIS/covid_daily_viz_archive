@@ -1,5 +1,11 @@
 # metro st. louis data
 
+# load data
+kc_detail <- read_csv("data/metro/county_kc.csv")
+kc_sf <- st_read("data/metro/daily_snapshot_kc.geojson", crs = 4326,
+                 stringsAsFactors = FALSE) %>%
+  st_transform(crs = 102003)
+
 # final data cleaning
 plot_date <- "2020-03-10"
 kc_detail <- filter(kc_detail, report_date >= plot_date)

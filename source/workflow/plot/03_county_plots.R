@@ -5,13 +5,7 @@
 # load data
 mo_sf <- st_read("data/county/daily_snapshot_mo.geojson", crs = 4326,
                  stringsAsFactors = FALSE) %>%
-  st_transform(crs = 102003) %>%
-  rename(
-    cases = confirmed,
-    case_rate = confirmed_rate,
-    new_cases = new_confirmed,
-    case_avg = confirmed_avg
-  )
+  st_transform(crs = 102003)
 
 # =============================================================================
 
@@ -27,7 +21,7 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   labs(
     title = "Reported COVID-19 Cases by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
+    caption = caption_text_census
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -50,7 +44,7 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   labs(
     title = "Reported COVID-19 Mortality by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
+    caption = caption_text_census
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -72,7 +66,7 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   labs(
     title = "Reported COVID-19 Case Fatality by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
+    caption = caption_text
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -90,4 +84,3 @@ st_geometry(ref_county) <- NULL
 
 # clean-up
 rm(mo_sf)
-rm(top_val)

@@ -3,11 +3,16 @@
 # =============================================================================
 
 # UPDATE date value
-date <- lubridate::mdy("04-28-2020")
+date <- lubridate::mdy("04-27-2020")
 
 # define first date for plotting
 plot_date <- "2020-03-10"
 date_breaks <- "5 days"
+
+# create caption
+# caption_text <- "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
+caption_text <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project"
+caption_text_census <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau"
 
 # =============================================================================
 
@@ -34,11 +39,6 @@ source("source/functions/sequoia_theme.R")
 
 # =============================================================================
 
-# load data
-source("source/workflow/plot/01_load_data.R")
-
-# =============================================================================
-
 # update plots
 ## overview plots
 source("source/workflow/plot/01_state_plots.R")
@@ -53,12 +53,13 @@ source("source/workflow/plot/06_stl_county_plots.R")
 source("source/workflow/plot/07_stl_zip_plots.R")
 source("source/workflow/plot/08_stl_individual_plots.R")
 
-source("source/workflow/plot/09_kc_county_plots.R")
+# source("source/workflow/plot/09_kc_county_plots.R")
 
 # =============================================================================
 
 # clean-up
-rm(plot_date, save_plots, sequoia_theme)
+rm(plot_date, save_plots, sequoia_theme, date_breaks, calculate_days, filter_date,
+   map_breaks, map_bins, round_any, caption_text, caption_text_census)
 
 # =============================================================================
 
@@ -72,18 +73,7 @@ rmarkdown::render(input = "docs/index.Rmd",
 
 # =============================================================================
 
-# update README
-rmarkdown::render(input = "README.Rmd",
-                  params = list(
-                    date_val = as.character(date)
-                  ))
-
-# delete README.html
-fs::file_delete("README.html")
-
-# =============================================================================
-
 # clean-up
 rm(pal, snapshot, date, zip_snapshot, map_breaks, map_bins, bins, round_any,
    data_table, state_data, stl_city_data, stl_county_data, kc_city_data,
-   kc_metro_data, stl_metro_data, date_breaks, calculate_days, filter_date)
+   kc_metro_data, stl_metro_data)

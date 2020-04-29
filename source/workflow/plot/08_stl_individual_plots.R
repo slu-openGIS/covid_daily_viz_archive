@@ -26,10 +26,10 @@ p <- ggplot(data = covid_race, mapping = aes(x = value, y = case_rate, fill = co
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = .5)) +
   labs(
     title = "Reported Cases by Race, St. Louis City & County",
-    subtitle = paste0("Current as of ", as.character(date)),
+    subtitle = paste0("Current as of ", as.character(date+1)),
     x = "Race",
     y = "Rate per 1,000 Individuals",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis and St. Louis County\nSt. Louis County's data are missing race for ~40% of cases\nSt. Louis City's data are missing race for ~6% of cases"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis, St. Louis County, and the U.S. Census Bureau\nSt. Louis County's data are missing race for ~40% of cases\nSt. Louis City's data are missing race for ~6% of cases"
   ) +
   sequoia_theme(base_size = 22, background = "white", map = FALSE)
 
@@ -53,10 +53,10 @@ p <- covid_race %>%
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = .05)) +
   labs(
     title = "Reported Deaths by Race, St. Louis City & County",
-    subtitle = paste0("Current as of ", as.character(date)),
+    subtitle = paste0("Current as of ", as.character(date+1)),
     x = "Race",
     y = "Rate per 1,000 Individuals",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis and St. Louis County\nSt. Louis County's data are missing race for ~40% of cases\nSt. Louis City's data are missing race for ~6% of cases"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis, St. Louis County, and the U.S. Census Bureau\nSt. Louis County's data are missing race for ~40% of cases\nSt. Louis City's data are missing race for ~6% of cases"
   ) +
   sequoia_theme(base_size = 22, background = "white", map = FALSE)
 
