@@ -493,25 +493,25 @@ One striking facet of the COVID-19 outbreak is the effect it has had on communit
 ### Poverty (Zip Code)
 
 ```{r poverty-zip-plot, echo=FALSE, out.width = '100%'}
-knitr::include_graphics(here::here("results", "high_res", "zip", "b_poverty_plot.png"))
+knitr::include_graphics(here::here("results", "high_res", "stl_zip", "b_poverty_plot.png"))
 ```
 
 ### Race (Zip Code)
 
 ```{r race-zip-plot, echo=FALSE, out.width = '100%'}
-knitr::include_graphics(here::here("results", "high_res", "zip", "c_race_plot.png"))
+knitr::include_graphics(here::here("results", "high_res", "stl_zip", "c_race_plot.png"))
 ```
 
 ### Race, Morbidity (Individual)
 
 ```{r race-individual-morbidity, echo=FALSE, out.width = '100%'}
-knitr::include_graphics(here::here("results", "high_res", "individual", "a_race_case.png"))
+knitr::include_graphics(here::here("results", "high_res", "stl_individual", "a_race_case.png"))
 ```
 
 ### Race, Mortality (Individual)
 
 ```{r race-individual-mortality, echo=FALSE, out.width = '100%'}
-knitr::include_graphics(here::here("results", "high_res", "individual", "a_race_mortality.png"))
+knitr::include_graphics(here::here("results", "high_res", "stl_individual", "a_race_mortality.png"))
 ```
 
 ## Other Static Maps and Plots {.tabset}

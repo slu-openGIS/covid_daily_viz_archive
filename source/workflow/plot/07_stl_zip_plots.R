@@ -1,3 +1,4 @@
+# st louis zip code level plots
 
 # =============================================================================
 
@@ -34,8 +35,8 @@ ggplot() +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
 ## save map
-save_plots(filename = "results/high_res/zip/a_confirmed_map.png", preset = "lg")
-save_plots(filename = "results/low_res/zip/a_confirmed_map.png", preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/stl_zip/a_confirmed_map.png", preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/a_confirmed_map.png", preset = "lg", dpi = 72)
 
 # =============================================================================
 
@@ -71,8 +72,8 @@ ggplot() +
   sequoia_theme(base_size = 22, background = "white")
 
 ## save plots
-save_plots(filename = "results/high_res/zip/b_poverty_plot.png", preset = "lg")
-save_plots(filename = "results/low_res/zip/b_poverty_plot.png", preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/stl_zip/b_poverty_plot.png", preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/b_poverty_plot.png", preset = "lg", dpi = 72)
 
 # =============================================================================
 
@@ -105,8 +106,8 @@ ggplot() +
   sequoia_theme(base_size = 22, background = "white")
 
 ## save plots
-save_plots(filename = "results/high_res/zip/c_race_plot.png", preset = "lg")
-save_plots(filename = "results/low_res/zip/c_race_plot.png", preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/stl_zip/c_race_plot.png", preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/c_race_plot.png", preset = "lg", dpi = 72)
 
 # =============================================================================
 
