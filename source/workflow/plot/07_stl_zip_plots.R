@@ -23,7 +23,7 @@ zip_valid <- map_breaks(zip_valid, var = "confirmed_rate", newvar = "confirmed_b
                         style = "fisher", classes = 5, dig_lab = 2)
 
 ## create map
-ggplot() +
+p <- ggplot() +
   geom_sf(data = zip_na, fill = "#9d9d9d") +
   geom_sf(data = zip_valid, mapping = aes(fill = confirmed_breaks)) +
   scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
@@ -35,8 +35,8 @@ ggplot() +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
 ## save map
-save_plots(filename = "results/high_res/stl_zip/a_confirmed_map.png", preset = "lg")
-save_plots(filename = "results/low_res/stl_zip/a_confirmed_map.png", preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/stl_zip/a_confirmed_map.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/a_confirmed_map.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
@@ -46,7 +46,7 @@ save_plots(filename = "results/low_res/stl_zip/a_confirmed_map.png", preset = "l
 top_val <- round_any(x = max(city_county_zip_sf$confirmed_rate, na.rm = TRUE), accuracy = 1, f = ceiling)
 
 ## plot poverty position = "jitter"
-ggplot() +
+p <- ggplot() +
   geom_smooth(data = city_county_zip_sf, mapping = aes(x = confirmed_rate, pvty_pct), 
               method = "lm", color = "#D95F02", size = 1.5, linetype = "dashed") +
   geom_point(data = focal_zips, mapping = aes(x = confirmed_rate, pvty_pct), color = "#D95F02", size = 6) +
@@ -72,15 +72,15 @@ ggplot() +
   sequoia_theme(base_size = 22, background = "white")
 
 ## save plots
-save_plots(filename = "results/high_res/stl_zip/b_poverty_plot.png", preset = "lg")
-save_plots(filename = "results/low_res/stl_zip/b_poverty_plot.png", preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/stl_zip/b_poverty_plot.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/b_poverty_plot.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
 # plot race
 
 ## plot race
-ggplot() +
+p <- ggplot() +
   geom_smooth(data = city_county_zip_sf, mapping = aes(x = confirmed_rate, blk_pct), 
               method = "lm", color = "#D95F02", size = 1.5, linetype = "dashed") +
   geom_point(data = focal_zips, mapping = aes(x = confirmed_rate, blk_pct), color = "#D95F02", size = 6) +
@@ -106,11 +106,11 @@ ggplot() +
   sequoia_theme(base_size = 22, background = "white")
 
 ## save plots
-save_plots(filename = "results/high_res/stl_zip/c_race_plot.png", preset = "lg")
-save_plots(filename = "results/low_res/stl_zip/c_race_plot.png", preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/stl_zip/c_race_plot.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/c_race_plot.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
 # clean-up
 rm(city_county_zip_sf, focal_zips, non_focal_zips, zip_na, zip_valid)
-rm(top_val)
+rm(p, top_val)

@@ -52,9 +52,13 @@ source("source/workflow/plot/05_county_plots_midmo.R")
 source("source/workflow/plot/06_stl_county_plots.R")
 source("source/workflow/plot/07_stl_zip_plots.R")
 source("source/workflow/plot/08_stl_individual_plots.R")
-# source("source/workflow/plot/07_kc_county_plots.R")
 
-source("source/workflow/plot/08_kc_plots.R")
+source("source/workflow/plot/09_kc_county_plots.R")
+
+# =============================================================================
+
+# clean-up
+rm(plot_date, save_plots, sequoia_theme)
 
 # =============================================================================
 
