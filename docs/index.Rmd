@@ -66,9 +66,7 @@ zip_snapshot <- st_read(here::here("data", "zip", "daily_snapshot_city_county.ge
 ```
 
 ## Introduction
-These maps summarize the latest available COVID-19 outbreak data from Johns Hopkins University's [COVID-19 project](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data), the New York Time's [COVID-19 project](http://github.com/nytimes/covid-19-data), the City of St. Louis, and St. Louis County. 
-
-For state and county-level data, this site uses the most recent Johns Hopkins University daily release. For all prior days, the New York Times' data are used. The Johns Hopkins data are published on a faster schedule but sometimes are not updated for all states or counties. Conversely, the New York Times' data are published on a slower schedule but have more consistent updates across states and counties. Using the latest Johns Hopkins release allows for faster updates, while using the New York Times' data for all prior days balances our need for recent data with consistency.
+These maps summarize the latest available COVID-19 outbreak data from the New York Time's [COVID-19 project](http://github.com/nytimes/covid-19-data), the City of St. Louis, and St. Louis County. The New York Times data are used for state and county-level data and local data sources are used for zip code and individual level data.
 
 ### What Makes These Maps Unique?
 Unlike other interactive maps being used to track the outbreak, the initial three maps include the counties in Illinois, Kansas, and Oklahoma that are part of Missouri's metropolitan areas. Kansas City itself is also displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
@@ -79,11 +77,9 @@ The final map is also unique - it includes both the City of St. Louis and St. Lo
 These maps are fully interactive. Clicking on a county will reveal some details about that place. You can navigate around them just as you would with Google Maps. You can zoom with your mouse or the `plus` and `minus` buttons in the upper-left corner of each map. You may also move the maps around by clicking with your mouse and dragging.
 
 ### Caveats
-Due to lags in reporting, both at the public health department level and at Johns Hopkins itself, these numbers may lag behind other figures reported in the media. 
+Due to lags in reporting, both at the public health department level and at the New York Times itself, these numbers may lag behind other figures reported in the media. 
 
-**As of April 14th, the CDC began requesting data on presumed positive cases.** This means that individuals who physicians believe are infected with COVID-19, but who cannot get access to testing, should be reported. Beginning on April 17th, signs in Missouri's data appeared that suggested at least one county, Moniteau, was reporting both confirmed and presumed positives. This change was confirmed on the Moniteau County's Public Department [COVID-19 website](https://moniteaucovid19.com).
-
-This complicates the data picture, since the data for Moniteau County are now not directly comparable to data for any county in Missouri that is still only reporting those cases that have a confirmed positive test result. **In the short term, this change is going to distort all of the county-level maps and plots on this site.** Please keep that in mind. In an ideal world, all counties would have begun reporting probable cases at the same time in Missouri. Hopefully we are able to get a clearer data picture in the coming days as more counties change their reporting processes.
+Prior to April 29th, I also used data from Johns Hopkins. As of the 29th, I am no longer using the Hopkins data because the New York Times only includes confirmed cases, while the Hopkins data inclues both confirmed and probable cases. Because probable cases are not being reported uniformly, and the New York Times is actively curating their data to remove them, their data seem to be the more stable (if conservative) option for the present.
 
 ## Daily Data {.tabset}
 While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1), and [Kansas City](https://www.kcmo.gov/city-hall/departments/health/coronavirus-covid-19/covid-19-totals) provide day-by-day tracking of cumulative cases on their respective dashboards, the State of Missouri does not. The following tabs provide daily breakdowns of COVIV data as well as additional statistics not included in the existing dashboards. Data are also provided for the wider St. Louis and Kansas City metro areas. Please note that the two average columns for reported cases and deaths are both seven-day rolling averages.
