@@ -17,7 +17,11 @@ city_dates %>%
     cases = confirmed,
     case_rate = confirmed_rate
   ) %>%
-  mutate(zip = as.character(zip)) -> stl_city_zip
+  mutate(zip = as.character(zip)) %>% 
+  mutate(
+    cases = ifelse(is.na(cases) == TRUE, NaN, cases),
+    case_rate = ifelse(is.na(case_rate) == TRUE, NaN, case_rate)
+  ) -> stl_city_zip
 
 # subset detailed data
 stl_city_zip_sub <- filter(stl_city_zip, report_date == date+1)
@@ -29,8 +33,6 @@ left_join(stl_city_zip_sf, stl_city_zip_sub, by = "zip") %>%
 
 # write data
 write_csv(stl_city_zip, "data/zip/zip_stl_city.csv")
-st_write(stl_city_zip_sf, "data/zip/daily_snapshot_stl_city.geojson",
-         delete_dsn = TRUE)
 
 # clean-up
 rm(stl_city_zip, stl_city_zip_sub, city_dates)
@@ -50,7 +52,11 @@ county_dates %>%
     cases = confirmed,
     case_rate = confirmed_rate
   ) %>%
-  mutate(zip = as.character(zip)) -> stl_county_zip
+  mutate(zip = as.character(zip)) %>% 
+  mutate(
+    cases = ifelse(is.na(cases) == TRUE, NaN, cases),
+    case_rate = ifelse(is.na(case_rate) == TRUE, NaN, case_rate)
+  ) -> stl_county_zip
 
 # subset detailed data
 stl_county_zip_sub <- filter(stl_county_zip, report_date == date+1)
@@ -62,8 +68,6 @@ left_join(stl_county_zip_sf, stl_county_zip_sub, by = "zip") %>%
 
 # write data
 write_csv(stl_county_zip, "data/zip/zip_stl_county.csv")
-st_write(stl_county_zip_sf, "data/zip/daily_snapshot_stl_county.geojson",
-         delete_dsn = TRUE)
 
 # clean-up
 rm(stl_county_zip, stl_county_zip_sub, county_dates)
@@ -106,10 +110,15 @@ city_county_zip_sf <- rbind(city_county_zip_sf, city_na, county_na) %>%
 city_county_zip_sf <- mutate(city_county_zip_sf, case_rate = cases/total_pop*1000)
 
 # clean-up
-rm(stl_city_zip_sf, stl_county_zip_sf, stl_city_zip, stl_county_zip, pop_city, pop_county,
+rm(stl_city_zip, stl_county_zip, pop_city, pop_county,
    city_na, county_na, stl_zip, city_lt5, wrangle_zip)
 
+# write data
+st_write(stl_city_zip_sf, "data/zip/daily_snapshot_stl_city.geojson",
+         delete_dsn = TRUE)
+st_write(stl_county_zip_sf, "data/zip/daily_snapshot_stl_county.geojson",
+         delete_dsn = TRUE)
 st_write(city_county_zip_sf, "data/zip/daily_snapshot_city_county.geojson",
          delete_dsn = TRUE)
 
-rm(city_county_zip_sf)
+rm(city_county_zip_sf, stl_city_zip_sf, stl_county_zip_sf)
