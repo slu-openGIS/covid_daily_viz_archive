@@ -31,9 +31,8 @@ wrangle_zip <- function(date, county){
                       report_date = date,
                       geoid = paste0("29", county),
                       county = county_name,
-                      state = "Missouri",
-                      last_update = Sys.time())
-  df <- dplyr::select(df, report_date, zip, geoid, county, state, last_update, count)
+                      state = "Missouri")
+  df <- dplyr::select(df, report_date, zip, geoid, county, state, count)
   df <- dplyr::rename(df, confirmed = count)
   
   # calculate rate

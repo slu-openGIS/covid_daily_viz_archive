@@ -7,7 +7,7 @@ city_county_zip_sf <- st_read("data/source/stl_zips/city_county_zip/city_county_
                               stringsAsFactors = FALSE)
 
 # define days to load
-city_dates <- seq(as.Date("2020-04-01"), date, by="days")
+city_dates <- seq(as.Date("2020-04-01"), date+1, by="days")
 
 # load zip data
 city_dates %>%
@@ -20,11 +20,11 @@ city_dates %>%
   mutate(zip = as.character(zip)) -> stl_city_zip
 
 # subset detailed data
-stl_city_zip_sub <- filter(stl_city_zip, report_date == date)
+stl_city_zip_sub <- filter(stl_city_zip, report_date == date+1)
 
 # combine with geometry
 left_join(stl_city_zip_sf, stl_city_zip_sub, by = "zip") %>%
-  select(report_date, zip, geoid, county, state, last_update, 
+  select(report_date, zip, geoid, county, state, 
          pvty_pct, wht_pct, blk_pct, cases, case_rate) -> stl_city_zip_sf
 
 # write data
@@ -40,7 +40,7 @@ stl_county_zip_sf <- st_read("data/source/stl_zips/stl_county_zip/stl_county_zip
                            crs = 4326, stringsAsFactors = FALSE)
 
 # define days to load
-county_dates <- seq(as.Date("2020-04-06"), date, by="days")
+county_dates <- seq(as.Date("2020-04-06"), date+1, by="days")
 
 # load zip data
 county_dates %>%
@@ -53,11 +53,11 @@ county_dates %>%
   mutate(zip = as.character(zip)) -> stl_county_zip
 
 # subset detailed data
-stl_county_zip_sub <- filter(stl_county_zip, report_date == date)
+stl_county_zip_sub <- filter(stl_county_zip, report_date == date+1)
 
 # combine with geometry
 left_join(stl_county_zip_sf, stl_county_zip_sub, by = "zip") %>%
-  select(report_date, zip, geoid, county, state, last_update, 
+  select(report_date, zip, geoid, county, state, 
          pvty_pct, wht_pct, blk_pct, cases, case_rate) -> stl_county_zip_sf
 
 # write data
