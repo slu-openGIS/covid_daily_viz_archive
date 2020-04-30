@@ -69,15 +69,15 @@ p <- ggplot(data = stl_sf) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines"), size = 6) +
   scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
   labs(
-    title = "Confirmed COVID-19 Cases by Metro St. Louis County",
+    title = "Reported COVID-19 Cases in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = caption_text_census
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
 ## save maps
-save_plots(filename = "results/high_res/stl_metro/a_confirmed_map.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/stl_metro/a_confirmed_map.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/stl_metro/a_case_map.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/stl_metro/a_case_map.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
@@ -105,7 +105,7 @@ p <- ggplot() +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .5)) + 
   labs(
-    title = "Reported COVID-19 Cases by Metro St. Louis County",
+    title = "Reported COVID-19 Cases in Metro St. Louis",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
     x = "Date",
     y = "Rate per 1,000",
@@ -160,7 +160,7 @@ p <- ggplot(data = county_subset) +
   scale_y_log10(limits = c(5, 3000), breaks = c(5,10,30,100,300,1000,3000), labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
-    title = "Pace of COVID-19 Cases by Metro St. Louis County",
+    title = "Pace of COVID-19 Cases in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = caption_text,
     x = "Days Since Fifth Case Reported",
@@ -217,7 +217,7 @@ p <- ggplot(data = county_subset) +
   scale_y_log10(limits = c(.3, 300), breaks = c(.3, 1, 3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
-    title = "Pace of New COVID-19 Cases by Metro St. Louis County",
+    title = "Pace of New COVID-19 Cases in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = caption_text,
     x = "Days Since Average of Five Cases Reached",
@@ -242,7 +242,7 @@ p <- ggplot(data = stl_sf) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines"), size = 6) +
   scale_fill_brewer(palette = "YlGn", name = "Percent") +
   labs(
-    title = "COVID-19 Mortality by Metro St. Louis County",
+    title = "COVID-19 Mortality in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = caption_text_census
   ) +
@@ -278,7 +278,7 @@ p <- ggplot() +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .05)) +
   labs(
-    title = "Reported COVID-19 Mortality by Metro St. Louis County",
+    title = "Reported COVID-19 Mortality in Metro St. Louis",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
     x = "Date",
     y = "Mortality Rate per 1,000",
@@ -335,7 +335,7 @@ p <- ggplot(data = county_subset) +
   scale_y_log10(limits = c(3, 400), breaks = c(3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
-    title = "Pace of COVID-19 Deaths by Metro St. Louis County",
+    title = "Pace of COVID-19 Deaths in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = caption_text,
     x = "Days Since Third Death Reported",
@@ -391,7 +391,7 @@ p <- ggplot(data = county_subset) +
   scale_y_log10(limits = c(1, 30), breaks = c(1, 3, 10, 30), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
-    title = "Pace of New COVID-19 Deaths by Metro St. Louis County",
+    title = "Pace of New COVID-19 Deaths in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = caption_text,
     x = "Days Since Average of Three Deaths Reported",
@@ -415,7 +415,7 @@ p <- ggplot(data = stl_sf) +
   geom_sf_label(mapping = aes(label = county), label.padding = unit(0.15, "lines"), size = 6) +
   scale_fill_brewer(palette = "BuPu", name = "Percent") +
   labs(
-    title = "COVID-19 Case Fatality by Metro St. Louis County",
+    title = "COVID-19 Case Fatality in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = caption_text
   ) +
@@ -449,7 +449,7 @@ p <- ggplot() +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,12), breaks = seq(0, 12, by = 1)) +
   labs(
-    title = "COVID-19 Case Fatality by Metro St. Louis County",
+    title = "COVID-19 Case Fatality in Metro St. Louis",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
     x = "Date",
     y = "Case Fatality (%)",
@@ -467,4 +467,3 @@ save_plots(filename = "results/low_res/stl_metro/j_case_fatality_rate.png", plot
 rm(stl_sf, county_focal, county_points, report_points, report_label, county_subset,
    county_data, county_day_points, report_day_points, report_line)
 rm(top_val, pal, cols, p)
-

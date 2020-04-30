@@ -518,6 +518,7 @@ In addition to the interactive maps above, I regularly update a range of static 
 | Links |  |  |
 |-------------------------|--|--|
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/b_case_rate.png" target="_blanl">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/c_case_log.png" target="_blanl">Reported Cases (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/d_case_log_avg.png" target="_blanl">Average New Cases (Log)</a> |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/d_case_log_avg_mo_only.png" target="_blanl">Average New Cases, MO Only (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/d_case_count_avg_mo_only.png" target="_blanl">Average New Cases, MO Only (Count)</a> | |
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/f_mortality_rate.png" target="_blanl">Mortality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/g_mortality_log.png" target="_blanl">Mortality (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/h_mortality_log_avg.png" target="_blanl">Average New Mortality (Log)</a> |
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/j_case_fatality_rate.png" target="_blanl">Case Fatality (Percent)</a> | | |
 
@@ -525,8 +526,8 @@ In addition to the interactive maps above, I regularly update a range of static 
 
 | Links |  |  |
 |-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/b_case_rate.png" target="_blanl">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/c_case_log.png" target="_blanl">Reported Cases (Log)</a> | |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/f_mortality_rate.png" target="_blanl">Mortality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/g_mortality_log.png" target="_blanl">Mortality (Log)</a> | |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/b_case_rate.png" target="_blanl">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/c_case_log.png" target="_blanl">Reported Cases (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/d_case_log_avg.png" target="_blanl">Average New Cases (Log)</a> |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/f_mortality_rate.png" target="_blanl">Mortality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/g_mortality_log.png" target="_blanl">Mortality (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/h_mortality_log_avg.png" target="_blanl">Average New Mortality (Log)</a> |
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/j_case_fatality_rate.png" target="_blanl">Case Fatality (Percent)</a> | | |
 
 ### Counties
@@ -542,9 +543,19 @@ In addition to the interactive maps above, I regularly update a range of static 
 
 | Links |  |  |
 |-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/a_confirmed_map.png" target="_blanl">Reported Cases (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/b_case_rate.png" target="_blanl">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/c_case_log.png" target="_blanl">Reported Cases (Log)</a> |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/a_case_map.png" target="_blanl">Reported Cases (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/b_case_rate.png" target="_blanl">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/c_case_log.png" target="_blanl">Reported Cases (Log)</a> |
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/d_case_log_avg.png" target="_blanl">Average New Cases (Log)</a> | | |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/e_mortality_map.png" target="_blanl">Mortality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/i_case_fatality.png" target="_blanl">Case Fatality (Map)</a> | |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/e_mortality_map.png" target="_blanl">Mortality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/f_mortality_rate.png" target="_blanl">Mortality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/g_mortality_log.png" target="_blanl">Mortality (Log)</a> | 
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/i_case_fatality_map.png" target="_blanl">Case Fatality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/j_case_fatality_rate.png" target="_blanl">Case Fatality (Percent)</a> | |
+
+### Kansas City Metro
+
+| Links |  |  |
+|-------------------------|--|--|
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/a_case_map.png" target="_blanl">Reported Cases (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/b_case_rate.png" target="_blanl">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/c_case_log.png" target="_blanl">Reported Cases (Log)</a> |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/d_case_log_avg.png" target="_blanl">Average New Cases (Log)</a> | | |
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/e_mortality_map.png" target="_blanl">Mortality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/f_mortality_rate.png" target="_blanl">Mortality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/g_mortality_log.png" target="_blanl">Mortality (Log)</a> | 
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/i_case_fatality_map.png" target="_blanl">Case Fatality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/j_case_fatality_rate.png" target="_blanl">Case Fatality (Percent)</a> | |
 
 ## Technical Notes
 * The Fisher breaks algorithm (Fisher 1958, Slocum et al. 2005) is used to identify legend categories
