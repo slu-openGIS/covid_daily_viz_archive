@@ -278,7 +278,7 @@ save_plots(filename = "results/low_res/metro/g_mortality_log.png", plot = p, pre
 
 # =============================================================================
 
-# create days from first day where average deaths were over 3, state-level data
+# create days from first day where average deaths were over 3, metro-level data
 
 ## subset data
 metro_data %>%
