@@ -334,7 +334,7 @@ leaflet() %>%
     fillColor = ~pal(avg_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste("<b>County:</b> ", snapshot$county, "<br>",
-                           "<b>Current Cumulative Count:</b> ", snapshot$confirmed, "<br>",
+                           "<b>Current Cumulative Count:</b> ", snapshot$cases, "<br>",
                            "<b>7-day Average of New Cases:</b> ", round(snapshot$case_avg, digits = 2), "<br>",
                            "<b>Average New Cases per 1,000 Residents:</b> ", round(snapshot$avg_rate, digits = 2), "<br>",
                            "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
