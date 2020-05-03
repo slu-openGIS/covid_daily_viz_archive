@@ -38,9 +38,10 @@ day,report_date,state,case_avg,factor_var
 36,2020-04-25,Missouri,187,Missouri
 37,2020-04-26,Missouri,190.14285714285714,Missouri
 38,2020-04-27,Missouri,195,Missouri
-39,2020-04-28,Missouri,209.57142857142858,Missouri
-40,2020-04-29,Missouri,204.28571428571428,Missouri
-41,2020-04-30,Missouri,199.14285714285714,Missouri
+39,2020-04-28,Missouri,195,Missouri
+40,2020-04-29,Missouri,184.57142857142858,Missouri
+41,2020-04-30,Missouri,177.71428571428572,Missouri
+42,2020-05-01,Missouri,173.85714285714286,Missouri
 0,2020-03-20,Missouri (No STL),6.857142857142857,Missouri (No STL)
 1,2020-03-21,Missouri (No STL),7.714285714285714,Missouri (No STL)
 2,2020-03-22,Missouri (No STL),7.714285714285714,Missouri (No STL)
@@ -80,6 +81,7 @@ day,report_date,state,case_avg,factor_var
 36,2020-04-25,Missouri (No STL),56.42857142857143,Missouri (No STL)
 37,2020-04-26,Missouri (No STL),60.57142857142857,Missouri (No STL)
 38,2020-04-27,Missouri (No STL),63.285714285714285,Missouri (No STL)
-39,2020-04-28,Missouri (No STL),74.71428571428571,Missouri (No STL)
-40,2020-04-29,Missouri (No STL),79.42857142857143,Missouri (No STL)
-41,2020-04-30,Missouri (No STL),78.85714285714286,Missouri (No STL)
+39,2020-04-28,Missouri (No STL),60.142857142857146,Missouri (No STL)
+40,2020-04-29,Missouri (No STL),59.714285714285715,Missouri (No STL)
+41,2020-04-30,Missouri (No STL),57.42857142857143,Missouri (No STL)
+42,2020-05-01,Missouri (No STL),61.857142857142854,Missouri (No STL)
