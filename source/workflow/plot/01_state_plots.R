@@ -522,10 +522,10 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 250)) + 
   labs(
     title = "COVID-19 Tests by State",
-    subtitle = paste0("2020-04-30 through ", as.character(test_date)),
+    subtitle = paste0("2020-04-03 through ", as.character(test_date)),
     x = "Date",
     y = "Rate per 100,00 Residents",
-    caption = caption_text_tests
+    caption = caption_text_tests_census
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
@@ -559,10 +559,10 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 20)) + 
   labs(
     title = "New COVID-19 Tests by State",
-    subtitle = paste0("2020-04-30 through ", as.character(test_date)),
+    subtitle = paste0("2020-04-03 through ", as.character(test_date)),
     x = "Date",
     y = "7-day Average of New Tests per 100,00 Residents",
-    caption = caption_text_tests
+    caption = caption_text_tests_census
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
@@ -596,7 +596,7 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 5)) + 
   labs(
     title = "COVID-19 Positive Tests by State",
-    subtitle = paste0("2020-04-30 through ", as.character(test_date)),
+    subtitle = paste0("2020-04-03 through ", as.character(test_date)),
     x = "Date",
     y = "7-day Average of Positive Tests (%)",
     caption = caption_text_tests
