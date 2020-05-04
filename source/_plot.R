@@ -70,7 +70,7 @@ rm(plot_date, save_plots, sequoia_theme, date_breaks, calculate_days, filter_dat
 # update interactive map
 rmarkdown::render(input = "docs/index.Rmd",
                   params = list(
-                    date = paste0("Current as of ", as.character(date)),
+                    date = paste0("Curgrent as of ", as.character(date)),
                     date_val = as.character(date),
                     prior_date_val = as.character(date-7)
                   ))
@@ -80,4 +80,4 @@ rmarkdown::render(input = "docs/index.Rmd",
 # clean-up
 rm(pal, snapshot, date, zip_snapshot, map_breaks, map_bins, bins, round_any,
    data_table, state_data, stl_city_data, stl_county_data, kc_city_data,
-   kc_metro_data, stl_metro_data)
+   kc_metro_data, stl_metro_data, state_test_data)
