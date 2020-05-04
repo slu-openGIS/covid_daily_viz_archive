@@ -524,7 +524,7 @@ p <- ggplot() +
     title = "COVID-19 Tests by State",
     subtitle = paste0("2020-04-03 through ", as.character(test_date)),
     x = "Date",
-    y = "Rate per 100,00 Residents",
+    y = "Rate per 100,000 Residents",
     caption = caption_text_tests_census
   ) +
   sequoia_theme(base_size = 22, background = "white")
@@ -561,7 +561,7 @@ p <- ggplot() +
     title = "New COVID-19 Tests by State",
     subtitle = paste0("2020-04-03 through ", as.character(test_date)),
     x = "Date",
-    y = "7-day Average of New Tests per 100,00 Residents",
+    y = "7-day Average of New Tests per 100,000 Residents",
     caption = caption_text_tests_census
   ) +
   sequoia_theme(base_size = 22, background = "white")
@@ -610,6 +610,7 @@ save_plots(filename = "results/low_res/state/m_positive_avg.png", plot = p, pres
 # =============================================================================
 
 # clean-up
-rm(state_data, state_subset, state_points, state_day_points, state_test_data)
+rm(state_data, state_subset, state_points, state_day_points, state_test_data,
+   caption_text_tests, caption_text_tests_census, test_date, test_date_breaks)
 rm(top_val, pal, cols, p, report_points, report_label, report_line, report_day_points)
 
