@@ -1,7 +1,7 @@
 # Scape Data and Construct Data Sets
 
 # UPDATE date value
-date <- lubridate::mdy("05-01-2020")
+date <- lubridate::mdy("05-02-2020")
 
 # UPDATE city zip's with < 5 or 0 cases
 city_lt5 <- c("63105", "63117", "63119", "63125", "63130", "63133", "63137", "63143")
@@ -26,6 +26,7 @@ source("source/workflow/build/02_create_state_msa.R")
 source("source/workflow/build/03_add_rates.R")
 source("source/workflow/build/04_create_spatial.R")
 source("source/workflow/build/05_create_zip.R")
+source("source/workflow/build/06_create_testing.R")
 
 # update interactive map
 rmarkdown::render(input = "docs/index.Rmd",

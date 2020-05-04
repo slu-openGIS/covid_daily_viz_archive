@@ -11,6 +11,8 @@ non_stl_data <- read_csv("data/county/county_full.csv") %>%
   filter(state == "Missouri") %>%
   filter(geoid %in% c("29071", "29099", "29113", "29183", "29189", "29219", "29510") == FALSE)
 
+state_test_data <- read_csv("data/state/state_testing.csv")
+
 # =============================================================================
 
 # define colors
@@ -496,7 +498,118 @@ save_plots(filename = "results/low_res/state/j_case_fatality_rate.png", plot = p
 
 # =============================================================================
 
+# plot test rate
+## subset
+state_subset <- filter(state_test_data, report_date >= as.Date("2020-04-03") & report_date <= test_date)
+
+## re-create end points
+state_points <- filter(state_test_data, report_date == test_date)
+
+## define top_val
+top_val <- round_any(x = max(state_subset$test_rate), accuracy = 100, f = ceiling)
+
+## create factors
+state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, test_rate))
+state_points <- mutate(state_points, factor_var = fct_reorder2(state, report_date, test_rate))
+
+## create plot
+p <- ggplot() +
+  geom_line(state_subset, mapping = aes(x = report_date, y = test_rate, color = factor_var), size = 2) +
+  geom_point(state_points, mapping = aes(x = report_date, y = test_rate, color = factor_var), 
+             size = 4, show.legend = FALSE) +
+  scale_colour_manual(values = cols, name = "State") +
+  scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 250)) + 
+  labs(
+    title = "COVID-19 Tests by State",
+    subtitle = paste0("2020-04-30 through ", as.character(test_date)),
+    x = "Date",
+    y = "Rate per 100,00 Residents",
+    caption = caption_text_tests
+  ) +
+  sequoia_theme(base_size = 22, background = "white")
+
+## save plot
+save_plots(filename = "results/high_res/state/k_test_rate.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/state/k_test_rate.png", plot = p, preset = "lg", dpi = 72)
+
+# =============================================================================
+
+# plot 7-day average of new tests
+## subset
+state_subset <- filter(state_test_data, report_date >= as.Date("2020-04-03") & report_date <= test_date)
+
+## re-create end points
+state_points <- filter(state_test_data, report_date == test_date)
+
+## define top_val
+top_val <- round_any(x = max(state_subset$new_test_rate_avg), accuracy = 20, f = ceiling)
+
+## create factors
+state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, new_test_rate_avg))
+state_points <- mutate(state_points, factor_var = fct_reorder2(state, report_date, new_test_rate_avg))
+
+## create plot
+p <- ggplot() +
+  geom_line(state_subset, mapping = aes(x = report_date, y = new_test_rate_avg, color = factor_var), size = 2) +
+  geom_point(state_points, mapping = aes(x = report_date, y = new_test_rate_avg, color = factor_var), 
+             size = 4, show.legend = FALSE) +
+  scale_colour_manual(values = cols, name = "State") +
+  scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 20)) + 
+  labs(
+    title = "New COVID-19 Tests by State",
+    subtitle = paste0("2020-04-30 through ", as.character(test_date)),
+    x = "Date",
+    y = "7-day Average of New Tests per 100,00 Residents",
+    caption = caption_text_tests
+  ) +
+  sequoia_theme(base_size = 22, background = "white")
+
+## save plot
+save_plots(filename = "results/high_res/state/l_new_tests_avg.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/state/l_new_tests_avg.png", plot = p, preset = "lg", dpi = 72)
+
+# =============================================================================
+
+# plot 7-day average of new tests
+## subset
+state_subset <- filter(state_test_data, report_date >= as.Date("2020-04-03") & report_date <= test_date)
+
+## re-create end points
+state_points <- filter(state_test_data, report_date == test_date)
+
+## define top_val
+top_val <- round_any(x = max(state_subset$positive_avg), accuracy = 5, f = ceiling)
+
+## create factors
+state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, positive_avg))
+state_points <- mutate(state_points, factor_var = fct_reorder2(state, report_date, positive_avg))
+
+## create plot
+p <- ggplot() +
+  geom_line(state_subset, mapping = aes(x = report_date, y = positive_avg, color = factor_var), size = 2) +
+  geom_point(state_points, mapping = aes(x = report_date, y = positive_avg, color = factor_var), 
+             size = 4, show.legend = FALSE) +
+  scale_colour_manual(values = cols, name = "State") +
+  scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 5)) + 
+  labs(
+    title = "COVID-19 Positive Tests by State",
+    subtitle = paste0("2020-04-30 through ", as.character(test_date)),
+    x = "Date",
+    y = "7-day Average of Positive Tests (%)",
+    caption = caption_text_tests
+  ) +
+  sequoia_theme(base_size = 22, background = "white")
+
+## save plot
+save_plots(filename = "results/high_res/state/m_positive_avg.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/state/m_positive_avg.png", plot = p, preset = "lg", dpi = 72)
+
+# =============================================================================
+
 # clean-up
-rm(state_data, state_subset, state_points, state_day_points)
+rm(state_data, state_subset, state_points, state_day_points, state_test_data)
 rm(top_val, pal, cols, p, report_points, report_label, report_line, report_day_points)
 

@@ -98,12 +98,14 @@ top_val <- round_any(x = max(county_subset$day), accuracy = 5, f = ceiling)
 county_subset %>%
   group_by(geoid) %>%
   summarise(day = max(day)) %>%
-  left_join(county_points, ., by = "geoid") -> county_day_points
+  left_join(county_points, ., by = "geoid") %>%
+  filter(county %in% unique(county_subset$county)) -> county_day_points
 
 ## add day to report points
 county_subset %>%
   select(county, report_date, day) %>%
-  left_join(report_points, ., by = c("county", "report_date")) -> report_day_points
+  left_join(report_points, ., by = c("county", "report_date")) %>%
+  filter(county %in% unique(county_subset$county)) -> report_day_points
 
 report_label <- filter(report_day_points, county == "St. Louis")
 

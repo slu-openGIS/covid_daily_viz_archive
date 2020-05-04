@@ -3,16 +3,20 @@
 # =============================================================================
 
 # UPDATE date value
-date <- lubridate::mdy("05-01-2020")
+date <- lubridate::mdy("05-02-2020")
 
 # define first date for plotting
 plot_date <- "2020-03-10"
 date_breaks <- "5 days"
+test_date <- "2020-05-03"
+test_date_breaks <- "3 days"
 
 # create caption
 # caption_text <- "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects"
 caption_text <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project"
 caption_text_census <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau"
+caption_text_tests <- "Plot by Christopher Prener, Ph.D.\nData via The Atlantic COVID-19 Tracking Project and the State of Missouri"
+caption_text_tests_census <- "Plot by Christopher Prener, Ph.D.\nData via The Atlantic COVID-19 Tracking Project, the State of Missouri, and and the U.S. Census Burea"
 
 # =============================================================================
 
@@ -48,11 +52,12 @@ source("source/workflow/plot/03_county_plots.R")
 ## regional plots
 source("source/workflow/plot/04_county_plots_semo.R")
 source("source/workflow/plot/05_county_plots_midmo.R")
+source("source/workflow/plot/06_county_plots_stjo.R")
 
-source("source/workflow/plot/06_stl_county_plots.R")
-source("source/workflow/plot/07_stl_zip_plots.R")
-source("source/workflow/plot/08_stl_individual_plots.R")
-source("source/workflow/plot/09_kc_county_plots.R")
+source("source/workflow/plot/07_stl_county_plots.R")
+source("source/workflow/plot/08_stl_zip_plots.R")
+source("source/workflow/plot/09_stl_individual_plots.R")
+source("source/workflow/plot/10_kc_county_plots.R")
 
 # =============================================================================
 
