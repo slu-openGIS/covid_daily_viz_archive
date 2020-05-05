@@ -1,7 +1,7 @@
 # Scape Data and Construct Data Sets
 
 # UPDATE date value
-date <- lubridate::mdy("05-02-2020")
+date <- lubridate::mdy("05-03-2020")
 
 # UPDATE city zip's with < 5 or 0 cases
 city_lt5 <- c("63105", "63117", "63119", "63125", "63130", "63133", "63137", "63143")
@@ -48,4 +48,4 @@ fs::file_delete("README.html")
 # clean-up
 rm(pal, snapshot, date, zip_snapshot, map_breaks, map_bins, bins, round_any,
    data_table, state_data, stl_city_data, stl_county_data, kc_city_data,
-   kc_metro_data, stl_metro_data)
+   kc_metro_data, stl_metro_data, state_test_data)
