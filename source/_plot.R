@@ -3,12 +3,12 @@
 # =============================================================================
 
 # UPDATE date value
-date <- lubridate::mdy("05-03-2020")
+date <- lubridate::mdy("05-04-2020")
 
 # define first date for plotting
 plot_date <- "2020-03-10"
 date_breaks <- "5 days"
-test_date <- "2020-05-04"
+test_date <- "2020-05-05"
 test_date_breaks <- "3 days"
 
 # create caption

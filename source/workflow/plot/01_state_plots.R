@@ -47,7 +47,7 @@ report_line <- tibble(
 state_subset <- filter(state_data, report_date >= plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$case_rate), accuracy = 25, f = ceiling)
+top_val <- round_any(x = max(state_subset$case_rate), accuracy = 50, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, case_rate))
@@ -63,7 +63,7 @@ p <- ggplot() +
   #                nudge_y = 10, nudge_x = -10, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 25)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 50)) + 
   labs(
     title = "Reported COVID-19 Cases by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -249,17 +249,17 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   # geom_point(report_day_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
   geom_point(peak_point, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
-  geom_point(peak_point_nostl, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
+  # geom_point(peak_point_nostl, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
   # geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
   #                nudge_y = .2, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = .25, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = .25, nudge_x = -1, size = 5) +
+                  nudge_y = .20, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = .15, nudge_x = 4, size = 5) +
-  geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = -.35, nudge_x = -1, size = 5) +
+  # geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
+  #                nudge_y = -.35, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
   scale_y_log10(limits = c(3, 500), breaks = c(3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
@@ -283,17 +283,17 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   # geom_point(report_day_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
   geom_point(peak_point, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
-  geom_point(peak_point_nostl, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
+  # geom_point(peak_point_nostl, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
   # geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
   #                nudge_y = -30, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 25, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = -50, nudge_x = -1, size = 5) +
+                  nudge_y = 50, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 25, nudge_x = 4, size = 5) +
-  geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = -45, nudge_x = -1, size = 5) +
+  # geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
+  #                nudge_y = -45, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
   scale_y_continuous(limits = c(0, 300), breaks = seq(0, 300, by = 50)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +

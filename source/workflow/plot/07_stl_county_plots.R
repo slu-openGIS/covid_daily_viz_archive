@@ -349,62 +349,6 @@ save_plots(filename = "results/low_res/stl_metro/g_mortality_log.png", plot = p,
 
 # =============================================================================
 
-# create days from first day where average deaths were over 3, county-level data
-
-## subset data
-county_data %>%
-  calculate_days(group_var = "geoid", stat_var = "deaths_avg", val = 3) %>%
-  select(day, report_date, geoid, county, deaths_avg) %>%
-  arrange(county, day) -> county_subset
-
-## define top_val
-top_val <- round_any(x = max(county_subset$day), accuracy = 5, f = ceiling)
-
-## identify max day
-county_subset %>%
-  group_by(geoid) %>%
-  summarise(day = max(day)) %>%
-  left_join(county_points, ., by = "geoid") %>%
-  filter(county %in% unique(county_subset$county)) -> county_day_points
-
-## add day to report points
-county_subset %>%
-  select(county, report_date, day) %>%
-  left_join(report_points, ., by = c("county", "report_date")) %>%
-  filter(county %in% unique(county_subset$county)) -> report_day_points
-
-report_label <- filter(report_day_points, county == "St. Louis")
-
-## create factors
-county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, day, deaths_avg))
-county_day_points <- mutate(county_day_points, factor_var = fct_reorder2(county, day, deaths_avg))
-
-## create plot
-p <- ggplot(data = county_subset) +
-  geom_line(mapping = aes(x = day, y = deaths_avg, color = factor_var), size = 2) +
-  geom_point(county_day_points, mapping = aes(x = day, y = deaths_avg, color = factor_var), 
-             size = 4, show.legend = FALSE) +
-  gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  # geom_point(report_day_points, mapping = aes(x = day, y = deaths_avg), size = 4, shape = 18) +
-  # geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths_avg, label = text),
-  #                nudge_y = .3, nudge_x = -1, size = 5) +
-  scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(1, 30), breaks = c(1, 3, 10, 30), labels = comma_format(accuracy = 1)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
-  labs(
-    title = "Pace of New COVID-19 Deaths in Metro St. Louis",
-    subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text,
-    x = "Days Since Average of Three Deaths Reported",
-    y = "7-day Average of New Deaths (Log)"
-  ) +
-  sequoia_theme(base_size = 22, background = "white")
-
-save_plots(filename = "results/high_res/stl_metro/h_mortality_log_avg.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/stl_metro/h_mortality_log_avg.png", plot = p, preset = "lg", dpi = 72)
-
-# =============================================================================
-
 # map case fatality rate
 ## create breaks
 stl_sf <- map_breaks(stl_sf, var = "case_fatality_rate", newvar = "case_fatality_breaks",
