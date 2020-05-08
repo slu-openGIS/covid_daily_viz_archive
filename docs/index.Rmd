@@ -68,7 +68,7 @@ zip_snapshot <- st_read(here::here("data", "zip", "daily_snapshot_city_county.ge
 ```
 
 ## Introduction
-These maps summarize the latest available COVID-19 outbreak data from the New York Time's [COVID-19 project](http://github.com/nytimes/covid-19-data), the City of St. Louis, and St. Louis County. The New York Times data are used for state and county-level data and local data sources are used for zip code and individual level data.
+These maps summarize the latest available COVID-19 outbreak data from the New York Time's [COVID-19 project](http://github.com/nytimes/covid-19-data), the [Johns Hopkins COVID-19 project](https://github.com/CSSEGISandData/COVID-19/), the City of St. Louis, and St. Louis County. The New York Times and Johns Hopkins data are used for state and county-level data, and local data sources are used for zip code and individual level data.
 
 ### What Makes These Maps Unique?
 Unlike other interactive maps being used to track the outbreak, the initial three maps include the counties in Illinois, Kansas, and Oklahoma that are part of Missouri's metropolitan areas. Kansas City itself is also displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
@@ -81,7 +81,7 @@ These maps are fully interactive. Clicking on a county will reveal some details 
 ### Caveats
 Due to lags in reporting, both at the public health department level and at the New York Times itself, these numbers may lag behind other figures reported in the media. 
 
-Prior to April 29th, I also used data from Johns Hopkins. As of the 29th, I am no longer using the Hopkins data because the New York Times only includes confirmed cases, while the Hopkins data inclues both confirmed and probable cases. Because probable cases are not being reported uniformly, and the New York Times is actively curating their data to remove them, their data seem to be the more stable (if conservative) option for the present.
+On May 6th, the New York Times began including probable cases (those without a confirmatory test result but where symptoms indicate a COVID-19 infection). These had been included in the Johns Hopkins data much earlier - as far back as mid-April following the CDC's guidance on April 14th to states and counties that they should begin reporting these. Not all counties report probable cases, however, and so I include markers on plots to indicate when the reporting change beginning on April 15th may have occurred.
 
 ## Daily Data {.tabset}
 While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1), and [Kansas City](https://www.kcmo.gov/city-hall/departments/health/coronavirus-covid-19/covid-19-totals) provide day-by-day tracking of cumulative cases on their respective dashboards, the State of Missouri does not. The following tabs provide daily breakdowns of COVIV data as well as additional statistics not included in the existing dashboards. Data are also provided for the wider St. Louis and Kansas City metro areas. Please note that the two average columns for reported cases and deaths are both seven-day rolling averages.
@@ -219,7 +219,7 @@ data_table
 ```
 
 ## Daily Testing Data {.tabset}
-Daily testing data are complied from a number of sources. For Missouri, the data set has been sourced directly from data posted by the [Missouri Department of Health & Senior Services](https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php) using a combination of data provided by [Denis Beganovic](https://twitter.com/beganovic2021), screen shots provided by The Alantic's [COVID Tracking Project](https://covidtracking.com), and the [wayback machine](http://web.archive.org). For other states, data is sourced from The Alantic's [COVID Tracking Project](https://covidtracking.com).
+Daily testing data are complied from a number of sources. For Missouri, the data set has been sourced directly from data posted by the [Missouri Department of Health & Senior Services](https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/results.php) using a combination of data provided by [Denis Beganovic](https://twitter.com/beganovic2021), screen shots provided by The Atlantic's [COVID Tracking Project](https://covidtracking.com), and the [wayback machine](http://web.archive.org). For other states, data is sourced from The Atlantic's [COVID Tracking Project](https://covidtracking.com).
 
 ### New Tests Average
 
@@ -240,7 +240,7 @@ knitr::include_graphics(here::here("results", "high_res", "state", "m_positive_a
 ```
 
 ### Missouri Data
-For Missouri, total numbers of test data are not available for many days in March and some days in April and May. For April and May, missing data are imputed using a linear teachnique. If Day 1 had 100 tests, and Day 3 had 200, Day 2 would assumed to have had 150 tests. Rates are per 100,000 residents, and averages are 7-day rolling averages.
+For Missouri, total numbers of test data are not available for many days in March and some days in April and May. For April and May, missing data are imputed using a linear technique. If Day 1 had 100 tests, and Day 3 had 200, Day 2 would assumed to have had 150 tests. Rates are per 100,000 residents, and averages are 7-day rolling averages.
 
 ```{r missouri-test-table, echo=FALSE, out.width = '100%'}
 state_test_data %>%
@@ -267,7 +267,7 @@ data_table
 ```
 
 ### All Data
-For Missouri, total numbers of test data are not available for many days in March and some days in April and May. For April and May, missing data are imputed using a linear teachnique. If Day 1 had 100 tests, and Day 3 had 200, Day 2 would assumed to have had 150 tests. Rates are per 100,000 residents, and averages are 7-day rolling averages.
+For Missouri, total numbers of test data are not available for many days in March and some days in April and May. For April and May, missing data are imputed using a linear technique. If Day 1 had 100 tests, and Day 3 had 200, Day 2 would assumed to have had 150 tests. Rates are per 100,000 residents, and averages are 7-day rolling averages.
 
 ```{r full-test-table, echo=FALSE, out.width = '100%'}
 state_test_data %>%
@@ -638,3 +638,4 @@ In addition to the interactive maps above, I regularly update a range of static 
 * The Fisher breaks algorithm (Fisher 1958, Slocum et al. 2005) is used to identify legend categories
 * Estimated populations for the the four counties around Kansas City as well as Kansas City itself were created using areal weighted interpolation (see Prener and Revord 2019)
 * Estimated populations for partial zip codes are also created using areal weighted interpolation (see Prener and Revord 2019)
+* For county and state-level data, the New York Times data set is used from January 24th through April 14th. Beginning April 15th, the Johns Hopkins data set is used.
