@@ -65,7 +65,7 @@ p <- ggplot() +
                   nudge_y = .15, nudge_x = -10, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .5)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
   labs(
     title = "Reported COVID-19 Cases by Select Missouri Counties",
     subtitle = paste0("St. Joseph Focus\n", as.character(plot_date), " through ", as.character(date)),
@@ -128,7 +128,7 @@ p <- ggplot(data = county_subset) +
     title = "Pace of COVID-19 Cases by Select Missouri Counties",
     subtitle = paste0("St. Joseph Focus\n", "Current as of ", as.character(date)),
     caption = caption_text,
-    x = "Days Since Tenth Case Reported",
+    x = "Days Since Fifth Case Reported",
     y = "Count of Reported Cases (Log)"
   ) +
   sequoia_theme(base_size = 22, background = "white")

@@ -49,8 +49,8 @@ report_points <- filter(county_data, report_date == as.Date("2020-04-15")) %>%
 report_line <- tibble(
   date = as.Date("2020-04-15"),
   case_rate = 3,
-  mortality_rate = NA,
-  case_fatality_rate = NA,
+  mortality_rate = .5,
+  case_fatality_rate = 11,
   text = "reporting change on 15 Apr"
 )
 
@@ -69,7 +69,7 @@ p <- ggplot(data = kc_sf) +
   labs(
     title = "Reported COVID-19 Cases in Metro Kansas City",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text_census
+    caption = caption_text_census_map
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -84,7 +84,7 @@ save_plots(filename = "results/low_res/kc_metro/a_case_map.png", plot = p, prese
 county_subset <- filter(county_data, report_date >= plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_rate), accuracy = .5, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_rate), accuracy = 1, f = ceiling)
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, case_rate))
@@ -101,7 +101,7 @@ p <- ggplot() +
                   nudge_y = .15, nudge_x = -10, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .5)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
   labs(
     title = "Reported COVID-19 Cases in Metro Kansas City",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -243,7 +243,7 @@ p <- ggplot(data = kc_sf) +
   labs(
     title = "COVID-19 Mortality in Metro Kansas City",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text_census
+    caption = caption_text_census_map
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -360,7 +360,7 @@ p <- ggplot(data = kc_sf) +
   labs(
     title = "COVID-19 Case Fatality in Metro Kansas City",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text
+    caption = caption_text_census_map2
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 

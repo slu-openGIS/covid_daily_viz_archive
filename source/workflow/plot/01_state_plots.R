@@ -2,6 +2,11 @@
 
 # =============================================================================
 
+# create test_date
+test_date <- date
+
+# =============================================================================
+
 # load data
 
 state_data <- read_csv("data/state/state_full.csv") 
@@ -251,11 +256,11 @@ p <- ggplot() +
   geom_point(peak_point, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
   # geom_point(peak_point_nostl, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = .2, nudge_x = -1, size = 5) +
+                  nudge_y = -.3, nudge_x = -2, size = 5) +
   geom_text_repel(data = peak_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = .25, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = .20, nudge_x = -1, size = 5) +
+                  nudge_y = .15, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = .15, nudge_x = 4, size = 5) +
   # geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
@@ -289,7 +294,7 @@ p <- ggplot() +
   geom_text_repel(data = peak_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 25, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = 50, nudge_x = -1, size = 5) +
+                  nudge_y = 25, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 25, nudge_x = 4, size = 5) +
   # geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
@@ -392,7 +397,7 @@ p <- ggplot() +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths, label = text),
                   nudge_y = .2, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(3, 3000), breaks = c(3, 10, 30, 100, 300, 1000, 3000), labels = comma_format(accuracy = 1)) +
+  scale_y_log10(limits = c(3, 4000), breaks = c(3, 10, 30, 100, 300, 1000, 3000), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Deaths by State",
@@ -444,7 +449,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = deaths_avg), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths_avg, label = text),
-                  nudge_y = .12, nudge_x = -1, size = 5) +
+                  nudge_y = .25, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(1, 300), breaks = c(1,3,10,30,100, 300), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +

@@ -51,8 +51,8 @@ report_points <- filter(county_data, report_date == as.Date("2020-04-15")) %>%
 report_line <- tibble(
   date = as.Date("2020-04-15"),
   case_rate = 3,
-  mortality_rate = NA,
-  case_fatality_rate = NA,
+  mortality_rate = .5,
+  case_fatality_rate = 11,
   text = "reporting change on 15 Apr"
 )
 
@@ -71,7 +71,7 @@ p <- ggplot(data = stl_sf) +
   labs(
     title = "Reported COVID-19 Cases in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text_census
+    caption = caption_text_census_map
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -245,7 +245,7 @@ p <- ggplot(data = stl_sf) +
   labs(
     title = "COVID-19 Mortality in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text_census
+    caption = caption_text_census_map
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -362,7 +362,7 @@ p <- ggplot(data = stl_sf) +
   labs(
     title = "COVID-19 Case Fatality in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text
+    caption = caption_text_census_map2
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 

@@ -21,7 +21,7 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   labs(
     title = "Reported COVID-19 Cases by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text_census
+    caption = caption_text_census_map
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -44,7 +44,7 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   labs(
     title = "Reported COVID-19 Mortality by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text_census
+    caption = caption_text_census_map
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -66,7 +66,7 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   labs(
     title = "Reported COVID-19 Case Fatality by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text
+    caption = caption_text_census_map2
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
