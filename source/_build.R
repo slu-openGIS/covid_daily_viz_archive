@@ -1,7 +1,7 @@
 # Scape Data and Construct Data Sets
 
 # UPDATE date value
-date <- lubridate::mdy("05-07-2020")
+date <- lubridate::mdy("05-08-2020")
 
 # UPDATE city zip's with < 5 or 0 cases
 city_lt5 <- c("63105", "63117", "63119", "63125", "63130", "63133", "63137", "63143")
