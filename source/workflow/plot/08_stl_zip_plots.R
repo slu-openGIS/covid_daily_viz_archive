@@ -29,7 +29,7 @@ p <- ggplot() +
   scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
   labs(
     title = "Reported COVID-19 Cases by \nSt. Louis ZCTA",
-    subtitle = paste0("Current as of ", as.character(date+1)),
+    subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis, St. Louis County, and the U.S. Census Bureau"
   )  +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
@@ -64,7 +64,7 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0,60), breaks = c(0,10,20,30,40,50,60)) +
   labs(
     title = "Reported COVID-19 Cases by St. Louis ZCTA",
-    subtitle = paste0("Current as of ", as.character(date+1)),
+    subtitle = paste0("Current as of ", as.character(date)),
     x = "Reported Rate per 1,000 Residents",
     y = "Residents Below Poverty Line (%)",
     caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis, St. Louis County, and the U.S. Census Bureau\n63103 and 63025 have significant nursing home outbreaks"
@@ -98,7 +98,7 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0,100), breaks = c(0,20,40,60,80,100)) +
   labs(
     title = "Reported COVID-19 Cases by St. Louis ZCTA",
-    subtitle = paste0("Current as of ", as.character(date+1)),
+    subtitle = paste0("Current as of ", as.character(date)),
     x = "Reported Rate per 1,000 Residents",
     y = "African American Residents (%)",
     caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis, St. Louis County, and the U.S. Census Bureau\n63103 and 63025 have significant nursing home outbreaks"

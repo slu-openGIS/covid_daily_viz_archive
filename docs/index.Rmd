@@ -575,16 +575,28 @@ knitr::include_graphics(here::here("results", "high_res", "stl_zip", "b_poverty_
 knitr::include_graphics(here::here("results", "high_res", "stl_zip", "c_race_plot.png"))
 ```
 
-### Race, Morbidity (Individual)
+### Race, Morbidity
 
 ```{r race-individual-morbidity, echo=FALSE, out.width = '100%'}
 knitr::include_graphics(here::here("results", "high_res", "stl_individual", "a_race_case.png"))
 ```
 
-### Race, Mortality (Individual)
+### Race, Mortality
 
 ```{r race-individual-mortality, echo=FALSE, out.width = '100%'}
 knitr::include_graphics(here::here("results", "high_res", "stl_individual", "b_race_mortality.png"))
+```
+
+### Race/Sex, Morbidity
+
+```{r race-sex-individual-morbidity, echo=FALSE, out.width = '100%'}
+knitr::include_graphics(here::here("results", "high_res", "stl_individual", "c_race_sex_case.png"))
+```
+
+### Race/Sex, Mortality
+
+```{r race-sex-individual-mortality, echo=FALSE, out.width = '100%'}
+knitr::include_graphics(here::here("results", "high_res", "stl_individual", "d_race_sex_mortality.png"))
 ```
 
 ## Other Static Maps and Plots {.tabset}
