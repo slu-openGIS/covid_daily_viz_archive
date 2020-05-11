@@ -27,6 +27,7 @@ source("source/workflow/build/03_add_rates.R")
 source("source/workflow/build/04_create_spatial.R")
 source("source/workflow/build/05_create_zip.R")
 source("source/workflow/build/06_create_testing.R")
+source("source/workflow/build/07_create_stl_hospital.R")
 
 # update interactive map
 rmarkdown::render(input = "docs/index.Rmd",
