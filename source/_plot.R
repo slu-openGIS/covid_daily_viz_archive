@@ -74,7 +74,7 @@ rm(plot_date, save_plots, sequoia_theme, date_breaks, calculate_days, filter_dat
 # update interactive map
 rmarkdown::render(input = "docs/index.Rmd",
                   params = list(
-                    date = paste0("Curgrent as of ", as.character(date)),
+                    date = paste0("Current as of ", as.character(date)),
                     date_val = as.character(date),
                     prior_date_val = as.character(date-7)
                   ))
