@@ -616,6 +616,6 @@ save_plots(filename = "results/low_res/state/m_positive_avg.png", plot = p, pres
 
 # clean-up
 rm(state_data, state_subset, state_points, state_day_points, state_test_data,
-   caption_text_tests, caption_text_tests_census, test_date, test_date_breaks)
+   caption_text_tests, caption_text_tests_census, test_date)
 rm(top_val, pal, cols, p, report_points, report_label, report_line, report_day_points)
 

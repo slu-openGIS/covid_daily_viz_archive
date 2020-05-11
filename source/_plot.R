@@ -3,7 +3,7 @@
 # =============================================================================
 
 # UPDATE date value
-date <- lubridate::mdy("05-09-2020")
+date <- lubridate::mdy("05-10-2020")
 
 # define first date for plotting
 plot_date <- "2020-03-10"
@@ -33,6 +33,7 @@ library(readr)
 library(scales)
 library(sf)
 library(tibble)
+library(tidyr)
 library(zoo)
 
 # functions
@@ -58,7 +59,8 @@ source("source/workflow/plot/06_county_plots_stjo.R")
 source("source/workflow/plot/07_stl_county_plots.R")
 source("source/workflow/plot/08_stl_zip_plots.R")
 source("source/workflow/plot/09_stl_individual_plots.R")
-source("source/workflow/plot/10_kc_county_plots.R")
+source("source/workflow/plot/10_stl_hospital_plots.R")
+source("source/workflow/plot/11_kc_county_plots.R")
 
 # =============================================================================
 
