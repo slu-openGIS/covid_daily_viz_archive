@@ -260,7 +260,7 @@ p <- ggplot() +
   geom_text_repel(data = peak_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = .25, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = .15, nudge_x = -1, size = 5) +
+                  nudge_y = .35, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = .15, nudge_x = 4, size = 5) +
   geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
@@ -294,9 +294,9 @@ p <- ggplot() +
   geom_text_repel(data = peak_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 25, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = -55, nudge_x = -1, size = 5) +
+                  nudge_y = -20, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = 25, nudge_x = 4, size = 5) +
+                  nudge_y = 20, nudge_x = 4, size = 5) +
   geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = -55, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
