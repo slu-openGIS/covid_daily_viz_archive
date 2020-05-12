@@ -143,7 +143,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Measure") +
   scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 20)) + 
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 25)) + 
   labs(
     title = "Total COVID-19 ICU Patients in Metro St. Louis",
     subtitle = paste0("St. Louis Metropolitan Pandemic Task Force Hospitals\n", min(stl_subset$report_date), " through ", as.character(date)),
