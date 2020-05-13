@@ -20,16 +20,11 @@ caption_text_tests_census <- "Plot by Christopher Prener, Ph.D.\nData via The At
 library(dplyr)
 library(forcats)
 library(ggplot2)
-# library(gghighlight)
 library(ggrepel)
-# library(purrr)
 library(RColorBrewer)
 library(readr)
-# library(scales)
 library(sf)
-# library(tibble)
 library(tidyr)
-# library(zoo)
 
 # functions
 # source("source/functions/calculate_days.R")
