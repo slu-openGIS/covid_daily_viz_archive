@@ -54,7 +54,7 @@ rm(map_bins, map_breaks, round_any, save_plots, sequoia_theme)
 # update interactive map
 rmarkdown::render(input = "docs/index.Rmd",
                   params = list(
-                    date = paste0("Current as of ", as.character(date)),
+                    date = paste0("Last updated on ", as.character(date)),
                     date_val = as.character(date),
                     prior_date_val = as.character(date-7)
                   ))
