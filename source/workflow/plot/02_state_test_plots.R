@@ -57,7 +57,8 @@ save_plots(filename = "results/low_res/state/k_test_rate.png", plot = p, preset 
 
 # plot 7-day average of new tests
 ## subset
-state_subset <- filter(state_test_data, report_date >= as.Date("2020-04-03") & report_date <= test_date)
+state_subset <- filter(state_test_data, report_date >= as.Date("2020-04-03") & report_date <= test_date) %?%
+  filter(state != "Oklahoma")
 
 ## re-create end points
 state_points <- filter(state_test_data, report_date == test_date)
