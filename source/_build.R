@@ -29,14 +29,6 @@ source("source/workflow/build/05_create_zip.R")
 source("source/workflow/build/06_create_testing.R")
 source("source/workflow/build/07_create_stl_hospital.R")
 
-# update interactive map
-rmarkdown::render(input = "docs/index.Rmd",
-                  params = list(
-                    date = paste0("Current as of ", as.character(date)),
-                    date_val = as.character(date),
-                    prior_date_val = as.character(date-7)
-                  ))
-
 # update README
 rmarkdown::render(input = "README.Rmd",
                   params = list(
@@ -47,6 +39,3 @@ rmarkdown::render(input = "README.Rmd",
 fs::file_delete("README.html")
 
 # clean-up
-rm(pal, snapshot, date, zip_snapshot, map_breaks, map_bins, bins, round_any,
-   data_table, state_data, stl_city_data, stl_county_data, kc_city_data,
-   kc_metro_data, stl_metro_data, state_test_data)
