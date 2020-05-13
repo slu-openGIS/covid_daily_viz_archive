@@ -8,7 +8,6 @@ date <- lubridate::mdy("05-11-2020")
 # define first date for plotting
 plot_date <- "2020-03-10"
 date_breaks <- "7 days"
-# test_date <- "2020-05-07"
 test_date_breaks <- "4 days"
 
 # create caption
@@ -48,19 +47,20 @@ source("source/functions/sequoia_theme.R")
 # update plots
 ## overview plots
 source("source/workflow/plot/01_state_plots.R")
-source("source/workflow/plot/02_metro_plots.R")
-source("source/workflow/plot/03_county_plots.R")
+source("source/workflow/plot/02_state_test_plots.R")
+source("source/workflow/plot/03_metro_plots.R")
+source("source/workflow/plot/04_county_plots.R")
 
 ## regional plots
-source("source/workflow/plot/04_county_plots_semo.R")
-source("source/workflow/plot/05_county_plots_midmo.R")
-source("source/workflow/plot/06_county_plots_stjo.R")
+source("source/workflow/plot/05_county_plots_semo.R")
+source("source/workflow/plot/06_county_plots_midmo.R")
+source("source/workflow/plot/07_county_plots_stjo.R")
 
-source("source/workflow/plot/07_stl_county_plots.R")
-source("source/workflow/plot/08_stl_zip_plots.R")
-source("source/workflow/plot/09_stl_individual_plots.R")
-source("source/workflow/plot/10_stl_hospital_plots.R")
-source("source/workflow/plot/11_kc_county_plots.R")
+source("source/workflow/plot/08_stl_county_plots.R")
+source("source/workflow/plot/09_stl_zip_plots.R")
+source("source/workflow/plot/10_stl_individual_plots.R")
+source("source/workflow/plot/11_stl_hospital_plots.R")
+source("source/workflow/plot/12_kc_county_plots.R")
 
 # =============================================================================
 
