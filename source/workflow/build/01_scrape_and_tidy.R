@@ -13,6 +13,28 @@ hopkins_dates %>%
   map_df(~ get_hopkins(date = .x, ref = counties)) %>%
   rename(cases = confirmed) -> hopkins_data
 
+# =============================================================================
+
+# fix Moniteau County
+
+# hopkins_rest <- filter(hopkins_data, county != "Moniteau")
+# hopkins_moniteau <- filter(hopkins_data, county == "Moniteau")
+
+# hopkins_moniteau <- mutate(hopkins_moniteau, cases = case_when(
+#  report_date == "2020-04-21" ~ 20,
+#  report_date == "2020-04-22" ~ 34,
+#  report_date == "2020-04-23" ~ 41,
+#  report_date == "2020-04-24" ~ 41,
+#  report_date == "2020-04-25" ~ 45,
+#  report_date >= "2020-04-26" & report_date <= "2020-04-30" ~ 49,
+#  report_date >= "2020-05-01" & report_date <= "2020-05-02" ~ 50,
+#  report_date >= "2020-05-03" & report_date <= "2020-05-06" ~ 51,
+#  report_date >= "2020-05-07" & report_date <= "2020-05-08" ~ 52,
+#  report_date >= "2020-05-09" ~ 53
+# )) -> x
+
+# =============================================================================
+
 # detailed_data <- get_hopkins(date = date, ref = counties)
 
 # add historical data to detailed
