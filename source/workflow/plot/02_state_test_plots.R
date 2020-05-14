@@ -57,7 +57,7 @@ save_plots(filename = "results/low_res/state/k_test_rate.png", plot = p, preset 
 
 # plot 7-day average of new tests
 ## subset
-state_subset <- filter(state_test_data, report_date >= as.Date("2020-04-03") & report_date <= test_date) %?%
+state_subset <- filter(state_test_data, report_date >= as.Date("2020-04-03") & report_date <= test_date) %>%
   filter(state != "Oklahoma")
 
 ## re-create end points
@@ -68,7 +68,8 @@ top_val <- round_any(x = max(state_subset$new_test_rate_avg), accuracy = 20, f =
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, new_test_rate_avg))
-state_points <- mutate(state_points, factor_var = fct_reorder2(state, report_date, new_test_rate_avg))
+state_points <- mutate(state_points, factor_var = fct_reorder2(state, report_date, new_test_rate_avg)) %>%
+  filter(state != "Oklahoma")
 
 ## create plot
 p <- ggplot() +
