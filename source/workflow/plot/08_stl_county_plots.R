@@ -157,7 +157,7 @@ p <- ggplot(data = county_subset) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
                   nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(5, 4000), breaks = c(5,10,30,100,300,1000,3000), 
+  scale_y_log10(limits = c(5, 5000), breaks = c(5,10,30,100,300,1000,3000), 
                 labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
@@ -181,7 +181,8 @@ save_plots(filename = "results/low_res/stl_metro/c_case_log.png", plot = p, pres
 county_data %>%
   calculate_days(group_var = "geoid", stat_var = "case_avg", val = 5) %>%
   select(day, report_date, geoid, county, case_avg) %>%
-  arrange(county, day) -> county_subset
+  arrange(county, day) %>%
+  mutate(case_avg = ifelse(case_avg < .1, .1, case_avg)) -> county_subset
 
 # define top_val
 top_val <- round_any(x = max(county_subset$day), accuracy = 5, f = ceiling)
@@ -191,7 +192,8 @@ county_subset %>%
   group_by(geoid) %>%
   summarise(day = max(day)) %>%
   left_join(county_points, ., by = "geoid") %>%
-  filter(county %in% unique(county_subset$county)) -> county_day_points
+  filter(county %in% unique(county_subset$county)) %>%
+  mutate(case_avg = ifelse(case_avg < .1, .1, case_avg)) -> county_day_points
 
 ## add day to report points
 county_subset %>%
@@ -215,7 +217,8 @@ p <- ggplot(data = county_subset) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(.3, 300), breaks = c(.3, 1, 3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
+  scale_y_log10(limits = c(.1, 300), breaks = c(.1, .3, 1, 3, 10, 30, 100, 300), 
+                labels = comma_format(accuracy = .2)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of New COVID-19 Cases in Metro St. Louis",
