@@ -287,7 +287,7 @@ p <- ggplot() +
   geom_text_repel(data = peak_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 25, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = -15, nudge_x = -1, size = 5) +
+                  nudge_y = 10, nudge_x = -20, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 15, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
