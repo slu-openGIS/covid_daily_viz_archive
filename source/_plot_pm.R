@@ -3,7 +3,8 @@
 # =============================================================================
 
 # UPDATE date value
-date <- lubridate::mdy("05-16-2020")
+# date <- lubridate::mdy("05-16-2020")
+date <- Sys.Date()
 
 # define first date for plotting
 test_date_breaks <- "4 days"
@@ -39,9 +40,9 @@ source("source/functions/sequoia_theme.R")
 source("source/workflow/plot/02_state_test_plots.R")
 
 # regional plots
-source("source/workflow/plot/09_stl_zip_plots.R")
-source("source/workflow/plot/10_stl_individual_plots.R")
-source("source/workflow/plot/11_stl_hospital_plots.R")
+source("source/workflow/plot/10_stl_zip_plots.R")
+source("source/workflow/plot/11_stl_individual_plots.R")
+source("source/workflow/plot/12_stl_hospital_plots.R")
 
 # =============================================================================
 

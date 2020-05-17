@@ -1,7 +1,8 @@
 # Scape Data and Construct Data Sets
 
 # UPDATE date value
-date <- lubridate::mdy("05-15-2020")
+# date <- lubridate::mdy("05-16-2020")
+date <- Sys.Date()-1
 
 # dependencies
 library(dplyr)

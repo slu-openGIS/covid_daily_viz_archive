@@ -3,7 +3,8 @@
 # =============================================================================
 
 # UPDATE date value
-date <- lubridate::mdy("05-15-2020")
+# date <- lubridate::mdy("05-16-2020")
+date <- Sys.Date()-1
 
 # define first date for plotting
 plot_date <- "2020-03-10"
@@ -51,8 +52,9 @@ source("source/workflow/plot/04_county_plots.R")
 source("source/workflow/plot/05_county_plots_semo.R")
 source("source/workflow/plot/06_county_plots_midmo.R")
 source("source/workflow/plot/07_county_plots_stjo.R")
-source("source/workflow/plot/08_stl_county_plots.R")
-source("source/workflow/plot/12_kc_county_plots.R")
+source("source/workflow/plot/08_county_plots_nomo.R")
+source("source/workflow/plot/09_stl_county_plots.R")
+source("source/workflow/plot/13_kc_county_plots.R")
 
 # =============================================================================
 
