@@ -113,7 +113,9 @@ p <- ggplot() +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
                   nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(5, 100000), labels = comma) +
+  scale_y_log10(limits = c(5, 200000), 
+                breaks = c(5, 100, 1000, 10000, 100000), 
+                labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Cases by State",
@@ -287,11 +289,11 @@ p <- ggplot() +
   geom_text_repel(data = peak_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 25, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = 125, nudge_x = -1, size = 5) +
+                  nudge_y = 115, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 15, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = -35, nudge_x = -1, size = 5) +
+                  nudge_y = -45, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
   scale_y_continuous(limits = c(0, 300), breaks = seq(0, 300, by = 50)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
