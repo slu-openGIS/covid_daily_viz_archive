@@ -7,7 +7,9 @@ city_county_zip_sf <- st_read("data/source/stl_zips/city_county_zip/city_county_
                               stringsAsFactors = FALSE)
 
 # define days to load
-city_dates <- seq(as.Date("2020-04-01"), date, by="days")
+city_dates_a <- seq(as.Date("2020-04-01"), as.Date("2020-05-18"), by="days")
+city_dates_b <- seq(as.Date("2020-05-20"), date, by="days")
+city_dates <- c(city_dates_a, city_dates_b)
 
 # load zip data
 city_dates %>%
@@ -42,7 +44,9 @@ stl_county_zip_sf <- st_read("data/source/stl_zips/stl_county_zip/stl_county_zip
                            crs = 4326, stringsAsFactors = FALSE)
 
 # define days to load
-county_dates <- seq(as.Date("2020-04-06"), date, by="days")
+county_dates_a <- seq(as.Date("2020-04-06"), as.Date("2020-05-18"), by="days")
+county_dates_b <- seq(as.Date("2020-05-20"), date, by="days")
+county_dates <- c(county_dates_a, county_dates_b)
 
 # load zip data
 county_dates %>%
