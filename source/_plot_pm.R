@@ -4,7 +4,7 @@
 
 # UPDATE date value
 # date <- lubridate::mdy("05-16-2020")
-date <- Sys.Date()-1
+date <- Sys.Date()
 
 # define first date for plotting
 test_date_breaks <- "5 days"
