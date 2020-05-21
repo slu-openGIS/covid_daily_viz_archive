@@ -4,11 +4,11 @@
 
 # UPDATE date value
 # date <- lubridate::mdy("05-16-2020")
-date <- Sys.Date()
+date <- Sys.Date()-1
 
 # define first date for plotting
-test_date_breaks <- "4 days"
-new_pt_breaks <- "5 days"
+test_date_breaks <- "5 days"
+new_pt_breaks <- "6 days"
 
 # create caption
 caption_text_tests <- "Plot by Christopher Prener, Ph.D.\nData via The Atlantic COVID-19 Tracking Project and the State of Missouri"

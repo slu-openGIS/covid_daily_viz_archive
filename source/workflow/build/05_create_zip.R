@@ -37,7 +37,7 @@ left_join(stl_city_zip_sf, stl_city_zip_sub, by = "zip") %>%
 write_csv(stl_city_zip, "data/zip/zip_stl_city.csv")
 
 # clean-up
-rm(stl_city_zip, stl_city_zip_sub, city_dates)
+rm(stl_city_zip, stl_city_zip_sub, city_dates, city_dates_a, city_dates_b)
 
 # load spatial data
 stl_county_zip_sf <- st_read("data/source/stl_zips/stl_county_zip/stl_county_zip.geojson", 
@@ -74,7 +74,7 @@ left_join(stl_county_zip_sf, stl_county_zip_sub, by = "zip") %>%
 write_csv(stl_county_zip, "data/zip/zip_stl_county.csv")
 
 # clean-up
-rm(stl_county_zip, stl_county_zip_sub, county_dates)
+rm(stl_county_zip, stl_county_zip_sub, county_dates, county_dates_a, county_dates_b)
 
 # load pop
 pop_city <- read_csv("data/source/stl_zips/stl_city_zip/stl_city_zip.csv") %>%
