@@ -8,7 +8,7 @@ date <- Sys.Date()-1
 
 # define first date for plotting
 plot_date <- "2020-03-10"
-date_breaks <- "7 days"
+date_breaks <- "9 days"
 
 # create caption
 caption_text <- "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nThe 15 Apr reporting change refers to the inclusion of probable cases in data per CDC guidance"
