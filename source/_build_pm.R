@@ -20,7 +20,7 @@ source("source/functions/wrangle_zip.R")
 
 # workflow
 source("source/workflow/build/05_create_zip.R")
-source("source/workflow/build/06_create_testing.R")
+# source("source/workflow/build/06_create_testing.R")
 source("source/workflow/build/07_create_stl_hospital.R")
 
 # clean-up
