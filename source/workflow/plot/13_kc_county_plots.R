@@ -41,15 +41,15 @@ county_points <- filter(county_data, report_date == date) %>%
 ## create reporting change points
 report_points <- filter(county_data, report_date == as.Date("2020-04-15")) %>%
   filter(geoid %in% county_focal) %>%
-  mutate(text = ifelse(geoid == "29189", "reporting change on 15 Apr", NA))
+  mutate(text = "reporting change on 15 Apr")
 
 # =============================================================================
 
 # create line label
 report_line <- tibble(
   date = as.Date("2020-04-15"),
-  case_rate = 3,
-  mortality_rate = .5,
+  case_rate = 12,
+  mortality_rate = .35,
   case_fatality_rate = 11,
   text = "reporting change on 15 Apr"
 )
@@ -98,7 +98,7 @@ p <- ggplot() +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
-                  nudge_y = .15, nudge_x = -10, size = 5) +
+                  nudge_y = .5, nudge_x = -15, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
@@ -197,7 +197,7 @@ county_subset %>%
   left_join(report_points, ., by = c("county", "report_date")) %>%
   filter(county %in% unique(county_subset$county)) -> report_day_points
 
-report_label <- filter(report_day_points, county == "Kansas City")
+report_label <- filter(report_day_points, county == "Wyandotte")
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, day, case_avg))
@@ -211,7 +211,7 @@ p <- ggplot(data = county_subset) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = .3, nudge_x = -1, size = 5) +
+                  nudge_y = .4, nudge_x = -4, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(.3, 300), breaks = c(.3, 1, 3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
@@ -272,7 +272,7 @@ p <- ggplot() +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = mortality_rate, label = text),
-                  nudge_y = .01, nudge_x = -10, size = 5) +
+                  nudge_y = .04, nudge_x = -15, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .05)) +
@@ -315,7 +315,7 @@ county_subset %>%
   left_join(report_points, ., by = c("county", "report_date")) %>%
   filter(county %in% unique(county_subset$county)) -> report_day_points
 
-report_label <- filter(report_day_points, county == "Kansas City")
+report_label <- filter(report_day_points, county == "Wyandotte")
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, day, deaths))
@@ -387,7 +387,7 @@ p <- ggplot() +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_fatality_rate, label = text),
-                  nudge_y = .15, nudge_x = -10, size = 5) +
+                  nudge_y = .5, nudge_x = -15, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,12), breaks = seq(0, 12, by = 1)) +

@@ -39,7 +39,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 250)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 500)) + 
   labs(
     title = "COVID-19 Tests by State",
     subtitle = paste0("2020-04-03 through ", as.character(test_date)),
