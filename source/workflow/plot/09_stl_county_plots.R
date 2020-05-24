@@ -160,7 +160,7 @@ p <- ggplot(data = county_subset) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
                   nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(5, 5000), breaks = c(5,10,30,100,300,1000,3000), 
+  scale_y_log10(limits = c(5, 10000), breaks = c(5,10,30,100,300,1000,3000,10000),
                 labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
@@ -339,7 +339,7 @@ p <- ggplot(data = county_subset) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths, label = text),
                   nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(3, 400), breaks = c(3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
+  scale_y_log10(limits = c(3, 1000), breaks = c(3, 10, 30, 100, 300, 1000), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Deaths in Metro St. Louis",

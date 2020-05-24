@@ -45,7 +45,7 @@ report_line <- tibble(
 state_subset <- filter(state_data, report_date >= plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$case_rate), accuracy = 50, f = ceiling)
+top_val <- round_any(x = max(state_subset$case_rate), accuracy = 100, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, case_rate))
@@ -61,7 +61,7 @@ p <- ggplot() +
                   nudge_y = 10, nudge_x = -15, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 50)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 100)) + 
   labs(
     title = "Reported COVID-19 Cases by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -289,7 +289,7 @@ p <- ggplot() +
   geom_text_repel(data = peak_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 25, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = 115, nudge_x = -1, size = 5) +
+                  nudge_y = 125, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 15, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
@@ -324,7 +324,7 @@ rm(peak_val, peak_point, current_point, peak_val_nostl, peak_point_nostl, curren
 state_subset <- filter(state_data, report_date >= plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$mortality_rate), accuracy = 2, f = ceiling)
+top_val <- round_any(x = max(state_subset$mortality_rate), accuracy = 5, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, mortality_rate))
@@ -340,7 +340,7 @@ p <- ggplot() +
                   nudge_y = 3, nudge_x = -15, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 2)) +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Reported COVID-19 Mortality by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -392,7 +392,8 @@ p <- ggplot() +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths, label = text),
                   nudge_y = .3, nudge_x = -3, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(3, 5000), breaks = c(3, 10, 30, 100, 300, 1000, 3000), labels = comma_format(accuracy = 1)) +
+  scale_y_log10(limits = c(3, 10000), breaks = c(3, 10, 30, 100, 300, 1000, 3000, 10000), 
+                labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Deaths by State",
