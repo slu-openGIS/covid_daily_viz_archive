@@ -21,7 +21,7 @@ top_val <- round_any(x = max(covid_race$case_rate, na.rm = TRUE), accuracy = 50,
 
 ## create plot
 p <- ggplot(data = covid_race, mapping = aes(x = value, y = case_rate, fill = value)) +
-  geom_bar(position = "dodge", stat = "identity", width = .75, show.legend = FALSE) +
+  geom_bar(position = "dodge", stat = "identity", width = .65, show.legend = FALSE) +
   scale_fill_brewer(palette = "Set1") +
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 50)) +
   labs(
@@ -47,7 +47,7 @@ top_val <- round_any(x = max(covid_race$mortality_rate, na.rm = TRUE), accuracy 
 ## create plot
 p <- covid_race %>%
   ggplot(data = ., mapping = aes(x = value, y = mortality_rate, fill = value)) +
-  geom_bar(position = "dodge", stat = "identity", width = .75, show.legend = FALSE) +
+  geom_bar(position = "dodge", stat = "identity", width = .65, show.legend = FALSE) +
   scale_fill_brewer(palette = "Set1") +
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
