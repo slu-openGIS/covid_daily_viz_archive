@@ -70,7 +70,7 @@ stl_hosp <-  read_csv(here::here("data", "metro", "stl_hospital.csv"))
 ```
 
 ## Introduction
-These maps summarize the latest available COVID-19 outbreak data from the New York Time's [COVID-19 project](http://github.com/nytimes/covid-19-data), the [Johns Hopkins COVID-19 project](https://github.com/CSSEGISandData/COVID-19/), the City of St. Louis, and St. Louis County. The New York Times and Johns Hopkins data are used for state and county-level data, and local data sources are used for zip code and individual level data.
+These maps summarize the latest available COVID-19 outbreak data from the New York Time's [COVID-19 project](http://github.com/nytimes/covid-19-data), the State of Missouri, the City of St. Louis, and St. Louis County. The New York Times data are used for state and county-level data, and local data sources are used for zip code and individual level data.
 
 ### What Makes These Maps Unique?
 Unlike other interactive maps being used to track the outbreak, the initial three maps include the counties in Illinois, Kansas, and Oklahoma that are part of Missouri's metropolitan areas. Kansas City itself is also displayed here as if it were its own county. This is necessary because their public health department is reporting data for the city separate from the four counties that include parts of Kansas City.
@@ -83,7 +83,7 @@ These maps are fully interactive. Clicking on a county will reveal some details 
 ### Caveats
 Due to lags in reporting, both at the public health department level and at the New York Times itself, these numbers may lag behind other figures reported in the media. 
 
-On May 6th, the New York Times began including probable cases (those without a confirmatory test result but where symptoms indicate a COVID-19 infection). These had been included in the Johns Hopkins data much earlier - as far back as mid-April following the CDC's guidance on April 14th to states and counties that they should begin reporting these. Not all counties report probable cases, however, and so I include markers on plots to indicate when the reporting change beginning on April 15th may have occurred.
+On May 6th, the New York Times began including probable cases (those without a confirmatory test result but where symptoms indicate a COVID-19 infection). Not all counties report probable cases, however, and so I include markers on plots to indicate when the reporting change beginning on April 15th may have occurred.
 
 ## Daily Data {.tabset}
 While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1), and [Kansas City](https://www.kcmo.gov/city-hall/departments/health/coronavirus-covid-19/covid-19-totals) provide day-by-day tracking of cumulative cases on their respective dashboards, the State of Missouri does not. The following tabs provide daily breakdowns of COVID data as well as additional statistics not included in the existing dashboards. Data are also provided for the wider St. Louis and Kansas City metro areas. Please note that the two average columns for reported cases and deaths are both seven-day rolling averages.
@@ -487,40 +487,56 @@ st_geometry(data_table) <- NULL
 data_table
 ```
 
-## Health Disparities in St. Louis {.tabset}
-One striking facet of the COVID-19 outbreak is the effect it has had on communities that have been historically been marginalized in the United States, including African Americans, indigenous nations (the Navajo Nation has one of the <a href="https://www.npr.org/2020/04/24/842945050/navajo-nation-sees-high-rate-of-covid-19-and-contact-tracing-is-a-challenge" target="_blank">highest infection rates in country</a>), and people incarcerated in jails/prisons. What ties these groups together is not inherent biological risk. Rather, disinvestment at the community level means the agencies and organizations that serve these communities often lack the resources needed to prevent the spread of infectious disease. This is long-standing social and health disparities that potentially leave individuals more susceptible to severe illness. The following plots trace emerging health disparities in the St. Louis region both by poverty and race.
+## Health Disparities
+One striking facet of the COVID-19 outbreak is the effect it has had on communities that have been historically been marginalized in the United States, including African Americans, indigenous nations (the Navajo Nation has one of the <a href="https://www.npr.org/2020/04/24/842945050/navajo-nation-sees-high-rate-of-covid-19-and-contact-tracing-is-a-challenge" target="_blank">highest infection rates in country</a>), and people incarcerated in jails/prisons. What ties these groups together is not inherent biological risk. Rather, disinvestment at the community level means the agencies and organizations that serve these communities often lack the resources needed to prevent the spread of infectious disease. This is long-standing social and health disparities that potentially leave individuals more susceptible to severe illness.
 
-### Poverty (Zip Code)
+### Missouri {.tabset}
+
+#### Race, Morbidity
+
+```{r race-individual-morbidity-mo, echo=FALSE, out.width = '100%'}
+knitr::include_graphics(here::here("results", "high_res", "mo_individual", "a_race_case.png"))
+```
+
+#### Race, Mortality
+
+```{r race-individual-mortality-mo, echo=FALSE, out.width = '100%'}
+knitr::include_graphics(here::here("results", "high_res", "mo_individual", "b_race_mortality.png"))
+```
+
+### St. Louis {.tabset}
+
+#### Poverty (Zip Code)
 
 ```{r poverty-zip-plot, echo=FALSE, out.width = '100%'}
 knitr::include_graphics(here::here("results", "high_res", "stl_zip", "b_poverty_plot.png"))
 ```
 
-### Race (Zip Code)
+#### Race (Zip Code)
 
 ```{r race-zip-plot, echo=FALSE, out.width = '100%'}
 knitr::include_graphics(here::here("results", "high_res", "stl_zip", "c_race_plot.png"))
 ```
 
-### Race, Morbidity
+#### Race, Morbidity
 
 ```{r race-individual-morbidity, echo=FALSE, out.width = '100%'}
 knitr::include_graphics(here::here("results", "high_res", "stl_individual", "a_race_case.png"))
 ```
 
-### Race, Mortality
+#### Race, Mortality
 
 ```{r race-individual-mortality, echo=FALSE, out.width = '100%'}
 knitr::include_graphics(here::here("results", "high_res", "stl_individual", "b_race_mortality.png"))
 ```
 
-### Race/Sex, Morbidity
+#### Race/Sex, Morbidity
 
 ```{r race-sex-individual-morbidity, echo=FALSE, out.width = '100%'}
 knitr::include_graphics(here::here("results", "high_res", "stl_individual", "c_race_sex_case.png"))
 ```
 
-### Race/Sex, Mortality
+#### Race/Sex, Mortality
 
 ```{r race-sex-individual-mortality, echo=FALSE, out.width = '100%'}
 knitr::include_graphics(here::here("results", "high_res", "stl_individual", "d_race_sex_mortality.png"))
@@ -606,6 +622,7 @@ In addition to the interactive maps above, I regularly update a range of static 
 | Links |  |  |
 |-------------------------|--|--|
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/a_case_map.png" target="_blanl">Reported Cases (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/e_mortality_map.png" target="_blanl">Mortality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/i_case_fatality.png" target="_blanl">Case Fatality (Map)</a> | 
+| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_ozark/b_case_rate.png" target="_blanl">Reported Cases, Ozarks (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_ozark/c_case_log.png" target="_blanl">Reported Cases, Ozarks (Log)</a> | |
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_midmo/b_case_rate.png" target="_blanl">Reported Cases, Mid-MO (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_midmo/c_case_log.png" target="_blanl">Reported Cases, Mid-MO (Log)</a> | |
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_semo/b_case_rate.png" target="_blanl">Reported Cases, Southeast MO (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_semo/c_case_log.png" target="_blanl">Reported Cases, Southeast MO (Log)</a> | |
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_semo/b_case_rate.png" target="_blanl">Reported Cases, Southeast MO (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_semo/c_case_log.png" target="_blanl">Reported Cases, Southeast MO (Log)</a> | |

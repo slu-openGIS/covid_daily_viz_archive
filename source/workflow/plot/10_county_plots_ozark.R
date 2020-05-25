@@ -13,12 +13,10 @@ county_data <- read_csv("data/county/county_full.csv") %>%
 pal <- brewer.pal(n = 8, name = "Set1")
 pal[6] <- "#FFD60C"
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
-          "Saline" = pal[4], "Moniteau" = pal[5], "Boone" = pal[6],
-          "Cole" = pal[7], "Pettis" = pal[8])
+          "Camden" = pal[4], "Miller" = pal[5], "Morgan" = pal[6])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29195", "29135", "29019",
-                  "29051", "29159")
+county_focal <- c("29510", "29189", "29511", "29029", "29131", "29141")
 
 # =============================================================================
 
@@ -70,7 +68,7 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
   labs(
     title = "Reported COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("Mid-Missouri Focus\n", as.character(plot_date), " through ", as.character(date)),
+    subtitle = paste0("Lake of the Ozarks Focus\n", as.character(plot_date), " through ", as.character(date)),
     x = "Date",
     y = "Rate per 1,000",
     caption = caption_text_census
@@ -78,8 +76,8 @@ p <- ggplot() +
   sequoia_theme(base_size = 22, background = "white")
 
 ## save plot
-save_plots(filename = "results/high_res/county_midmo/b_case_rate.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county_midmo/b_case_rate.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/county_ozark/b_case_rate.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county_ozark/b_case_rate.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
@@ -128,7 +126,7 @@ p <- ggplot(data = county_subset) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("Mid-Missouri Focus\n", "Current as of ", as.character(date)),
+    subtitle = paste0("Lake of the Ozarks Focus\n", "Current as of ", as.character(date)),
     caption = caption_text,
     x = "Days Since Fifth Case Reported",
     y = "Count of Reported Cases (Log)"
@@ -136,8 +134,8 @@ p <- ggplot(data = county_subset) +
   sequoia_theme(base_size = 22, background = "white")
 
 ## save plots
-save_plots(filename = "results/high_res/county_midmo/c_case_log.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county_midmo/c_case_log.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/county_ozark/c_case_log.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county_ozark/c_case_log.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 

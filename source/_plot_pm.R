@@ -4,15 +4,15 @@
 
 # UPDATE date value
 # date <- lubridate::mdy("05-16-2020")
-date <- Sys.Date()
+date <- Sys.Date()-1
 
 # define first date for plotting
 test_date_breaks <- "5 days"
 new_pt_breaks <- "6 days"
 
 # create caption
-caption_text_tests <- "Plot by Christopher Prener, Ph.D.\nData via The Atlantic COVID-19 Tracking Project and the State of Missouri"
-caption_text_tests_census <- "Plot by Christopher Prener, Ph.D.\nData via The Atlantic COVID-19 Tracking Project, the State of Missouri, and and the U.S. Census Bureau"
+# caption_text_tests <- "Plot by Christopher Prener, Ph.D.\nData via The Atlantic COVID-19 Tracking Project and the State of Missouri"
+# caption_text_tests_census <- "Plot by Christopher Prener, Ph.D.\nData via The Atlantic COVID-19 Tracking Project, the State of Missouri, and and the U.S. Census Bureau"
 
 # =============================================================================
 
@@ -38,11 +38,12 @@ source("source/functions/sequoia_theme.R")
 # update plots
 ## overview plots
 # source("source/workflow/plot/02_state_test_plots.R")
+source("source/workflow/plot/03_state_individual_plots.R")
 
 # regional plots
-source("source/workflow/plot/10_stl_zip_plots.R")
-source("source/workflow/plot/11_stl_individual_plots.R")
-source("source/workflow/plot/12_stl_hospital_plots.R")
+source("source/workflow/plot/12_stl_zip_plots.R")
+source("source/workflow/plot/13_stl_individual_plots.R")
+source("source/workflow/plot/14_stl_hospital_plots.R")
 
 # =============================================================================
 

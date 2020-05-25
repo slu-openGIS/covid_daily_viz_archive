@@ -11,10 +11,11 @@ plot_date <- "2020-03-10"
 date_breaks <- "9 days"
 
 # create caption
-caption_text <- "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects\nThe 15 Apr reporting change refers to the inclusion of probable cases in data per CDC guidance"
-caption_text_census <- "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE and New York Times COVID-19 Projects, and the U.S. Census Bureau"
-caption_text_census_map <- "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE Project and the U.S. Census Bureau"
-caption_text_census_map2 <- "Plot by Christopher Prener, Ph.D.\nData via Johns Hopkins University CSSE Project"
+# Johns Hopkins University CSSE
+caption_text <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project\nThe 15 Apr reporting change refers to the inclusion of probable cases in data per CDC guidance"
+caption_text_census <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau"
+caption_text_census_map <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau"
+caption_text_census_map2 <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project"
 
 # =============================================================================
 
@@ -45,16 +46,17 @@ source("source/functions/sequoia_theme.R")
 # update plots
 ## overview plots
 source("source/workflow/plot/01_state_plots.R")
-source("source/workflow/plot/03_metro_plots.R")
-source("source/workflow/plot/04_county_plots.R")
+source("source/workflow/plot/04_metro_plots.R")
+source("source/workflow/plot/05_county_plots.R")
 
 ## regional plots
-source("source/workflow/plot/05_county_plots_semo.R")
-source("source/workflow/plot/06_county_plots_midmo.R")
-source("source/workflow/plot/07_county_plots_stjo.R")
-source("source/workflow/plot/08_county_plots_nomo.R")
-source("source/workflow/plot/09_stl_county_plots.R")
-source("source/workflow/plot/13_kc_county_plots.R")
+source("source/workflow/plot/06_county_plots_semo.R")
+source("source/workflow/plot/07_county_plots_midmo.R")
+source("source/workflow/plot/08_county_plots_stjo.R")
+source("source/workflow/plot/09_county_plots_nomo.R")
+source("source/workflow/plot/10_county_plots_ozark.R")
+source("source/workflow/plot/11_stl_county_plots.R")
+source("source/workflow/plot/15_kc_county_plots.R")
 
 # =============================================================================
 
