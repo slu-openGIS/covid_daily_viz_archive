@@ -20,6 +20,7 @@ top_val <- round_any(x = max(stl_hosp$new_in_pt, na.rm = TRUE), accuracy = 5, f 
 
 ## subset
 stl_hosp %>%
+  filter(report_date <= date-2) %>%
   select(report_date, new_in_pt, new_in_pt_avg) %>%
   pivot_longer(cols = c(new_in_pt, new_in_pt_avg), names_to = "category", values_to = "value") %>%
   mutate(category = case_when(
