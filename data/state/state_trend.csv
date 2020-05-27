@@ -66,6 +66,7 @@ day,report_date,state,case_avg,factor_var
 64,2020-05-23,Missouri,161.14285714285714,Missouri
 65,2020-05-24,Missouri,149.28571428571428,Missouri
 66,2020-05-25,Missouri,153,Missouri
+67,2020-05-26,Missouri,152.57142857142858,Missouri
 0,2020-03-20,Missouri (No STL),6.857142857142857,Missouri (No STL)
 1,2020-03-21,Missouri (No STL),7.714285714285714,Missouri (No STL)
 2,2020-03-22,Missouri (No STL),7.714285714285714,Missouri (No STL)
@@ -133,3 +134,4 @@ day,report_date,state,case_avg,factor_var
 64,2020-05-23,Missouri (No STL),79,Missouri (No STL)
 65,2020-05-24,Missouri (No STL),91,Missouri (No STL)
 66,2020-05-25,Missouri (No STL),90.14285714285714,Missouri (No STL)
+67,2020-05-26,Missouri (No STL),91.42857142857143,Missouri (No STL)
