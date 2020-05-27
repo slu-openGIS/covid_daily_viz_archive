@@ -10,15 +10,18 @@ county_data <- read_csv("data/county/county_full.csv") %>%
 # =============================================================================
 
 # define colors
-pal <- brewer.pal(n = 8, name = "Set1")
-pal[6] <- "#FFD60C"
+pal_a <- brewer.pal(n = 8, name = "Set1")
+pal_a[6] <- "#FFD60C"
+pal_b <- brewer.pal(n = 6, name = "Reds")
+pal_b <- pal_b[c(6)]
+pal <- c(pal_a, pal_b)
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
           "Mississippi" = pal[4], "Pemiscot" = pal[5], "Cape Girardeau" = pal[6],
-          "Scott" = pal[7], "Perry" = pal[8])
+          "Scott" = pal[7], "Perry" = pal[8], "Stoddard" = pal[9])
 
 # define focal metros
 county_focal <- c("29510", "29189", "29511", "29133", "29155", "29031",
-                  "29201", "29157")
+                  "29201", "29157", "29207")
 
 # =============================================================================
 
