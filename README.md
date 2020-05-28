@@ -45,7 +45,7 @@ data. They are used to generate daily snapshots for mapping:
   - `daily_snapshot_city_county.geojson` - ZACTA (zip code) data for the
     City of St. Louis and St. Louis County
 
-All of the daily snapshot data were last updated on 2020-05-26.
+All of the daily snapshot data were last updated on 2020-05-27.
 
 There are several additional data sets, including convenience summaries
 of county-level data for the St. Louis and Kansas City MSAs and separate
