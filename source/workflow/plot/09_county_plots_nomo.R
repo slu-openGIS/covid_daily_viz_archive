@@ -11,12 +11,12 @@ county_data <- read_csv("data/county/county_full.csv") %>%
 
 # define colors
 pal <- brewer.pal(n = 8, name = "Set1")
-# pal[6] <- "#FFD60C"
+pal[6] <- "#FFD60C"
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
-          "Sullivan" = pal[4])
+          "Sullivan" = pal[4], "Adair" = pal[5], "Gentry" = pal[6])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29211")
+county_focal <- c("29510", "29189", "29511", "29211", "29001", "29075")
 
 # =============================================================================
 
@@ -68,7 +68,7 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
   labs(
     title = "Reported COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("Sullivan County Focus\n", as.character(plot_date), " through ", as.character(date)),
+    subtitle = paste0("Northern Missouri Focus\n", as.character(plot_date), " through ", as.character(date)),
     x = "Date",
     y = "Rate per 1,000",
     caption = caption_text_census
@@ -126,7 +126,7 @@ p <- ggplot(data = county_subset) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("Sullivan County Focus\n", "Current as of ", as.character(date)),
+    subtitle = paste0("Northern Missouri Focus\n", "Current as of ", as.character(date)),
     caption = caption_text,
     x = "Days Since Fifth Case Reported",
     y = "Count of Reported Cases (Log)"
