@@ -249,17 +249,17 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
   geom_point(peak_point, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
-  geom_point(peak_point_nostl, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
+  # geom_point(peak_point_nostl, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = -.3, nudge_x = -2, size = 5) +
   geom_text_repel(data = peak_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = .15, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = .55, nudge_x = -1, size = 5) +
+                  nudge_y = .35, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = -.45, nudge_x = -8, size = 5) +
-  geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = -.5, nudge_x = -1, size = 5) +
+  # geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
+  #                nudge_y = -.5, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
   scale_y_log10(limits = c(3, 500), breaks = c(3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
@@ -283,7 +283,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
   geom_point(peak_point, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
-  geom_point(peak_point_nostl, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
+  # geom_point(peak_point_nostl, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = -75, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point, mapping = aes(x = day, y = case_avg, label = text),
@@ -291,9 +291,9 @@ p <- ggplot() +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 125, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = 15, nudge_x = -1, size = 5) +
-  geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = -65, nudge_x = -1, size = 5) +
+                  nudge_y = 10, nudge_x = -20, size = 5) +
+  # geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
+  #                nudge_y = -65, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
   scale_y_continuous(limits = c(0, 300), breaks = seq(0, 300, by = 50)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
