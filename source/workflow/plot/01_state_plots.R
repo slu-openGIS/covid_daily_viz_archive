@@ -285,13 +285,13 @@ p <- ggplot() +
   geom_point(peak_point, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
   # geom_point(peak_point_nostl, mapping = aes(x = day, y = case_avg), size = 4, shape = 16) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = -75, nudge_x = -1, size = 5) +
+                  nudge_y = -65, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 25, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point, mapping = aes(x = day, y = case_avg, label = text),
                   nudge_y = 125, nudge_x = -1, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = 10, nudge_x = -20, size = 5) +
+                  nudge_y = -5, nudge_x = -23, size = 5) +
   # geom_text_repel(data = current_point_nostl, mapping = aes(x = day, y = case_avg, label = text),
   #                nudge_y = -65, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
