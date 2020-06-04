@@ -41,9 +41,9 @@ source("source/functions/sequoia_theme.R")
 source("source/workflow/plot/03_state_individual_plots.R")
 
 # regional plots
-source("source/workflow/plot/12_stl_zip_plots.R")
-source("source/workflow/plot/13_stl_individual_plots.R")
-source("source/workflow/plot/14_stl_hospital_plots.R")
+source("source/workflow/plot/13_stl_zip_plots.R")
+source("source/workflow/plot/14_stl_individual_plots.R")
+source("source/workflow/plot/15_stl_hospital_plots.R")
 
 # =============================================================================
 
