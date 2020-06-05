@@ -9,6 +9,7 @@ date <- Sys.Date()-1
 # define first date for plotting
 plot_date <- "2020-03-10"
 date_breaks <- "9 days"
+date_breaks_alt <- "7 days"
 
 # create caption
 # Johns Hopkins University CSSE
