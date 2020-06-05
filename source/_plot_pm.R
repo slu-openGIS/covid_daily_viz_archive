@@ -8,7 +8,7 @@ date <- Sys.Date()
 
 # define first date for plotting
 test_date_breaks <- "5 days"
-new_pt_breaks <- "6 days"
+new_pt_breaks <- "8 days"
 
 # create caption
 # caption_text_tests <- "Plot by Christopher Prener, Ph.D.\nData via The Atlantic COVID-19 Tracking Project and the State of Missouri"
