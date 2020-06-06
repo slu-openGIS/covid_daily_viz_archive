@@ -64,7 +64,7 @@ p <- ggplot() +
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
                   nudge_y = .5, nudge_x = -15, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
   labs(
     title = "Reported COVID-19 Cases by Select Missouri Counties",
@@ -73,7 +73,8 @@ p <- ggplot() +
     y = "Rate per 1,000",
     caption = caption_text_census
   ) +
-  sequoia_theme(base_size = 22, background = "white")
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
 save_plots(filename = "results/high_res/county_ozark/b_case_rate.png", plot = p, preset = "lg")

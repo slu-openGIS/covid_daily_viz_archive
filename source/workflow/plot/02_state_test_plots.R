@@ -47,7 +47,8 @@ p <- ggplot() +
     y = "Rate per 100,000 Residents",
     caption = caption_text_tests_census
   ) +
-  sequoia_theme(base_size = 22, background = "white")
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
 save_plots(filename = "results/high_res/state/k_test_rate.png", plot = p, preset = "lg")
@@ -86,7 +87,8 @@ p <- ggplot() +
     y = "7-day Average of New Tests per 100,000 Residents",
     caption = caption_text_tests_census
   ) +
-  sequoia_theme(base_size = 22, background = "white")
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
 save_plots(filename = "results/high_res/state/l_new_tests_avg.png", plot = p, preset = "lg")
@@ -123,7 +125,8 @@ p <- ggplot() +
     y = "7-day Average of Positive Tests (%)",
     caption = caption_text_tests
   ) +
-  sequoia_theme(base_size = 22, background = "white")
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
 save_plots(filename = "results/high_res/state/m_positive_avg.png", plot = p, preset = "lg")

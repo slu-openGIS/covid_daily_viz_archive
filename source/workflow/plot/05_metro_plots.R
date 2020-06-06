@@ -57,7 +57,7 @@ p <- ggplot(metro_subset) +
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
                   nudge_y = .5, nudge_x = -15, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
-  scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .5)) + 
   labs(
     title = "Reported COVID-19 Cases by Metro Area",
@@ -66,7 +66,8 @@ p <- ggplot(metro_subset) +
     y = "Rate per 1,000",
     caption = caption_text_census
   ) +
-  sequoia_theme(base_size = 22, background = "white")
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
 save_plots(filename = "results/high_res/metro/b_case_rate.png", plot = p, preset = "lg")
@@ -208,7 +209,7 @@ p <- ggplot() +
   geom_text_repel(data = report_line, mapping = aes(x = date, y = mortality_rate, label = text),
                   nudge_y = .05, nudge_x = -15, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
-  scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .02)) +
   labs(
     title = "Reported COVID-19 Mortality by Metro Area",
@@ -217,7 +218,8 @@ p <- ggplot() +
     y = "Mortality Rate per 1,000",
     caption = caption_text_census
   ) +
-  sequoia_theme(base_size = 22, background = "white")
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
 save_plots(filename = "results/high_res/metro/f_mortality_rate.png", plot = p, preset = "lg")
@@ -353,7 +355,7 @@ p <- ggplot() +
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_fatality_rate, label = text),
                   nudge_y = .5, nudge_x = 15, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
-  scale_x_date(date_breaks = date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,12), breaks = seq(0, 12, by = 1)) +
   labs(
     title = "COVID-19 Case Fatality by Metro Area",
@@ -362,7 +364,8 @@ p <- ggplot() +
     y = "Case Fatality (%)",
     caption = caption_text
   ) +
-  sequoia_theme(base_size = 22, background = "white")
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
 save_plots(filename = "results/high_res/metro/j_case_fatality_rate.png", plot = p, preset = "lg")

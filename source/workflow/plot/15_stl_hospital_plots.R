@@ -54,7 +54,8 @@ p <- ggplot() +
     y = "New Patients",
     caption = "Plot by Christopher Prener, Ph.D.\nData via the St. Louis Metro Parademic Task Force"
   ) +
-  sequoia_theme(base_size = 22, background = "white")
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
 save_plots(filename = "results/high_res/stl_metro/n_new_in_pt.png", plot = p, preset = "lg")
@@ -103,7 +104,8 @@ p <- ggplot() +
     y = "Total Patients",
     caption = "Plot by Christopher Prener, Ph.D.\nData via the St. Louis Metro Parademic Task Force"
   ) +
-  sequoia_theme(base_size = 22, background = "white")
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
 save_plots(filename = "results/high_res/stl_metro/o_in_pt.png", plot = p, preset = "lg")
@@ -152,7 +154,8 @@ p <- ggplot() +
     y = "Total ICU Patients",
     caption = "Plot by Christopher Prener, Ph.D.\nData via the St. Louis Metro Parademic Task Force"
   ) +
-  sequoia_theme(base_size = 22, background = "white")
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
 save_plots(filename = "results/high_res/stl_metro/p_icu.png", plot = p, preset = "lg")
@@ -201,7 +204,8 @@ p <- ggplot() +
     y = "Total Ventilated Patients",
     caption = "Plot by Christopher Prener, Ph.D.\nData via the St. Louis Metro Parademic Task Force"
   ) +
-  sequoia_theme(base_size = 22, background = "white")
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
 save_plots(filename = "results/high_res/stl_metro/q_vent.png", plot = p, preset = "lg")
