@@ -10,85 +10,13 @@ peak_point_x <- -1
 peak_point_y <- 25
 current_point_x <- -1
 current_point_y <- 125
-x_angle <- 25
+
 
 ## data values
 stl <- c("29071", "29099", "29113", "29183", "29189", "29219", "29510")
 kc <- c("29013", "29025", "29037", "29047", "29049", "29095", "29107", 
         "29165", "29177", "29511")
 kc_stl <- c(kc, stl)   
-
-# =============================================================================
-
-# load data
-regional_data <- read_csv("data/county/county_full.csv") %>%
-  mutate(geoid = as.character(geoid)) %>%
-  filter(state == "Missouri")
-
-# =============================================================================
-
-## define data cleaning function
-grouped_prep <- function(.data, date){
-  
-  out <- mutate(.data, case_avg = rollmean(new_cases, k = 7, align = "right", fill = NA))
-  out <- filter(out, report_date >= start_date)
-  out <- select(out, -new_cases)
-  out <- rowid_to_column(out, var = "day")
-  out <- mutate(out, day = day-1)
-  
-  return(out)
-  
-}
-
-## prepare data
-regional_data %>%
-  mutate(region = case_when(
-    geoid %in% stl == TRUE ~ "St. Louis",
-    geoid %in% kc == TRUE ~ "Kansas City",
-    geoid %in% kc_stl == FALSE ~ "Outstate"
-  )) %>%
-  group_by(report_date, region) %>%
-  summarise(new_cases = sum(new_cases)) %>%
-  ungroup() %>%
-  group_split(region) %>%
-  map_df(~grouped_prep(.x, date = start_date)) %>%
-  arrange(report_date, region) %>%
-  mutate(region = as_factor(region)) %>%
-  mutate(region = fct_relevel(region, "St. Louis", "Kansas City", "Outstate")) -> regional_subset
-
-## define top_val
-top_val <- round_any(x = max(regional_subset$day), accuracy = 5, f = ceiling)
-
-# =============================================================================
-
-## construct plot
-p <- ggplot() +
-  geom_area(regional_subset, mapping = aes(x = report_date, y = case_avg, fill = region),
-            show.legend = FALSE) +
-  scale_fill_brewer(palette = "Set1") +
-  facet_wrap(vars(region), nrow = 3) +
-  scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
-  labs(
-    title = "Pace of New COVID-19 Cases in Missouri by Region",
-    subtitle = paste0(as.character(regional_subset$report_date[1]), " through ", as.character(date)),
-    caption = caption_text,
-    x = "Days Since Average of Five Cases Reported",
-    y = "7-day Average of New Cases"
-  ) +
-  sequoia_theme(base_size = 22, background = "white") +
-  theme(axis.text.x = element_text(angle = x_angle))
-
-## save plot
-save_plots(filename = "results/high_res/regional/a_avg_all.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/regional/a_avg_all.png", plot = p, preset = "lg", dpi = 72)
-
-
-# =============================================================================
-
-# clean-up
-rm(grouped_prep)
-rm(regional_data, regional_subset)
-rm(top_val, p)
 
 # =============================================================================
 # =============================================================================
@@ -150,7 +78,7 @@ focal_data %>%
   filter(report_date >= start_date) %>%
   rowid_to_column(var = "day") %>%
   mutate(day = day-1) %>%
-  mutate(state = "St. Louis Metro") %>%
+  mutate(state = "St. Louis") %>%
   mutate(factor_var = as.factor(NA_character_)) -> focal_subset
 
 ## extra points
@@ -282,7 +210,7 @@ focal_data %>%
   filter(report_date >= start_date) %>%
   rowid_to_column(var = "day") %>%
   mutate(day = day-1) %>%
-  mutate(state = "Kansas City Metro") %>%
+  mutate(state = "Kansas City") %>%
   mutate(factor_var = as.factor(NA_character_)) -> focal_subset
 
 ## extra points
@@ -487,7 +415,80 @@ rm(state_data, state_subset, state_points, state_day_points)
 rm(top_val, p, report_points, report_label, report_day_points)
 
 # =============================================================================
+# =============================================================================
+
+# load data
+regional_data <- read_csv("data/county/county_full.csv") %>%
+  mutate(geoid = as.character(geoid)) %>%
+  filter(state == "Missouri")
+
+# =============================================================================
+
+## define data cleaning function
+grouped_prep <- function(.data, date){
+  
+  out <- mutate(.data, case_avg = rollmean(new_cases, k = 7, align = "right", fill = NA))
+  out <- filter(out, report_date >= start_date)
+  out <- select(out, -new_cases)
+  out <- rowid_to_column(out, var = "day")
+  out <- mutate(out, day = day-1)
+  
+  return(out)
+  
+}
+
+## prepare data
+regional_data %>%
+  mutate(region = case_when(
+    geoid %in% stl == TRUE ~ "St. Louis",
+    geoid %in% kc == TRUE ~ "Kansas City",
+    geoid %in% kc_stl == FALSE ~ "Outstate"
+  )) %>%
+  group_by(report_date, region) %>%
+  summarise(new_cases = sum(new_cases)) %>%
+  ungroup() %>%
+  group_split(region) %>%
+  map_df(~grouped_prep(.x, date = start_date)) %>%
+  arrange(report_date, region) %>%
+  mutate(region = as_factor(region)) %>%
+  mutate(region = fct_relevel(region, "St. Louis", "Kansas City", "Outstate")) -> regional_subset
+
+## define top_val
+top_val <- round_any(x = max(regional_subset$day), accuracy = 5, f = ceiling)
+
+# =============================================================================
+
+## construct plot
+p <- ggplot() +
+  geom_area(regional_subset, mapping = aes(x = report_date, y = case_avg, fill = region),
+            show.legend = FALSE) +
+  scale_fill_brewer(palette = "Set1") +
+  facet_wrap(vars(region), nrow = 3) +
+  scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
+  labs(
+    title = "Pace of New COVID-19 Cases in Missouri by Region",
+    subtitle = paste0(as.character(regional_subset$report_date[1]), " through ", as.character(date)),
+    caption = caption_text,
+    x = "Days Since Average of Five Cases Reported",
+    y = "7-day Average of New Cases"
+  ) +
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
+
+## save plot
+save_plots(filename = "results/high_res/regional/a_avg_all.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/regional/a_avg_all.png", plot = p, preset = "lg", dpi = 72)
+
+
+# =============================================================================
+
+# clean-up
+rm(grouped_prep)
+rm(regional_data, regional_subset)
+rm(top_val, p)
+
+# =============================================================================
 
 ## clean-up
 rm(kc, stl, kc_stl, report_label_x, report_label_y, peak_point_x,
-   peak_point_y, current_point_x, current_point_y, x_angle)
+   peak_point_y, current_point_x, current_point_y)
