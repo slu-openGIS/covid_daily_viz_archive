@@ -20,13 +20,13 @@ cols <- c("Illinois" = pal[1], "Kansas" = pal[2], "Missouri" = pal[3], "Oklahoma
 
 # plot test rate
 ## subset
-state_subset <- filter(state_test_data, report_date >= as.Date("2020-04-03") & report_date <= test_date)
+state_subset <- filter(state_test_data, report_date >= as.Date("2020-05-23") & report_date <= test_date)
 
 ## re-create end points
 state_points <- filter(state_test_data, report_date == test_date)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$test_rate), accuracy = 100, f = ceiling)
+top_val <- round_any(x = max(state_subset$test_rate), accuracy = 1000, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, test_rate))
@@ -39,12 +39,12 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 500)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1000)) + 
   labs(
     title = "COVID-19 Tests by State",
-    subtitle = paste0("2020-04-03 through ", as.character(test_date)),
+    subtitle = paste0("2020-05-23 through ", as.character(test_date)),
     x = "Date",
-    y = "Rate per 100,000 Residents",
+    y = "Cumulative Rate per 100,000 Residents",
     caption = caption_text_tests_census
   ) +
   sequoia_theme(base_size = 22, background = "white") +
@@ -58,14 +58,14 @@ save_plots(filename = "results/low_res/state/k_test_rate.png", plot = p, preset 
 
 # plot 7-day average of new tests
 ## subset
-state_subset <- filter(state_test_data, report_date >= as.Date("2020-04-03") & report_date <= test_date) %>%
+state_subset <- filter(state_test_data, report_date >= as.Date("2020-05-30") & report_date <= test_date) %>%
   filter(state != "Oklahoma")
 
 ## re-create end points
 state_points <- filter(state_test_data, report_date == test_date)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$new_test_rate_avg), accuracy = 20, f = ceiling)
+top_val <- round_any(x = max(state_subset$new_test_rate_avg, na.rm = TRUE), accuracy = 25, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, new_test_rate_avg))
@@ -79,10 +79,10 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 20)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 25)) + 
   labs(
     title = "New COVID-19 Tests by State",
-    subtitle = paste0("2020-04-03 through ", as.character(test_date)),
+    subtitle = paste0("2020-05-30 through ", as.character(test_date)),
     x = "Date",
     y = "7-day Average of New Tests per 100,000 Residents",
     caption = caption_text_tests_census
@@ -98,13 +98,15 @@ save_plots(filename = "results/low_res/state/l_new_tests_avg.png", plot = p, pre
 
 # plot 7-day average of new tests
 ## subset
-state_subset <- filter(state_test_data, report_date >= as.Date("2020-04-03") & report_date <= test_date)
+state_subset <- filter(state_test_data, report_date >= as.Date("2020-05-30") & report_date <= test_date) %>%
+  filter(state %in% c("Oklahoma", "Kansas") == FALSE)
 
 ## re-create end points
-state_points <- filter(state_test_data, report_date == test_date)
+state_points <- filter(state_test_data, report_date == test_date) %>%
+  filter(state %in% c("Oklahoma", "Kansas") == FALSE)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$positive_avg), accuracy = 5, f = ceiling)
+top_val <- round_any(x = max(state_subset$positive_avg), accuracy = 1, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, positive_avg))
@@ -117,10 +119,10 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 5)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
   labs(
     title = "COVID-19 Positive Tests by State",
-    subtitle = paste0("2020-04-03 through ", as.character(test_date)),
+    subtitle = paste0("2020-05-30 through ", as.character(test_date)),
     x = "Date",
     y = "7-day Average of Positive Tests (%)",
     caption = caption_text_tests

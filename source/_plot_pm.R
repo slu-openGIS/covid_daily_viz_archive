@@ -7,8 +7,9 @@
 date <- Sys.Date()
 
 # define first date for plotting
-test_date_breaks <- "5 days"
+test_date_breaks <- "2 days"
 new_pt_breaks <- "8 days"
+x_angle <- 25
 
 # create caption
 caption_text_tests <- "Plot by Christopher Prener, Ph.D.\nData via The Atlantic COVID-19 Tracking Project and the State of Missouri"
@@ -48,7 +49,7 @@ source("source/workflow/plot/15_stl_hospital_plots.R")
 # =============================================================================
 
 # clean-up
-rm(map_bins, map_breaks, round_any, save_plots, sequoia_theme)
+rm(map_bins, map_breaks, round_any, save_plots, sequoia_theme, x_angle)
 
 # =============================================================================
 
