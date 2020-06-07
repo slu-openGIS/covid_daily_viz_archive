@@ -45,7 +45,7 @@ p <- ggplot() +
   geom_point(hosp_points, mapping = aes(x = report_date, y = value, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Measure") +
-  scale_x_date(date_breaks = new_pt_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = hosp_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) + 
   labs(
     title = "New COVID-19 Hospitalizations in Metro St. Louis",
@@ -95,7 +95,7 @@ p <- ggplot() +
   geom_point(hosp_points, mapping = aes(x = report_date, y = value, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Measure") +
-  scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = hosp_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 50)) + 
   labs(
     title = "Total COVID-19 Hospitalizations in Metro St. Louis",
@@ -145,7 +145,7 @@ p <- ggplot() +
   geom_point(hosp_points, mapping = aes(x = report_date, y = value, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Measure") +
-  scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = hosp_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 25)) + 
   labs(
     title = "Total COVID-19 ICU Patients in Metro St. Louis",
@@ -195,7 +195,7 @@ p <- ggplot() +
   geom_point(hosp_points, mapping = aes(x = report_date, y = value, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Measure") +
-  scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = hosp_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 20)) + 
   labs(
     title = "Total COVID-19 Ventilated Patients in Metro St. Louis",
@@ -214,5 +214,5 @@ save_plots(filename = "results/low_res/stl_metro/q_vent.png", plot = p, preset =
 # =============================================================================
 
 # clean-up
-rm(stl_hosp, stl_subset, hosp_points, test_date_breaks, avg_line, new_pt_breaks)
+rm(stl_hosp, stl_subset, hosp_points, avg_line, hosp_breaks)
 rm(top_val, p, cols, pal)

@@ -8,7 +8,7 @@ date <- Sys.Date()
 
 # define first date for plotting
 test_date_breaks <- "2 days"
-new_pt_breaks <- "8 days"
+hosp_breaks <- "7 days"
 x_angle <- 25
 
 # create caption
@@ -38,7 +38,7 @@ source("source/functions/sequoia_theme.R")
 
 # update plots
 ## overview plots
-# source("source/workflow/plot/02_state_test_plots.R")
+source("source/workflow/plot/02_state_test_plots.R")
 source("source/workflow/plot/03_state_individual_plots.R")
 
 # regional plots
