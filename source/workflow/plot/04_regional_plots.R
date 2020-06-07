@@ -4,7 +4,7 @@
 
 # define values
 ## plot values
-report_label_x <- 10
+report_label_x <- 12
 report_label_y <- 50
 peak_point_x <- -1
 peak_point_y <- 25
