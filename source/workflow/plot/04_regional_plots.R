@@ -124,7 +124,7 @@ p <- ggplot() +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = -125, nudge_x = 15, size = 5) +
   geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                  nudge_y = -40, nudge_x = -1, size = 5) +
+                  nudge_y = -70, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
   scale_y_continuous(limits = c(0, 300), breaks = seq(0, 300, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
@@ -246,7 +246,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_day_points, mapping = aes(x = report_date, y = case_avg), size = 4, shape = 18) +
   geom_point(peak_point, mapping = aes(x = report_date, y = case_avg), size = 4, shape = 16) +
-  # geom_point(peak_point_nostl, mapping = aes(x = report_date, y = case_avg), size = 4, shape = 16) +
+  geom_point(peak_point_nostl, mapping = aes(x = report_date, y = case_avg), size = 4, shape = 16) +
   geom_text_repel(data = report_label, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = report_label_y, nudge_x = report_label_x, size = 5) +
   geom_text_repel(data = peak_point, mapping = aes(x = report_date, y = case_avg, label = text),
@@ -255,8 +255,8 @@ p <- ggplot() +
                   nudge_y = current_point_y, nudge_x = current_point_x, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = 25, nudge_x = -1, size = 5) +
-  # geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-  #                nudge_y = -40, nudge_x = -1, size = 5) +
+  geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
+                  nudge_y = -70, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
   scale_y_continuous(limits = c(0, 300), breaks = seq(0, 300, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
