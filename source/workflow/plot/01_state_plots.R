@@ -253,7 +253,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = deaths), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths, label = text),
-                  nudge_y = .3, nudge_x = -3, size = 5) +
+                  nudge_y = .4, nudge_x = -5, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(3, 10000), breaks = c(3, 10, 30, 100, 300, 1000, 3000, 10000), 
                 labels = comma_format(accuracy = 1)) +

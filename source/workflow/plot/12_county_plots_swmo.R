@@ -13,10 +13,11 @@ county_data <- read_csv("data/county/county_full.csv") %>%
 pal <- brewer.pal(n = 8, name = "Set1")
 pal[6] <- "#FFD60C"
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
-          "Jasper" = pal[4], "McDonald" = pal[5], "Newton" = pal[6])
+          "Greene" = pal[4], "Jasper" = pal[5], "McDonald" = pal[6], 
+          "Newton" = pal[7])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29097", "29119", "29145")
+county_focal <- c("29510", "29189", "29511", "29077", "29097", "29119", "29145")
 
 # =============================================================================
 
