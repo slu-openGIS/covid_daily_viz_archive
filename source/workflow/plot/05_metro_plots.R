@@ -288,7 +288,8 @@ save_plots(filename = "results/low_res/metro/g_mortality_log.png", plot = p, pre
 metro_data %>%
   calculate_days(group_var = "geoid", stat_var = "deaths_avg", val = 3) %>%
   select(day, report_date, short_name, deaths_avg) %>%
-  arrange(short_name, day) -> metro_subset
+  arrange(short_name, day) %>%
+  mutate(deaths_avg = ifelse(deaths_avg < .1, .1, deaths_avg)) -> metro_subset
 
 ## define top_val
 top_val <- round_any(x = max(metro_subset$day), accuracy = 5, f = ceiling)
@@ -298,7 +299,8 @@ metro_subset %>%
   group_by(short_name) %>%
   summarise(day = max(day)) %>%
   left_join(metro_points, ., by = "short_name") %>%
-  filter(short_name %in% unique(metro_subset$short_name)) -> metro_day_points
+  filter(short_name %in% unique(metro_subset$short_name)) %>%
+  mutate(deaths_avg = ifelse(deaths_avg < .1, .1, deaths_avg)) -> metro_day_points
 
 ## add day to report points
 metro_subset %>%
@@ -321,7 +323,8 @@ p <- ggplot(data = metro_subset) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths_avg, label = text),
                   nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
-  scale_y_log10(limits = c(1, 30), breaks = c(1, 3, 10, 30), labels = comma_format(accuracy = 1)) +
+  scale_y_log10(limits = c(.1, 30), breaks = c(.1, .3, 1, 3, 10, 30), 
+                labels = comma_format(accuracy = .2)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of New COVID-19 Deaths by Metro Area",
