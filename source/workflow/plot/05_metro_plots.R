@@ -112,7 +112,7 @@ p <- ggplot(data = metro_subset) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
                   nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
-  scale_y_log10(limits = c(5, 12000), breaks = c(5,10,30,100,300,1000,3000,10000), 
+  scale_y_log10(limits = c(5, 13000), breaks = c(5,10,30,100,300,1000,3000,10000), 
                 labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
@@ -194,7 +194,7 @@ save_plots(filename = "results/low_res/metro/d_case_log_avg.png", preset = "lg",
 metro_subset <- filter(metro_data, report_date >= plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(metro_subset$mortality_rate), accuracy = .02, f = ceiling)
+top_val <- round_any(x = max(metro_subset$mortality_rate), accuracy = .04, f = ceiling)
 
 ## create factors
 metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, mortality_rate))
@@ -210,7 +210,7 @@ p <- ggplot() +
                   nudge_y = .05, nudge_x = -15, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .02)) +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .04)) +
   labs(
     title = "Reported COVID-19 Mortality by Metro Area",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
