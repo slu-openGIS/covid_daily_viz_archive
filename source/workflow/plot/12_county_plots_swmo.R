@@ -14,10 +14,11 @@ pal <- brewer.pal(n = 8, name = "Set1")
 pal[6] <- "#FFD60C"
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
           "Greene" = pal[4], "Jasper" = pal[5], "McDonald" = pal[6], 
-          "Newton" = pal[7])
+          "Newton" = pal[7], "Taney" = pal[8])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29077", "29097", "29119", "29145")
+county_focal <- c("29510", "29189", "29511", "29077", "29097", "29119", "29145",
+                  "29213")
 
 # =============================================================================
 
