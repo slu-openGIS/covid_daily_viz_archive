@@ -162,7 +162,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = .2, nudge_x = -1, size = 5) +
+                  nudge_y = .3, nudge_x = -3, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(1, 3000), breaks = c(1, 3, 10, 30, 100, 300, 1000, 3000), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
