@@ -1,7 +1,7 @@
 # re-format KC data
 
 #### load raw data #### 
-orig <- read_excel("data/source/kc_county_breakdowns/kc_raw_cases_by_county.csv")
+orig <- read_csv("data/source/kc_county_breakdowns/kc_raw_cases_by_county.csv")
 
 #### covert to long #### 
 tidy <- pivot_longer(orig, cols = c("Clay", "Jackson", "Platte", "Cass"), names_to = "county", values_to = "cases")
@@ -9,6 +9,7 @@ tidy <- pivot_longer(orig, cols = c("Clay", "Jackson", "Platte", "Cass"), names_
 #### clean-up #### 
 tidy %>%
   rename(report_date = Date) %>%
+  mutate(report_date = mdy(report_date)) %>%
   mutate(geoid = case_when(
     county == "Clay" ~ "29047",
     county == "Jackson" ~ "29095",
