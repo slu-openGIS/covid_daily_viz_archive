@@ -36,12 +36,14 @@ test_subset %>%
   ) -> test_subset
 
 ## out of state data
-c("ks", "il", "ok") %>%
+c("ar", "ks", "il", "ok") %>%
   unlist() %>%
-  map_df(~read_csv(paste0("https://covidtracking.com/api/v1/states/", .x, "/daily.csv"))) %>%
+  map_df(~read_csv(paste0("https://covidtracking.com/api/v1/states/", .x, "/daily.csv"), 
+                   col_types = cols(fips = col_character()))) %>%
   mutate(
     report_date = ymd(as.character(date)),
     state = case_when(
+      state == "AR" ~ "Arkansas",
       state == "KS" ~ "Kansas",
       state == "IL" ~ "Illinois",
       state == "OK" ~ "Oklahoma"
