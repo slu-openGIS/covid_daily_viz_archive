@@ -12,7 +12,9 @@ library(dplyr)
 library(lubridate)
 library(purrr)
 library(readr)
+library(readxl)
 library(sf)
+library(tidyr)
 library(zoo)
 
 # functions
@@ -22,6 +24,7 @@ source("source/functions/wrangle_zip.R")
 source("source/workflow/build/05_create_zip.R")
 source("source/workflow/build/06_create_testing.R")
 source("source/workflow/build/07_create_stl_hospital.R")
+source("source/workflow/build/08_create_kc_counties.R")
 
 # clean-up
 rm(date)
