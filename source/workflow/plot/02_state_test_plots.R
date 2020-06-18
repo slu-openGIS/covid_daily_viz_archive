@@ -13,8 +13,9 @@ state_test_data <- read_csv("data/state/state_testing.csv")
 # =============================================================================
 
 # define colors
-pal <- brewer.pal(n = 4, name = "Set1")
-cols <- c("Illinois" = pal[1], "Kansas" = pal[2], "Missouri" = pal[3], "Oklahoma" = pal[4])
+pal <- brewer.pal(n = 5, name = "Set1")
+cols <- c("Illinois" = pal[1], "Kansas" = pal[2], "Missouri" = pal[3], "Oklahoma" = pal[4],
+          "Arkansas" = pal[5])
 
 # =============================================================================
 
@@ -99,11 +100,11 @@ save_plots(filename = "results/low_res/state/l_new_tests_avg.png", plot = p, pre
 # plot 7-day average of new tests
 ## subset
 state_subset <- filter(state_test_data, report_date >= as.Date("2020-05-30") & report_date <= test_date) %>%
-  filter(state %in% c("Oklahoma", "Kansas") == FALSE)
+  filter(state %in% c("Oklahoma", "Kansas", "Arkansas") == FALSE)
 
 ## re-create end points
 state_points <- filter(state_test_data, report_date == test_date) %>%
-  filter(state %in% c("Oklahoma", "Kansas") == FALSE)
+  filter(state %in% c("Oklahoma", "Kansas", "Arkansas") == FALSE)
 
 ## define top_val
 top_val <- round_any(x = max(state_subset$positive_avg), accuracy = 1, f = ceiling)
