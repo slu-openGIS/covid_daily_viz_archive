@@ -8,8 +8,9 @@ state_data <- read_csv("data/state/state_full.csv")
 # =============================================================================
 
 # define colors
-pal <- brewer.pal(n = 4, name = "Set1")
-cols <- c("Illinois" = pal[1], "Kansas" = pal[2], "Missouri" = pal[3], "Oklahoma" = pal[4])
+pal <- brewer.pal(n = 5, name = "Set1")
+cols <- c("Illinois" = pal[1], "Kansas" = pal[2], "Missouri" = pal[3], "Oklahoma" = pal[4],
+          "Arkansas" = pal[5])
 
 # =============================================================================
 
@@ -279,7 +280,8 @@ save_plots(filename = "results/low_res/state/g_mortality_log.png", plot = p, pre
 state_data %>%
   calculate_days(group_var = "state", stat_var = "deaths_avg", val = 3) %>%
   select(day, report_date, state, deaths_avg) %>%
-  arrange(state, day) -> state_subset
+  arrange(state, day) %>%
+  mutate(deaths_avg = ifelse(deaths_avg < .1, .1, deaths_avg))  -> state_subset
 
 # define top_val
 top_val <- round_any(x = max(state_subset$day), accuracy = 5, f = ceiling)
@@ -288,7 +290,8 @@ top_val <- round_any(x = max(state_subset$day), accuracy = 5, f = ceiling)
 state_subset %>%
   group_by(state) %>%
   summarise(day = max(day)) %>%
-  left_join(state_points, ., by = "state") -> state_day_points
+  left_join(state_points, ., by = "state") %>%
+  mutate(deaths_avg = ifelse(deaths_avg < .1, .1, deaths_avg))  -> state_day_points
 
 ## add day to report points
 state_subset %>%
@@ -310,7 +313,8 @@ p <- ggplot() +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths_avg, label = text),
                   nudge_y = .25, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(1, 300), breaks = c(1,3,10,30,100, 300), labels = comma_format(accuracy = 1)) +
+  scale_y_log10(limits = c(.1, 300), breaks = c(.1, .3, 1,3,10,30,100, 300), 
+                labels = comma_format(accuracy = .2)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of New COVID-19 Deaths by State",

@@ -95,7 +95,7 @@ get_times <- function(end_date){
   df <- readr::read_csv(response)
   
   # tidy data
-  df <- dplyr::filter(df, state %in% c("Kansas", "Missouri", "Illinois", "Oklahoma"))
+  df <- dplyr::filter(df, state %in% c("Arkansas", "Kansas", "Missouri", "Illinois", "Oklahoma"))
   df <- dplyr::rename(df,
                       confirmed = cases,
                       report_date = date,
