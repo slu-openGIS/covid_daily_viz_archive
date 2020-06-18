@@ -17,7 +17,8 @@ tidy %>%
   )) %>%
   mutate(state = "Missouri") %>%
   select(report_date, geoid, county, state, cases) %>%
-  mutate(report_date = as.Date(report_date)) -> tidy
+  mutate(report_date = as.Date(report_date)) %>%
+  filter(is.na(cases) == FALSE) -> tidy
 
 #### write data #### 
 write_csv(tidy, "data/county/kc_cases_by_county.csv")
