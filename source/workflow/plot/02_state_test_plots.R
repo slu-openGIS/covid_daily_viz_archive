@@ -41,7 +41,7 @@ p <- ggplot() +
   scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1000)) + 
   labs(
-    title = "COVID-19 Tests by State",
+    title = "COVID-19 Persons Tested by State",
     subtitle = paste0("2020-05-23 through ", as.character(test_date)),
     x = "Date",
     y = "Cumulative Rate per 100,000 Residents",
@@ -81,7 +81,7 @@ p <- ggplot() +
   scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 25)) + 
   labs(
-    title = "New COVID-19 Tests by State",
+    title = "New Persons Tested for COVID-19 by State",
     subtitle = paste0("2020-05-30 through ", as.character(test_date)),
     x = "Date",
     y = "7-day Average of New Tests per 100,000 Residents",
@@ -121,7 +121,7 @@ p <- ggplot() +
   scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
   labs(
-    title = "COVID-19 Positive Tests by State",
+    title = "COVID-19 Positive Individuals by State",
     subtitle = paste0("2020-05-30 through ", as.character(test_date)),
     x = "Date",
     y = "7-day Average of Positive Tests (%)",
