@@ -387,8 +387,8 @@ p <- ggplot() +
                   nudge_y = current_point_y, nudge_x = current_point_x, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = 25, nudge_x = -1, size = 5) +
-  # geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-  #                nudge_y = -45, nudge_x = -1, size = 5) +
+  geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
+                  nudge_y = -70, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
   scale_y_continuous(limits = c(0, 300), breaks = seq(0, 300, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
