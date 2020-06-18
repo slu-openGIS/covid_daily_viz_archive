@@ -20,7 +20,7 @@ tidy %>%
   mutate(report_date = as.Date(report_date)) -> tidy
 
 #### write data #### 
-write_csv(tidy, "data/metro/kc_cases_by_county.csv")
+write_csv(tidy, "data/county/kc_cases_by_county.csv")
 
 #### clean-up #### 
 rm(orig, tidy)
