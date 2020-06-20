@@ -10,33 +10,16 @@ county_data <- read_csv("data/county/county_full.csv") %>%
 # =============================================================================
 
 # define colors
-pal_a <- brewer.pal(n = 8, name = "Set1")
-pal_a[6] <- "#FFD60C"
-pal_b <- brewer.pal(n = 6, name = "Reds")
-pal_b <- pal_b[c(6)]
-pal_c <- brewer.pal(n = 6, name = "Blues")
-pal_c <- pal_c[c(6)]
-# pal_d <- brewer.pal(n = 6, name = "Greens")
-# pal_d <- pal_d[c(6)]
-# pal_e <- brewer.pal(n = 6, name = "Purples")
-# pal_e <- pal_e[c(6)]
-pal <- c(pal_a, pal_b, pal_c) # , pal_d, pal_e
-
-# clean-up
-rm(pal_a, pal_b, pal_c) # , pal_d, pal_e
+pal <- brewer.pal(n = 8, name = "Set1")
+pal[6] <- "#FFD60C"
 
 # define cols object
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
-          "Mississippi" = pal[4], "Pemiscot" = pal[5], "Scott" = pal[6],  
-          "Stoddard" = pal[7], "New Madrid" = pal[8], "Butler" = pal[9], 
-          "Dunklin" = pal[10])
-
-# "Cape Girardeau" = pal[6], "Perry" = pal[8],
-#  "29031", "29157", 
+          "Cape Girardeau" = pal[4], "Perry" = pal[5], "St. Francois" = pal[6],
+          "Ste. Genevieve" = pal[7])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29133", "29155", 
-                  "29201",  "29207", "29143", "29023", "29069")
+county_focal <- c("29510", "29189", "29511", "29031", "29157", "29186",  "29187")
 
 # =============================================================================
 
@@ -88,7 +71,7 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
   labs(
     title = "Reported COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("Southeast Missouri Focus\n", as.character(plot_date), " through ", as.character(date)),
+    subtitle = paste0("Cape Girardeau Focus\n", as.character(plot_date), " through ", as.character(date)),
     x = "Date",
     y = "Rate per 1,000",
     caption = caption_text_census
@@ -97,8 +80,8 @@ p <- ggplot() +
   theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
-save_plots(filename = "results/high_res/county_semo/b_case_rate.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county_semo/b_case_rate.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/county_cape/b_case_rate.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county_cape/b_case_rate.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
@@ -147,7 +130,7 @@ p <- ggplot(data = county_subset) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Pace of COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("Southeast Missouri Focus\n", "Current as of ", as.character(date)),
+    subtitle = paste0("Cape Girardeau Focus\n", "Current as of ", as.character(date)),
     caption = caption_text,
     x = "Days Since Fifth Case Reported",
     y = "Count of Reported Cases (Log)"
@@ -155,8 +138,8 @@ p <- ggplot(data = county_subset) +
   sequoia_theme(base_size = 22, background = "white")
 
 ## save plots
-save_plots(filename = "results/high_res/county_semo/c_case_log.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county_semo/c_case_log.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/county_cape/c_case_log.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county_cape/c_case_log.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
