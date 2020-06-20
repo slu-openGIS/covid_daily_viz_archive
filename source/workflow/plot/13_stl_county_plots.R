@@ -24,13 +24,15 @@ pal_b <- pal_b[c(6)]
 pal_c <- brewer.pal(n = 6, name = "Blues")
 pal_c <- pal_c[c(6)]
 pal <- c(pal_a, pal_b, pal_c)
+
+# clean-up
+rm(pal_a, pal_b, pal_c)
+
+# define cols object
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "St. Charles" = pal[3],
           "Monroe" = pal[4], "Clinton" = pal[5], "St. Clair" = pal[6],
           "Jefferson" = pal[7], "Madison" = pal[8],  "Franklin" = pal[9],
           "Lincoln" = pal[10])
-
-# clean-up
-rm(pal_a, pal_b, pal_c)
 
 # define focal metros
 county_focal <- c("29510", "29189", "29183", "17133", "17027", "17163",
