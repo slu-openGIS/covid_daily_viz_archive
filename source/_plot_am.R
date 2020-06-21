@@ -9,7 +9,7 @@ date <- Sys.Date()-1
 # define first date for plotting
 plot_date <- "2020-03-10"
 date_breaks <- "9 days"
-date_breaks_alt <- "7 days"
+date_breaks_alt <- "9 days"
 x_angle <- 25
 
 # create caption
@@ -59,8 +59,9 @@ source("source/workflow/plot/09_county_plots_stjo.R")
 source("source/workflow/plot/10_county_plots_nomo.R")
 source("source/workflow/plot/11_county_plots_ozark.R")
 source("source/workflow/plot/12_county_plots_swmo.R")
-source("source/workflow/plot/13_stl_county_plots.R")
-source("source/workflow/plot/17_kc_county_plots.R")
+source("source/workflow/plot/13_county_plots_cape.R")
+source("source/workflow/plot/14_stl_county_plots.R")
+source("source/workflow/plot/18_kc_county_plots.R")
 
 # =============================================================================
 

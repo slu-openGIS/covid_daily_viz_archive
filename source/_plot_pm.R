@@ -42,9 +42,9 @@ source("source/workflow/plot/02_state_test_plots.R")
 source("source/workflow/plot/03_state_individual_plots.R")
 
 # regional plots
-source("source/workflow/plot/14_stl_zip_plots.R")
-source("source/workflow/plot/15_stl_individual_plots.R")
-source("source/workflow/plot/16_stl_hospital_plots.R")
+source("source/workflow/plot/15_stl_zip_plots.R")
+source("source/workflow/plot/16_stl_individual_plots.R")
+source("source/workflow/plot/17_stl_hospital_plots.R")
 
 # =============================================================================
 
