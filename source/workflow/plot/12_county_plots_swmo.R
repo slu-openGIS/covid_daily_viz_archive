@@ -61,7 +61,7 @@ report_line <- tibble(
 county_subset <- filter(county_data, report_date >= plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_rate), accuracy = 1, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_rate), accuracy = 2, f = ceiling)
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, case_rate))
@@ -75,10 +75,10 @@ p <- ggplot() +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
-                  nudge_y = .5, nudge_x = -15, size = 5) +
+                  nudge_y = 2, nudge_x = -20, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 2)) + 
   labs(
     title = "Reported COVID-19 Cases by Select Missouri Counties",
     subtitle = paste0("Southwest Missouri Focus\n", as.character(plot_date), " through ", as.character(date)),
