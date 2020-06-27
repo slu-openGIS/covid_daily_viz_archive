@@ -107,7 +107,7 @@ state_points <- filter(state_test_data, report_date == test_date) %>%
   filter(state %in% c("Oklahoma", "Kansas", "Arkansas") == FALSE)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$positive_avg), accuracy = 1, f = ceiling)
+top_val <- round_any(x = max(state_subset$positive_avg), accuracy = .5, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, positive_avg))
@@ -120,7 +120,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .5)) + 
   labs(
     title = "COVID-19 Positive Individuals by State",
     subtitle = paste0("2020-05-30 through ", as.character(test_date)),
