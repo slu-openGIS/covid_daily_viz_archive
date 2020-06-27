@@ -56,7 +56,7 @@ report_points <- filter(county_data, report_date == as.Date("2020-04-15")) %>%
 report_line <- tibble(
   date = as.Date("2020-04-15"),
   case_rate = 5,
-  mortality_rate = .65,
+  mortality_rate = .45,
   case_fatality_rate = 11,
   text = "reporting change on 15 Apr"
 )
@@ -105,7 +105,7 @@ p <- ggplot() +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
-                  nudge_y = .5, nudge_x = -15, size = 5) +
+                  nudge_y = 1, nudge_x = -20, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .5)) + 
@@ -213,10 +213,19 @@ report_label <- filter(report_day_points, county == "St. Louis")
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, day, case_avg))
 county_day_points <- mutate(county_day_points, factor_var = fct_reorder2(county, day, case_avg))
 
+## fix st louis
+x <- filter(county_subset, geoid == 29510 & (report_date < "2020-06-20" | report_date > "2020-07-01"))
+y <- filter(county_subset, geoid != 29510)
+county_subset <- bind_rows(x,y)
+corrected_stl_point <- filter(county_subset, geoid == 29510 & (report_date == "2020-06-19" | report_date == "2020-07-02"))
+county_day_points <- filter(county_day_points, geoid != 29510)
+
 ## create plot
 p <- ggplot(data = county_subset) +
   geom_line(mapping = aes(x = day, y = case_avg, color = factor_var), size = 2) +
   geom_point(county_day_points, mapping = aes(x = day, y = case_avg, color = factor_var), 
+             size = 4, show.legend = FALSE) +
+  geom_point(corrected_stl_point, mapping = aes(x = day, y = case_avg), color = pal[1], shape = 15,
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
@@ -229,7 +238,7 @@ p <- ggplot(data = county_subset) +
   labs(
     title = "Pace of New COVID-19 Cases in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text,
+    caption = paste0(caption_text, "\nSt. Louis City's trend has not been updated since 2020-06-19 due to data quality issues"),
     x = "Days Since Average of Five Cases Reached",
     y = "7-day Average of Reported Cases (Log)"
   ) +
@@ -238,6 +247,9 @@ p <- ggplot(data = county_subset) +
 ## save plots
 save_plots(filename = "results/high_res/stl_metro/d_case_log_avg.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/stl_metro/d_case_log_avg.png", plot = p, preset = "lg", dpi = 72)
+
+## remove extras
+rm(x, y, corrected_stl_point)
 
 # =============================================================================
 
@@ -283,7 +295,7 @@ p <- ggplot() +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = mortality_rate, label = text),
-                  nudge_y = .04, nudge_x = -15, size = 5) +
+                  nudge_y = .06, nudge_x = -20, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .05)) +
@@ -399,7 +411,7 @@ p <- ggplot() +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_fatality_rate, label = text),
-                  nudge_y = .5, nudge_x = -15, size = 5) +
+                  nudge_y = .5, nudge_x = -20, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,12), breaks = seq(0, 12, by = 1)) +
