@@ -6,10 +6,10 @@
 ## plot values
 report_label_x <- -15
 report_label_y <- 70
-peak_point_x <- -1
-peak_point_y <- 25
-current_point_x <- -25
-current_point_y <- 5
+peak_point_x <- 0
+peak_point_y <- 125
+current_point_x <- -30
+current_point_y <- -35
 
 
 ## data values
@@ -119,12 +119,12 @@ p <- ggplot() +
                   nudge_y = report_label_y, nudge_x = report_label_x, size = 5) +
   geom_text_repel(data = peak_point, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = peak_point_y, nudge_x = peak_point_x, size = 5) +
-  # geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
-  #                nudge_y = current_point_y, nudge_x = current_point_x, size = 5.) +
+  geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
+                  nudge_y = current_point_y, nudge_x = current_point_x, size = 5.) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = -135, nudge_x = 18, size = 5) +
   geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                  nudge_y = -50, nudge_x = -1, size = 5) +
+                  nudge_y = -60, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
   scale_y_continuous(limits = c(0, 400), breaks = seq(0, 400, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
@@ -251,8 +251,8 @@ p <- ggplot() +
                   nudge_y = report_label_y, nudge_x = report_label_x, size = 5) +
   geom_text_repel(data = peak_point, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = peak_point_y, nudge_x = peak_point_x, size = 5) +
-  # geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
-  #                nudge_y = current_point_y, nudge_x = current_point_x, size = 5) +
+  geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
+                  nudge_y = current_point_y, nudge_x = current_point_x, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = 25, nudge_x = -1, size = 5) +
   geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
@@ -383,12 +383,12 @@ p <- ggplot() +
                   nudge_y = report_label_y, nudge_x = report_label_x, size = 5) +
   geom_text_repel(data = peak_point, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = peak_point_y, nudge_x = peak_point_x, size = 5) +
-  # geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
-  #                nudge_y = current_point_y, nudge_x = current_point_x, size = 5) +
+  geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
+                  nudge_y = current_point_y, nudge_x = current_point_x, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = -100, nudge_x = -35, size = 5) +
-  # geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-  #                nudge_y = -145, nudge_x = -1, size = 5) +
+  geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
+                  nudge_y = -190, nudge_x = 0, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
   scale_y_continuous(limits = c(0, 400), breaks = seq(0, 400, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
