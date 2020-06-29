@@ -132,7 +132,7 @@ state_test_data %>%
     `Average Percent Positive` = positive_avg
   ) -> data_table
 
-data_table
+DT::datatable(data_table)
 ```
 
 ### All Data
@@ -159,7 +159,7 @@ state_test_data %>%
     `Average Percent Positive` = positive_avg
   ) -> data_table
 
-data_table
+DT::datatable(data_table)
 ```
 
 ## Daily Data {.tabset}
@@ -184,7 +184,7 @@ state_data %>%
     `Average New Deaths` = deaths_avg
   ) -> data_table
 
-data_table
+DT::datatable(data_table)
 ```
 
 ### St. Louis Metro
@@ -206,7 +206,7 @@ stl_metro_data %>%
     `Average New Deaths` = deaths_avg
   ) -> data_table
 
-data_table
+DT::datatable(data_table)
 ```
 
 ### City of St. Louis
@@ -228,7 +228,7 @@ stl_city_data %>%
     `Average New Deaths` = deaths_avg
   ) -> data_table
 
-data_table
+DT::datatable(data_table)
 ```
 
 ### St. Louis County
@@ -250,7 +250,7 @@ stl_county_data %>%
     `Average New Deaths` = deaths_avg
   ) -> data_table
 
-data_table
+DT::datatable(data_table)
 ```
 
 ### Kansas City Metro
@@ -272,7 +272,7 @@ kc_metro_data %>%
     `Average New Deaths` = deaths_avg
   ) -> data_table
 
-data_table
+DT::datatable(data_table)
 ```
 
 ### Kansas City
@@ -294,7 +294,7 @@ kc_city_data %>%
     `Average New Deaths` = deaths_avg
   ) -> data_table
 
-data_table
+DT::datatable(data_table)
 ```
 
 ## Health Care Infrastructure
@@ -385,7 +385,7 @@ snapshot %>%
 
 st_geometry(data_table) <- NULL
 
-data_table
+DT::datatable(data_table)
 ```
 
 ## Average New Cases by County {.tabset}
@@ -444,7 +444,7 @@ snapshot %>%
 
 st_geometry(data_table) <- NULL
 
-data_table
+DT::datatable(data_table)
 ```
 
 ## Mortality Rates by County {.tabset}
@@ -502,7 +502,7 @@ snapshot %>%
 
 st_geometry(data_table) <- NULL
 
-data_table
+DT::datatable(data_table)
 ```
 
 ## Infection Rates by St. Louis ZCTA (Zip Code) {.tabset}
@@ -561,7 +561,7 @@ zip_snapshot %>%
 
 st_geometry(data_table) <- NULL
 
-data_table
+DT::datatable(data_table)
 ```
 
 ## Health Disparities
@@ -671,7 +671,7 @@ stl_hosp %>%
     `Daily Discharged Patients` = new_discharge
   ) -> data_table
 
-data_table
+DT::datatable(data_table)
 ```
 
 ## Other Static Maps and Plots {.tabset}
