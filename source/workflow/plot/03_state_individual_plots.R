@@ -29,9 +29,11 @@ p <- ggplot(data = covid_race, mapping = aes(x = value, y = case_rate, fill = va
     subtitle = paste0("Current as of ", as.character(date)),
     x = "Race",
     y = "Estimated Rate per 100,000 Individuals",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the U.S. Census Bureau\nMissouri's data are missing race for ~17% of cases"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the U.S. Census Bureau"
   ) +
   sequoia_theme(base_size = 22, background = "white", map = FALSE)
+
+# \nMissouri's data are missing race for ~17% of cases
 
 ## save plot
 save_plots(filename = "results/high_res/mo_individual/a_race_case.png", plot = p, preset = "lg")
@@ -55,9 +57,11 @@ p <- covid_race %>%
     subtitle = paste0("Current as of ", as.character(date)),
     x = "Race",
     y = "Estimated Rate per 100,000 Individuals",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the U.S. Census Bureau\nMissouri's data are missing race for ~2.5% of deaths"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the U.S. Census Bureau"
   ) +
   sequoia_theme(base_size = 22, background = "white", map = FALSE)
+
+# \nMissouri's data are missing race for ~2.5% of deaths
 
 ## save plot
 save_plots(filename = "results/high_res/mo_individual/b_race_mortality.png", plot = p, preset = "lg")
