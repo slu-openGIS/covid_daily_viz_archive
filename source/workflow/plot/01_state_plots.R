@@ -112,7 +112,7 @@ p <- ggplot() +
   scale_y_log10(limits = c(5, 200000), 
                 breaks = c(5, 100, 1000, 10000, 100000), 
                 labels = comma) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 7)) +
   labs(
     title = "Pace of COVID-19 Cases by State",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -166,7 +166,7 @@ p <- ggplot() +
                   nudge_y = .3, nudge_x = -3, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(1, 3000), breaks = c(1, 3, 10, 30, 100, 300, 1000, 3000), labels = comma_format(accuracy = 1)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 7)) +
   labs(
     title = "Pace of New COVID-19 Cases by State",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -200,7 +200,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = mortality_rate, label = text),
-                  nudge_y = 3, nudge_x = -15, size = 5) +
+                  nudge_y = 5, nudge_x = -20, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 5)) +
@@ -254,11 +254,11 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = deaths), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths, label = text),
-                  nudge_y = .4, nudge_x = -5, size = 5) +
+                  nudge_y = .6, nudge_x = -5, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(3, 10000), breaks = c(3, 10, 30, 100, 300, 1000, 3000, 10000), 
                 labels = comma_format(accuracy = 1)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 7)) +
   labs(
     title = "Pace of COVID-19 Deaths by State",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -311,11 +311,11 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = deaths_avg), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths_avg, label = text),
-                  nudge_y = .25, nudge_x = -1, size = 5) +
+                  nudge_y = .5, nudge_x = -2, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(.1, 300), breaks = c(.1, .3, 1,3,10,30,100, 300), 
                 labels = comma_format(accuracy = .2)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 7)) +
   labs(
     title = "Pace of New COVID-19 Deaths by State",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -347,7 +347,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_fatality_rate, label = text),
-                  nudge_y = 1, nudge_x = -15, size = 5) +
+                  nudge_y = 2, nudge_x = 15, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,10), breaks = seq(0, 10, by = 1)) +
