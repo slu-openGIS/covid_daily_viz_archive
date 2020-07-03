@@ -214,19 +214,23 @@ county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, day, ca
 county_day_points <- mutate(county_day_points, factor_var = fct_reorder2(county, day, case_avg))
 
 ## fix st louis
-x <- filter(county_subset, geoid == 29510 & (report_date < "2020-06-20" | report_date > "2020-07-01"))
-y <- filter(county_subset, geoid != 29510)
-county_subset <- bind_rows(x,y)
 corrected_stl_point <- filter(county_subset, geoid == 29510 & (report_date == "2020-06-19" | report_date == "2020-07-02"))
+x <- filter(county_subset, geoid == 29510 & report_date > "2020-07-01")
+y <- filter(county_subset, geoid != 29510)
+stl_prior <- filter(county_subset, geoid == 29510 & report_date < "2020-06-20")
+county_subset <- bind_rows(x,y)
 county_day_points <- filter(county_day_points, geoid != 29510)
 
 ## create plot
-p <- ggplot(data = county_subset) +
-  geom_line(mapping = aes(x = day, y = case_avg, color = factor_var), size = 2) +
-  geom_point(county_day_points, mapping = aes(x = day, y = case_avg, color = factor_var), 
+p <- ggplot() +
+  geom_line(data = county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), size = 2) +
+  geom_line(data = stl_prior, mapping = aes(x = day, y = case_avg), size = 2, color = pal[1]) +
+  geom_point(county_day_points, mapping = aes(x = day, y = case_avg, color = factor_var),
              size = 4, show.legend = FALSE) +
   geom_point(corrected_stl_point, mapping = aes(x = day, y = case_avg), color = pal[1], shape = 15,
              size = 4, show.legend = FALSE) +
+  geom_line(corrected_stl_point, mapping = aes(x = day, y = case_avg), color = pal[1],
+            size = 2, linetype = "dotted", show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
@@ -238,7 +242,7 @@ p <- ggplot(data = county_subset) +
   labs(
     title = "Pace of New COVID-19 Cases in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = paste0(caption_text, "\nSt. Louis City's trend has not been updated since 2020-06-19 due to data quality issues"),
+    caption = paste0(caption_text, "\nSt. Louis City's trend omitted between 2020-06-19 and 2020-07-01 due to data quality issues"),
     x = "Days Since Average of Five Cases Reached",
     y = "7-day Average of Reported Cases (Log)"
   ) +
