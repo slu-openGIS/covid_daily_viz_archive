@@ -219,7 +219,7 @@ x <- filter(county_subset, geoid == 29510 & report_date > "2020-07-01")
 y <- filter(county_subset, geoid != 29510)
 stl_prior <- filter(county_subset, geoid == 29510 & report_date < "2020-06-20")
 county_subset <- bind_rows(x,y)
-county_day_points <- filter(county_day_points, geoid != 29510)
+# county_day_points <- filter(county_day_points, geoid != 29510)
 
 ## create plot
 p <- ggplot() +
@@ -437,5 +437,5 @@ save_plots(filename = "results/low_res/stl_metro/j_case_fatality_rate.png", plot
 
 # clean-up
 rm(stl_sf, county_focal, county_points, report_points, report_label, county_subset,
-   county_data, county_day_points, report_day_points, report_line)
+   county_data, county_day_points, report_day_points, report_line, stl_prior)
 rm(top_val, pal, cols, p)
