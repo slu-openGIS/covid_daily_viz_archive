@@ -70,20 +70,3 @@ rm(plot_date, save_plots, sequoia_theme, date_breaks, calculate_days, filter_dat
    map_breaks, map_bins, round_any, caption_text, caption_text_census,
    caption_text_census_map, caption_text_census_map2, x_angle,
    start_date, date_breaks_alt)
-
-# =============================================================================
-
-# update interactive map
-rmarkdown::render(input = "docs/index.Rmd",
-                  params = list(
-                    date = paste0("Last updated on ", as.character(date)),
-                    date_val = as.character(date),
-                    prior_date_val = as.character(date-7)
-                  ))
-
-# =============================================================================
-
-# clean-up
-rm(pal, snapshot, date, zip_snapshot, map_breaks, map_bins, bins, round_any,
-   data_table, state_data, stl_city_data, stl_county_data, kc_city_data,
-   kc_metro_data, stl_metro_data, state_test_data, stl_hosp)

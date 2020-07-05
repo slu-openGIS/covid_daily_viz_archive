@@ -50,20 +50,3 @@ source("source/workflow/plot/17_stl_hospital_plots.R")
 
 # clean-up
 rm(map_bins, map_breaks, round_any, save_plots, sequoia_theme, x_angle)
-
-# =============================================================================
-
-# update interactive map
-rmarkdown::render(input = "docs/index.Rmd",
-                  params = list(
-                    date = paste0("Last updated on ", as.character(date)),
-                    date_val = as.character(date),
-                    prior_date_val = as.character(date-7)
-                  ))
-
-# =============================================================================
-
-# clean-up
-rm(pal, snapshot, date, zip_snapshot, map_breaks, map_bins, bins, round_any,
-   data_table, state_data, stl_city_data, stl_county_data, kc_city_data,
-   kc_metro_data, stl_metro_data, state_test_data, stl_hosp)
