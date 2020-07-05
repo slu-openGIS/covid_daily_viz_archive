@@ -1,0 +1,22 @@
+.column {
+  float: left;
+  width: 33.33%;
+  text-align: center;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.padtop{
+  margin-top: 3em;
+}
