@@ -1,0 +1,438 @@
+---
+title: "Overview"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# dependencies
+library(fontawesome)
+
+library(dplyr)
+library(leaflet)
+library(readr)
+library(sf)
+
+library(ggplot2)
+
+# functions
+source(here::here("source", "functions", "map_breaks.R"))
+source(here::here("source", "functions", "round_any.R"))
+
+# build dates
+params <- list(
+  date = paste0("Last updated on ", as.character(Sys.Date()-1)),
+  date_val = as.character(Sys.Date()-1),
+  prior_date_val = as.character(Sys.Date()-8)
+)
+
+# load data
+state_data <- read_csv(here::here("data", "state", "state_full.csv")) %>%
+  filter(state == "Missouri") %>%
+  filter(report_date >= "2020-03-07") %>%
+  arrange(desc(report_date))
+
+state_test_data <- read_csv(here::here("data", "state", "state_testing.csv"))
+
+stl_metro_data <- read_csv(here::here("data", "metro_all", "metro_full.csv")) %>%
+  filter(short_name == "St. Louis") %>%
+  filter(report_date >= "2020-03-07") %>%
+  arrange(desc(report_date))
+
+kc_metro_data <- read_csv(here::here("data", "metro_all", "metro_full.csv")) %>%
+  filter(short_name == "Kansas City") %>%
+  filter(report_date >= "2020-03-07") %>%
+  arrange(desc(report_date))
+
+stl_city_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
+  filter(geoid == "29510") %>%
+  filter(report_date >= "2020-03-18") %>%
+  arrange(desc(report_date))
+
+stl_county_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
+  filter(geoid == "29189") %>%
+  filter(report_date >= "2020-03-07") %>%
+  arrange(desc(report_date))
+
+kc_city_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
+  filter(geoid == "29511") %>%
+  filter(report_date >= "2020-03-20") %>%
+  arrange(desc(report_date))
+
+snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 4326,
+                    stringsAsFactors = FALSE) %>%
+  mutate(icu_rate = ifelse(hospitals == 0, NA, icu_rate)) %>%
+  mutate(avg_rate = (case_avg/total_pop)*1000)
+```
+
+Welcome to the overhauled version of <a href="https://chris-prener.github.io" target="_blank">Chris Prener's</a> tracking site for the SARS-CoV-2 pandemic in Missouri. This site is updated nightly using data from a variety of federal, state, and local data sources as well as the <a href="https://nytimes.com" target="_blank">New York Times'</a> <a href="https://github.com/nytimes/covid-19-data" target="_blank">COVID-19 Project</a>. Chris also posts <a href="https://twitter.com/chrisprener" target="_blank">Twitter</a> threads on Tuesday and Thursday evenings breaking down current trends in Missouri. If you are new to the site, please read the [About page](about.html) for an overview of these data.
+
+## Daily Data {.tabset .tabset-fade .tabset-pills .padtop}
+While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1), and [Kansas City](https://www.kcmo.gov/city-hall/departments/health/coronavirus-covid-19/covid-19-totals) provide day-by-day tracking of cumulative cases on their respective dashboards, the State of Missouri does not. The following tabs provide daily breakdowns of COVID data as well as additional statistics not included in the existing dashboards. Data are also provided for the wider St. Louis and Kansas City metro areas. Please note that the two average columns for reported cases and deaths are both seven-day rolling averages.
+
+### Missouri
+
+```{r missouri-data-table, echo=FALSE, out.width = '100%'}
+state_data %>%
+  select(report_date, cases, new_cases, case_avg, deaths, new_deaths) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Cumulative Deaths` = deaths,
+    `New Deaths` = new_deaths
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### St. Louis Metro
+
+```{r metro-stl-data-table, echo=FALSE, out.width = '100%'}
+stl_metro_data %>%
+  select(report_date, cases, new_cases, case_avg, deaths, new_deaths) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Cumulative Deaths` = deaths,
+    `New Deaths` = new_deaths
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### City of St. Louis
+
+```{r stl-city-data-table, echo=FALSE, out.width = '100%'}
+stl_city_data %>%
+  select(report_date, cases, new_cases, case_avg, deaths, new_deaths) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Cumulative Deaths` = deaths,
+    `New Deaths` = new_deaths
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### St. Louis County
+
+```{r stl-county-data-table, echo=FALSE, out.width = '100%'}
+stl_county_data %>%
+  select(report_date, cases, new_cases, case_avg, deaths, new_deaths) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Cumulative Deaths` = deaths,
+    `New Deaths` = new_deaths
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### Kansas City Metro
+
+```{r metro-kc-data-table, echo=FALSE, out.width = '100%'}
+kc_metro_data %>%
+  select(report_date, cases, new_cases, case_avg, deaths, new_deaths) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Cumulative Deaths` = deaths,
+    `New Deaths` = new_deaths
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### Kansas City
+
+```{r kansas-city-data-table, echo=FALSE, out.width = '100%'}
+kc_city_data %>%
+  select(report_date, cases, new_cases, case_avg, deaths, new_deaths) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Cumulative Deaths` = deaths,
+    `New Deaths` = new_deaths
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+## Infection Rates by County {.tabset .tabset-fade .tabset-pills .padtop}
+This map shows infections as a rate per 1,000 residents. It is important not to map the raw counts themselves, but if you want to see those data, click on a county.
+
+### Map
+
+```{r map-infections, echo = FALSE, out.width = '100%', out.height='600px'}
+# calculate breaks
+bins <- map_bins(snapshot, var = "case_rate", style = "fisher", classes = 5, dig_lab = 2,
+                 round = 2)
+bins[length(bins)] <- round_any(x = max(snapshot$case_rate), accuracy = .01, f = ceiling)
+
+# create color palette
+pal <- colorBin("BuGn", domain = snapshot$case_rate, bins = bins)
+
+# map
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = snapshot,
+    color = "#444444", 
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.75,
+    fillColor = ~pal(case_rate),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste("<b>County:</b> ", snapshot$county, "<br>",
+                           "<b>Current Cumulative Count:</b> ", snapshot$cases, "<br>",
+                           "<b>Current Cumulative Rate per 1,000:</b> ", round(snapshot$case_rate, digits = 2), "<br>",
+                           "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
+                           "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds)
+    )  %>%
+    addLegend(pal = pal, values = snapshot$case_rate, opacity = .75, title = "Rate")
+```
+
+### Data Table
+
+```{r confirmed-data-table, echo=FALSE, out.width = '100%'}
+snapshot %>%
+  select(state, county, cases, case_rate) %>%
+  mutate(
+    case_rate = round(case_rate, digits = 2)
+  ) %>%
+  rename(
+    State = state,
+    County = county,
+    `Cumulative Cases` = cases,
+    `Rate per 1,000 Residents` = case_rate
+  ) %>%
+  arrange(State, County) -> data_table
+
+st_geometry(data_table) <- NULL
+
+DT::datatable(data_table)
+```
+
+## Average New Cases by County {.tabset .tabset-fade .tabset-pills .padtop}
+This map shows a seven-day rolling average of new cases. For this map, this covers `r params$date_val` back through `r params$prior_date_val`. There is not a threshold for what constitutes a high or low average, but the higher the average number of new cases, the more new spread we can infer. For mapping purposes, these are displayed as a rate per 1,000 residents. As with the prior map, additional details are available by clicking on each county or on the data table.
+
+### Map
+
+```{r map-confirmed-avg, echo = FALSE, out.width = '100%', out.height='600px', warning=FALSE}
+# calculate breaks
+bins <- map_bins(snapshot, var = "avg_rate", style = "fisher", classes = 5, dig_lab = 2,
+                 round = 2)
+bins[length(bins)] <- round_any(x = max(snapshot$avg_rate), accuracy = .01, f = ceiling)
+
+# create color palette
+pal <- colorBin("RdPu", domain = snapshot$avg_rate, bins = bins)
+
+# map
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = snapshot,
+    color = "#444444", 
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.75,
+    fillColor = ~pal(avg_rate),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste("<b>County:</b> ", snapshot$county, "<br>",
+                           "<b>Current Cumulative Count:</b> ", snapshot$cases, "<br>",
+                           "<b>7-day Average of New Cases:</b> ", round(snapshot$case_avg, digits = 2), "<br>",
+                           "<b>Average New Cases per 1,000 Residents:</b> ", round(snapshot$avg_rate, digits = 2), "<br>",
+                           "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
+                           "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds)
+    )  %>%
+    addLegend(pal = pal, values = snapshot$avg_rate, opacity = .75, title = "7-day Average Rate")
+```
+
+
+### Data Table
+
+```{r confirmed-avg-data-table, echo=FALSE, out.width = '100%'}
+snapshot %>%
+  select(state, county, cases, case_avg, avg_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2)
+  ) %>%
+  rename(
+    State = state,
+    County = county,
+    `Cumulative Cases` = cases,
+    `7-day Average New Cases` = case_avg,
+    `Average New Cases per 1,000 Residents` = avg_rate
+  ) %>%
+  arrange(State, County) -> data_table
+
+st_geometry(data_table) <- NULL
+
+DT::datatable(data_table)
+```
+
+## Mortality Rates by County {.tabset .tabset-fade .tabset-pills .padtop}
+This map shows mortality as a rate per 1,000 residents. As with the prior maps, raw counts of deaths and hospital infrastructure details are available by clicking on individual counties or on the data table.
+
+### Map
+
+```{r map-mortality, echo = FALSE, out.width = '100%', out.height='600px'}
+# calculate breaks
+bins <- map_bins(snapshot, var = "mortality_rate", style = "fisher", classes = 5, dig_lab = 2,
+                 round = 2)
+bins[length(bins)] <- round_any(x = max(snapshot$mortality_rate), accuracy = .01, f = ceiling)
+
+# create color palette
+pal <- colorBin("YlGn", domain = snapshot$mortality_rate, bins = bins)
+
+# map
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = snapshot,
+    color = "#444444", 
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.75,
+    fillColor = ~pal(mortality_rate),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste("<b>County:</b> ", snapshot$county, "<br>",
+                           "<b>Current Mortality Count:</b> ", snapshot$deaths, "<br>",
+                           "<b>Current Mortality Rate per 1,000:</b> ", round(snapshot$mortality_rate, digits = 2), "<br>",
+                           "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
+                           "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds)
+    )  %>%
+    addLegend(pal = pal, values = snapshot$mortality_rate, opacity = .75, title = "Rate")
+```
+
+### Data Table
+
+```{r mortality-data-table, echo=FALSE, out.width = '100%'}
+snapshot %>%
+  select(state, county, deaths, mortality_rate, case_fatality_rate) %>%
+  mutate(
+    mortality_rate = round(mortality_rate, digits = 2),
+    case_fatality_rate = round(case_fatality_rate, digits = 2)
+  ) %>%
+  rename(
+    State = state,
+    County = county,
+    `Cumulative Deaths` = deaths,
+    `Rate per 1,000 Residents` = mortality_rate,
+    `Case Fatality (%)` = case_fatality_rate
+  ) %>%
+  arrange(State, County) -> data_table
+
+st_geometry(data_table) <- NULL
+
+DT::datatable(data_table)
+```
+
+## Additional Plots and Data {.padtop}
+Select an area below to view additional plots that focus on trends within a variety of areas of Missouri.
+
+<br>
+
+<div class="row">
+  <div class="column">
+  <a href="about.html">`r fa("chart-line", height = 40)`</i>
+  <br><p style="font-size:20px">Statewide Data</p></a><p>Includes testing data</p></div>
+  <div class="column">
+  <a href="about.html">`r fa("chart-area", height = 40)`</i>
+  <br><p style="font-size:20px">Regional Data</p></a></div>
+  <div class="column">
+  <a href="about.html">`r fa("user-friends", height = 40)`</i>
+  <br><p style="font-size:20px">Health Disparities</p></a><p>Includes statewide and St. Louis data</p></div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="column">
+  <a href="about.html">`r fa("chart-bar", height = 40)`</i>
+  <br><p style="font-size:20px">Metro Area Data</p></a></div>
+  <div class="column">
+  <a href="about.html">`r fa("chart-line", height = 40)`</i>
+  <br><p style="font-size:20px">Kansas City Metro</p></a></div>
+  <div class="column">
+  <a href="about.html">`r fa("chart-area", height = 40)`</i>
+  <br><p style="font-size:20px">St. Louis Metro</p></a><p>Includes testing and hospitalization data</p></div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="column">
+  <a href="about.html">`r fa("chart-area", height = 40)`</i>
+  <br><p style="font-size:20px">Cape Girardeau</p></a></div>
+  <div class="column">
+  <a href="about.html">`r fa("chart-bar", height = 40)`</i>
+  <br><p style="font-size:20px">Southeast MO</p></a></div>
+  <div class="column">
+  <a href="about.html">`r fa("chart-line", height = 40)`</i>
+  <br><p style="font-size:20px">Lake of the Ozarks</p></a></div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="column">
+  <a href="about.html">`r fa("chart-line", height = 40)`</i>
+  <br><p style="font-size:20px">Mid-Missouri</p></a></div>
+  <div class="column">
+  <a href="about.html">`r fa("chart-area", height = 40)`</i>
+  <br><p style="font-size:20px">Northern MO</p></a></div>
+  <div class="column">
+  <a href="about.html">`r fa("chart-bar", height = 40)`</i>
+  <br><p style="font-size:20px">St. Joseph</p></a></div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="column">
+  <a href="about.html">`r fa("chart-bar", height = 40)`</i>
+  <br><p style="font-size:20px">Southwest MO Focus</p></a></div>
+  <div class="column"></div>
+  <div class="column"></div>
+</div>

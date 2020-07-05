@@ -1,0 +1,39 @@
+---
+title: "About This Website"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+## Where Do These Data Come From?
+Data for this site is compiled from a number of sources on a daily basis:
+
+  1. County and state COVID-19 data - the <a href="https://nytimes.com" target="_blank">New York Times'</a> <a href="https://github.com/nytimes/covid-19-data" target="_blank">COVID-19 Project</a>
+  2. State testing data - the <a href="https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/" target="_blank">Missouri Department of Health and Senior Services</a> for Missouri specific data and the <a href="https://covidtracking.com" target="_blank">COVID Tracking Project</a> for surrounding states
+  3. State health disparities data - the <a href="https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/" target="_blank">Missouri Department of Health and Senior Services</a>
+  4. St. Louis area health disparities data - the <a href="https://www.stlouis-mo.gov/covid-19/data/index.cfm" target="_blank">City of St. Louis</a> and <a href="https://stlcorona.com/resources/covid-19-statistics1/" target="_blank">St. Louis County</a>
+  5. St. Louis area zip code data - the <a href="https://www.stlouis-mo.gov/covid-19/data/index.cfm" target="_blank">City of St. Louis</a> and <a href="https://stlcorona.com/resources/covid-19-statistics1/" target="_blank">St. Louis County</a>
+  6. St. Louis area hospitalization data - the St. Louis Metropolitan Pandemic Task Force
+  7. Demographic data - the U.S. Census Bureau's American Community Survey 5-year estimates (2014-2018)
+  
+See the [Technical Notes page](data.html) for additional details.
+
+## Why Do Numbers Not Match? {.padtop}
+Due to lags in reporting, both at the public health department level and at the New York Times itself, case and mortality numbers may lag behind other figures reported in the media. At the same time, because the New York Times obtains data from multiple sources, some case and mortality numbers may actually be higher than what is reported by the state.
+
+## What Are Probable Cases? {.padtop}
+On May 6th, the New York Times began including probable cases - those without a confirmatory test result but where symptoms indicate a COVID-19 infection. Not all counties report probable cases, however, and so I include markers on plots to indicate when the reporting change beginning on April 15th may have occurred.
+
+## Why Do You Not Have Hospitalization Data for Missouri? {.padtop}
+Missouri does not have what Chris considers reliable statewide hospitalization data. Their partners, the Missouri Hospital Association (MHA), provide the state with hospitalization data from the Centers for Disease Control's National Healthcare Safety Network (NHSN). Unfortunately, not all hospitals in Missouri report to the NHSN each day. MHA has stopped reporting the exact number of hospitals reporting daily, which had been their practice until early June. Since the number of hospitals reporting changes each day, it is impossible to disentangle whether COVID-19 hospitalizations went up because more hospitals were reporting or because there was a genuine increase in the number of in-patients in Missouri. Likewise, it is impossible to know if decreases are genuine or are artifact from a smaller number of hospitals reporting.
+
+## About Chris {.padtop}
+Chris is an urban and medical sociologist with an interest in mixed methods research designs that incorporate spatial data. His current book project examines the effect of neighborhood context and conditions on emergency medical services work, particularly with patients who have mental illnesses or substance use disorders. Chris also as a grant to conduct pilot work on the effects of historic redlining on contemporary health disparities in St. Louis. He is also part of a research team examining the effects of literacy on mental health service use and recovery, and he is engaged in a number of St. Louis specific projects on street closures, crime, arson, and vacancy. Chris is an Assistant Professor in the Department of Sociology and Anthropology at <a href="http://wwww.slu.edu" target="_blank">Saint Louis University</a>. More details are available at his <a href="https://chris-prener.github.io" target="_blank">website</a> and he can be contacted at <a href="mailto:chris.prener@slu.edu">chris.prener@slu.edu</a>.
+
+## About the SLU OpenGIS Project {.padtop}
+The <a href="https://slu-dss.github.io" target="_blank">SLU Data Science Seminar</a> is the host of Chris's <a href="https://slu-opengis.github.io" target="_blank">openGIS</a> project. The project is a collaborative effort with <a href="http://wwww.slu.edu" target="_blank">Saint Louis University</a> students to curate and host GIS data about the St. Louis area in an accessible manner. We also maintain several R packages that contain tools for working with spatial data. More details about our projects and our commitment to creating an inclusive, welcoming data science community are available on our <a href="https://slu-opengis.github.io/about/" target="_blank">website</a>.
+
+## About Saint Louis University {.padtop}
+Founded in 1818, <a href="http://wwww.slu.edu" target="_blank">Saint Louis University</a> is one of the nation's oldest and most pretigious Catholic institutions. Rooted in Jesuit values and its pioneering history as the first university west of the Mississippi River, SLU offers nearly 13,000 students a rigorous, transformative education of the whole person. At the core of the University's diverse community of scholars is SLU’s service-focused mission, which challenges and prepares students to make the world a better, more just place.
