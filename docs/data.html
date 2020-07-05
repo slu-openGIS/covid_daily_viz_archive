@@ -357,9 +357,6 @@ div.tocify {
 <li>
   <a href="data.html">Technical Notes</a>
 </li>
-<li>
-  <a href="https://github.com/slu-openGIS/covid_daily_viz">Source Code</a>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -379,9 +376,9 @@ div.tocify {
 
 <div id="workflow" class="section level2">
 <h2>Workflow</h2>
-<p>Data production, plotting, and the generation of this website all use the programming language <code>R</code>.</p>
+<p>Data production, plotting, and the generation of this website all use the programming language <code>R</code>. The workflows are split into three processes - an “AM” process that builds data from the New York Times, a “PM” process that builds data from other sources, and a final site building process to create this site itself. All source code is available in this project’s <a href="https://github.com/slu-openGIS/covid_daily_viz" target = "_blank">GitHub repository</a>.</p>
 </div>
-<div id="downloading-case-and-mortality-data" class="section level2">
+<div id="downloading-case-and-mortality-data" class="section level2 padtop">
 <h2>Downloading Case and Mortality Data</h2>
 <p>To download the data from the New York Times:</p>
 <pre class="r"><code>get_times &lt;- function(end_date){
@@ -396,12 +393,14 @@ div.tocify {
   df &lt;- readr::read_csv(response)
   
   # tidy data
-  df &lt;- dplyr::filter(df, state %in% c(&quot;Arkansas&quot;, &quot;Kansas&quot;, &quot;Missouri&quot;, &quot;Illinois&quot;, &quot;Oklahoma&quot;))
+  df &lt;- dplyr::filter(df, state %in% 
+                      c(&quot;Arkansas&quot;, &quot;Kansas&quot;, &quot;Missouri&quot;, &quot;Illinois&quot;, &quot;Oklahoma&quot;))
   df &lt;- dplyr::rename(df,
                       confirmed = cases,
                       report_date = date,
                       geoid = fips)
   df &lt;- dplyr::mutate(df, geoid = ifelse(county == &quot;Kansas City&quot;, &quot;29511&quot;, geoid))
+  df &lt;- dplyr::mutate(df, geoid = ifelse(county == &quot;Joplin&quot;, &quot;29512&quot;, geoid))
   df &lt;- dplyr::select(df, geoid, report_date, confirmed, deaths)
   
   if (is.null(end_date) == FALSE){
@@ -415,10 +414,10 @@ div.tocify {
   
 }</code></pre>
 </div>
-<div id="other-notes" class="section level2">
+<div id="other-notes" class="section level2 padtop">
 <h2>Other Notes</h2>
 <ul>
-<li>The Fisher breaks algorithm (Fisher 1958, Slocum et al. 2005) is used to identify legend categories</li>
+<li>The Fisher breaks algorithm (Fisher 1958, Slocum et al. 2005) is used to identify legend categories on maps</li>
 <li>Estimated populations for the the four counties around Kansas City as well as Kansas City itself were created using areal weighted interpolation (see Prener and Revord 2019)</li>
 <li>Estimated populations for partial zip codes are also created using areal weighted interpolation (see Prener and Revord 2019)</li>
 </ul>
