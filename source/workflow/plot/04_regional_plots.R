@@ -126,7 +126,7 @@ p <- ggplot() +
   geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = -130, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
-  scale_y_continuous(limits = c(0, 450), breaks = seq(0, 450, by = 50)) +
+  scale_y_continuous(limits = c(0, 500), breaks = seq(0, 500, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   labs(
     title = "Pace of New COVID-19 Cases in Missouri",
@@ -258,7 +258,7 @@ p <- ggplot() +
   # geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = -80, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
-  scale_y_continuous(limits = c(0, 450), breaks = seq(0, 450, by = 50)) +
+  scale_y_continuous(limits = c(0, 500), breaks = seq(0, 500, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   labs(
     title = "Pace of New COVID-19 Cases in Missouri",
@@ -293,6 +293,14 @@ focal_data <- read_csv("data/county/county_full.csv") %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(state == "Missouri") %>%
   filter(geoid %in% kc_stl == FALSE)
+
+joplin <- filter(focal_data, geoid == "29512") %>%
+  filter(report_date > "2020-07-01")
+focal_data <- filter(focal_data, geoid != "29512")
+focal_data <- rbind(focal_data, joplin) %>%
+  arrange(county, report_date)
+
+rm(joplin)
 
 # =============================================================================
 
@@ -390,7 +398,7 @@ p <- ggplot() +
   geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = -170, nudge_x = 0, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
-  scale_y_continuous(limits = c(0, 450), breaks = seq(0, 450, by = 50)) +
+  scale_y_continuous(limits = c(0, 500), breaks = seq(0, 500, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   labs(
     title = "Pace of New COVID-19 Cases in Missouri",
@@ -421,6 +429,14 @@ rm(top_val, p, report_points, report_label, report_day_points)
 regional_data <- read_csv("data/county/county_full.csv") %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(state == "Missouri")
+
+joplin <- filter(regional_data, geoid == "29512") %>%
+  filter(report_date > "2020-07-01")
+regional_data <- filter(regional_data, geoid != "29512")
+regional_data <- rbind(regional_data, joplin) %>%
+  arrange(county, report_date)
+
+rm(joplin)
 
 # =============================================================================
 

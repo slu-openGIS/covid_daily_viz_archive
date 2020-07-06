@@ -63,7 +63,7 @@ county_data %>%
   group_by(short_name, report_date) %>%
   summarise(
     cases = sum(cases),
-    new_cases = sum(new_cases),
+    new_cases = sum(new_cases, na.rm = TRUE),
     deaths = sum(deaths),
     new_deaths = sum(new_deaths)
   ) %>%
