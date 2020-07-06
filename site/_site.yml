@@ -6,6 +6,8 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+    - text: "FAQ"
+      href: faq.html      
     - text: "Technical Notes"
       href: data.html
 output:

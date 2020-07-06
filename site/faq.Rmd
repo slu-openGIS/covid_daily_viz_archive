@@ -1,0 +1,42 @@
+---
+title: "Frequently Asked Questions"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+## Where Do These Data Come From?
+Data for this site is compiled from a number of sources on a daily basis:
+
+  1. County and state COVID-19 data - the <a href="https://nytimes.com" target="_blank">New York Times'</a> <a href="https://github.com/nytimes/covid-19-data" target="_blank">COVID-19 Project</a>
+  2. State testing data - the <a href="https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/" target="_blank">Missouri Department of Health and Senior Services</a> for Missouri specific data and the <a href="https://covidtracking.com" target="_blank">COVID Tracking Project</a> for surrounding states
+  3. State health disparities data - the <a href="https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/" target="_blank">Missouri Department of Health and Senior Services</a>
+  4. St. Louis area health disparities data - the <a href="https://www.stlouis-mo.gov/covid-19/data/index.cfm" target="_blank">City of St. Louis</a> and <a href="https://stlcorona.com/resources/covid-19-statistics1/" target="_blank">St. Louis County</a>
+  5. St. Louis area zip code data - the <a href="https://www.stlouis-mo.gov/covid-19/data/index.cfm" target="_blank">City of St. Louis</a> and <a href="https://stlcorona.com/resources/covid-19-statistics1/" target="_blank">St. Louis County</a>
+  6. St. Louis area hospitalization data - the St. Louis Metropolitan Pandemic Task Force
+  7. Demographic data - the U.S. Census Bureau's American Community Survey 5-year estimates (2014-2018)
+  
+See the [Technical Notes page](data.html) for additional details.
+
+## Why Do Numbers Not Match? {.padtop}
+Due to lags in reporting, both at the public health department level and at the New York Times itself, case and mortality numbers may lag behind other figures reported in the media. At the same time, because the New York Times obtains data from multiple sources, some case and mortality numbers may actually be higher than what is reported by the state.
+
+## What Are Probable Cases? {.padtop}
+On May 6th, the New York Times began including probable cases - those without a confirmatory test result but where symptoms indicate a COVID-19 infection. Not all counties report probable cases, however, and so I include markers on plots to indicate when the reporting change beginning on April 15th may have occurred.
+
+## Why Do You Not Have Hospitalization Data for Missouri? {.padtop}
+Missouri does not have what Chris considers reliable statewide hospitalization data. Their partners, the Missouri Hospital Association (MHA), provide the state with hospitalization data from the Centers for Disease Control's National Healthcare Safety Network (NHSN). Unfortunately, not all hospitals in Missouri report to the NHSN each day. MHA has stopped reporting the exact number of hospitals reporting daily, which had been their practice until early June. Since the number of hospitals reporting changes each day, it is impossible to disentangle whether COVID-19 hospitalizations went up because more hospitals were reporting or because there was a genuine increase in the number of in-patients in Missouri. Likewise, it is impossible to know if decreases are genuine or are artifact from a smaller number of hospitals reporting.
+
+## Why Do You Treat Joplin and Kansas City as Counties? {.padtop}
+Since both cities have their own health departments, and straddle multiple counties, both the State of Missouri and the New York Times have been releasing data on infections and deaths exclusive of the counties they lie in. This has been true for Kansas City since the beginning of the pandemic, and true for Joplin since June 25th. I have adjusted the populations for both the cities themselves and the surrounding counties to provide accurate per capita rates, and have also created maps that show Joplin and Kansas City as their own entities.
+
+## Can I Reuse Your Data or Graphics? {.padtop}
+Absolutely! All code, data, website content, and images are available under a CC-BY 4.0 license. This means that you can use these data and graphics as long as you tell your audience where they came from. Graphics should not be altered to remove the caption that indicates who made them and where the underlying data came from.
+
+## How Do I Download Your Data? {.padtop}
+The easiest way to download them is to go to the <a href="https://github.com/slu-openGIS/covid_daily_viz" target="_blank">GitHub repository</a> for this project and click on the green `Code` button. The menu that appears will give you an option to download a `.zip` file that contains all of the clean data and most of the raw data (in the `data/` folder).
+
+## How Do I Download Your Graphics? {.padtop}
+Low resolution version of the graphics can be downloaded one at a time from the website by right clicking on them. If you want to download them all at once, or download the high resolution versions, follow the same process for downloading the data from <a href="https://github.com/slu-openGIS/covid_daily_viz" target="_blank">GitHub</a> (see above). The images will be in the `results/` folder.
