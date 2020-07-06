@@ -22,4 +22,4 @@ counties_sf <- rbind(mo_counties, il_ks_ok_counties)
 counties_sf <- arrange(counties_sf, GEOID)
 
 # write data
-st_write(counties_sf, "data/source/mo_county_xl.geojson")
+st_write(counties_sf, "data/source/mo_county_xl.geojson", delete_dsn = TRUE)

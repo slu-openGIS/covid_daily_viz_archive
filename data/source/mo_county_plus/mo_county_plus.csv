@@ -8,7 +8,6 @@ GEOID,NAME,total_pop
 29125,Maries County,8884
 29109,Lawrence County,38133
 29179,Reynolds County,6315
-29145,Newton County,58202
 29043,Christian County,84275
 29119,McDonald County,22827
 29005,Atchison County,5270
@@ -41,7 +40,6 @@ GEOID,NAME,total_pop
 29039,Cedar County,13938
 29017,Bollinger County,12281
 29175,Randolph County,24945
-29097,Jasper County,119238
 29149,Oregon County,10699
 29059,Dallas County,16499
 29151,Osage County,13619
@@ -110,8 +108,11 @@ GEOID,NAME,total_pop
 29013,Bates County,16374
 29143,New Madrid County,17811
 29029,Camden County,45096
-29037,Cass County,102372
-29047,Clay County,125718
-29095,Jackson County,377169
-29511,Kansas City,475663
-29165,Platte County,51748
+29097,Jasper County,76186
+29512,Joplin,50073
+29145,Newton County,51181
+29037,Cass County,102542
+29047,Clay County,116613
+29095,Jackson County,380899
+29511,Kansas City,481417
+29165,Platte County,51198
