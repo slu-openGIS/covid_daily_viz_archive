@@ -14,10 +14,10 @@ counties <- counties(state = c(5, 17, 20, 29, 40), cb = FALSE, class = "sf")
 st_geometry(counties) <- NULL
 
 ## create kansas city row
-kc <- tibble(
-  geoid = "29511",
+extra <- tibble(
+  geoid = c("29511", "29512"),
   state = "Missouri",
-  county = "Kansas City"
+  county = c("Kansas City", "Joplin")
 )
 
 ## tidy
@@ -35,7 +35,7 @@ counties %>%
     state == "29" ~ "Missouri",
     state == "40" ~ "Oklahoma"
   )) %>%
-  bind_rows(., kc) %>%
+  bind_rows(., extra) %>%
   arrange(state, geoid) %>%
   mutate(county = ifelse(geoid == "29510", "St. Louis City", county)) -> counties
 

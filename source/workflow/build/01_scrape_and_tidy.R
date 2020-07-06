@@ -53,6 +53,14 @@ times_dates %>%
   unlist() %>%
   map_df(~historic_expand(ref = counties, date = .x)) -> times_dates
 
+# fix Joplin
+joplin <- filter(times_dates, geoid == "29512") %>%
+  filter(report_date > "2020-06-24")
+times_dates <- filter(times_dates, geoid != "29512")
+times_dates <- rbind(times_dates, joplin) %>%
+  arrange(state, county, report_date)
+rm(joplin)
+
 # combine county master list with historic data
 times_data <- left_join(times_dates, times_raw, by = c("geoid", "report_date"))
 

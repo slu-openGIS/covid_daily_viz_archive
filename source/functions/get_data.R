@@ -101,6 +101,7 @@ get_times <- function(end_date){
                       report_date = date,
                       geoid = fips)
   df <- dplyr::mutate(df, geoid = ifelse(county == "Kansas City", "29511", geoid))
+  df <- dplyr::mutate(df, geoid = ifelse(county == "Joplin", "29512", geoid))
   df <- dplyr::select(df, geoid, report_date, confirmed, deaths)
   
   if (is.null(end_date) == FALSE){
