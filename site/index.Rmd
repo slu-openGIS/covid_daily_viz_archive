@@ -380,7 +380,21 @@ st_geometry(data_table) <- NULL
 DT::datatable(data_table)
 ```
 
-## Other Static Maps and Plots {.tabset .tabset-fade .tabset-pills .padtop}
+## Additional Plots and Data {.padtop}
+Select an area below to view additional plots that focus on trends within a variety of areas of Missouri.
+
+<br>
+
+<div class="row">
+  <div class="column">
+  <a href="stl.html">`r fa("chart-area", height = 40)`</i>
+  <br><p style="font-size:20px">St. Louis Metro</p></a><p>Includes zip code and hospitalization data</p></div>
+  <div class="column"></div>
+  <div class="column"></div>
+</div>
+
+
+## Legacy Plots {.tabset .tabset-fade .tabset-pills .padtop}
 In addition to the interactive maps above, I regularly update a range of static maps and plots that capture the progression of the COVID-19 outbreak in Missouri, several metro areas, and at the ZCTA (zip code) level in St. Louis City and County. The most recent versions of each plot can be viewed by clicking on the links within the tabs below.
 
 ### State

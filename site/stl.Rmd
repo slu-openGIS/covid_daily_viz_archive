@@ -1,0 +1,278 @@
+---
+title: "St. Louis Metropolitan Area"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# dependencies
+library(dplyr)
+library(leaflet)
+library(readr)
+library(sf)
+
+library(ggplot2)
+
+# functions
+source(here::here("source", "functions", "map_breaks.R"))
+source(here::here("source", "functions", "round_any.R"))
+
+# load data
+county_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
+  filter(geoid %in% c("17005", "17013", "17027", "17083", "17117", 
+               "17119", "17133", "17163", "29071", "29099", 
+               "29113", "29183", "29189", "29219", "29510")) %>%
+  filter(report_date >= "2020-03-07") %>%
+  arrange(desc(report_date), county)
+zip_snapshot <- st_read(here::here("data", "zip", "daily_snapshot_city_county.geojson"), stringsAsFactors = FALSE) 
+stl_hosp <-  read_csv(here::here("data", "metro", "stl_hospital.csv"))
+```
+
+The following plots and maps focus on the St. Louis metropolitan statistical area, which covers fifteen counties in Missouri and Illinois.
+
+## Infections {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for the St. Louis metro area. All averages presented are 7-day rolling averages.
+
+### Static Map
+
+```{r metro-infection-map, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/a_case_map.png")
+```
+
+### Infection Rates
+
+```{r metro-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/b_case_rate.png")
+```
+
+### Infection Pace
+
+```{r metro-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/c_case_log.png")
+```
+
+### New Infections
+
+```{r metro-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/d_case_log_avg.png")
+```
+
+### Data Table
+
+```{r metro-infection-table, echo=FALSE, out.width = '100%'}
+county_data %>%
+  select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    state = case_when(
+      state == "Illinois" ~ "IL",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+## Mortality {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for the St. Louis metro area. All averages presented are 7-day rolling averages, and the abbreviation "CFR" states for case fatality rate (the number of deaths divided by the number of known cases, expressed as a percentage).
+
+### Static Map
+
+```{r metro-death-map, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/e_mortality_map.png")
+```
+
+### Mortality Rates
+
+```{r metro-death-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/f_mortality_rate.png")
+```
+
+### Infection Pace
+
+```{r metro-death-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/g_mortality_log.png")
+```
+
+### Case Fatality Rate
+
+```{r metro-cfr, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/j_case_fatality_rate.png")
+```
+
+### Data Table
+
+```{r metro-death-table, echo=FALSE, out.width = '100%'}
+county_data %>%
+  select(report_date, county, state, deaths, new_deaths, deaths_avg, mortality_rate, case_fatality_rate) %>%
+  mutate(
+    deaths_avg = round(deaths_avg, digits = 2),
+    mortality_rate = round(mortality_rate, digits = 2),
+    case_fatality_rate = round(case_fatality_rate, digits = 2),
+    state = case_when(
+      state == "Illinois" ~ "IL",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Deaths` = deaths,
+    `New Deaths` = new_deaths,
+    `Average New Deaths` = deaths_avg,
+    `Per Capita Rate` = mortality_rate,
+    CFR = case_fatality_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+## Infection Rates by ZCTA (Zip Code) {.tabset .tabset-fade .tabset-pills .padtop}
+This map shows infections as a rate per 1,000 residents for all ZCTAs with five or more patients. It is important not to map the raw counts themselves, but if you want to see those data, click on a ZCTA or the data table.
+
+### Interactive Map
+
+```{r map-infections-zip, echo = FALSE, out.width = '100%', out.height='600px', warning=FALSE}
+# calculate breaks
+bins <- map_bins(zip_snapshot, var = "case_rate", style = "fisher", classes = 5, dig_lab = 2,
+                 round = 2)
+bins[1] <- round_any(x = min(zip_snapshot$case_rate, na.rm = TRUE), accuracy = .01, f = floor)
+bins[length(bins)] <- round_any(x = max(zip_snapshot$case_rate, na.rm = TRUE), accuracy = .01, f = ceiling)
+# create color palette
+pal <- colorBin("BuGn", domain = zip_snapshot$case_rate, bins = bins)
+# map
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = zip_snapshot,
+    color = "#444444", 
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.75,
+    fillColor = ~pal(case_rate),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste0("<b>Zip:</b> ", zip_snapshot$zip, " <br> ",
+                 "<b>Current Cumulative Count:</b> ", zip_snapshot$cases, "<br>",
+                 "<b>Current Cumulative Rate per 1,000:</b> ", round(zip_snapshot$case_rate, digits = 2), " <br> ",
+                 "<b>Population Below Poverty Line:</b> ", round(zip_snapshot$pvty_pct, digits = 2), "% <br> ",
+                 "<b>African American Population:</b> ", round(zip_snapshot$blk_pct, digits = 2), "% ")
+    )  %>%
+    addLegend(pal = pal, values = zip_snapshot$case_rate, opacity = .75, title = "Rate")
+```
+
+### Static Map
+
+```{r confirmed-static, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_zip/a_case_map.png")
+```
+
+### Data Table
+
+```{r zip-data-table, echo=FALSE, out.width = '100%'}
+zip_snapshot %>%
+  select(zip, cases, case_rate, pvty_pct, blk_pct) %>%
+  mutate(
+    case_rate = round(case_rate, digits = 2),
+    pvty_pct = round(pvty_pct, digits = 2),
+    blk_pct = round(blk_pct, digits = 2)
+  ) %>%
+  rename(
+    `Zip Code` = zip,
+    `Cumulative Cases` = cases,
+    `Rate per 1,000 Residents` = case_rate,
+    `Poverty Rate (%)` = pvty_pct,
+    `% African American` = blk_pct
+  ) -> data_table
+st_geometry(data_table) <- NULL
+DT::datatable(data_table)
+```
+
+### Notes
+
+  * If a ZCTA straddles the city and the county, and only has reported infection numbers in one entity, its estimated partial population will be displayed. Similarly, estimated partial populations for zip codes that straddle outlying counties are used.
+
+## Hospitalizations {.tabset .tabset-fade .tabset-pills .padtop}
+St. Louis has had a regional pandemic task force that covers four major health care systems: SSM (SLU), BJC Healthcare, Mercy, and St. Luke's Hospital. The task force has been providing daily media briefings since April 5th. Their data covers the largest hospital systems in the region, so while it does not include every possible hospital, it does include a large share of COVID-19 patients. All averages presented are 7-day rolling averages.
+
+### New Patients 
+
+```{r new-in-pt, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/n_new_in_pt.png")
+```
+
+### Total Patients 
+
+```{r total-in-pt, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/o_in_pt.png")
+```
+
+### Data Table 1
+
+```{r in-patient-data, echo=FALSE, out.width = '100%'}
+stl_hosp %>%
+  arrange(desc(report_date)) %>%
+  select(report_date, new_in_pt, new_in_pt_avg, in_pt, in_pt_avg) %>%
+  mutate(
+    new_in_pt_avg = round(new_in_pt_avg, digits = 2),
+    in_pt_avg = round(in_pt_avg, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    `New Patients` = new_in_pt,
+    `New Patients Average` = new_in_pt_avg,
+    `Total Patients` = in_pt,
+    `Total Patients Average` = in_pt_avg
+  ) -> data_table
+
+DT::datatable(data_table)
+```
+
+### ICU Patients
+
+```{r total-icu, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/p_icu.png")
+```
+
+### Ventilated Patients 
+
+```{r total-vent, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/q_vent.png")
+```
+
+### Data Table 2
+
+```{r icu-data, echo=FALSE}
+stl_hosp %>%
+  arrange(desc(report_date)) %>%
+  select(report_date, icu, icu_avg, vent, vent_avg) %>%
+  mutate(
+    icu_avg = round(icu_avg, digits = 2),
+    vent_avg = round(vent_avg, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    `ICU Patients` = icu,
+    `ICU Patients Average` = icu_avg,
+    `Ventilated Patients` = vent,
+    `Ventiled Patients Average` = vent_avg
+  ) -> data_table
+
+DT::datatable(data_table)
+```
+

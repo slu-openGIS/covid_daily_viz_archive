@@ -18,4 +18,5 @@ dir_delete(path = "site/img")
 # clean-up environment
 rm(params, pal, snapshot, map_breaks, map_bins, bins, round_any,
    data_table, state_data, stl_city_data, stl_county_data, kc_city_data,
-   kc_metro_data, stl_metro_data, state_test_data)
+   kc_metro_data, stl_metro_data, state_test_data,
+   county_data, stl_hosp, zip_snapshot)
