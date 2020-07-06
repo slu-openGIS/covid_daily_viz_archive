@@ -7,6 +7,7 @@ library(tibble)
 
 # spatial packages
 library(areal)
+library(nngeo)
 library(sf)
 library(tidycensus)
 library(tigris)
@@ -92,6 +93,9 @@ joplin %>%
   ) %>%
   mutate(GEOID = ifelse(NAME == "Joplin", "29512", GEOID)) %>%
   select(GEOID, NAME) -> joplin
+
+joplin <- st_remove_holes(joplin)
+joplin <- rename(joplin, geometry = geom)
 
 rm(joplin_0, joplin_county_geo, joplin_geo)
 
