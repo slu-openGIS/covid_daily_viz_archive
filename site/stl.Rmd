@@ -33,10 +33,10 @@ zip_snapshot <- st_read(here::here("data", "zip", "daily_snapshot_city_county.ge
 stl_hosp <-  read_csv(here::here("data", "metro", "stl_hospital.csv"))
 ```
 
-The following plots and maps focus on the St. Louis metropolitan statistical area, which covers fifteen counties in Missouri and Illinois.
+The following plots and maps focus on the St. Louis <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metropolitan statistical area</a>, which covers fifteen counties in Missouri and Illinois.
 
 ## Infections {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for the St. Louis metro area. All averages presented are 7-day rolling averages.
+These plots show patterns in infections for the St. Louis <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. All averages presented are 7-day rolling averages.
 
 ### Static Map
 
@@ -69,6 +69,7 @@ county_data %>%
   select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
   mutate(
     case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2),
     state = case_when(
       state == "Illinois" ~ "IL",
       state == "Missouri" ~ "MO"
@@ -88,7 +89,7 @@ DT::datatable(data_table, rownames= FALSE)
 ```
 
 ## Mortality {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for the St. Louis metro area. All averages presented are 7-day rolling averages, and the abbreviation "CFR" states for case fatality rate (the number of deaths divided by the number of known cases, expressed as a percentage).
+These plots show patterns in infections for the St. Louis <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. All averages presented are 7-day rolling averages, and the abbreviation "CFR" states for case fatality rate (the number of deaths divided by the number of known cases, expressed as a percentage).
 
 ### Static Map
 

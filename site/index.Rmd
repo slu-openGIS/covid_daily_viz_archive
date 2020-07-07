@@ -381,21 +381,23 @@ DT::datatable(data_table)
 ```
 
 ## Additional Plots and Data {.padtop}
-Select an area below to view additional plots that focus on trends within a variety of areas of Missouri.
+Select an area below to view additional plots that focus on trends within a variety of areas of Missouri. *This section is a work in progress.*
 
 <br>
 
 <div class="row">
   <div class="column">
+  <a href="kc.html">`r fa("chart-line", height = 40)`</i>
+  <br><p style="font-size:20px">Kansas City Metro</p></a></div>
+  <div class="column">
   <a href="stl.html">`r fa("chart-area", height = 40)`</i>
   <br><p style="font-size:20px">St. Louis Metro</p></a><p>Includes zip code and hospitalization data</p></div>
-  <div class="column"></div>
   <div class="column"></div>
 </div>
 
 
 ## Legacy Plots {.tabset .tabset-fade .tabset-pills .padtop}
-In addition to the interactive maps above, I regularly update a range of static maps and plots that capture the progression of the COVID-19 outbreak in Missouri, several metro areas, and at the ZCTA (zip code) level in St. Louis City and County. The most recent versions of each plot can be viewed by clicking on the links within the tabs below.
+The most recent versions of plots not yet included in the new sub-pages in the previous section can be found below. *As I add new sub-pages above, I will remove these tabs below.*
 
 ### State
 
@@ -434,23 +436,3 @@ In addition to the interactive maps above, I regularly update a range of static 
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_semo/b_case_rate.png" target="_blank">Reported Cases, Southeast MO (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_semo/c_case_log.png" target="_blank">Reported Cases, Southeast MO (Log)</a> | |
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_stjo/b_case_rate.png" target="_blank">Reported Cases, St. Joseph (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_stjo/c_case_log.png" target="_blank">Reported Cases, St. Joseph (Log)</a> | |
 | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_nomo/b_case_rate.png" target="_blank">Reported Cases, Sullivan Cnty (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_nomo/c_case_log.png" target="_blank">Reported Cases, Sullivan Cnty (Log)</a> | |
-
-
-### St. Louis Metro
-
-| Links |  |  |
-|-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/a_case_map.png" target="_blank">Reported Cases (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/b_case_rate.png" target="_blank">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/c_case_log.png" target="_blank">Reported Cases (Log)</a> |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/d_case_log_avg.png" target="_blank">Average New Cases (Log)</a> | | |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/e_mortality_map.png" target="_blank">Mortality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/f_mortality_rate.png" target="_blank">Mortality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/g_mortality_log.png" target="_blank">Mortality (Log)</a> | 
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/i_case_fatality_map.png" target="_blank">Case Fatality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/j_case_fatality_rate.png" target="_blank">Case Fatality (Percent)</a> | |
-
-### Kansas City Metro
-
-| Links |  |  |
-|-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/a_case_map.png" target="_blank">Reported Cases (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/b_case_rate.png" target="_blank">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/c_case_log.png" target="_blank">Reported Cases (Log)</a> |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/d_case_log_avg.png" target="_blank">Average New Cases (Log)</a> | | |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/e_mortality_map.png" target="_blank">Mortality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/f_mortality_rate.png" target="_blank">Mortality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/g_mortality_log.png" target="_blank">Mortality (Log)</a> | 
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/i_case_fatality_map.png" target="_blank">Case Fatality (Map)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/j_case_fatality_rate.png" target="_blank">Case Fatality (Percent)</a> | |
-

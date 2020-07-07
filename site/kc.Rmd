@@ -1,0 +1,143 @@
+---
+title: "Kansas City Metropolitan Area"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# dependencies
+library(dplyr)
+library(leaflet)
+library(readr)
+library(sf)
+
+library(ggplot2)
+
+# functions
+source(here::here("source", "functions", "map_breaks.R"))
+source(here::here("source", "functions", "round_any.R"))
+
+# load data
+county_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
+  filter(geoid %in% c("20091", "20103", "20107", "20121", "20209",
+                  "29013", "29025", "29037", "29047", "29049", 
+                  "29095", "29107", "29165", "29177", "29511")) %>%
+  filter(report_date >= "2020-03-07") %>%
+  arrange(desc(report_date), county)
+```
+
+The following plots and maps focus on the Kansas City <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metropolitan statistical area</a>, which covers fourteen counties in Missouri and Kansas plus Kansas City, which is treated here as <a href="faq.html#Why_Do_You_Treat_Joplin_and_Kansas_City_as_Counties">the equivalent of a county</a>.
+
+## Infections {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for the Kansas City <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. All averages presented are 7-day rolling averages.
+
+### Static Map
+
+```{r metro-infection-map, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/kc_metro/a_case_map.png")
+```
+
+### Infection Rates
+
+```{r metro-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/kc_metro/b_case_rate.png")
+```
+
+### Infection Pace
+
+```{r metro-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/kc_metro/c_case_log.png")
+```
+
+### New Infections
+
+```{r metro-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/kc_metro/d_case_log_avg.png")
+```
+
+### Data Table
+
+```{r metro-infection-table, echo=FALSE, out.width = '100%'}
+county_data %>%
+  select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2),
+    state = case_when(
+      state == "Kansas" ~ "KS",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+## Mortality {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for the Kansas City <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. All averages presented are 7-day rolling averages, and the abbreviation "CFR" states for case fatality rate (the number of deaths divided by the number of known cases, expressed as a percentage).
+
+### Static Map
+
+```{r metro-death-map, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/kc_metro/e_mortality_map.png")
+```
+
+### Mortality Rates
+
+```{r metro-death-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/kc_metro/f_mortality_rate.png")
+```
+
+### Infection Pace
+
+```{r metro-death-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/kc_metro/g_mortality_log.png")
+```
+
+### Case Fatality Rate
+
+```{r metro-cfr, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/kc_metro/j_case_fatality_rate.png")
+```
+
+### Data Table
+
+```{r metro-death-table, echo=FALSE, out.width = '100%'}
+county_data %>%
+  select(report_date, county, state, deaths, new_deaths, deaths_avg, mortality_rate, case_fatality_rate) %>%
+  mutate(
+    deaths_avg = round(deaths_avg, digits = 2),
+    mortality_rate = round(mortality_rate, digits = 2),
+    case_fatality_rate = round(case_fatality_rate, digits = 2),
+    state = case_when(
+      state == "Kansas" ~ "KC",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Deaths` = deaths,
+    `New Deaths` = new_deaths,
+    `Average New Deaths` = deaths_avg,
+    `Per Capita Rate` = mortality_rate,
+    CFR = case_fatality_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
