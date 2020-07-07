@@ -7,6 +7,49 @@ output:
     toc_float: true
 ---
 
+```{r setup, include=FALSE}
+# dependencies
+library(dplyr)
+library(leaflet)
+library(RColorBrewer)
+library(sf)
+
+# load data
+snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 4326,
+                    stringsAsFactors = FALSE)
+
+# create list with vectors of metro counties by GEOID
+metro_counties <- list(
+  cape_girardeau = c("29031", "29017", "17003"),
+  columbia = c("29019", "29007", "29175", "29053", "29089"),
+  jeff_city = c("29051", "29027", "29135", "29151"),
+  joplin = c("29097", "29145", "29512", "40115"),
+  kansas_city = c("20091", "20103", "20107", "20121", "20209",
+                  "29013", "29025", "29037", "29047", "29049", 
+                  "29095", "29107", "29165", "29177", "29511"),
+  springfield = c("29077", "29043", "29225", "29167", "29225"),
+  st_joseph = c("29003", "29021", "29063", "20043"),
+  st_louis = c("17005", "17013", "17027", "17083", "17117", 
+               "17119", "17133", "17163", "29071", "29099", 
+               "29113", "29183", "29189", "29219", "29510")
+)
+
+# prep data
+snapshot %>%
+  select(GEOID, county, state, total_pop) %>%
+  mutate(metro = case_when(
+    GEOID %in% metro_counties$cape_girardeau ~ "Cape Girardeau",
+    GEOID %in% metro_counties$columbia ~ "Columbia",
+    GEOID %in% metro_counties$jeff_city ~ "Jefferson City",
+    GEOID %in% metro_counties$joplin ~ "Joplin",
+    GEOID %in% metro_counties$kansas_city ~ "Kansas City",
+    GEOID %in% metro_counties$springfield ~ "Springfield",
+    GEOID %in% metro_counties$st_joseph ~ "St. Joseph",
+    GEOID %in% metro_counties$st_louis ~ "St. Louis"
+  )) %>%
+  filter(is.na(metro) == FALSE) -> snapshot
+```
+
 ## Where Do These Data Come From?
 Data for this site is compiled from a number of sources on a daily basis:
 
@@ -31,6 +74,53 @@ Missouri does not have what Chris considers reliable statewide hospitalization d
 
 ## Why Do You Treat Joplin and Kansas City as Counties? {.padtop}
 Since both cities have their own health departments, and straddle multiple counties, both the State of Missouri and the New York Times have been releasing data on infections and deaths exclusive of the counties they lie in. This has been true for Kansas City since the beginning of the pandemic, and true for Joplin since June 25th. I have adjusted the populations for both the cities themselves and the surrounding counties to provide accurate per capita rates, and have also created maps that show Joplin and Kansas City as their own entities.
+
+## What is a Metropolitan Statistical Area? {.padtop}
+A Metropolitan Statistical Area, or a "MSA," is a region defined by the U.S. Office of Management and Budget with the U.S. Census Bureau:
+
+> The general concept of a metropolitan or micropolitan statistical area is that of a core area containing a substantial population nucleus, together with adjacent communities having a high degree of economic and social integration with that core. 
+
+You can read more about MSAs on the <a href="https://www.census.gov/programs-surveys/metro-micro/about.html" target="_blank">Census Bureau's website</a>.
+
+This site uses these pre-existing definitions for all data involving "metro" areas, with the county-equivalents for [Joplin and Kansas City](#Why_Do_You_Treat_Joplin_and_Kansas_City_as_Counties) added to their respective metros. There are a total of eight MSAs in Missouri, several of which include counties in adjacent states:
+
+  1. Cape Girardeau, MO-IL Metro Area
+  2. Columbia, MO Metro Area
+  3. Jefferson City, MO Metro Area
+  4. Joplin, MO Metro Area
+  5. Kansas City, MO-KS Metro Area
+  6. Springfield, MO Metro Area
+  7. St. Joseph, MO-KS Metro Area
+  8. St. Louis, MO-IL Metro Area
+
+<br>
+
+```{r msa-map, echo=FALSE, out.width = '100%'}
+# define colors
+pal <- brewer.pal(n = 8, name = "Set1")
+pal[6] <- "#FFD60C"
+pal <- c(pal[6], pal[3], pal[4], pal[7], pal[2], pal[5], pal[8], pal[1])
+factpal <- colorFactor(pal, as.factor(snapshot$metro))
+
+# create map
+snapshot %>%
+  leaflet() %>%
+  setView(lat = 38.497191, lng = -92.631555, zoom = 6) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.75,
+    color = ~factpal(metro),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste("<b>County:</b> ", snapshot$county, "<br>",
+                           "<b>State:</b> ", snapshot$state, "<br>",
+                           "<b>Metropolitan Statistical Area:</b> ", snapshot$metro, "<br>",
+                           "<b>Total Population (2018):</b> ", snapshot$total_pop)
+  ) %>%
+  addLegend(pal = factpal, values = snapshot$metro, opacity = .75, title = "Metropolitan Areas")
+```
 
 ## Can I Reuse Your Data or Graphics? {.padtop}
 Absolutely! All code, data, website content, and images are available under a CC-BY 4.0 license. This means that you can use these data and graphics as long as you tell your audience where they came from. Graphics should not be altered to remove the caption that indicates who made them and where the underlying data came from.
