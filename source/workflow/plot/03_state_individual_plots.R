@@ -17,13 +17,13 @@ covid_race %>%
 # plot morbidity rates, race
 
 ## define top_val
-top_val <- round_any(x = max(covid_race$case_rate, na.rm = TRUE), accuracy = 50, f = ceiling)
+top_val <- round_any(x = max(covid_race$case_rate, na.rm = TRUE), accuracy = 100, f = ceiling)
 
 ## create plot
 p <- ggplot(data = covid_race, mapping = aes(x = value, y = case_rate, fill = value)) +
   geom_bar(position = "dodge", stat = "identity", width = .65, show.legend = FALSE) +
   scale_fill_brewer(palette = "Set1") +
-  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 50)) +
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 100)) +
   labs(
     title = "Reported Cases by Race, Missouri",
     subtitle = paste0("Current as of ", as.character(date)),
