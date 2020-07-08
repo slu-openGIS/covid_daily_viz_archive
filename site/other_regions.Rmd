@@ -1,0 +1,203 @@
+---
+title: "Non-Metro Regions"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# dependencies
+library(dplyr)
+library(readr)
+
+# load data
+county_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
+  mutate(geoid = as.character(geoid)) %>%
+  filter(state == "Missouri") %>%
+  arrange(desc(report_date), county)
+
+# subset data
+semo <- filter(county_data, geoid %in% c("29133", "29155", "29201",  "29207", "29143", "29023", "29069"))
+mid_mo <- filter(county_data, geoid %in% c("29195", "29135", "29019", "29051", "29159", "29007", "29027"))
+st_jo <- filter(county_data, geoid %in% c("29003", "29021", "29063", "29049"))
+nomo <- filter(county_data, geoid %in% c("29211", "29001", "29075", "29079"))
+ozark <- filter(county_data, geoid %in% c("29029", "29131", "29141", "29015", "29169"))
+swmo <- filter(county_data, geoid %in% c("29077", "29097", "29119", "29145", "29213", "29011", "29009", "29512"))
+cape <- filter(county_data, geoid %in% c("29031", "29157", "29186",  "29187"))
+
+# remove county data
+rm(county_data)
+```
+
+The following plots focus on a number of regions around Missouri. Unlike the pages for [St. Louis](stl.html) and [Kansas City](kc.html), these regions do not encompass officially designated regions. Rather, they attempt to group counties together based on geographic proximity.
+
+## Cape Girardeau {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for a number of counties in the Cape Girardeau region of Missouri, which lies along the Mississippi River to the south of St. Louis. These include some, but not all, of the counties in the Cape Girardeau <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. All averages presented are 7-day rolling averages.
+
+### Infection Rates
+
+```{r cape-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_cape/b_case_rate.png")
+```
+
+### Infection Pace
+
+```{r cape-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_cape/c_case_log.png")
+```
+
+### Data Table
+
+```{r cape-infection-table, echo=FALSE, out.width = '100%'}
+cape %>%
+  select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2),
+    state = case_when(
+      state == "Kansas" ~ "KS",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+## Mid-Missouri {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for a number of counties in the Mid-Missouri region of Missouri, which lies along the Missouri River to the west of St. Louis and the east of Kansas City. These include some, but not all, of the counties in the Jefferson City and Columbia <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro areas</a>. All averages presented are 7-day rolling averages.
+
+### Infection Rates
+
+```{r midmo-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_midmo/b_case_rate.png")
+```
+
+### Infection Pace
+
+```{r midmo-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_midmo/c_case_log.png")
+```
+
+### Data Table
+
+```{r midmo-infection-table, echo=FALSE, out.width = '100%'}
+mid_mo %>%
+  select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2),
+    state = case_when(
+      state == "Kansas" ~ "KS",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+
+## Lake of the Ozarks {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for a number of counties in central Missouri's Lake of the Ozarks region. Camden County is the primary county at the heart of the region, containing much of Osage Beach, MO. These counties are south of the Mid-Missouri region. All averages presented are 7-day rolling averages.
+
+### Infection Rates
+
+```{r ozark-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_ozark/b_case_rate.png")
+```
+
+### Infection Pace
+
+```{r ozark-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_ozark/c_case_log.png")
+```
+
+### Data Table
+
+```{r ozark-infection-table, echo=FALSE, out.width = '100%'}
+ozark %>%
+  select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2),
+    state = case_when(
+      state == "Kansas" ~ "KS",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+## Northern Missouri {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for a number of counties in the northern part Missouri. These counties lie north of the Mid-Missouri region and south of the Iowa border. All averages presented are 7-day rolling averages.
+
+### Infection Rates
+
+```{r nomo-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_nomo/b_case_rate.png")
+```
+
+### Infection Pace
+
+```{r nomo-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_nomo/c_case_log.png")
+```
+
+### Data Table
+
+```{r nomo-infection-table, echo=FALSE, out.width = '100%'}
+nomo %>%
+  select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2),
+    state = case_when(
+      state == "Kansas" ~ "KS",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+
