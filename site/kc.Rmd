@@ -34,11 +34,15 @@ These plots show patterns in infections for the Kansas City <a href="faq.html#Wh
 knitr::include_graphics("img/kc_metro/a_case_map.png")
 ```
 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/kc_metro/a_case_map.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/a_case_map.png" target="_blank">Low-res</a>]
+
 ### Infection Rates
 
 ```{r metro-infection-rate, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/kc_metro/b_case_rate.png")
 ```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/kc_metro/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/b_case_rate.png" target="_blank">Low-res</a>]
 
 ### Infection Pace
 
@@ -46,11 +50,15 @@ knitr::include_graphics("img/kc_metro/b_case_rate.png")
 knitr::include_graphics("img/kc_metro/c_case_log.png")
 ```
 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/kc_metro/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/c_case_log.png" target="_blank">Low-res</a>]
+
 ### New Infections
 
 ```{r metro-infection-avg, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/kc_metro/d_case_log_avg.png")
 ```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/kc_metro/d_case_log_avg.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/d_case_log_avg.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -78,8 +86,14 @@ county_data %>%
 DT::datatable(data_table, rownames= FALSE)
 ```
 
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+
 ## Mortality {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for the Kansas City <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. All averages presented are 7-day rolling averages, and the abbreviation "CFR" states for case fatality rate (the number of deaths divided by the number of known cases, expressed as a percentage).
+These plots show patterns in infections for the Kansas City <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>.
 
 ### Static Map
 
@@ -87,23 +101,31 @@ These plots show patterns in infections for the Kansas City <a href="faq.html#Wh
 knitr::include_graphics("img/kc_metro/e_mortality_map.png")
 ```
 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/kc_metro/e_mortality_map.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/e_mortality_map.png" target="_blank">Low-res</a>]
+
 ### Mortality Rates
 
 ```{r metro-death-rate, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/kc_metro/f_mortality_rate.png")
 ```
 
-### Infection Pace
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/kc_metro/f_mortality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/f_mortality_rate.png" target="_blank">Low-res</a>]
+
+### Mortality Pace
 
 ```{r metro-death-log, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/kc_metro/g_mortality_log.png")
 ```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/kc_metro/g_mortality_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/g_mortality_log.png" target="_blank">Low-res</a>]
 
 ### Case Fatality Rate
 
 ```{r metro-cfr, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/kc_metro/j_case_fatality_rate.png")
 ```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/kc_metro/j_case_fatality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/j_case_fatality_rate.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -132,4 +154,11 @@ county_data %>%
 
 DT::datatable(data_table, rownames= FALSE)
 ```
+
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+  * The abbreviation "CFR" states for case fatality rate (the number of deaths divided by the number of known cases, expressed as a percentage).
 

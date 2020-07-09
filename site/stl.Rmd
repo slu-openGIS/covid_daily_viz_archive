@@ -44,11 +44,15 @@ These plots show patterns in infections for counties within the St. Louis <a hre
 knitr::include_graphics("img/stl_metro/a_case_map.png")
 ```
 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/a_case_map.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/a_case_map.png" target="_blank">Low-res</a>]
+
 ### Infection Rates
 
 ```{r metro-infection-rate, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/stl_metro/b_case_rate.png")
 ```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/b_case_rate.png" target="_blank">Low-res</a>]
 
 ### Infection Pace
 
@@ -56,11 +60,15 @@ knitr::include_graphics("img/stl_metro/b_case_rate.png")
 knitr::include_graphics("img/stl_metro/c_case_log.png")
 ```
 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/c_case_log.png" target="_blank">Low-res</a>]
+
 ### New Infections
 
 ```{r metro-infection-avg, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/stl_metro/d_case_log_avg.png")
 ```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/d_case_log_avg.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/d_case_log_avg.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -91,7 +99,7 @@ DT::datatable(data_table, rownames= FALSE)
 ### Notes
 
   * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
-  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots rates](faq.html#What_are_Log_Plots).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
 
 ## Mortality {.tabset .tabset-fade .tabset-pills .padtop}
@@ -103,23 +111,31 @@ These plots show patterns in deaths for counties within the St. Louis <a href="f
 knitr::include_graphics("img/stl_metro/e_mortality_map.png")
 ```
 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/e_mortality_map.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/e_mortality_map.png" target="_blank">Low-res</a>]
+
 ### Mortality Rates
 
 ```{r metro-death-rate, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/stl_metro/f_mortality_rate.png")
 ```
 
-### Infection Pace
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/f_mortality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/f_mortality_rate.png" target="_blank">Low-res</a>]
+
+### Mortality Pace
 
 ```{r metro-death-log, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/stl_metro/g_mortality_log.png")
 ```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/g_mortality_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/g_mortality_log.png" target="_blank">Low-res</a>]
 
 ### Case Fatality Rate
 
 ```{r metro-cfr, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/stl_metro/j_case_fatality_rate.png")
 ```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/j_case_fatality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/j_case_fatality_rate.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -152,7 +168,7 @@ DT::datatable(data_table, rownames= FALSE)
 ### Notes
 
   * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
-  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots rates](faq.html#What_are_Log_Plots).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
   * The abbreviation "CFR" states for case fatality rate (the number of deaths divided by the number of known cases, expressed as a percentage).
 
@@ -196,6 +212,8 @@ leaflet() %>%
 knitr::include_graphics("img/stl_zip/a_case_map.png")
 ```
 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map.png" target="_blank">Low-res</a>]
+
 ### Data Table
 
 ```{r zip-data-table, echo=FALSE, out.width = '100%'}
@@ -222,24 +240,30 @@ DT::datatable(data_table)
   * If a ZCTA straddles the city and the county, and only has reported infection numbers in one entity, its estimated partial population will be displayed. Similarly, estimated partial populations for zip codes that straddle outlying counties are used.
   * ZCTA stands for "<a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html" target="_blank">ZIP Code Tabulation Area</a>. These are not identical to zip codes, but they are essential for mapping zip codes as regions on a map.
   * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `zip_stl_city.csv` and `zip_stl_county.csv` tables, which are assembled from data provided by [St. Louis City and County](faq.html#Where_Do_These_Data_Come_From). These data are also available as `.geojson` files for mapping.
-  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
+  * The FAQ contains a short explanation of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
 
-## Hospitalizations {.tabset .tabset-fade .tabset-pills .padtop}
+## Hospitalizations {.padtop}
 St. Louis has had a regional pandemic task force that covers four major health care systems: SSM (SLU), BJC Healthcare, Mercy, and St. Luke's Hospital. The task force has been providing daily media briefings since April 5th. Their data covers the largest hospital systems in the region, so while it does not include every possible hospital, it does include a large share of COVID-19 patients. All averages presented are 7-day rolling averages.
 
-### New Patients 
+### In-Patient Metrics {.tabset .tabset-fade .tabset-pills .padtop}
+
+#### New Patients 
 
 ```{r new-in-pt, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/stl_metro/n_new_in_pt.png")
 ```
 
-### Total Patients 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/n_new_in_pt.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/n_new_in_pt.png" target="_blank">Low-res</a>]
+
+#### Total Patients 
 
 ```{r total-in-pt, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/stl_metro/o_in_pt.png")
 ```
 
-### Data Table 1
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/o_in_pt.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/o_in_pt.png" target="_blank">Low-res</a>]
+
+#### Data Table
 
 ```{r in-patient-data, echo=FALSE, out.width = '100%'}
 stl_hosp %>%
@@ -260,19 +284,31 @@ stl_hosp %>%
 DT::datatable(data_table)
 ```
 
-### ICU Patients
+#### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `stl_hospital.csv` table, which is assembled from data provided by the [St. Louis Pandemic Task Force](faq.html#Where_Do_These_Data_Come_From).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+  * The new in-patient measure is lagged two days behind its report day.
+
+### ICU Metrics {.tabset .tabset-fade .tabset-pills .padtop}
+
+#### ICU Patients
 
 ```{r total-icu, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/stl_metro/p_icu.png")
 ```
 
-### Ventilated Patients 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/p_icu.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/p_icu.png" target="_blank">Low-res</a>]
+
+#### Ventilated Patients 
 
 ```{r total-vent, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/stl_metro/q_vent.png")
 ```
 
-### Data Table 2
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/q_vent.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/q_vent.png" target="_blank">Low-res</a>]
+
+#### Data Table
 
 ```{r icu-data, echo=FALSE}
 stl_hosp %>%
@@ -293,3 +329,7 @@ stl_hosp %>%
 DT::datatable(data_table)
 ```
 
+#### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `stl_hospital.csv` table, which is assembled from data provided by the [St. Louis Pandemic Task Force](faq.html#Where_Do_These_Data_Come_From).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
