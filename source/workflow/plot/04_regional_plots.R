@@ -127,9 +127,9 @@ p <- ggplot() +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
                   nudge_y = -135, nudge_x = 18, size = 5) +
   geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                  nudge_y = -120, nudge_x = -1, size = 5) +
+                  nudge_y = -150, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
-  scale_y_continuous(limits = c(0, 500), breaks = seq(0, 500, by = 50)) +
+  scale_y_continuous(limits = c(0, 550), breaks = seq(0, 550, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   labs(
     title = "Pace of New COVID-19 Cases in Missouri",
@@ -261,7 +261,7 @@ p <- ggplot() +
   # geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = -100, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
-  scale_y_continuous(limits = c(0, 500), breaks = seq(0, 500, by = 50)) +
+  scale_y_continuous(limits = c(0, 550), breaks = seq(0, 550, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   labs(
     title = "Pace of New COVID-19 Cases in Missouri",
@@ -397,11 +397,11 @@ p <- ggplot() +
   # geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = current_point_y, nudge_x = current_point_x, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                  nudge_y = -100, nudge_x = -40, size = 5) +
-  geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                  nudge_y = -190, nudge_x = 0, size = 5) +
+                  nudge_y = -210, nudge_x = 0, size = 5) +
+  # geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
+  #                nudge_y = -190, nudge_x = 0, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
-  scale_y_continuous(limits = c(0, 500), breaks = seq(0, 500, by = 50)) +
+  scale_y_continuous(limits = c(0, 550), breaks = seq(0, 550, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   labs(
     title = "Pace of New COVID-19 Cases in Missouri",
