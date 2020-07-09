@@ -69,6 +69,15 @@ Due to lags in reporting, both at the public health department level and at the 
 ## What Are Probable Cases? {.padtop}
 On May 6th, the New York Times began including probable cases - those without a confirmatory test result but where symptoms indicate a COVID-19 infection. Not all counties report probable cases, however, and so I include markers on plots to indicate when the reporting change beginning on April 15th may have occurred.
 
+## What are Per Capita Rates? {.padtop}
+In order to compare rates across neighborhoods, cities, states, or countries, use utilize per capita statistics. When we calculate a "rate per capita" or a "per capita rate," we take our rate and multiply it by a set number of individuals. This helps us ensure that our data are expressed relative to the size of the population they describe. For example, we typically calculate infant mortality rate by multiplying a given entity’s rate by 1,000. In the United States, we typically calculate per capita crime rates by taking a city’s or state’s rate, and multiplying it by 100,000.
+
+## What are Log Plots? {.padtop}
+The website Datawrapper has a <a href="https://blog.datawrapper.de/weeklychart-logscale/" target="_blank">great explainer</a> on how to read log plots. The key takeway from their explaination is that "Log scales show relative values instead of absolute ones." Instead of showing absolute change, they show us the *rate* at which change happens. These are useful for comparing how COVID-19, for example, spreads between multiple counties. The steeper the line for a particular jurisdiction, the faster the rate of growth.
+
+## What are Rolling Averages? {.padtop}
+A rolling average is a technique for calculating an average for values for different "windows." All of the plots on this site use a seven day rolling average, meaning that the the value of a given day's average is calculated from the prior seven days' values. This has the effect of "smoothing" out large daily variations, for example, in the number of new COVID cases or hospitalizations reported. Doing so gives us a better sense of the trend - if cases climbing or falling, for example.
+
 ## Why Do You Not Have Hospitalization Data for Missouri? {.padtop}
 Missouri does not have what Chris considers reliable statewide hospitalization data. Their partners, the Missouri Hospital Association (MHA), provide the state with hospitalization data from the Centers for Disease Control's National Healthcare Safety Network (NHSN). Unfortunately, not all hospitals in Missouri report to the NHSN each day. MHA has stopped reporting the exact number of hospitals reporting daily, which had been their practice until early June. Since the number of hospitals reporting changes each day, it is impossible to disentangle whether COVID-19 hospitalizations went up because more hospitals were reporting or because there was a genuine increase in the number of in-patients in Missouri. Likewise, it is impossible to know if decreases are genuine or are artifact from a smaller number of hospitals reporting.
 

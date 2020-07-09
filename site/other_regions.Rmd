@@ -21,13 +21,13 @@ county_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
   arrange(desc(report_date), county)
 
 # subset data
-semo <- filter(county_data, geoid %in% c("29133", "29155", "29201",  "29207", "29143", "29023", "29069"))
-mid_mo <- filter(county_data, geoid %in% c("29195", "29135", "29019", "29051", "29159", "29007", "29027"))
-st_jo <- filter(county_data, geoid %in% c("29003", "29021", "29063", "29049"))
-nomo <- filter(county_data, geoid %in% c("29211", "29001", "29075", "29079"))
-ozark <- filter(county_data, geoid %in% c("29029", "29131", "29141", "29015", "29169"))
-swmo <- filter(county_data, geoid %in% c("29077", "29097", "29119", "29145", "29213", "29011", "29009", "29512"))
 cape <- filter(county_data, geoid %in% c("29031", "29157", "29186",  "29187"))
+mid_mo <- filter(county_data, geoid %in% c("29195", "29135", "29019", "29051", "29159", "29007", "29027"))
+ozark <- filter(county_data, geoid %in% c("29029", "29131", "29141", "29015", "29169"))
+nomo <- filter(county_data, geoid %in% c("29211", "29001", "29075", "29079"))
+semo <- filter(county_data, geoid %in% c("29133", "29155", "29201",  "29207", "29143", "29023", "29069"))
+st_jo <- filter(county_data, geoid %in% c("29003", "29021", "29063", "29049"))
+swmo <- filter(county_data, geoid %in% c("29077", "29097", "29119", "29145", "29213", "29011", "29009", "29512"))
 
 # remove county data
 rm(county_data)
@@ -36,7 +36,7 @@ rm(county_data)
 The following plots focus on a number of regions around Missouri. Unlike the pages for [St. Louis](stl.html) and [Kansas City](kc.html), these regions do not encompass officially designated regions. Rather, they attempt to group counties together based on geographic proximity.
 
 ## Cape Girardeau {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for a number of counties in the Cape Girardeau region of Missouri, which lies along the Mississippi River to the south of St. Louis. These include some, but not all, of the counties in the Cape Girardeau <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. All averages presented are 7-day rolling averages.
+These plots show patterns in infections for a number of counties in the Cape Girardeau region of Missouri, which lies along the Mississippi River to the south of St. Louis. These include some, but not all, of the counties in the Cape Girardeau <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>.
 
 ### Infection Rates
 
@@ -44,11 +44,15 @@ These plots show patterns in infections for a number of counties in the Cape Gir
 knitr::include_graphics("img/county_cape/b_case_rate.png")
 ```
 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_cape/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_cape/b_case_rate.png" target="_blank">Low-res</a>]
+
 ### Infection Pace
 
 ```{r cape-infection-log, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/county_cape/c_case_log.png")
 ```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_cape/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_cape/c_case_log.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -76,8 +80,14 @@ cape %>%
 DT::datatable(data_table, rownames= FALSE)
 ```
 
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots rates](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+  
 ## Mid-Missouri {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for a number of counties in the Mid-Missouri region of Missouri, which lies along the Missouri River to the west of St. Louis and the east of Kansas City. These include some, but not all, of the counties in the Jefferson City and Columbia <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro areas</a>. All averages presented are 7-day rolling averages.
+These plots show patterns in infections for a number of counties in the Mid-Missouri region of Missouri, which lies along the Missouri River to the west of St. Louis and the east of Kansas City. These include some, but not all, of the counties in the Jefferson City and Columbia <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro areas</a>.
 
 ### Infection Rates
 
@@ -85,11 +95,15 @@ These plots show patterns in infections for a number of counties in the Mid-Miss
 knitr::include_graphics("img/county_midmo/b_case_rate.png")
 ```
 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_midmo/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_midmo/b_case_rate.png" target="_blank">Low-res</a>]
+
 ### Infection Pace
 
 ```{r midmo-infection-log, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/county_midmo/c_case_log.png")
 ```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_midmo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_midmo/c_case_log.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -117,9 +131,14 @@ mid_mo %>%
 DT::datatable(data_table, rownames= FALSE)
 ```
 
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots rates](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
 
 ## Lake of the Ozarks {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for a number of counties in central Missouri's Lake of the Ozarks region. Camden County is the primary county at the heart of the region, containing much of Osage Beach, MO. These counties are south of the Mid-Missouri region. All averages presented are 7-day rolling averages.
+These plots show patterns in infections for a number of counties in central Missouri's Lake of the Ozarks region. Camden County is the primary county at the heart of the region, containing much of Osage Beach, MO. These counties are south of the Mid-Missouri region.
 
 ### Infection Rates
 
@@ -127,11 +146,15 @@ These plots show patterns in infections for a number of counties in central Miss
 knitr::include_graphics("img/county_ozark/b_case_rate.png")
 ```
 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_ozark/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_ozark/b_case_rate.png" target="_blank">Low-res</a>]
+
 ### Infection Pace
 
 ```{r ozark-infection-log, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/county_ozark/c_case_log.png")
 ```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_ozark/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_ozark/c_case_log.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -159,8 +182,14 @@ ozark %>%
 DT::datatable(data_table, rownames= FALSE)
 ```
 
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots rates](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+
 ## Northern Missouri {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for a number of counties in the northern part Missouri. These counties lie north of the Mid-Missouri region and south of the Iowa border. All averages presented are 7-day rolling averages.
+These plots show patterns in infections for a number of counties in the northern part Missouri. These counties lie north of the Mid-Missouri region and south of the Iowa border.
 
 ### Infection Rates
 
@@ -168,11 +197,15 @@ These plots show patterns in infections for a number of counties in the northern
 knitr::include_graphics("img/county_nomo/b_case_rate.png")
 ```
 
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_nomo/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_nomo/b_case_rate.png" target="_blank">Low-res</a>]
+
 ### Infection Pace
 
 ```{r nomo-infection-log, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/county_nomo/c_case_log.png")
 ```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_nomo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_nomo/c_case_log.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -200,4 +233,161 @@ nomo %>%
 DT::datatable(data_table, rownames= FALSE)
 ```
 
+### Notes
 
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots rates](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+
+## Southeast Missouri {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for a number of counties in the southeastern part Missouri known as the "bootheel." These counties lie south of the Cape Girardeau <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a> along the Mississippi River.
+
+### Infection Rates
+
+```{r semo-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_semo/b_case_rate.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_semo/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_semo/b_case_rate.png" target="_blank">Low-res</a>]
+
+### Infection Pace
+
+```{r semo-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_semo/c_case_log.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_semo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_semo/c_case_log.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r semo-infection-table, echo=FALSE, out.width = '100%'}
+semo %>%
+  select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2),
+    state = case_when(
+      state == "Kansas" ~ "KS",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots rates](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+
+## St. Joseph {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for a number of counties in the northwestern part Missouri, including parts (but not all of) of the St. Joseph <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. These counties lie just to the north of the Kansas City <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a> along the Missouri River.
+
+### Infection Rates
+
+```{r st_jo-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_stjo/b_case_rate.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_stjo/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_stjo/b_case_rate.png" target="_blank">Low-res</a>]
+
+### Infection Pace
+
+```{r st_jo-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_stjo/c_case_log.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_stjo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_stjo/c_case_log.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r st_jo-infection-table, echo=FALSE, out.width = '100%'}
+st_jo %>%
+  select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2),
+    state = case_when(
+      state == "Kansas" ~ "KS",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots rates](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+
+## Southwest Missouri {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for a number of counties in the southwestern part Missouri, including parts (but not all of) of the Joplin and Springfield <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro areas</a>.
+
+### Infection Rates
+
+```{r swmo-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_swmo/b_case_rate.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_swmo/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_swmo/b_case_rate.png" target="_blank">Low-res</a>]
+
+### Infection Pace
+
+```{r swmo-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_swmo/c_case_log.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_swmo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_swmo/c_case_log.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r swmo-infection-table, echo=FALSE, out.width = '100%'}
+swmo %>%
+  select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2),
+    state = case_when(
+      state == "Kansas" ~ "KS",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots rates](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
