@@ -36,7 +36,7 @@ stl_hosp <-  read_csv(here::here("data", "metro", "stl_hospital.csv"))
 The following plots and maps focus on the St. Louis <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metropolitan statistical area</a>, which covers fifteen counties in Missouri and Illinois.
 
 ## Infections {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for the St. Louis <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. All averages presented are 7-day rolling averages.
+These plots show patterns in infections for counties within the St. Louis <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>.
 
 ### Static Map
 
@@ -88,8 +88,14 @@ county_data %>%
 DT::datatable(data_table, rownames= FALSE)
 ```
 
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots rates](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+
 ## Mortality {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for the St. Louis <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. All averages presented are 7-day rolling averages, and the abbreviation "CFR" states for case fatality rate (the number of deaths divided by the number of known cases, expressed as a percentage).
+These plots show patterns in deaths for counties within the St. Louis <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>.
 
 ### Static Map
 
@@ -142,6 +148,13 @@ county_data %>%
 
 DT::datatable(data_table, rownames= FALSE)
 ```
+
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots rates](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+  * The abbreviation "CFR" states for case fatality rate (the number of deaths divided by the number of known cases, expressed as a percentage).
 
 ## Infection Rates by ZCTA (Zip Code) {.tabset .tabset-fade .tabset-pills .padtop}
 This map shows infections as a rate per 1,000 residents for all ZCTAs with five or more patients. It is important not to map the raw counts themselves, but if you want to see those data, click on a ZCTA or the data table.
@@ -207,6 +220,9 @@ DT::datatable(data_table)
 ### Notes
 
   * If a ZCTA straddles the city and the county, and only has reported infection numbers in one entity, its estimated partial population will be displayed. Similarly, estimated partial populations for zip codes that straddle outlying counties are used.
+  * ZCTA stands for "<a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html" target="_blank">ZIP Code Tabulation Area</a>. These are not identical to zip codes, but they are essential for mapping zip codes as regions on a map.
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `zip_stl_city.csv` and `zip_stl_county.csv` tables, which are assembled from data provided by [St. Louis City and County](faq.html#Where_Do_These_Data_Come_From). These data are also available as `.geojson` files for mapping.
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
 
 ## Hospitalizations {.tabset .tabset-fade .tabset-pills .padtop}
 St. Louis has had a regional pandemic task force that covers four major health care systems: SSM (SLU), BJC Healthcare, Mercy, and St. Luke's Hospital. The task force has been providing daily media briefings since April 5th. Their data covers the largest hospital systems in the region, so while it does not include every possible hospital, it does include a large share of COVID-19 patients. All averages presented are 7-day rolling averages.
