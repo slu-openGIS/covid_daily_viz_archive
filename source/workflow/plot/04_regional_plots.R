@@ -58,11 +58,11 @@ state_data %>%
   arrange(state, day) %>%
   filter(state == "Missouri") -> state_subset
 
+## define top_val
+top_val <- round_any(x = max(state_subset$case_avg), accuracy = 50, f = ceiling)
+
 ## set start date
 start_date <- state_subset$report_date[1]
-
-## define top_val
-top_val <- round_any(x = max(state_subset$day), accuracy = 5, f = ceiling)
 
 ## extra points
 peak_val <- max(state_subset$case_avg)
@@ -125,11 +125,11 @@ p <- ggplot() +
   # geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = current_point_y, nudge_x = current_point_x, size = 5.) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                  nudge_y = -135, nudge_x = 18, size = 5) +
-  geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                  nudge_y = -150, nudge_x = -1, size = 5) +
+                  nudge_y = -190, nudge_x = -1, size = 5) +
+  # geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
+  #                nudge_y = -150, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
-  scale_y_continuous(limits = c(0, 550), breaks = seq(0, 550, by = 50)) +
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   labs(
     title = "Pace of New COVID-19 Cases in Missouri",
@@ -151,7 +151,7 @@ save_plots(filename = "results/low_res/regional/b_avg_stl.png", plot = p, preset
 rm(peak_val, peak_point, current_point, peak_val_nostl, peak_point_nostl, current_point_nostl,
    focal_data, focal_subset)
 rm(state_data, state_subset, state_points, state_day_points)
-rm(top_val, p, report_points, report_label, report_day_points)
+rm(p, report_points, report_label, report_day_points)
 
 # =============================================================================
 # =============================================================================
@@ -192,9 +192,6 @@ state_data %>%
 
 ## set start date
 start_date <- state_subset$report_date[1]
-
-## define top_val
-top_val <- round_any(x = max(state_subset$day), accuracy = 5, f = ceiling)
 
 ## extra points
 peak_val <- max(state_subset$case_avg)
@@ -257,11 +254,11 @@ p <- ggplot() +
   # geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = current_point_y, nudge_x = current_point_x, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                  nudge_y = 16, nudge_x = -4, size = 5) +
+                  nudge_y = -5, nudge_x = -30, size = 5) +
   # geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = -100, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
-  scale_y_continuous(limits = c(0, 550), breaks = seq(0, 550, by = 50)) +
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   labs(
     title = "Pace of New COVID-19 Cases in Missouri",
@@ -283,7 +280,7 @@ save_plots(filename = "results/low_res/regional/c_avg_kc.png", plot = p, preset 
 rm(peak_val, peak_point, current_point, peak_val_nostl, peak_point_nostl, current_point_nostl,
    focal_data, focal_subset)
 rm(state_data, state_subset, state_points, state_day_points)
-rm(top_val, p, report_points, report_label, report_day_points)
+rm(p, report_points, report_label, report_day_points)
 
 # =============================================================================
 # =============================================================================
@@ -332,9 +329,6 @@ state_data %>%
 
 ## set start date
 start_date <- state_subset$report_date[1]
-
-## define top_val
-top_val <- round_any(x = max(state_subset$day), accuracy = 5, f = ceiling)
 
 ## extra points
 peak_val <- max(state_subset$case_avg)
@@ -397,11 +391,11 @@ p <- ggplot() +
   # geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = current_point_y, nudge_x = current_point_x, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                  nudge_y = -210, nudge_x = 0, size = 5) +
+                  nudge_y = -220, nudge_x = 0, size = 5) +
   # geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = -190, nudge_x = 0, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
-  scale_y_continuous(limits = c(0, 550), breaks = seq(0, 550, by = 50)) +
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 50)) +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   labs(
     title = "Pace of New COVID-19 Cases in Missouri",
