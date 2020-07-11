@@ -407,15 +407,20 @@ DT::datatable(data_table)
   * The FAQ contains a short explanation of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
 
 ## Additional Plots and Data {.padtop}
-Select an area below to view additional plots that focus on trends within a variety of areas of Missouri. *This section is a work in progress.*
+Select an area below to view additional plots that focus on trends within a variety of areas of Missouri.
 
 <br>
+
 <div class="row">
   <div class="column">
   <a href="states.html">`r fa("chart-area", height = 40)`</i>
   <br><p style="font-size:20px">States</p></a><p>Includes testing data</p></div>
-  <div class="column"></div>
-  <div class="column"></div>
+  <div class="column">
+  <a href="regions.html">`r fa("chart-pie", height = 40)`</i>
+  <br><p style="font-size:20px">Meta Regions</p></div>
+  <div class="column">
+  <a href="regions.html">`r fa("chart-line", height = 40)`</i>
+  <br><p style="font-size:20px">Metro Areas</p></div></div>
 </div>
 <div class="row">
   <div class="column">
@@ -429,22 +434,6 @@ Select an area below to view additional plots that focus on trends within a vari
   <br><p style="font-size:20px">Non-Metro Regions</p></a></div>
 </div>
 
+<br>
 
-## Legacy Plots {.tabset .tabset-fade .tabset-pills .padtop}
-The most recent versions of plots not yet included in the new sub-pages in the previous section can be found below. *As I add new sub-pages above, I will remove these tabs below.*
-
-
-### Regional
-
-| Links |  |  |
-|-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/regional/a_avg_all.png" target="_blank">Avg. New Cases, All</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/regional/b_avg_stl.png" target="_blank">Avg. New Cases, St. Louis</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/regional/c_avg_kc.png" target="_blank">Avg. New Cases, Kansas City</a> |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/regional/d_avg_outstate.png" target="_blank">Avg. New Cases, Outstate</a> | | |
-
-### Metro Areas
-
-| Links |  |  |
-|-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/b_case_rate.png" target="_blank">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/c_case_log.png" target="_blank">Reported Cases (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/d_case_log_avg.png" target="_blank">Average New Cases (Log)</a> |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/f_mortality_rate.png" target="_blank">Mortality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/g_mortality_log.png" target="_blank">Mortality (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/h_mortality_log_avg.png" target="_blank">Average New Mortality (Log)</a> |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/j_case_fatality_rate.png" target="_blank">Case Fatality (Percent)</a> | | |
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

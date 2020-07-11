@@ -1,0 +1,88 @@
+---
+title: "Meta Regions"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# dependencies
+library(dplyr)
+library(readr)
+
+# load data
+# regional_data <- read_csv(here::here("data", "regional_all", "regional_full.csv")) %>%
+#  filter(report_date >= "2020-03-07") %>%
+#  arrange(desc(report_date), short_name)
+```
+
+The following plots and maps focus on three "meta regions" in Missouri. The St. Louis and Kansas City regions only contain the Missouri countiesin those regionals, so the 7-day averages will be different than the values reported for the [full regionalpolitan statistical areas](regionals.html). The "outstate" region borrows a term used occasionally to describe areas outside of St. Louis and Kansas City. It includes all Missouri counties not included in either the St. Louis pr Kansas City MSAs.
+
+## Infections {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for these three meta regions.
+
+### All Meta Regions
+
+```{r region-all, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/regional/a_avg_all.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/regional/a_avg_all.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/regional/a_avg_all.png" target="_blank">Low-res</a>]
+
+### St. Louis
+
+```{r region-stl, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/regional/b_avg_stl.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/regional/b_avg_stl.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/regional/b_avg_stl.png" target="_blank">Low-res</a>]
+
+### Kansas City
+
+```{r region-kc, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/regional/c_avg_kc.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/regional/c_avg_kc.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/regional/c_avg_kc.png" target="_blank">Low-res</a>]
+
+### Outstate
+
+```{r region-outstate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/regional/d_avg_outstate.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/regional/d_avg_outstate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/regional/d_avg_outstate.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+*These data are not currently published. The data set creation process will be modified to regularly export these data, and this tab will be updated when those updates are complete.*
+
+```{r regional-infection-table, echo=FALSE, out.width = '100%', eval=FALSE}
+regional_data %>%
+  select(report_date, short_name, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    MSA = short_name,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) the `county_full.csv` and `state_full.csv` tables, which are assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains a short explanation of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+  

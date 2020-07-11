@@ -200,6 +200,7 @@ DT::datatable(data_table, rownames= FALSE)
 
   * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `state_testing.csv` table, which is assembled from data provided by [State of Missouri](faq.html#Where_Do_These_Data_Come_From) and the [COVID Tracking Project](faq.html#Where_Do_These_Data_Come_From).
   * Testing data are provided from 23 May onward because data for Missouri prior to that date included both PCR/viral tests and serology tests mixed together. 
+  * Missouri occasionally does not report current testing data. This issue was more pronounced in April and May, but these days without data reported were almost exclusively before the 23 May cutoff date discussed above. Since 23 May, there has been one day - 10 July - when the state failed to report data. A technique called "linear interpolation" is used to estimate these missing values. 
   * These data are interpreted to reflect the number of individuals who have been tested and not the number of tests.
   * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates). Note that the rates presented for testing data are per 100,000 individuals.
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
