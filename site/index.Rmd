@@ -410,7 +410,13 @@ DT::datatable(data_table)
 Select an area below to view additional plots that focus on trends within a variety of areas of Missouri. *This section is a work in progress.*
 
 <br>
-
+<div class="row">
+  <div class="column">
+  <a href="states.html">`r fa("chart-area", height = 40)`</i>
+  <br><p style="font-size:20px">States</p></a><p>Includes testing data</p></div>
+  <div class="column"></div>
+  <div class="column"></div>
+</div>
 <div class="row">
   <div class="column">
   <a href="kc.html">`r fa("chart-line", height = 40)`</i>
@@ -427,14 +433,6 @@ Select an area below to view additional plots that focus on trends within a vari
 ## Legacy Plots {.tabset .tabset-fade .tabset-pills .padtop}
 The most recent versions of plots not yet included in the new sub-pages in the previous section can be found below. *As I add new sub-pages above, I will remove these tabs below.*
 
-### State
-
-| Links |  |  |
-|-------------------------|--|--|
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/b_case_rate.png" target="_blank">Reported Cases (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/c_case_log.png" target="_blank">Reported Cases (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/d_case_log_avg.png" target="_blank">Average New Cases (Log)</a> |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/f_mortality_rate.png" target="_blank">Mortality (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/g_mortality_log.png" target="_blank">Mortality (Log)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/h_mortality_log_avg.png" target="_blank">Average New Mortality (Log)</a> |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/j_case_fatality_rate.png" target="_blank">Case Fatality (Percent)</a> | | |
-| <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/k_test_rate.png" target="_blank">Cumulative Tests (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/l_new_tests_avg.png" target="_blank">Avg. New Tests (Rate)</a> | <a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/m_positive_avg.png" target="_blank">Avg. Positive (Percent)</a> |
 
 ### Regional
 

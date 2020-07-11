@@ -26,7 +26,7 @@ county_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
 The following plots and maps focus on the Kansas City <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metropolitan statistical area</a>, which covers fourteen counties in Missouri and Kansas plus Kansas City, which is treated here as <a href="faq.html#Why_Do_You_Treat_Joplin_and_Kansas_City_as_Counties">the equivalent of a county</a>.
 
 ## Infections {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for the Kansas City <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. All averages presented are 7-day rolling averages.
+These plots show patterns in infections for the Kansas City <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>.
 
 ### Static Map
 
@@ -161,4 +161,3 @@ DT::datatable(data_table, rownames= FALSE)
   * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
   * The abbreviation "CFR" states for case fatality rate (the number of deaths divided by the number of known cases, expressed as a percentage).
-
