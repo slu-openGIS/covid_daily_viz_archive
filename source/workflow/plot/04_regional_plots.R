@@ -125,7 +125,7 @@ p <- ggplot() +
   # geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = current_point_y, nudge_x = current_point_x, size = 5.) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                  nudge_y = -190, nudge_x = -1, size = 5) +
+                  nudge_y = -210, nudge_x = -1, size = 5) +
   # geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = -150, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
@@ -254,7 +254,7 @@ p <- ggplot() +
   # geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = current_point_y, nudge_x = current_point_x, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                  nudge_y = -5, nudge_x = -30, size = 5) +
+                  nudge_y = -10, nudge_x = -35, size = 5) +
   # geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = -100, nudge_x = -1, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
@@ -391,7 +391,7 @@ p <- ggplot() +
   # geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = current_point_y, nudge_x = current_point_x, size = 5) +
   geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                  nudge_y = -220, nudge_x = 0, size = 5) +
+                  nudge_y = -230, nudge_x = 0, size = 5) +
   # geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
   #                nudge_y = -190, nudge_x = 0, size = 5) +
   scale_color_brewer(palette = "Dark2", name = "Category") +
