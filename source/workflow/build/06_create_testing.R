@@ -9,7 +9,7 @@ test_subset <- filter(test_data, report_date >= as.Date("2020-05-23")) %>%
   select(report_date, cases, tests_pcr_total)
 
 ## linear interpolation
-# test_subset$tests_impute <- na.approx(test_subset$tests)
+test_subset$tests_pcr_total <- na.approx(test_subset$tests_pcr_total)
 
 ## combine with full data
 # test_subset %>%
