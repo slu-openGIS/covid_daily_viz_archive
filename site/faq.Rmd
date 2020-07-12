@@ -141,7 +141,3 @@ The easiest way to download them is to go to the <a href="https://github.com/slu
 
 ## How Do I Download Your Graphics? {.padtop}
 Low resolution version of the graphics can be downloaded one at a time from the website by right clicking on them. If you want to download them all at once, or download the high resolution versions, follow the same process for downloading the data from <a href="https://github.com/slu-openGIS/covid_daily_viz" target="_blank">GitHub</a> (see above). The images will be in the `results/` folder.
-
-<br>
-
-<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

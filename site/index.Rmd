@@ -417,9 +417,9 @@ Select an area below to view additional plots that focus on trends within a vari
   <br><p style="font-size:20px">States</p></a><p>Includes testing data</p></div>
   <div class="column">
   <a href="regions.html">`r fa("chart-pie", height = 40)`</i>
-  <br><p style="font-size:20px">Meta Regions</p></div>
+  <br><p style="font-size:20px">Meso Regions</p></div>
   <div class="column">
-  <a href="regions.html">`r fa("chart-line", height = 40)`</i>
+  <a href="metros.html">`r fa("chart-line", height = 40)`</i>
   <br><p style="font-size:20px">Metro Areas</p></div></div>
 </div>
 <div class="row">
@@ -433,7 +433,10 @@ Select an area below to view additional plots that focus on trends within a vari
   <a href="other_regions.html">`r fa("chart-pie", height = 40)`</i>
   <br><p style="font-size:20px">Non-Metro Regions</p></a></div>
 </div>
-
-<br>
-
-<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
+<div class="row">
+  <div class="column">
+  <a href="disparities.html">`r fa("chart-pie", height = 40)`</i>
+  <br><p style="font-size:20px">Disparities</p></a><p>Includes race, sex, and poverty data for Missouri and St. Louis</p></div>
+  <div class="column"></div>
+  <div class="column"></div>
+</div>

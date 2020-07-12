@@ -1,5 +1,5 @@
 ---
-title: "Meta Regions"
+title: "Meso Regions"
 output: 
   html_document:
     toc: true
@@ -20,12 +20,12 @@ library(readr)
 #  arrange(desc(report_date), short_name)
 ```
 
-The following plots and maps focus on three "meta regions" in Missouri. The St. Louis and Kansas City regions only contain the Missouri countiesin those regionals, so the 7-day averages will be different than the values reported for the [full regionalpolitan statistical areas](regionals.html). The "outstate" region borrows a term used occasionally to describe areas outside of St. Louis and Kansas City. It includes all Missouri counties not included in either the St. Louis pr Kansas City MSAs.
+The following plots and maps focus on three "meso regions" in Missouri. The St. Louis and Kansas City regions only contain the Missouri countiesin those regionals, so the 7-day averages will be different than the values reported for the [full regionalpolitan statistical areas](regionals.html). The "outstate" region borrows a term used occasionally to describe areas outside of St. Louis and Kansas City. It includes all Missouri counties not included in either the St. Louis pr Kansas City MSAs.
 
 ## Infections {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for these three meta regions.
+These plots show patterns in infections for these three meso regions.
 
-### All Meta Regions
+### All Meso Regions
 
 ```{r region-all, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/regional/a_avg_all.png")
