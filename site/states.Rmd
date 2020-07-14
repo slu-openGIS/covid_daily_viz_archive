@@ -21,6 +21,9 @@ state_data <- read_csv(here::here("data", "state", "state_full.csv")) %>%
 
 state_test_data <- read_csv(here::here("data", "state", "state_testing.csv")) %>%
   arrange(desc(report_date), state)
+
+state_live_data <- read_csv(here::here("data", "state", "state_live_tests.csv")) %>%
+  arrange(desc(report_date))
 ```
 
 The following plots and maps focus on a number of states surrounding Missouri in order to provide a comparison for our own state-level trends. The focal states in this section are currently Arkansas, Illinois, Kansas, and Oklahoma in addition to Missouri itself.
@@ -204,3 +207,40 @@ DT::datatable(data_table, rownames= FALSE)
   * These data are interpreted to reflect the number of individuals who have been tested and not the number of tests.
   * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates). Note that the rates presented for testing data are per 100,000 individuals.
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+
+## Live Daily Testing {.tabset .tabset-fade .tabset-pills .padtop}
+The following plot and data table mirror the daily PCR/viral testing data posted on the State of Missouri's dashboard. Unlike the data above, these reflect the number of tests and not the number of individuals tested. They give a sense of overall testing capacity and not the proportion of the population being tested. Unlike other data on this site, the total number of tests may change for multiple days with each update.
+
+### Daily Testing
+
+```{r state-daily_test, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/state/n_total_tests_avg.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/n_total_tests_avg.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/n_total_tests_avg.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r state-live-table, echo=FALSE, out.width = '100%'}
+state_live_data %>%
+  select(report_date, pcr_neg, pcr_pos, pcr_int, pcr_total, pcr_avg) %>%
+  mutate(
+    pcr_avg = round(pcr_avg, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    `Negative Tests` = pcr_neg,
+    `Positive Tests` = pcr_pos,
+    `Indeterminate Tests` = pcr_int,
+    `Total Tests` = pcr_total,
+    `Average Tests` = pcr_avg
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `state_live_tests.csv` table, which is assembled from data provided by [State of Missouri](faq.html#Where_Do_These_Data_Come_From).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+  
