@@ -1,4 +1,4 @@
-report_date,pcr_neg,pcr_pos,pcr_int,pcr_total,pct_avg
+report_date,pcr_neg,pcr_pos,pcr_int,pcr_total,pcr_avg
 2020-03-16,409,30,0,439,NA
 2020-03-17,635,49,0,684,NA
 2020-03-18,740,54,2,796,NA
