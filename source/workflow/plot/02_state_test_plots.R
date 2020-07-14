@@ -141,3 +141,63 @@ save_plots(filename = "results/low_res/state/m_positive_avg.png", plot = p, pres
 rm(caption_text_tests, caption_text_tests_census, state_points, state_subset, state_test_data,
    test_date, test_date_breaks)
 rm(p, cols, top_val, pal)
+
+# =============================================================================
+
+# load data
+state_live_data <- read_csv("data/state/state_live_tests.csv")
+
+# =============================================================================
+
+# define colors
+pal <- brewer.pal(n = 3, name = "Set1")
+cols <- c("7-day Average" = pal[1], "Count" = pal[2])
+
+# =============================================================================
+
+# plot average new tests
+
+## define top_val
+top_val <- round_any(x = max(state_live_data$pcr_total, na.rm = TRUE), accuracy = 1000, f = ceiling)
+
+## subset
+state_live_data %>%
+  select(report_date, pcr_total, pcr_avg) %>%
+  pivot_longer(cols = c(pcr_total, pcr_avg), names_to = "category", values_to = "value") %>%
+  mutate(category = case_when(
+    category == "pcr_total" ~ "Count",
+    category == "pcr_avg" ~ "7-day Average"
+  )) %>%
+  mutate(category = fct_relevel(category, "Count", "7-day Average")) -> state_live_subset
+
+avg_line <- filter(state_live_subset, category == "7-day Average")
+
+## create points
+test_points <- filter(state_live_subset, report_date == date-3)
+
+## create factors
+state_live_subset <- mutate(state_live_subset, factor_var = fct_reorder2(category, report_date, value))
+test_points <- mutate(test_points, factor_var = fct_reorder2(category, report_date, value))
+
+## plot
+p <- ggplot() +
+  geom_line(state_live_subset, mapping = aes(x = report_date, y = value, color = factor_var), size = 2) +
+  geom_line(avg_line, mapping = aes(x = report_date, y = value), color = cols[1], size = 2) +
+  geom_point(test_points, mapping = aes(x = report_date, y = value, color = factor_var), 
+             size = 4, show.legend = FALSE) +
+  scale_colour_manual(values = cols, name = "Measure") +
+  scale_x_date(date_breaks = total_test_date_breaks, date_labels = "%d %b") +
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 1000)) + 
+  labs(
+    title = "Daily COVID-19 PCR Tests",
+    subtitle = paste0(min(state_live_subset$report_date), " through ", as.character(date-3)),
+    x = "Date",
+    y = "New Tests",
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the State of Missouri"
+  ) +
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = x_angle))
+
+## save plot
+save_plots(filename = "results/high_res/state/n_total_tests_avg.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/state/n_total_tests_avg.png", plot = p, preset = "lg", dpi = 72)

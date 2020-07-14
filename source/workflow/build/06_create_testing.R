@@ -103,7 +103,7 @@ live_data <- read_csv("data/source/mo_tests/live_tests.csv")
 ## clean live data
 live_data %>%
   mutate(pcr_total = pcr_neg + pcr_pos + pcr_int) %>%
-  mutate(pct_avg = rollmean(pcr_total, k = 7, align = "right", fill = NA)) -> live_data
+  mutate(pcr_avg = rollmean(pcr_total, k = 7, align = "right", fill = NA)) -> live_data
 
 # write data
 write_csv(live_data, path = "data/state/state_live_tests.csv")
