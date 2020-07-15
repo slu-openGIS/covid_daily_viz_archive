@@ -60,7 +60,7 @@ p <- ggplot() +
                    nudge_y = -4, 
                    nudge_x = .5,
                    segment.color = 'grey50') +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 1)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 2)) +
   scale_y_continuous(limits = c(0,60), breaks = c(0,10,20,30,40,50,60)) +
   labs(
     title = "Reported COVID-19 Cases by St. Louis ZCTA",
@@ -94,7 +94,7 @@ p <- ggplot() +
                    nudge_y = -4, 
                    nudge_x = .5,
                    segment.color = 'grey50') +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 1)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 2)) +
   scale_y_continuous(limits = c(0,100), breaks = c(0,20,40,60,80,100)) +
   labs(
     title = "Reported COVID-19 Cases by St. Louis ZCTA",
