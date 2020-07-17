@@ -60,8 +60,10 @@ source("source/workflow/plot/10_county_plots_nomo.R")
 source("source/workflow/plot/11_county_plots_ozark.R")
 source("source/workflow/plot/12_county_plots_swmo.R")
 source("source/workflow/plot/13_county_plots_cape.R")
-source("source/workflow/plot/14_stl_county_plots.R")
-source("source/workflow/plot/18_kc_county_plots.R")
+source("source/workflow/plot/14_county_plots_west.R")
+source("source/workflow/plot/15_county_plots_spring.R")
+source("source/workflow/plot/16_stl_county_plots.R")
+source("source/workflow/plot/20_kc_county_plots.R")
 
 # =============================================================================
 

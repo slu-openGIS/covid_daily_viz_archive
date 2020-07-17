@@ -14,24 +14,19 @@ pal_a <- brewer.pal(n = 8, name = "Set1")
 pal_a[6] <- "#FFD60C"
 pal_b <- brewer.pal(n = 6, name = "Reds")
 pal_b <- pal_b[c(6)]
-pal_c <- brewer.pal(n = 6, name = "Blues")
-pal_c <- pal_c[c(6)]
-pal_d <- brewer.pal(n = 6, name = "Greens")
-pal_d <- pal_d[c(6)]
-pal <- c(pal_a, pal_b, pal_c, pal_d)
+pal <- c(pal_a, pal_b)
 
 # clean-up
-rm(pal_a, pal_b, pal_c, pal_d)
+rm(pal_a, pal_b)
 
 # define cols object
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
-          "Greene" = pal[4], "Jasper" = pal[5], "McDonald" = pal[6], 
-          "Newton" = pal[7], "Taney" = pal[8], "Barton" = pal[9],
-          "Barry" = pal[10], "Joplin" = pal[11])
+          "Jasper" = pal[4], "McDonald" = pal[5], "Newton" = pal[6], "Barton" = pal[7],
+          "Barry" = pal[8], "Joplin" = pal[9])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29077", "29097", "29119", "29145",
-                  "29213", "29011", "29009", "29512")
+county_focal <- c("29510", "29189", "29511", "29097", "29119", "29145",
+                  "29011", "29009", "29512")
 
 # =============================================================================
 
