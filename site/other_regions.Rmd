@@ -22,12 +22,14 @@ county_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
 
 # subset data
 cape <- filter(county_data, geoid %in% c("29031", "29157", "29186",  "29187"))
-mid_mo <- filter(county_data, geoid %in% c("29195", "29135", "29019", "29051", "29159", "29007", "29027"))
+mid_mo <- filter(county_data, geoid %in% c("29135", "29019", "29051", "29007", "29027"))
 ozark <- filter(county_data, geoid %in% c("29029", "29131", "29141", "29015", "29169"))
 nomo <- filter(county_data, geoid %in% c("29211", "29001", "29075", "29079"))
 semo <- filter(county_data, geoid %in% c("29133", "29155", "29201",  "29207", "29143", "29023", "29069"))
+spring <- filter(county_data, geoid %in% c("29043", "29077", "29167", "29213"))
 st_jo <- filter(county_data, geoid %in% c("29003", "29021", "29063", "29049"))
-swmo <- filter(county_data, geoid %in% c("29077", "29097", "29119", "29145", "29213", "29011", "29009", "29512"))
+swmo <- filter(county_data, geoid %in% c("29097", "29119", "29145", "29011", "29009", "29512"))
+west <- filter(county_data, geoid %in% c("29033", "29101", "29159", "29195"))
 
 # remove county data
 rm(county_data)
@@ -290,6 +292,108 @@ DT::datatable(data_table, rownames= FALSE)
   * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
 
+## Southwest Missouri {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for a number of counties in the southwestern part Missouri, including parts (but not all of) of the Joplin <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>.
+
+### Infection Rates
+
+```{r swmo-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_swmo/b_case_rate.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_swmo/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_swmo/b_case_rate.png" target="_blank">Low-res</a>]
+
+### Infection Pace
+
+```{r swmo-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_swmo/c_case_log.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_swmo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_swmo/c_case_log.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r swmo-infection-table, echo=FALSE, out.width = '100%'}
+swmo %>%
+  select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2),
+    state = case_when(
+      state == "Kansas" ~ "KS",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+
+## Springfield {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for a number of counties near Springfield and Branson, Missouri. This region lies between Lake of the Ozarks and the Joplin metro, and includes parts (but not all of) of the Springfield <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>.
+
+### Infection Rates
+
+```{r spring-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_spring/b_case_rate.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_spring/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_spring/b_case_rate.png" target="_blank">Low-res</a>]
+
+### Infection Pace
+
+```{r spring-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_spring/c_case_log.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_spring/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_spring/c_case_log.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r spring-infection-table, echo=FALSE, out.width = '100%'}
+spring %>%
+  select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2),
+    state = case_when(
+      state == "Kansas" ~ "KS",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+
 ## St. Joseph {.tabset .tabset-fade .tabset-pills .padtop}
 These plots show patterns in infections for a number of counties in the northwestern part Missouri, including parts (but not all of) of the St. Joseph <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. These counties lie just to the north of the Kansas City <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a> along the Missouri River.
 
@@ -341,29 +445,29 @@ DT::datatable(data_table, rownames= FALSE)
   * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
 
-## Southwest Missouri {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for a number of counties in the southwestern part Missouri, including parts (but not all of) of the Joplin and Springfield <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro areas</a>.
+## West-Central Missouri {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for a number of counties that lie along the Missouri River between Mid-MO and Kansas City. 
 
 ### Infection Rates
 
-```{r swmo-infection-rate, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/county_swmo/b_case_rate.png")
+```{r west-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_west/b_case_rate.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_swmo/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_swmo/b_case_rate.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_west/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_west/b_case_rate.png" target="_blank">Low-res</a>]
 
 ### Infection Pace
 
-```{r swmo-infection-log, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/county_swmo/c_case_log.png")
+```{r west-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_west/c_case_log.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_swmo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_swmo/c_case_log.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_west/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_west/c_case_log.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
-```{r swmo-infection-table, echo=FALSE, out.width = '100%'}
-swmo %>%
+```{r west-infection-table, echo=FALSE, out.width = '100%'}
+west %>%
   select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
   mutate(
     case_avg = round(case_avg, digits = 2),
@@ -391,3 +495,4 @@ DT::datatable(data_table, rownames= FALSE)
   * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
   * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+  
