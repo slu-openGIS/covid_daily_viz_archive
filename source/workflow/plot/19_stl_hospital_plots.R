@@ -3,7 +3,7 @@
 # =============================================================================
 
 # load data
-stl_hosp <-  read_csv("data/metro/stl_hospital.csv")
+stl_hosp <-  read_csv("data/MO_HEALTH_Covid_Tracking/data/metro/stl_hospital.csv")
 
 # =============================================================================
 

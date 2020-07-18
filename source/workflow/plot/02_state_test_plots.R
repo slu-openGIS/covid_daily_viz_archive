@@ -8,7 +8,7 @@ test_date <- date
 # =============================================================================
 
 # load data
-state_test_data <- read_csv("data/state/state_testing.csv")
+state_test_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/state/state_testing.csv")
 
 # =============================================================================
 

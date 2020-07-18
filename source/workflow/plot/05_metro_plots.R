@@ -3,7 +3,7 @@
 # =============================================================================
 
 # load data
-metro_data <- read_csv("data/metro_all/metro_full.csv")
+metro_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/metro_all/metro_full.csv")
 
 # =============================================================================
 

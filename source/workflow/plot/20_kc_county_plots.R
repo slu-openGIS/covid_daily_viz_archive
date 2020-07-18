@@ -3,12 +3,12 @@
 # =============================================================================
 
 # load data
-kc_sf <- st_read("data/metro/daily_snapshot_kc.geojson", crs = 4326,
+kc_sf <- st_read("data/MO_HEALTH_Covid_Tracking/data/metro/daily_snapshot_kc.geojson", crs = 4326,
                   stringsAsFactors = FALSE) %>%
   st_transform(crs = "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs ") %>%
   mutate(county = ifelse(GEOID %in% c("29511"), NA, county))
 
-county_data <- read_csv("data/county/county_full.csv") %>%
+county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.csv") %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(geoid %in% c("20091", "20103", "20107", "20121", "20209",
                       "29013", "29025", "29037", "29047", "29049", 

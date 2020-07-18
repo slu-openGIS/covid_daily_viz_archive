@@ -26,9 +26,9 @@ kc_stl <- c(kc, stl)
 
 # load data
 
-state_data <- read_csv("data/state/state_full.csv") 
+state_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/state/state_full.csv") 
 
-focal_data <- read_csv("data/county/county_full.csv") %>%
+focal_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.csv") %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(state == "Missouri") %>%
   filter(geoid %in% stl == TRUE)
@@ -158,9 +158,9 @@ rm(p, report_points, report_label, report_day_points)
 
 # load data
 
-state_data <- read_csv("data/state/state_full.csv") 
+state_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/state/state_full.csv") 
 
-focal_data <- read_csv("data/county/county_full.csv") %>%
+focal_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.csv") %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(state == "Missouri") %>%
   filter(geoid %in% kc == TRUE)
@@ -287,9 +287,9 @@ rm(p, report_points, report_label, report_day_points)
 
 # load data
 
-state_data <- read_csv("data/state/state_full.csv") 
+state_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/state/state_full.csv") 
 
-focal_data <- read_csv("data/county/county_full.csv") %>%
+focal_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.csv") %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(state == "Missouri") %>%
   filter(geoid %in% kc_stl == FALSE)
@@ -427,7 +427,7 @@ rm(top_val, p, report_points, report_label, report_day_points)
 # =============================================================================
 
 # load data
-regional_data <- read_csv("data/county/county_full.csv") %>%
+regional_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.csv") %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(state == "Missouri")
 

@@ -3,7 +3,7 @@
 # =============================================================================
 
 # load data
-city_county_zip_sf <- st_read("data/zip/daily_snapshot_city_county.geojson", crs = 4326,
+city_county_zip_sf <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snapshot_city_county.geojson", crs = 4326,
                               stringsAsFactors = FALSE) %>%
   st_transform(crs = 26915)
 

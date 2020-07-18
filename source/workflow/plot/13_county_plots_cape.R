@@ -3,7 +3,7 @@
 # =============================================================================
 
 # load data
-county_data <- read_csv("data/county/county_full.csv") %>%
+county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.csv") %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(state == "Missouri")
 

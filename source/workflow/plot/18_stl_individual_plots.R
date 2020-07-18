@@ -3,8 +3,8 @@
 # =============================================================================
 
 # load data
-covid_race <-  read_csv("data/individual/stl_race_rates.csv")
-covid_race_gender <-  read_csv("data/individual/stl_race_gender_rates.csv")
+covid_race <-  read_csv("data/MO_HEALTH_Covid_Tracking/data/individual/stl_race_rates.csv")
+covid_race_gender <-  read_csv("data/MO_HEALTH_Covid_Tracking/data/individual/stl_race_gender_rates.csv")
 
 # =============================================================================
 
