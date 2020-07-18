@@ -39,13 +39,13 @@ source("source/functions/sequoia_theme.R")
 
 # update plots
 ## overview plots
-source("source/workflow/plot/02_state_test_plots.R")
-source("source/workflow/plot/03_state_individual_plots.R")
+source("source/workflow/02_state_test_plots.R")
+source("source/workflow/03_state_individual_plots.R")
 
 # regional plots
-source("source/workflow/plot/17_stl_zip_plots.R")
-source("source/workflow/plot/18_stl_individual_plots.R")
-source("source/workflow/plot/19_stl_hospital_plots.R")
+source("source/workflow/17_stl_zip_plots.R")
+source("source/workflow/18_stl_individual_plots.R")
+source("source/workflow/19_stl_hospital_plots.R")
 
 # =============================================================================
 

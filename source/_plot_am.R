@@ -47,23 +47,23 @@ source("source/functions/sequoia_theme.R")
 
 # update plots
 ## overview plots
-source("source/workflow/plot/01_state_plots.R")
-source("source/workflow/plot/04_regional_plots.R")
-source("source/workflow/plot/05_metro_plots.R")
-source("source/workflow/plot/06_county_plots.R")
+source("source/workflow/01_state_plots.R")
+source("source/workflow/04_regional_plots.R")
+source("source/workflow/05_metro_plots.R")
+source("source/workflow/06_county_plots.R")
 
 ## regional plots
-source("source/workflow/plot/07_county_plots_semo.R")
-source("source/workflow/plot/08_county_plots_midmo.R")
-source("source/workflow/plot/09_county_plots_stjo.R")
-source("source/workflow/plot/10_county_plots_nomo.R")
-source("source/workflow/plot/11_county_plots_ozark.R")
-source("source/workflow/plot/12_county_plots_swmo.R")
-source("source/workflow/plot/13_county_plots_cape.R")
-source("source/workflow/plot/14_county_plots_west.R")
-source("source/workflow/plot/15_county_plots_spring.R")
-source("source/workflow/plot/16_stl_county_plots.R")
-source("source/workflow/plot/20_kc_county_plots.R")
+source("source/workflow/07_county_plots_semo.R")
+source("source/workflow/08_county_plots_midmo.R")
+source("source/workflow/09_county_plots_stjo.R")
+source("source/workflow/10_county_plots_nomo.R")
+source("source/workflow/11_county_plots_ozark.R")
+source("source/workflow/12_county_plots_swmo.R")
+source("source/workflow/13_county_plots_cape.R")
+source("source/workflow/14_county_plots_west.R")
+source("source/workflow/15_county_plots_spring.R")
+source("source/workflow/16_stl_county_plots.R")
+source("source/workflow/20_kc_county_plots.R")
 
 # =============================================================================
 
