@@ -3,7 +3,7 @@
 # =============================================================================
 
 # load data
-state_data <- read_csv("data/state/state_full.csv") 
+state_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/state/state_full.csv") 
 
 # =============================================================================
 
