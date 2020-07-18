@@ -1,0 +1,3 @@
+[submodule "data/MO_HEALTH_Covid_Tracking"]
+	path = data/MO_HEALTH_Covid_Tracking
+	url = https://github.com/slu-openGIS/MO_HEALTH_Covid_Tracking
