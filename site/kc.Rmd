@@ -15,7 +15,7 @@ library(dplyr)
 library(readr)
 
 # load data
-county_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
+county_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "county", "county_full.csv")) %>%
   filter(geoid %in% c("20091", "20103", "20107", "20121", "20209",
                   "29013", "29025", "29037", "29047", "29049", 
                   "29095", "29107", "29165", "29177", "29511")) %>%

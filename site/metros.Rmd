@@ -15,7 +15,7 @@ library(dplyr)
 library(readr)
 
 # load data
-metro_data <- read_csv(here::here("data", "metro_all", "metro_full.csv")) %>%
+metro_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "metro_all", "metro_full.csv")) %>%
   filter(report_date >= "2020-03-07") %>%
   arrange(desc(report_date), short_name)
 ```

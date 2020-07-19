@@ -16,10 +16,10 @@ library(readr)
 library(sf)
 
 # load data
-state_data <- read_csv(here::here("data", "individual", "mo_race_rates.csv"))
-stl_race <- read_csv(here::here("data", "individual", "stl_race_rates.csv"))
-stl_race_gender <- read_csv(here::here("data", "individual", "stl_race_gender_rates.csv"))
-zip_snapshot <- st_read(here::here("data", "zip", "daily_snapshot_city_county.geojson")) %>%
+state_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "individual", "mo_race_rates.csv"))
+stl_race <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "individual", "stl_race_rates.csv"))
+stl_race_gender <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "individual", "stl_race_gender_rates.csv"))
+zip_snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_city_county.geojson")) %>%
   filter(is.na(cases) == FALSE)
 st_geometry(zip_snapshot) <- NULL
 ```

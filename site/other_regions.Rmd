@@ -15,7 +15,7 @@ library(dplyr)
 library(readr)
 
 # load data
-county_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
+county_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "county", "county_full.csv")) %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(state == "Missouri") %>%
   arrange(desc(report_date), county)

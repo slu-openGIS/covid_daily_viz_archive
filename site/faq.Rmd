@@ -15,7 +15,7 @@ library(RColorBrewer)
 library(sf)
 
 # load data
-snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 4326,
+snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "county", "daily_snapshot_mo_xl.geojson"), crs = 4326,
                     stringsAsFactors = FALSE)
 
 # create list with vectors of metro counties by GEOID

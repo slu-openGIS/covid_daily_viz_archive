@@ -32,39 +32,39 @@ params <- list(
 )
 
 # load data
-state_data <- read_csv(here::here("data", "state", "state_full.csv")) %>%
+state_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "state", "state_full.csv")) %>%
   filter(state == "Missouri") %>%
   filter(report_date >= "2020-03-07") %>%
   arrange(desc(report_date))
 
-state_test_data <- read_csv(here::here("data", "state", "state_testing.csv"))
+state_test_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "state", "state_testing.csv"))
 
-stl_metro_data <- read_csv(here::here("data", "metro_all", "metro_full.csv")) %>%
+stl_metro_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "metro_all", "metro_full.csv")) %>%
   filter(short_name == "St. Louis") %>%
   filter(report_date >= "2020-03-07") %>%
   arrange(desc(report_date))
 
-kc_metro_data <- read_csv(here::here("data", "metro_all", "metro_full.csv")) %>%
+kc_metro_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "metro_all", "metro_full.csv")) %>%
   filter(short_name == "Kansas City") %>%
   filter(report_date >= "2020-03-07") %>%
   arrange(desc(report_date))
 
-stl_city_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
+stl_city_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "county", "county_full.csv")) %>%
   filter(geoid == "29510") %>%
   filter(report_date >= "2020-03-18") %>%
   arrange(desc(report_date))
 
-stl_county_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
+stl_county_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "county", "county_full.csv")) %>%
   filter(geoid == "29189") %>%
   filter(report_date >= "2020-03-07") %>%
   arrange(desc(report_date))
 
-kc_city_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
+kc_city_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "county", "county_full.csv")) %>%
   filter(geoid == "29511") %>%
   filter(report_date >= "2020-03-20") %>%
   arrange(desc(report_date))
 
-snapshot <- st_read(here::here("data", "county", "daily_snapshot_mo_xl.geojson"), crs = 4326,
+snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "county", "daily_snapshot_mo_xl.geojson"), crs = 4326,
                     stringsAsFactors = FALSE) %>%
   mutate(icu_rate = ifelse(hospitals == 0, NA, icu_rate)) %>%
   mutate(avg_rate = (case_avg/total_pop)*1000)

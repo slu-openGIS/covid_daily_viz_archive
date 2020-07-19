@@ -23,14 +23,15 @@ source(here::here("source", "functions", "map_breaks.R"))
 source(here::here("source", "functions", "round_any.R"))
 
 # load data
-county_data <- read_csv(here::here("data", "county", "county_full.csv")) %>%
+county_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "county", "county_full.csv")) %>%
   filter(geoid %in% c("17005", "17013", "17027", "17083", "17117", 
                "17119", "17133", "17163", "29071", "29099", 
                "29113", "29183", "29189", "29219", "29510")) %>%
   filter(report_date >= "2020-03-07") %>%
   arrange(desc(report_date), county)
-zip_snapshot <- st_read(here::here("data", "zip", "daily_snapshot_city_county.geojson"), stringsAsFactors = FALSE) 
-stl_hosp <-  read_csv(here::here("data", "metro", "stl_hospital.csv"))
+zip_snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_city_county.geojson"), 
+                        stringsAsFactors = FALSE) 
+stl_hosp <-  read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "metro", "stl_hospital.csv"))
 ```
 
 The following plots and maps focus on the St. Louis <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metropolitan statistical area</a>, which covers fifteen counties in Missouri and Illinois.
