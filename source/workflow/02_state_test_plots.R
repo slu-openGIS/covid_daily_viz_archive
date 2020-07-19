@@ -145,7 +145,7 @@ rm(p, cols, top_val, pal)
 # =============================================================================
 
 # load data
-state_live_data <- read_csv("data/state/state_live_tests.csv")
+state_live_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/state/state_live_tests.csv")
 
 # =============================================================================
 
