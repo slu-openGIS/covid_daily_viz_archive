@@ -10,15 +10,23 @@ county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.c
 # =============================================================================
 
 # define colors
-pal <- brewer.pal(n = 8, name = "Set1")
-pal[6] <- "#FFD60C"
+pal_a <- brewer.pal(n = 8, name = "Set1")
+pal_a[6] <- "#FFD60C"
+pal_b <- brewer.pal(n = 6, name = "Reds")
+pal_b <- pal_b[c(6)]
+pal <- c(pal_a, pal_b) # pal_c, pal_d, pal_e
+
+# clean-up
+rm(pal_a, pal_b) # pal_c, pal_d, pal_e
+
+# define cols object
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
           "Camden" = pal[4], "Miller" = pal[5], "Morgan" = pal[6], "Benton" = pal[7],
-          "Pulaski" = pal[8])
+          "Pulaski" = pal[8], "Laclede" = pal[9])
 
 # define focal metros
 county_focal <- c("29510", "29189", "29511", "29029", "29131", "29141", "29015",
-                  "29169")
+                  "29169", "29105")
 
 # =============================================================================
 
