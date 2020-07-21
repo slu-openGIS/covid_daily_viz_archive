@@ -7,9 +7,9 @@
 date <- Sys.Date()
 
 # define first date for plotting
-test_date_breaks <- "3 days"
+test_date_breaks <- "7 days"
 total_test_date_breaks <- "10 days"
-hosp_breaks <- "7 days"
+hosp_breaks <- "9 days"
 x_angle <- 25
 
 # create caption
