@@ -88,7 +88,7 @@ save_plots(filename = "results/low_res/kc_metro/a_case_map.png", plot = p, prese
 county_subset <- filter(county_data, report_date >= plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_rate), accuracy = 1, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_rate), accuracy = 2, f = ceiling)
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, case_rate))
@@ -105,7 +105,7 @@ p <- ggplot() +
                   nudge_y = 1, nudge_x = -20, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 2)) + 
   labs(
     title = "Reported COVID-19 Cases in Metro Kansas City",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
@@ -216,7 +216,7 @@ p <- ggplot(data = county_subset) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = .6, nudge_x = -8, size = 5) +
+                  nudge_y = 1, nudge_x = -8, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(.3, 300), breaks = c(.3, 1, 3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 7)) +

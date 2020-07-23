@@ -8,9 +8,10 @@ date <- Sys.Date()-1
 
 # define first date for plotting
 plot_date <- "2020-03-10"
-date_breaks <- "9 days"
-date_breaks_alt <- "9 days"
+date_breaks <- "10 days"
+date_breaks_alt <- "10 days"
 x_angle <- 25
+county_rate_val <- 5
 
 # create caption
 # Johns Hopkins University CSSE
@@ -71,4 +72,4 @@ source("source/workflow/20_kc_county_plots.R")
 rm(plot_date, save_plots, sequoia_theme, date_breaks, calculate_days, filter_date,
    map_breaks, map_bins, round_any, caption_text, caption_text_census,
    caption_text_census_map, caption_text_census_map2, x_angle,
-   start_date, date_breaks_alt)
+   start_date, date_breaks_alt, county_rate_val)

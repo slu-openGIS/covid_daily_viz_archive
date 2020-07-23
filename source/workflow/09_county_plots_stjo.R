@@ -48,7 +48,7 @@ report_line <- tibble(
 county_subset <- filter(county_data, report_date >= plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_rate), accuracy = 2, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_rate), accuracy = county_rate_val, f = ceiling)
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, case_rate))
@@ -65,7 +65,7 @@ p <- ggplot() +
                   nudge_y = 2, nudge_x = -20, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 2)) +  
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = county_rate_val)) +  
   labs(
     title = "Reported COVID-19 Cases by Select Missouri Counties",
     subtitle = paste0("St. Joseph Focus\n", as.character(plot_date), " through ", as.character(date)),
