@@ -1,4 +1,4 @@
-map_breaks <- function(.data, var, newvar, classes, style, clean_labels = TRUE, dig_lab = 10){
+map_breaks <- function(.data, var, newvar, classes, style, breaks, clean_labels = TRUE, dig_lab = 10){
   
   # save parameters to list
   paramList <- as.list(match.call())
@@ -21,7 +21,10 @@ map_breaks <- function(.data, var, newvar, classes, style, clean_labels = TRUE, 
   newQ <- rlang::quo_name(rlang::enquo(new))
   
   # calculate breaks and categories
-  breaks <- classInt::classIntervals(.data[[refQ]], n = classes, style = style)
+  if (missing(breaks) == TRUE){
+    breaks <- classInt::classIntervals(.data[[refQ]], n = classes, style = style)
+  }
+  
   categories <- cut(.data[[refQ]], breaks = c(breaks$brks), include.lowest = TRUE, dig.lab = dig_lab)
   
   # create new variable

@@ -3,6 +3,69 @@
 # =============================================================================
 
 # load data
+regional_zip_sf <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snapshot_regional.geojson", crs = 4326,
+                           stringsAsFactors = FALSE) %>%
+  st_transform(crs = 26915)
+
+regional_counties <- st_read("data/MO_HEALTH_Covid_Tracking/data/county/daily_snapshot_mo.geojson") %>%
+  st_transform(crs = 26915) %>%
+  filter(GEOID %in% c("29099", "29183", "29189", "29510")) %>%
+  select(GEOID, county)
+
+regional_centroids <- regional_counties %>%
+  st_centroid() %>%
+  get_coords(crs = 26915)
+
+st_geometry(regional_centroids) <- NULL
+
+# =============================================================================
+
+# map reported rate
+## create breaks
+zip_valid <- filter(regional_zip_sf, is.na(case_rate) == FALSE)
+zip_na <- filter(regional_zip_sf, is.na(case_rate) == TRUE)
+zip_valid <- map_breaks(zip_valid, var = "case_rate", newvar = "map_breaks",
+                        style = "fisher", classes = 5, dig_lab = 2)
+
+## create map
+p <- ggplot() +
+  geom_sf(data = zip_na, fill = "#9d9d9d") +
+  geom_sf(data = zip_valid, mapping = aes(fill = map_breaks)) +
+  geom_sf(data = regional_counties, fill = NA, color = "black", size = .75) +
+  geom_text_repel(data = regional_centroids, mapping = aes(x = x, y = y, label = county),
+                  nudge_x = c(-35000, -20000, -40000, 10000),
+                  nudge_y = c(-10000, 20000, -20000, -35000),
+                  size = 6) +
+  # geom_sf_label(data = labels, mapping = aes(label = name), label.size = NA, size = 6) +
+  scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
+  labs(
+    title = "Reported COVID-19 Cases by \nRegional St. Louis ZCTA",
+    subtitle = paste0("Current as of ", as.character(date)),
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the included counties and the U.S. Census Bureau"
+  )  +
+  sequoia_theme(base_size = 22, background = "white", map = TRUE)
+
+## save map
+save_plots(filename = "results/high_res/stl_zip/a_case_map_regional.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/a_case_map_regional.png", plot = p, preset = "lg", dpi = 72)
+
+# =============================================================================
+
+# store breaks
+breaks <- classInt::classIntervals(regional_zip_sf$case_rate, n = 5, style = "fisher")
+
+# modify regional objects
+regional_centroids <- filter(regional_centroids, GEOID %in% c("29510", "29189"))
+regional_counties <- filter(regional_counties, GEOID %in% c("29510", "29189"))
+
+# =============================================================================
+
+# clean-up
+rm(p, regional_zip_sf)
+
+# =============================================================================
+
+# load data
 city_county_zip_sf <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snapshot_city_county.geojson", crs = 4326,
                               stringsAsFactors = FALSE) %>%
   st_transform(crs = 26915)
@@ -10,8 +73,8 @@ city_county_zip_sf <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snap
 # =============================================================================
 
 ## highlight focal zips
-focal_zips <- filter(city_county_zip_sf, zip %in% c("63103", "63025"))
-non_focal_zips <- filter(city_county_zip_sf, zip %in% c("63103", "63025") == FALSE)
+focal_zips <- filter(city_county_zip_sf, GEOID_ZCTA %in% c("63103", "63025"))
+non_focal_zips <- filter(city_county_zip_sf, GEOID_ZCTA %in% c("63103", "63025") == FALSE)
 
 # =============================================================================
 
@@ -20,23 +83,24 @@ non_focal_zips <- filter(city_county_zip_sf, zip %in% c("63103", "63025") == FAL
 zip_valid <- filter(city_county_zip_sf, is.na(case_rate) == FALSE)
 zip_na <- filter(city_county_zip_sf, is.na(case_rate) == TRUE)
 zip_valid <- map_breaks(zip_valid, var = "case_rate", newvar = "map_breaks",
-                        style = "fisher", classes = 5, dig_lab = 2)
+                        breaks = breaks, dig_lab = 2)
 
 ## create map
 p <- ggplot() +
   geom_sf(data = zip_na, fill = "#9d9d9d") +
   geom_sf(data = zip_valid, mapping = aes(fill = map_breaks)) +
+  geom_sf(data = regional_counties, fill = NA, color = "black", size = .75) +
   scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
   labs(
-    title = "Reported COVID-19 Cases by \nSt. Louis ZCTA",
+    title = "Reported COVID-19 Cases by \nCore St. Louis ZCTA",
     subtitle = paste0("Current as of ", as.character(date)),
     caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis, St. Louis County, and the U.S. Census Bureau"
   )  +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
 ## save map
-save_plots(filename = "results/high_res/stl_zip/a_case_map.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/stl_zip/a_case_map.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/stl_zip/a_case_map_core.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/a_case_map_core.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
@@ -53,7 +117,7 @@ p <- ggplot() +
   geom_point(data = focal_zips, mapping = aes(x = case_rate, pvty_pct), color = "#1B9E77", size = 4) +
   geom_point(data = non_focal_zips, mapping = aes(x = case_rate, pvty_pct), color = "#1B9E77", size = 4,
              position = "jitter") +
-  geom_label_repel(data = focal_zips, mapping = aes(x = case_rate, pvty_pct, label = zip),
+  geom_label_repel(data = focal_zips, mapping = aes(x = case_rate, pvty_pct, label = GEOID_ZCTA),
                    size = 6,
                    box.padding   = 0.35, 
                    point.padding = 0.5,
@@ -87,7 +151,7 @@ p <- ggplot() +
   geom_point(data = focal_zips, mapping = aes(x = case_rate, blk_pct), color = "#1B9E77", size = 4) +
   geom_point(data = non_focal_zips, mapping = aes(x = case_rate, blk_pct), color = "#1B9E77", size = 4,
              position = "jitter") +
-  geom_label_repel(data = focal_zips, mapping = aes(x = case_rate, blk_pct, label = zip),
+  geom_label_repel(data = focal_zips, mapping = aes(x = case_rate, blk_pct, label = GEOID_ZCTA),
                    size = 6,
                    box.padding   = 0.35, 
                    point.padding = 0.5,
@@ -112,5 +176,6 @@ save_plots(filename = "results/low_res/stl_zip/c_race_plot.png", plot = p, prese
 # =============================================================================
 
 # clean-up
-rm(city_county_zip_sf, focal_zips, non_focal_zips, zip_na, zip_valid)
+rm(city_county_zip_sf, focal_zips, non_focal_zips, zip_na, zip_valid,
+   breaks, regional_centroids, regional_counties)
 rm(p, top_val)
