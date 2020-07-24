@@ -29,7 +29,7 @@ county_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "
                "29113", "29183", "29189", "29219", "29510")) %>%
   filter(report_date >= "2020-03-07") %>%
   arrange(desc(report_date), county)
-zip_snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_city_county.geojson"), 
+zip_snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_regional.geojson"), 
                         stringsAsFactors = FALSE) 
 stl_hosp <-  read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "metro", "stl_hospital.csv"))
 ```
@@ -198,7 +198,7 @@ leaflet() %>%
     fillOpacity = 0.75,
     fillColor = ~pal(case_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
-    popup = paste0("<b>Zip:</b> ", zip_snapshot$zip, " <br> ",
+    popup = paste0("<b>Zip:</b> ", zip_snapshot$GEOID_ZCTA, " <br> ",
                  "<b>Current Cumulative Count:</b> ", zip_snapshot$cases, "<br>",
                  "<b>Current Cumulative Rate per 1,000:</b> ", round(zip_snapshot$case_rate, digits = 2), " <br> ",
                  "<b>Population Below Poverty Line:</b> ", round(zip_snapshot$pvty_pct, digits = 2), "% <br> ",
@@ -219,14 +219,14 @@ Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_vi
 
 ```{r zip-data-table, echo=FALSE, out.width = '100%'}
 zip_snapshot %>%
-  select(zip, cases, case_rate, pvty_pct, blk_pct) %>%
+  select(GEOID_ZCTA, cases, case_rate, pvty_pct, blk_pct) %>%
   mutate(
     case_rate = round(case_rate, digits = 2),
     pvty_pct = round(pvty_pct, digits = 2),
     blk_pct = round(blk_pct, digits = 2)
   ) %>%
   rename(
-    `Zip Code` = zip,
+    `Zip Code` = GEOID_ZCTA,
     `Cumulative Cases` = cases,
     `Rate per 1,000 Residents` = case_rate,
     `Poverty Rate (%)` = pvty_pct,
@@ -238,7 +238,7 @@ DT::datatable(data_table)
 
 ### Notes
 
-  * If a ZCTA straddles the city and the county, and only has reported infection numbers in one entity, its estimated partial population will be displayed. Similarly, estimated partial populations for zip codes that straddle outlying counties are used.
+  * If a ZCTA straddles two counties, and only has reported infection numbers in one entity, its estimated partial population will be displayed. Similarly, estimated partial populations for zip codes that straddle outlying counties are used.
   * ZCTA stands for "<a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html" target="_blank">ZIP Code Tabulation Area</a>. These are not identical to zip codes, but they are essential for mapping zip codes as regions on a map.
   * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `zip_stl_city.csv` and `zip_stl_county.csv` tables, which are assembled from data provided by [St. Louis City and County](faq.html#Where_Do_These_Data_Come_From). These data are also available as `.geojson` files for mapping.
   * The FAQ contains a short explanation of [per-capita rates](faq.html#What_are_Per_Capita_Rates).

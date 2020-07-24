@@ -193,14 +193,14 @@ Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_vi
 
 ```{r zip-data-table, echo=FALSE, out.width = '100%'}
 zip_snapshot %>%
-  select(zip, cases, case_rate, pvty_pct, blk_pct) %>%
+  select(GEOID_ZCTA, cases, case_rate, pvty_pct, blk_pct) %>%
   mutate(
     case_rate = round(case_rate, digits = 2),
     pvty_pct = round(pvty_pct, digits = 2),
     blk_pct = round(blk_pct, digits = 2)
   ) %>%
   rename(
-    `Zip Code` = zip,
+    `Zip Code` = GEOID_ZCTA,
     `Cumulative Cases` = cases,
     `Rate per 1,000 Residents` = case_rate,
     `Poverty Rate (%)` = pvty_pct,
