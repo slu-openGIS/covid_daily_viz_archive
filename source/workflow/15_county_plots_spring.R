@@ -122,7 +122,7 @@ p <- ggplot(data = county_subset) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
-                  nudge_y = .3, nudge_x = -1, size = 5) +
+                  nudge_y = county_log_y, nudge_x = county_log_x, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(5, 10000), breaks = c(5,10,30,100,300,1000,3000,10000), 
                 labels = comma_format(accuracy = 1)) +
@@ -144,5 +144,5 @@ save_plots(filename = "results/low_res/county_spring/c_case_log.png", plot = p, 
 
 # clean-up
 rm(county_data, county_subset, county_points, county_day_points, report_day_points, report_points, 
-   report_label, report_line, county_focal)
+   report_label, report_line, county_focal, county_log_x, county_log_y)
 rm(top_val, pal, cols, p)

@@ -12,6 +12,8 @@ date_breaks <- "10 days"
 date_breaks_alt <- "10 days"
 x_angle <- 25
 county_rate_val <- 5
+county_log_x <- -3
+county_log_y <- .4
 
 # create caption
 # Johns Hopkins University CSSE

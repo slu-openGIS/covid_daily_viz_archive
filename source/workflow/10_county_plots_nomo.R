@@ -13,10 +13,12 @@ county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.c
 pal <- brewer.pal(n = 8, name = "Set1")
 pal[6] <- "#FFD60C"
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
-          "Sullivan" = pal[4], "Adair" = pal[5], "Gentry" = pal[6], "Grundy" = pal[7])
+          "Sullivan" = pal[4], "Adair" = pal[5], "Gentry" = pal[6], "Grundy" = pal[7],
+          "Nodaway" = pal[8])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29211", "29001", "29075", "29079")
+county_focal <- c("29510", "29189", "29511", "29211", "29001", "29075", "29079",
+                  "29147")
 
 # =============================================================================
 
@@ -120,7 +122,7 @@ p <- ggplot(data = county_subset) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
-                  nudge_y = .3, nudge_x = -1, size = 5) +
+                  nudge_y = county_log_y, nudge_x = county_log_x, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(5, 10000), breaks = c(5,10,30,100,300,1000,3000,10000),
                 labels = comma_format(accuracy = 1)) +
