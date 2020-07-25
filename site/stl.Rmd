@@ -212,10 +212,9 @@ leaflet() %>%
                  "<b>Population Below Poverty Line:</b> ", round(zip_snapshot$pvty_pct, digits = 2), "% <br> ",
                  "<b>African American Population:</b> ", round(zip_snapshot$blk_pct, digits = 2), "% ")
   )  %>%
-  addPolygons(
+  addPolylines(
     data = regional_counties,
     color = "#000000",
-    fill = "transparent",
     weight = 3
   ) %>%
   addLegend(pal = pal, values = zip_snapshot$case_rate, opacity = .75, title = "Rate")
