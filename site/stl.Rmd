@@ -29,8 +29,14 @@ county_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "
                "29113", "29183", "29189", "29219", "29510")) %>%
   filter(report_date >= "2020-03-07") %>%
   arrange(desc(report_date), county)
+
+regional_counties <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "county", "daily_snapshot_mo.geojson")) %>%
+  filter(GEOID %in% c("29099", "29183", "29189", "29510")) %>%
+  select(GEOID, county)
+
 zip_snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_regional.geojson"), 
                         stringsAsFactors = FALSE) 
+
 stl_hosp <-  read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "metro", "stl_hospital.csv"))
 ```
 
@@ -184,8 +190,10 @@ bins <- map_bins(zip_snapshot, var = "case_rate", style = "fisher", classes = 5,
                  round = 2)
 bins[1] <- round_any(x = min(zip_snapshot$case_rate, na.rm = TRUE), accuracy = .01, f = floor)
 bins[length(bins)] <- round_any(x = max(zip_snapshot$case_rate, na.rm = TRUE), accuracy = .01, f = ceiling)
+
 # create color palette
 pal <- colorBin("BuGn", domain = zip_snapshot$case_rate, bins = bins)
+
 # map
 leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
@@ -203,8 +211,14 @@ leaflet() %>%
                  "<b>Current Cumulative Rate per 1,000:</b> ", round(zip_snapshot$case_rate, digits = 2), " <br> ",
                  "<b>Population Below Poverty Line:</b> ", round(zip_snapshot$pvty_pct, digits = 2), "% <br> ",
                  "<b>African American Population:</b> ", round(zip_snapshot$blk_pct, digits = 2), "% ")
-    )  %>%
-    addLegend(pal = pal, values = zip_snapshot$case_rate, opacity = .75, title = "Rate")
+  )  %>%
+  addPolygons(
+    data = regional_counties,
+    color = "#000000",
+    fill = "transparent",
+    weight = 3
+  ) %>%
+  addLegend(pal = pal, values = zip_snapshot$case_rate, opacity = .75, title = "Rate")
 ```
 
 ### Static Map
