@@ -210,10 +210,14 @@ leaflet() %>%
 ### Static Map
 
 ```{r confirmed-static, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/stl_zip/a_case_map.png")
+knitr::include_graphics("img/stl_zip/a_case_map_regional.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_regional.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_regional.png" target="_blank">Low-res</a>]
+
+### Other Maps
+
+  * St. Louis City and County [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_core.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_core.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
