@@ -27,7 +27,7 @@ state_subset <- filter(state_test_data, report_date >= as.Date("2020-05-23") & r
 state_points <- filter(state_test_data, report_date == test_date)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$test_rate), accuracy = 1000, f = ceiling)
+top_val <- round_any(x = max(state_subset$test_rate), accuracy = 2000, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, test_rate))
@@ -40,7 +40,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1000)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 2000)) + 
   labs(
     title = "COVID-19 Persons Tested by State",
     subtitle = paste0("2020-05-23 through ", as.character(test_date)),
@@ -107,7 +107,7 @@ state_points <- filter(state_test_data, report_date == test_date) %>%
   filter(state %in% c("Oklahoma", "Kansas", "Arkansas") == FALSE)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$positive_avg), accuracy = .5, f = ceiling)
+top_val <- round_any(x = max(state_subset$positive_avg), accuracy = 1, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, positive_avg))
@@ -120,7 +120,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = test_date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .5)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1)) + 
   labs(
     title = "COVID-19 Positive Individuals by State",
     subtitle = paste0("2020-05-30 through ", as.character(test_date)),
@@ -158,7 +158,7 @@ cols <- c("7-day Average" = pal[1], "Count" = pal[2])
 # plot average new tests
 
 ## define top_val
-top_val <- round_any(x = max(state_live_data$pcr_total, na.rm = TRUE), accuracy = 1000, f = ceiling)
+top_val <- round_any(x = max(state_live_data$pcr_total, na.rm = TRUE), accuracy = 2000, f = ceiling)
 
 ## subset
 state_live_data %>%
@@ -187,7 +187,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Measure") +
   scale_x_date(date_breaks = total_test_date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 1000)) + 
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 2000)) + 
   labs(
     title = "Daily COVID-19 PCR Tests",
     subtitle = paste0(min(state_live_subset$report_date), " through ", as.character(date-3)),
