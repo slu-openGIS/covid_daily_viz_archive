@@ -231,6 +231,10 @@ Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_vi
 ### Other Maps
 
   * St. Louis City and County [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_core.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_core.png" target="_blank">Low-res</a>]
+  * St. Louis City [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_stl_city.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_stl_city.png" target="_blank">Low-res</a>]
+  * St. Louis County [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_stl_county.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_stl_county.png" target="_blank">Low-res</a>]
+  * St. Charles County [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_st_charles.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_st_charles.png" target="_blank">Low-res</a>]
+  * Jefferson County [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_jefferson.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_jefferson.png" target="_blank">Low-res</a>]
 
 ### Data Table
 

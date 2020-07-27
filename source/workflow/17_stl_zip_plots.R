@@ -18,6 +18,39 @@ regional_centroids <- regional_counties %>%
 
 st_geometry(regional_centroids) <- NULL
 
+city_county_zip_sf <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snapshot_city_county.geojson", crs = 4326,
+                              stringsAsFactors = FALSE) %>%
+  st_transform(crs = 26915)
+
+jeffco <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snapshot_jefferson_county.geojson", crs = 4326,
+                           stringsAsFactors = FALSE) %>%
+  st_transform(crs = 26915)
+
+st_charles <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snapshot_st_charles_county.geojson", crs = 4326,
+                  stringsAsFactors = FALSE) %>%
+  st_transform(crs = 26915)
+
+stl_city <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snapshot_stl_city.geojson", crs = 4326,
+                      stringsAsFactors = FALSE) %>%
+  st_transform(crs = 26915)
+
+stl_county <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snapshot_stl_county.geojson", crs = 4326,
+                      stringsAsFactors = FALSE) %>%
+  st_transform(crs = 26915)
+
+# =============================================================================
+
+# store breaks
+breaks <- classInt::classIntervals(regional_zip_sf$case_rate, n = 5, style = "fisher")
+
+# identify minimum value and apply to breaks
+breaks$brks[1] <- min(c(min(city_county_zip_sf$case_rate, na.rm = TRUE), 
+                        min(regional_zip_sf$case_rate, na.rm = TRUE), 
+                        min(st_charles$case_rate, na.rm = TRUE), 
+                        min(jeffco$case_rate, na.rm = TRUE), 
+                        min(stl_city$case_rate, na.rm = TRUE), 
+                        min(stl_county$case_rate, na.rm = TRUE)))
+
 # =============================================================================
 
 # map reported rate
@@ -25,7 +58,11 @@ st_geometry(regional_centroids) <- NULL
 zip_valid <- filter(regional_zip_sf, is.na(case_rate) == FALSE)
 zip_na <- filter(regional_zip_sf, is.na(case_rate) == TRUE)
 zip_valid <- map_breaks(zip_valid, var = "case_rate", newvar = "map_breaks",
-                        style = "fisher", classes = 5, dig_lab = 2)
+                        breaks = breaks, dig_lab = 2)
+
+# create palette
+pal <- RColorBrewer::brewer.pal(n = 5, name = "GnBu")
+names(pal) <- levels(zip_valid$map_breaks)
 
 ## create map
 p <- ggplot() +
@@ -36,8 +73,7 @@ p <- ggplot() +
                   nudge_x = c(-35000, -20000, -40000, 10000),
                   nudge_y = c(-10000, 20000, -20000, -35000),
                   size = 6) +
-  # geom_sf_label(data = labels, mapping = aes(label = name), label.size = NA, size = 6) +
-  scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
+  scale_fill_manual(values = pal, name = "Rate per 1,000") +
   labs(
     title = "Reported COVID-19 Cases by \nRegional St. Louis ZCTA",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -51,9 +87,6 @@ save_plots(filename = "results/low_res/stl_zip/a_case_map_regional.png", plot = 
 
 # =============================================================================
 
-# store breaks
-breaks <- classInt::classIntervals(regional_zip_sf$case_rate, n = 5, style = "fisher")
-
 # modify regional objects
 regional_centroids <- filter(regional_centroids, GEOID %in% c("29510", "29189"))
 regional_counties <- filter(regional_counties, GEOID %in% c("29510", "29189"))
@@ -62,13 +95,6 @@ regional_counties <- filter(regional_counties, GEOID %in% c("29510", "29189"))
 
 # clean-up
 rm(p, regional_zip_sf)
-
-# =============================================================================
-
-# load data
-city_county_zip_sf <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snapshot_city_county.geojson", crs = 4326,
-                              stringsAsFactors = FALSE) %>%
-  st_transform(crs = 26915)
 
 # =============================================================================
 
@@ -90,7 +116,7 @@ p <- ggplot() +
   geom_sf(data = zip_na, fill = "#9d9d9d") +
   geom_sf(data = zip_valid, mapping = aes(fill = map_breaks)) +
   geom_sf(data = regional_counties, fill = NA, color = "black", size = .75) +
-  scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
+  scale_fill_manual(values = pal, name = "Rate per 1,000") +
   labs(
     title = "Reported COVID-19 Cases by \nCore St. Louis ZCTA",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -177,5 +203,123 @@ save_plots(filename = "results/low_res/stl_zip/c_race_plot.png", plot = p, prese
 
 # clean-up
 rm(city_county_zip_sf, focal_zips, non_focal_zips, zip_na, zip_valid,
-   breaks, regional_centroids, regional_counties)
+   regional_centroids, regional_counties)
 rm(p, top_val)
+
+# =============================================================================
+
+# map reported rate
+## create breaks
+zip_valid <- filter(jeffco, is.na(case_rate) == FALSE)
+zip_na <- filter(jeffco, is.na(case_rate) == TRUE)
+zip_valid <- map_breaks(zip_valid, var = "case_rate", newvar = "map_breaks",
+                        breaks = breaks, dig_lab = 2)
+
+## create map
+p <- ggplot() +
+  geom_sf(data = zip_na, fill = "#9d9d9d") +
+  geom_sf(data = zip_valid, mapping = aes(fill = map_breaks)) +
+  scale_fill_manual(values = pal, name = "Rate per 1,000") +
+  labs(
+    title = "Reported COVID-19 Cases by \nJefferson County ZCTA",
+    subtitle = paste0("Current as of ", as.character(date)),
+    caption = "Plot by Christopher Prener, Ph.D.\nData via Jefferson County and the U.S. Census Bureau"
+  )  +
+  sequoia_theme(base_size = 22, background = "white", map = TRUE)
+
+## save map
+save_plots(filename = "results/high_res/stl_zip/a_case_map_jefferson.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/a_case_map_jefferson.png", plot = p, preset = "lg", dpi = 72)
+
+## clean-up
+rm(jeffco, p, zip_na, zip_valid)
+
+# =============================================================================
+
+# map reported rate
+## create breaks
+zip_valid <- filter(st_charles, is.na(case_rate) == FALSE)
+zip_na <- filter(st_charles, is.na(case_rate) == TRUE)
+zip_valid <- map_breaks(zip_valid, var = "case_rate", newvar = "map_breaks",
+                        breaks = breaks, dig_lab = 2)
+
+## create map
+p <- ggplot() +
+  geom_sf(data = zip_na, fill = "#9d9d9d") +
+  geom_sf(data = zip_valid, mapping = aes(fill = map_breaks)) +
+  scale_fill_manual(values = pal, name = "Rate per 1,000") +
+  labs(
+    title = "Reported COVID-19 Cases by \nSt. Charles County ZCTA",
+    subtitle = paste0("Current as of ", as.character(date)),
+    caption = "Plot by Christopher Prener, Ph.D.\nData via St. Charles County and the U.S. Census Bureau"
+  )  +
+  sequoia_theme(base_size = 22, background = "white", map = TRUE)
+
+## save map
+save_plots(filename = "results/high_res/stl_zip/a_case_map_st_charles.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/a_case_map_st_charles.png", plot = p, preset = "lg", dpi = 72)
+
+## clean-up
+rm(st_charles, p, zip_na, zip_valid)
+
+# =============================================================================
+
+# map reported rate
+## create breaks
+zip_valid <- filter(stl_county, is.na(case_rate) == FALSE)
+zip_na <- filter(stl_county, is.na(case_rate) == TRUE)
+zip_valid <- map_breaks(zip_valid, var = "case_rate", newvar = "map_breaks",
+                        breaks = breaks, dig_lab = 2)
+
+## create map
+p <- ggplot() +
+  geom_sf(data = zip_na, fill = "#9d9d9d") +
+  geom_sf(data = zip_valid, mapping = aes(fill = map_breaks)) +
+  scale_fill_manual(values = pal, name = "Rate per 1,000") +
+  labs(
+    title = "Reported COVID-19 Cases by \nSt. Louis County ZCTA",
+    subtitle = paste0("Current as of ", as.character(date)),
+    caption = "Plot by Christopher Prener, Ph.D.\nData via St. Louis County and the U.S. Census Bureau"
+  )  +
+  sequoia_theme(base_size = 22, background = "white", map = TRUE)
+
+## save map
+save_plots(filename = "results/high_res/stl_zip/a_case_map_stl_county.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/a_case_map_stl_county.png", plot = p, preset = "lg", dpi = 72)
+
+## clean-up
+rm(stl_county, p, zip_na, zip_valid)
+
+# =============================================================================
+
+# map reported rate
+## create breaks
+zip_valid <- filter(stl_city, is.na(case_rate) == FALSE)
+zip_na <- filter(stl_city, is.na(case_rate) == TRUE)
+zip_valid <- map_breaks(zip_valid, var = "case_rate", newvar = "map_breaks",
+                        breaks = breaks, dig_lab = 2)
+
+## create map
+p <- ggplot() +
+  geom_sf(data = zip_na, fill = "#9d9d9d") +
+  geom_sf(data = zip_valid, mapping = aes(fill = map_breaks)) +
+  scale_fill_manual(values = pal, name = "Rate per 1,000") +
+  labs(
+    title = "Reported COVID-19 Cases by \nSt. Louis City ZCTA",
+    subtitle = paste0("Current as of ", as.character(date)),
+    caption = "Plot by Christopher Prener, Ph.D.\nData via St. Louis City and the U.S. Census Bureau"
+  )  +
+  sequoia_theme(base_size = 22, background = "white", map = TRUE)
+
+## save map
+save_plots(filename = "results/high_res/stl_zip/a_case_map_stl_city.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/a_case_map_stl_city.png", plot = p, preset = "lg", dpi = 72)
+
+## clean-up
+rm(stl_city, p, zip_na, zip_valid)
+
+# =============================================================================
+
+## clean-up
+rm(breaks, pal)
+
