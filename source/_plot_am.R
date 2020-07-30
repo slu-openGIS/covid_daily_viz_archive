@@ -13,7 +13,7 @@ date_breaks_alt <- "10 days"
 x_angle <- 25
 
 # county region plot values
-county_log_max <- 12000
+county_log_max <- 13000
 county_rate_val <- 5
 county_log_x <- -3
 county_log_y <- .4
