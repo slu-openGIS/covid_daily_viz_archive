@@ -55,7 +55,7 @@ p <- ggplot(metro_subset) +
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
-                  nudge_y = 1, nudge_x = -20, size = 5) +
+                  nudge_y = 1, nudge_x = -25, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 2)) + 
@@ -110,9 +110,9 @@ p <- ggplot(data = metro_subset) +
              size = 4, show.legend = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
-                  nudge_y = .3, nudge_x = -3, size = 5) +
+                  nudge_y = .3, nudge_x = -5, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
-  scale_y_log10(limits = c(5, 30000), breaks = c(5,10,30,100,300,1000,3000,10000,30000), 
+  scale_y_log10(limits = c(5, 31000), breaks = c(5,10,30,100,300,1000,3000,10000,30000), 
                 labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 7)) +
   labs(
@@ -207,7 +207,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = mortality_rate, label = text),
-                  nudge_y = .05, nudge_x = -20, size = 5) +
+                  nudge_y = .05, nudge_x = -25, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .04)) +
@@ -356,7 +356,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_fatality_rate, label = text),
-                  nudge_y = .75, nudge_x = 20, size = 5) +
+                  nudge_y = .75, nudge_x = 25, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,12), breaks = seq(0, 12, by = 1)) +
