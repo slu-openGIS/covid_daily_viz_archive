@@ -71,7 +71,7 @@ p <- ggplot() +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
-                  nudge_y = 2, nudge_x = -20, size = 5) +
+                  nudge_y = county_rate_x, nudge_x = county_rate_y, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = county_rate_val)) + 
