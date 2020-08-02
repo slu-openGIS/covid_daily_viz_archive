@@ -13,6 +13,7 @@
 
 <title>Technical Notes</title>
 
+<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -382,7 +383,7 @@ div.tocify {
 <p>Data production, plotting, and the generation of this website all use the programming language <code>R</code>. The workflows are split into three processes - an “AM” process that builds data from the New York Times, a “PM” process that builds data from other sources, and a final site building process to create this site itself. All source code for visualization is available in this project’s <a href="https://github.com/slu-openGIS/covid_daily_viz" target = "_blank">GitHub repository</a>. An <a href="https://github.com/slu-openGIS/MO_HEALTH_Covid_Tracking" target="_blank">accompanying repository</a> includes all of the source code for creating data sets.</p>
 </div>
 <div id="downloading-case-and-mortality-data" class="section level2 padtop">
-<h2>Downloading Case and Mortality Data</h2>
+<h2 class="padtop">Downloading Case and Mortality Data</h2>
 <p>To download the data from the New York Times:</p>
 <pre class="r"><code>get_times &lt;- function(end_date){
   
@@ -418,7 +419,7 @@ div.tocify {
 }</code></pre>
 </div>
 <div id="other-notes" class="section level2 padtop">
-<h2>Other Notes</h2>
+<h2 class="padtop">Other Notes</h2>
 <ul>
 <li>The Fisher breaks algorithm (Fisher 1958, Slocum et al. 2005) is used to identify legend categories on maps</li>
 <li>Estimated populations for the the four counties around Kansas City as well as Kansas City itself were created using areal weighted interpolation (see Prener and Revord 2019)</li>
