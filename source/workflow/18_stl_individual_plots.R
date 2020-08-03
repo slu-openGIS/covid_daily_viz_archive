@@ -23,13 +23,13 @@ covid_race_gender %>%
 # plot morbidity rates, race
 
 ## define top_val
-top_val <- round_any(x = max(covid_race$case_rate, na.rm = TRUE), accuracy = 1, f = ceiling)
+top_val <- round_any(x = max(covid_race$case_rate, na.rm = TRUE), accuracy = 2, f = ceiling)
 
 ## create plot
 p <- ggplot(data = covid_race, mapping = aes(x = value, y = case_rate, fill = county)) +
   geom_bar(position = "dodge", stat = "identity") +
   scale_fill_brewer(palette = "Set1", name = "County") +
-  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 1)) +
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 2)) +
   labs(
     title = "Reported Cases by Race, St. Louis City & County",
     subtitle = paste0("Current as of ", as.character(date)),
