@@ -149,6 +149,15 @@ state_live_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/state/state_live
 
 # =============================================================================
 
+# remove errant last line
+if (remove_last == TRUE){
+  
+  state_live_data <- slice(state_live_data, 1:(n()-1))
+  
+}
+
+# =============================================================================
+
 # define colors
 pal <- brewer.pal(n = 3, name = "Set1")
 cols <- c("7-day Average" = pal[1], "Count" = pal[2])
@@ -173,7 +182,11 @@ state_live_data %>%
 avg_line <- filter(state_live_subset, category == "7-day Average")
 
 ## create points
-test_points <- filter(state_live_subset, report_date == date-3)
+if (remove_last == TRUE){
+  test_points <- filter(state_live_subset, report_date == date-4)
+} else {
+  test_points <- filter(state_live_subset, report_date == date-3) 
+}
 
 ## create factors
 state_live_subset <- mutate(state_live_subset, factor_var = fct_reorder2(category, report_date, value))
@@ -190,7 +203,8 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 2000)) + 
   labs(
     title = "Daily COVID-19 PCR Tests",
-    subtitle = paste0(min(state_live_subset$report_date), " through ", as.character(date-3)),
+    subtitle = paste0(min(state_live_subset$report_date), " through ", 
+                      ifelse(remove_last == TRUE, as.character(date-4), as.character(date-3))),
     x = "Date",
     y = "New Tests",
     caption = "Plot by Christopher Prener, Ph.D.\nData via the State of Missouri"
@@ -201,3 +215,7 @@ p <- ggplot() +
 ## save plot
 save_plots(filename = "results/high_res/state/n_total_tests_avg.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/state/n_total_tests_avg.png", plot = p, preset = "lg", dpi = 72)
+
+## clean-up
+rm(remove_last)
+

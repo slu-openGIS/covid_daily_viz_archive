@@ -3,8 +3,10 @@
 # =============================================================================
 
 # UPDATE date value
-# date <- lubridate::mdy("05-16-2020")
 date <- Sys.Date()
+
+# UPDATE remove last row value
+remove_last <- TRUE
 
 # define first date for plotting
 test_date_breaks <- "7 days"
