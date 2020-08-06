@@ -6,7 +6,7 @@
 date <- Sys.Date()
 
 # UPDATE remove last row value
-remove_last <- TRUE
+remove_last <- FALSE
 
 # define first date for plotting
 test_date_breaks <- "7 days"
