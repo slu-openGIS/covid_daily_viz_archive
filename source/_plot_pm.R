@@ -41,7 +41,7 @@ source("source/functions/sequoia_theme.R")
 
 # update plots
 ## overview plots
-source("source/workflow/02_state_test_plots.R")
+# source("source/workflow/02_state_test_plots.R")
 source("source/workflow/03_state_individual_plots.R")
 
 # regional plots
