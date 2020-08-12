@@ -162,7 +162,7 @@ p <- ggplot(data = county_subset) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(5, 10000), breaks = c(5,10,30,100,300,1000,3000,10000), 
                 labels = comma_format(accuracy = 1)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 7)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = date_breaks_log)) +
   labs(
     title = "Pace of COVID-19 Cases in Metro Kansas City",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -219,7 +219,7 @@ p <- ggplot(data = county_subset) +
                   nudge_y = 1, nudge_x = -8, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(.3, 300), breaks = c(.3, 1, 3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 7)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = date_breaks_log)) +
   labs(
     title = "Pace of New COVID-19 Cases in Metro Kansas City",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -338,7 +338,7 @@ p <- ggplot(data = county_subset) +
                   nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(3, 400), breaks = c(3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 7)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = date_breaks_log)) +
   labs(
     title = "Pace of COVID-19 Deaths in Metro Kansas City",
     subtitle = paste0("Current as of ", as.character(date)),

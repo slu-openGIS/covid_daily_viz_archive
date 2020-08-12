@@ -127,7 +127,7 @@ p <- ggplot(data = county_subset) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(5, county_log_max), breaks = c(5,10,30,100,300,1000,3000,10000),
                 labels = comma_format(accuracy = 1)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 7)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = date_breaks_log)) +
   labs(
     title = "Pace of COVID-19 Cases by Select Missouri Counties",
     subtitle = paste0("Mid-Missouri Focus\n", "Current as of ", as.character(date)),

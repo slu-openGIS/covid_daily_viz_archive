@@ -8,12 +8,13 @@ date <- Sys.Date()-1
 
 # define first date for plotting
 plot_date <- "2020-03-10"
-date_breaks <- "10 days"
-date_breaks_alt <- "10 days"
+date_breaks <- "14 days"
+date_breaks_alt <- "14 days"
+date_breaks_log <- 10
 x_angle <- 25
 
 # county region plot values
-county_log_max <- 15000
+county_log_max <- 16000
 county_rate_val <- 5
 county_rate_x <- 2
 county_rate_y <- -25
