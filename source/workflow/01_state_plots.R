@@ -109,8 +109,8 @@ p <- ggplot() +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
                   nudge_y = .5, nudge_x = -3, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(5, 200000), 
-                breaks = c(5, 100, 1000, 10000, 100000), 
+  scale_y_log10(limits = c(5, 300000), 
+                breaks = c(5, 100, 1000, 10000, 100000, 300000), 
                 labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = date_breaks_log)) +
   labs(
