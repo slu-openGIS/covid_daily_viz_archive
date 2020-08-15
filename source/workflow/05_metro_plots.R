@@ -28,8 +28,8 @@ report_points <- filter(metro_data, report_date == as.Date("2020-04-15")) %>%
 # create line label
 report_line <- tibble(
   date = as.Date("2020-04-15"),
-  case_rate = 4,
-  mortality_rate = 0.18,
+  case_rate = 12,
+  mortality_rate = 0.4,
   case_fatality_rate = 11,
   text = "reporting change on 15 Apr"
 )
@@ -55,7 +55,7 @@ p <- ggplot(metro_subset) +
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
-                  nudge_y = 1, nudge_x = -25, size = 5) +
+                  nudge_y = 1, nudge_x = 25, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 2)) + 
@@ -110,7 +110,7 @@ p <- ggplot(data = metro_subset) +
              size = 4, show.legend = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
-                  nudge_y = .3, nudge_x = -5, size = 5) +
+                  nudge_y = .4, nudge_x = -5, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_y_log10(limits = c(5, 38000), breaks = c(5,10,30,100,300,1000,3000,10000,30000), 
                 labels = comma_format(accuracy = 1)) +
@@ -207,7 +207,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = mortality_rate, label = text),
-                  nudge_y = .05, nudge_x = -25, size = 5) +
+                  nudge_y = .05, nudge_x = 25, size = 5) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .04)) +
