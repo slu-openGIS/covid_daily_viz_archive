@@ -44,7 +44,7 @@ report_points <- filter(county_data, report_date == as.Date("2020-04-15")) %>%
 # create line label
 report_line <- tibble(
   date = as.Date("2020-04-15"),
-  case_rate = 10,
+  case_rate = county_rate_pos,
   mortality_rate = NA,
   case_fatality_rate = NA,
   text = "reporting change on 15 Apr"

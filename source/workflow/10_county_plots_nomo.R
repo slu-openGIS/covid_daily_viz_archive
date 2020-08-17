@@ -14,19 +14,21 @@ pal_a <- brewer.pal(n = 8, name = "Set1")
 pal_a[6] <- "#FFD60C"
 pal_b <- brewer.pal(n = 6, name = "Reds")
 pal_b <- pal_b[c(6)]
-pal <- c(pal_a, pal_b) 
+pal_c <- brewer.pal(n = 6, name = "Blues")
+pal_c <- pal_c[c(6)]
+pal <- c(pal_a, pal_b, pal_c)
 
 # clean-up
-rm(pal_a, pal_b)
+rm(pal_a, pal_b, pal_c)
 
 # define cols
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
           "Sullivan" = pal[4], "Adair" = pal[5], "Gentry" = pal[6], "Pike" = pal[7],
-          "Nodaway" = pal[8], "Marion" = pal[9])
+          "Nodaway" = pal[8], "Marion" = pal[9], "Ralls" = pal[10])
 
 # define focal metros
 county_focal <- c("29510", "29189", "29511", "29211", "29001", "29075",
-                  "29147", "29127", "29163")
+                  "29147", "29127", "29163", "29173")
 
 # =============================================================================
 
@@ -45,7 +47,7 @@ report_points <- filter(county_data, report_date == as.Date("2020-04-15")) %>%
 # create line label
 report_line <- tibble(
   date = as.Date("2020-04-15"),
-  case_rate = 10,
+  case_rate = county_rate_pos,
   mortality_rate = NA,
   case_fatality_rate = NA,
   text = "reporting change on 15 Apr"

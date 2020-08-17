@@ -10,17 +10,25 @@ county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.c
 # =============================================================================
 
 # define colors
-pal <- brewer.pal(n = 8, name = "Set1")
-pal[6] <- "#FFD60C"
+pal_a <- brewer.pal(n = 8, name = "Set1")
+pal_a[6] <- "#FFD60C"
+pal_b <- brewer.pal(n = 6, name = "Reds")
+pal_b <- pal_b[c(6)]
+pal_c <- brewer.pal(n = 6, name = "Blues")
+pal_c <- pal_c[c(6)]
+pal <- c(pal_a, pal_b, pal_c)
+
+# clean-up
+rm(pal_a, pal_b, pal_c)
 
 # define cols object
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
           "Cape Girardeau" = pal[4], "Perry" = pal[5], "St. Francois" = pal[6],
-          "Ste. Genevieve" = pal[7], "Bollinger" = pal[8])
+          "Ste. Genevieve" = pal[7], "Bollinger" = pal[8], "Washington" = pal[9])
 
 # define focal metros
 county_focal <- c("29510", "29189", "29511", "29031", "29157", "29186",  "29187",
-                  "29017")
+                  "29017", "29221")
 
 # =============================================================================
 
@@ -39,7 +47,7 @@ report_points <- filter(county_data, report_date == as.Date("2020-04-15")) %>%
 # create line label
 report_line <- tibble(
   date = as.Date("2020-04-15"),
-  case_rate = 10,
+  case_rate = county_rate_pos,
   mortality_rate = NA,
   case_fatality_rate = NA,
   text = "reporting change on 15 Apr"

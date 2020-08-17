@@ -16,8 +16,9 @@ x_angle <- 25
 # county region plot values
 county_log_max <- 17000
 county_rate_val <- 5
+county_rate_pos <- 30
 county_rate_x <- 2
-county_rate_y <- -25
+county_rate_y <- 25
 county_log_x <- -3
 county_log_y <- .4
 
