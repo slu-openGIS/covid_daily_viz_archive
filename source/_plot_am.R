@@ -14,7 +14,7 @@ date_breaks_log <- 10
 x_angle <- 25
 
 # county region plot values
-county_log_max <- 17000
+county_log_max <- 30000
 county_rate_val <- 5
 county_rate_pos <- 30
 county_rate_x <- 2

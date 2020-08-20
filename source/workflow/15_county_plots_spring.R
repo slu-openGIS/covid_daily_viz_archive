@@ -10,15 +10,25 @@ county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.c
 # =============================================================================
 
 # define colors
-pal <- brewer.pal(n = 8, name = "Set1")
-pal[6] <- "#FFD60C"
+pal_a <- brewer.pal(n = 8, name = "Set1")
+pal_a[6] <- "#FFD60C"
+pal_b <- brewer.pal(n = 6, name = "Reds")
+pal_b <- pal_b[c(6)]
+pal_c <- brewer.pal(n = 6, name = "Blues")
+pal_c <- pal_c[c(6)]
+pal <- c(pal_a, pal_b, pal_c)
+
+# clean-up
+rm(pal_a, pal_b, pal_c)
 
 # define cols object
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
-          "Christian" = pal[4], "Greene" = pal[5], "Polk" = pal[7], "Taney" = pal[8])
+          "Christian" = pal[4], "Greene" = pal[5], "Polk" = pal[7], "Taney" = pal[8],
+          "Stone" = pal[9])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29043", "29077", "29167", "29213")
+county_focal <- c("29510", "29189", "29511", "29043", "29077", "29167", 
+                  "29213", "29209")
 
 # =============================================================================
 
@@ -124,7 +134,7 @@ p <- ggplot(data = county_subset) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
                   nudge_y = county_log_y, nudge_x = county_log_x, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(5, county_log_max), breaks = c(5,10,30,100,300,1000,3000,10000), 
+  scale_y_log10(limits = c(5, county_log_max), breaks = c(5,10,30,100,300,1000,3000,10000,30000), 
                 labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = date_breaks_log)) +
   labs(
