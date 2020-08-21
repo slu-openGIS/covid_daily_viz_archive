@@ -27,7 +27,7 @@ report_points <- filter(state_data, report_date == as.Date("2020-04-15")) %>%
 # create line label
 report_line <- tibble(
   date = as.Date("2020-04-15"),
-  case_rate = 700,
+  case_rate = 1400,
   mortality_rate = 33,
   case_fatality_rate = 8,
   text = "reporting change on 15 Apr"
@@ -53,7 +53,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
   geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
-                  nudge_y = 30, nudge_x = -25, size = 5) +
+                  nudge_y = 30, nudge_x = 30, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 100)) + 
@@ -163,7 +163,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   geom_point(report_day_points, mapping = aes(x = day, y = case_avg), size = 4, shape = 18) +
   geom_text_repel(data = report_label, mapping = aes(x = day, y = case_avg, label = text),
-                  nudge_y = .3, nudge_x = -3, size = 5) +
+                  nudge_y = .4, nudge_x = -3, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_y_log10(limits = c(1, 3000), breaks = c(1, 3, 10, 30, 100, 300, 1000, 3000), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = date_breaks_log)) +
