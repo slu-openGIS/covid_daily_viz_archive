@@ -70,9 +70,9 @@ p <- ggplot() +
   geom_point(county_points, mapping = aes(x = report_date, y = case_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
-  geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
-                  nudge_y = county_rate_x, nudge_x = county_rate_y, size = 5) +
+  # geom_vline(xintercept = as.Date("2020-04-15"), linetype="dotted", size = 1.25) + 
+  # geom_text_repel(data = report_line, mapping = aes(x = date, y = case_rate, label = text),
+  #                nudge_y = county_rate_x, nudge_x = county_rate_y, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = county_rate_val)) + 
@@ -128,9 +128,9 @@ p <- ggplot(data = county_subset) +
   geom_point(county_day_points, mapping = aes(x = day, y = cases, color = factor_var), 
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  geom_point(report_day_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
-  geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
-                  nudge_y = county_log_y, nudge_x = county_log_x, size = 5) +
+  # geom_point(report_day_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
+  # geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
+  #                nudge_y = county_log_y, nudge_x = county_log_x, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(5, county_log_max), breaks = c(5,10,30,100,300,1000,3000,10000,30000),
                 labels = comma_format(accuracy = 1)) +
