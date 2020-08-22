@@ -24,7 +24,7 @@ county_log_y <- .4
 
 # create caption
 # Johns Hopkins University CSSE
-caption_text <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project\nAs of 15 Apr, these trends may include probably cases per CDC guidance"
+caption_text <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project"
 caption_text_census <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau"
 caption_text_census_map <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau"
 caption_text_census_map2 <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project"
