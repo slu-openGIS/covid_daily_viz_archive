@@ -156,7 +156,7 @@ p <- ggplot(data = county_subset) +
   geom_point(county_day_points, mapping = aes(x = day, y = cases, color = factor_var), 
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  geom_point(report_day_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
+  # geom_point(report_day_points, mapping = aes(x = day, y = cases), size = 4, shape = 18) +
   # geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
   #                nudge_y = .5, nudge_x = -2, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
@@ -337,7 +337,7 @@ p <- ggplot(data = county_subset) +
   # geom_text_repel(data = report_label, mapping = aes(x = day, y = deaths, label = text),
   #                nudge_y = .3, nudge_x = -1, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(3, 400), breaks = c(3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
+  scale_y_log10(limits = c(3, 300), breaks = c(3, 10, 30, 100, 300), labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = date_breaks_log)) +
   labs(
     title = "Pace of COVID-19 Deaths in Metro Kansas City",
