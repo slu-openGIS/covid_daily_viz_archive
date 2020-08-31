@@ -6,14 +6,14 @@
 ## plot values
 report_label_x <- 25
 report_label_y <- 80
-peak_point_x <- 0
-peak_point_y <- 125
-current_point_x <- -80
-current_point_y <- -70
-# peak_point_x <- -70
-# peak_point_y <- -70
-# current_point_x <- 0
-# current_point_y <- 350
+# peak_point_x <- 0
+# peak_point_y <- 125
+# current_point_x <- -80
+# current_point_y <- -70
+peak_point_x <- -50
+peak_point_y <- -70
+current_point_x <- 0
+current_point_y <- 350
 
 ## data values
 stl <- c("29071", "29099", "29113", "29183", "29189", "29219", "29510")
