@@ -40,7 +40,7 @@ report_line <- tibble(
 state_subset <- filter(state_data, report_date >= plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$case_rate), accuracy = 100, f = ceiling)
+top_val <- round_any(x = max(state_subset$case_rate), accuracy = 200, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, case_rate))
@@ -56,7 +56,7 @@ p <- ggplot() +
   #                nudge_y = 30, nudge_x = 30, size = 5) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 100)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 200)) + 
   labs(
     title = "Reported COVID-19 Cases by State",
     subtitle = paste0(as.character(plot_date), " through ", as.character(date)),

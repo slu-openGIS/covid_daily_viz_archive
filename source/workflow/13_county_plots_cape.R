@@ -24,11 +24,12 @@ rm(pal_a, pal_b, pal_c)
 # define cols object
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
           "Cape Girardeau" = pal[4], "Perry" = pal[5], "St. Francois" = pal[6],
-          "Ste. Genevieve" = pal[7], "Bollinger" = pal[8], "Washington" = pal[9])
+          "Ste. Genevieve" = pal[7], "Bollinger" = pal[8], "Washington" = pal[9],
+          "Madison" = pal[10])
 
 # define focal metros
 county_focal <- c("29510", "29189", "29511", "29031", "29157", "29186",  "29187",
-                  "29017", "29221")
+                  "29017", "29221", "29123")
 
 # =============================================================================
 
