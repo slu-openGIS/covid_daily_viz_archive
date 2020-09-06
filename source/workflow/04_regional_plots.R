@@ -486,7 +486,7 @@ p <- ggplot() +
     title = "Pace of New COVID-19 Cases in Missouri by Region",
     subtitle = paste0(as.character(regional_subset$report_date[1]), " through ", as.character(date)),
     caption = caption_text,
-    x = "Days Since Average of Five Cases Reported",
+    x = "Date",
     y = "7-day Average of New Cases"
   ) +
   sequoia_theme(base_size = 22, background = "white") +
