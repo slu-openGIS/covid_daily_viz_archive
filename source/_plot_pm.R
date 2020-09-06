@@ -9,9 +9,9 @@ date <- Sys.Date()
 remove_last <- FALSE
 
 # define first date for plotting
-test_date_breaks <- "7 days"
-total_test_date_breaks <- "10 days"
-hosp_breaks <- "10 days"
+test_date_breaks <- "14 days"
+total_test_date_breaks <- "14 days"
+hosp_breaks <- "14 days"
 x_angle <- 25
 
 # create caption
