@@ -16,21 +16,17 @@ pal_b <- brewer.pal(n = 6, name = "Reds")
 pal_b <- pal_b[c(6)]
 pal_c <- brewer.pal(n = 6, name = "Blues")
 pal_c <- pal_c[c(6)]
-pal_d <- brewer.pal(n = 6, name = "Greens")
-pal_d <- pal_d[c(6)]
-pal <- c(pal_a, pal_b, pal_c, pal_d)
+pal <- c(pal_a, pal_b, pal_c)
 
 # clean-up
 rm(pal_a, pal_b, pal_c)
 
-# define cols
+# define cols object
 cols <- c("St. Louis City" = pal[1], "St. Louis" = pal[2], "Kansas City" = pal[3],
-          "Sullivan" = pal[4], "Adair" = pal[5], "Gentry" = pal[6], "Pike" = pal[7],
-          "Nodaway" = pal[8], "Marion" = pal[9], "Ralls" = pal[10], "Livingston" = pal[11])
+          "Ozark" = pal[4], "Howell" = pal[5], "Texas" = pal[6])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29211", "29001", "29075",
-                  "29147", "29127", "29163", "29173", "29117")
+county_focal <- c("29510", "29189", "29511", "29153", "29215", "29091")
 
 # =============================================================================
 
@@ -82,7 +78,7 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = county_rate_val)) + 
   labs(
     title = "Reported COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("Northern Missouri Focus\n", as.character(plot_date), " through ", as.character(date)),
+    subtitle = paste0("Ozark Mountains Focus\n", as.character(plot_date), " through ", as.character(date)),
     x = "Date",
     y = "Rate per 1,000",
     caption = caption_text_census
@@ -91,8 +87,8 @@ p <- ggplot() +
   theme(axis.text.x = element_text(angle = x_angle))
 
 ## save plot
-save_plots(filename = "results/high_res/county_nomo/b_case_rate.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county_nomo/b_case_rate.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/county_ozkmtns/b_case_rate.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county_ozkmtns/b_case_rate.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
@@ -136,12 +132,12 @@ p <- ggplot(data = county_subset) +
   # geom_text_repel(data = report_label, mapping = aes(x = day, y = cases, label = text),
   #                nudge_y = county_log_y, nudge_x = county_log_x, size = 5) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(5, county_log_max), breaks = c(5,10,30,100,300,1000,3000,10000,30000),
+  scale_y_log10(limits = c(5, county_log_max), breaks = c(5,10,30,100,300,1000,3000,10000,30000), 
                 labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = date_breaks_log)) +
   labs(
     title = "Pace of COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("Northern Missouri Focus\n", "Current as of ", as.character(date)),
+    subtitle = paste0("Ozark Mountains Focus\n", "Current as of ", as.character(date)),
     caption = caption_text,
     x = "Days Since Fifth Case Reported",
     y = "Count of Reported Cases (Log)"
@@ -149,12 +145,12 @@ p <- ggplot(data = county_subset) +
   sequoia_theme(base_size = 22, background = "white")
 
 ## save plots
-save_plots(filename = "results/high_res/county_nomo/c_case_log.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county_nomo/c_case_log.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/county_ozkmtns/c_case_log.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county_ozkmtns/c_case_log.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
 # clean-up
 rm(county_data, county_subset, county_points, county_day_points, report_day_points, report_points, 
-   report_label, report_line, county_focal)
+   report_label, report_line, county_focal, county_log_x, county_log_y)
 rm(top_val, pal, cols, p)

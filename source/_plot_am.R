@@ -72,8 +72,8 @@ source("source/workflow/12_county_plots_swmo.R")
 source("source/workflow/13_county_plots_cape.R")
 source("source/workflow/14_county_plots_west.R")
 source("source/workflow/15_county_plots_spring.R")
-source("source/workflow/16_stl_county_plots.R")
-source("source/workflow/20_kc_county_plots.R")
+source("source/workflow/17_stl_county_plots.R")
+source("source/workflow/21_kc_county_plots.R")
 
 # =============================================================================
 
