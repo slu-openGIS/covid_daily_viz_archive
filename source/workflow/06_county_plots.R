@@ -9,7 +9,7 @@ mo_sf <- st_read("data/MO_HEALTH_Covid_Tracking/data/county/daily_snapshot_mo.ge
 
 # =============================================================================
 
-# map missouri rates
+# map missouri rates ####
 ## create breaks
 mo_sf <- map_breaks(mo_sf, var = "case_rate", newvar = "map_breaks",
                     style = "fisher", classes = 5, dig_lab = 2)
@@ -20,8 +20,8 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   scale_fill_brewer(palette = "GnBu", name = "Rate per 1,000") +
   labs(
     title = "Reported COVID-19 Cases by Missouri County",
-    subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text_census_map
+    subtitle = paste0("Current as of ", as.character(values$date)),
+    caption = values$caption_text_census_map
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
@@ -29,6 +29,27 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
 save_plots(filename = "results/high_res/county/a_case_map.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/county/a_case_map.png", plot = p, preset = "lg", dpi = 72)
 
+# =============================================================================
+
+# map missouri new case rates ####
+## create breaks
+mo_sf <- map_breaks(mo_sf, var = "case_avg_rate", newvar = "map_breaks",
+                    style = "fisher", classes = 5, dig_lab = 3)
+
+## create map
+p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
+  geom_sf() +
+  scale_fill_brewer(palette = "RdPu", name = "Rate per 100,000") +
+  labs(
+    title = "7-day Average of New COVID-19 Cases by Missouri County",
+    subtitle = paste0("Current as of ", as.character(values$date)),
+    caption = values$caption_text_census_map
+  ) +
+  sequoia_theme(base_size = 22, background = "white", map = TRUE)
+
+## save map
+save_plots(filename = "results/high_res/county/d_new_case_map.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county/d_new_case_map.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
@@ -43,14 +64,14 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   scale_fill_brewer(palette = "YlGn", name = "Rate per 1,000") +
   labs(
     title = "Reported COVID-19 Mortality by Missouri County",
-    subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text_census_map
+    subtitle = paste0("Current as of ", as.character(values$date)),
+    caption = values$caption_text_census_map
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
 ## save map
-save_plots(filename = "results/high_res/county/e_mortality_map.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county/e_mortality_map.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/county/g_mortality_map.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county/g_mortality_map.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
@@ -65,22 +86,16 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   scale_fill_brewer(palette = "BuGn", name = "Percent") +
   labs(
     title = "Reported COVID-19 Case Fatality by Missouri County",
-    subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text_census_map2
+    subtitle = paste0("Current as of ", as.character(values$date)),
+    caption = values$caption_text_census_map2
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
 ## save map
-save_plots(filename = "results/high_res/county/i_case_fatality_map.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county/i_case_fatality_map.png", plot = p, preset = "lg", dpi = 72)
-
-# =============================================================================
-
-# create reference object
-ref_county <- mo_sf
-st_geometry(ref_county) <- NULL
+save_plots(filename = "results/high_res/county/l_case_fatality_map.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county/l_case_fatality_map.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
 # clean-up
-rm(mo_sf)
+rm(mo_sf, p)
