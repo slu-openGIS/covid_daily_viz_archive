@@ -276,12 +276,12 @@ This map shows a seven-day rolling average of new cases. For this map, this cove
 
 ```{r map-confirmed-avg, echo = FALSE, out.width = '100%', out.height='600px', warning=FALSE}
 # calculate breaks
-bins <- map_bins(snapshot, var = "avg_rate", style = "fisher", classes = 5, dig_lab = 2,
+bins <- map_bins(snapshot, var = "case_avg_rate", style = "fisher", classes = 5, dig_lab = 2,
                  round = 2)
-bins[length(bins)] <- round_any(x = max(snapshot$avg_rate), accuracy = .01, f = ceiling)
+bins[length(bins)] <- round_any(x = max(snapshot$case_avg_rate), accuracy = .01, f = ceiling)
 
 # create color palette
-pal <- colorBin("RdPu", domain = snapshot$avg_rate, bins = bins)
+pal <- colorBin("RdPu", domain = snapshot$case_avg_rate, bins = bins)
 
 # map
 leaflet() %>%
@@ -293,33 +293,41 @@ leaflet() %>%
     opacity = 1.0, 
     smoothFactor = 0.5,
     fillOpacity = 0.75,
-    fillColor = ~pal(avg_rate),
+    fillColor = ~pal(case_avg_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste("<b>County:</b> ", snapshot$county, "<br>",
                            "<b>Current Cumulative Count:</b> ", snapshot$cases, "<br>",
                            "<b>7-day Average of New Cases:</b> ", round(snapshot$case_avg, digits = 2), "<br>",
-                           "<b>Average New Cases per 1,000 Residents:</b> ", round(snapshot$avg_rate, digits = 2), "<br>",
+                           "<b>Average New Cases per 100,000 Residents:</b> ", round(snapshot$case_avg_rate, digits = 2), "<br>",
                            "<b>Hospital Count:</b> ", snapshot$hospitals, "<br>",
                            "<b>Baseline ICU Beds:</b> ", snapshot$icu_beds)
     )  %>%
     addLegend(pal = pal, values = snapshot$avg_rate, opacity = .75, title = "7-day Average Rate")
 ```
 
+### Static Map
+
+```{r new-case-static, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county/d_new_case_map.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county/d_new_case_map.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/d_new_case_map.png" target="_blank">Low-res</a>]
+
 ### Data Table
 
 ```{r confirmed-avg-data-table, echo=FALSE, out.width = '100%'}
 snapshot %>%
-  select(state, county, cases, case_avg, avg_rate) %>%
+  select(state, county, cases, case_avg, case_avg_rate) %>%
   mutate(
     case_avg = round(case_avg, digits = 2),
-    avg_rate = round(avg_rate, digits = 2)
+    case_avg_rate = round(case_avg_rate, digits = 2)
   ) %>%
   rename(
     State = state,
     County = county,
     `Cumulative Cases` = cases,
     `7-day Average New Cases` = case_avg,
-    `Average New Cases per 1,000 Residents` = avg_rate
+    `Average New Cases per 100,000 Residents` = case_avg_rate
   ) %>%
   arrange(State, County) -> data_table
 
@@ -372,10 +380,10 @@ leaflet() %>%
 ### Static Map
 
 ```{r mortality-static, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/county/e_mortality_map.png")
+knitr::include_graphics("img/county/g_mortality_map.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county/e_mortality_map.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/e_mortality_map.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county/g_mortality_map.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/g_mortality_map.png" target="_blank">Low-res</a>]
 
 ### Data Table
 

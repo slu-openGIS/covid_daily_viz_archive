@@ -41,30 +41,40 @@ knitr::include_graphics("img/metro/c_case_log.png")
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/c_case_log.png" target="_blank">Low-res</a>]
 
-### New Infections
+### New Infection Rates
 
-```{r metro-infection-avg, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/metro/d_case_log_avg.png")
+```{r metro-infection-avg-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/metro/e_new_case.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/d_case_log_avg.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/d_case_log_avg.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/e_new_case.png" target="_blank">Low-res</a>]
+
+### New Infection Pace
+
+```{r metro-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/metro/f_new_case_log.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/f_new_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/f_new_case_log.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
 ```{r metro-infection-table, echo=FALSE, out.width = '100%'}
 metro_data %>%
-  select(report_date, short_name, cases, new_cases, case_avg, case_rate) %>%
+  select(report_date, short_name, cases, case_rate, new_cases, case_avg, case_avg_rate) %>%
   mutate(
     case_avg = round(case_avg, digits = 2),
-    case_rate = round(case_rate, digits = 2)
+    case_rate = round(case_rate, digits = 2),
+    case_avg_rate = round(case_avg_rate, digits = 2)
   ) %>%
   rename(
     `Report Date` = report_date,
     MSA = short_name,
     `Cumulative Cases` = cases,
+    `Per Capita Rate` = case_rate,
     `New Cases` = new_cases,
     `Average New Cases` = case_avg,
-    `Per Capita Rate` = case_rate
+    `New Cases Per Capita` = case_avg_rate
   ) -> data_table
 
 DT::datatable(data_table, rownames= FALSE)
@@ -82,34 +92,34 @@ These plots show patterns in infections for the Kansas City <a href="faq.html#Wh
 ### Mortality Rates
 
 ```{r metro-death-rate, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/metro/f_mortality_rate.png")
+knitr::include_graphics("img/metro/h_mortality_rate.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/f_mortality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/f_mortality_rate.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/h_mortality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/h_mortality_rate.png" target="_blank">Low-res</a>]
 
 ### Mortality Pace
 
 ```{r metro-death-log, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/metro/g_mortality_log.png")
+knitr::include_graphics("img/metro/i_mortality_log.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/g_mortality_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/g_mortality_log.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/i_mortality_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/i_mortality_log.png" target="_blank">Low-res</a>]
 
 ### New Mortality
 
 ```{r metro-death-log-avg, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/metro/h_mortality_log_avg.png")
+knitr::include_graphics("img/metro/k_mortality_log_avg.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/h_mortality_log_avg.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/h_mortality_log_avg.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/k_mortality_log_avg.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/k_mortality_log_avg.png" target="_blank">Low-res</a>]
 
 ### Case Fatality Rate
 
 ```{r metro-cfr, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/metro/j_case_fatality_rate.png")
+knitr::include_graphics("img/metro/m_case_fatality_rate.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/j_case_fatality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/j_case_fatality_rate.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/m_case_fatality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/m_case_fatality_rate.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
