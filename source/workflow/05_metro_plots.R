@@ -71,7 +71,7 @@ top_val <- round_any(x = max(metro_subset$day), accuracy = 5, f = ceiling)
 ## identify max day
 metro_subset %>%
   group_by(short_name) %>%
-  summarise(day = max(day)) %>%
+  summarise(day = max(day), .groups = "drop_last") %>%
   left_join(metro_points, ., by = "short_name") -> metro_day_points
 
 ## create factors
@@ -156,7 +156,7 @@ top_val <- round_any(x = max(metro_subset$day), accuracy = 5, f = ceiling)
 ## identify max day
 metro_subset %>%
   group_by(short_name) %>%
-  summarise(day = max(day)) %>%
+  summarise(day = max(day), .groups = "drop_last") %>%
   left_join(metro_points, ., by = "short_name") %>%
   filter(short_name %in% metro_subset$short_name) %>%
   mutate(case_avg = ifelse(case_avg < .1, .1, case_avg)) -> metro_day_points
@@ -238,7 +238,7 @@ top_val <- round_any(x = max(metro_subset$day), accuracy = 5, f = ceiling)
 ## identify max day
 metro_subset %>%
   group_by(short_name) %>%
-  summarise(day = max(day)) %>%
+  summarise(day = max(day), .groups = "drop_last") %>%
   left_join(metro_points, ., by = "short_name") %>%
   filter(short_name %in% unique(metro_subset$short_name)) -> metro_day_points
 
@@ -286,7 +286,7 @@ top_val <- round_any(x = max(metro_subset$day), accuracy = 5, f = ceiling)
 ## identify max day
 metro_subset %>%
   group_by(short_name) %>%
-  summarise(day = max(day)) %>%
+  summarise(day = max(day), .groups = "drop_last") %>%
   left_join(metro_points, ., by = "short_name") %>%
   filter(short_name %in% unique(metro_subset$short_name)) %>%
   mutate(deaths_avg = ifelse(deaths_avg < .1, .1, deaths_avg)) -> metro_day_points
@@ -321,7 +321,7 @@ save_plots(filename = "results/low_res/metro/k_mortality_log_avg.png", plot = p,
 # plot case fatality rate
 
 ## re-subset data
-metro_subset <- filter(metro_data, report_date >= plot_date)
+metro_subset <- filter(metro_data, report_date >= values$plot_date)
 
 ## create factors
 metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, case_fatality_rate))
@@ -337,7 +337,7 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0,12), breaks = seq(0, 12, by = 1)) +
   labs(
     title = "COVID-19 Case Fatality by Metro Area",
-    subtitle = paste0(as.character(plot_date), " through ", as.character(values$date)),
+    subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
     x = "Date",
     y = "Case Fatality (%)",
     caption = values$caption_text
@@ -353,4 +353,4 @@ save_plots(filename = "results/low_res/metro/m_case_fatality_rate.png", plot = p
 
 # clean-up
 rm(metro_data, metro_subset, metro_points, metro_day_points)
-rm(top_val, pal, cols, p)
+rm(top_val, cols, p)

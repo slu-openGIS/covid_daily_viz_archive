@@ -9,7 +9,7 @@ calculate_days <- function(.data, group_var, stat_var, val){
   date_tibble <- dplyr::filter(.data, !!stat_varQ >= val)
   date_tibble <- dplyr::group_by(date_tibble, !!group_varQ)
   date_tibble <- dplyr::arrange(date_tibble, report_date)
-  date_tibble <- dplyr::summarise(date_tibble, first_day = first(report_date))
+  date_tibble <- dplyr::summarise(date_tibble, first_day = first(report_date), .groups = "drop_last")
   
   ## identify style
   if (group_var == "state"){
