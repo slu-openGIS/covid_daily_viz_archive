@@ -9,7 +9,7 @@ report_label_y <- 80
 peak_point_x <- 0
 peak_point_y <- 125
 current_point_x <- -80
-current_point_y <- -50
+current_point_y <- -30
 # peak_point_x <- -50
 # peak_point_y <- -70
 # current_point_x <- 0
