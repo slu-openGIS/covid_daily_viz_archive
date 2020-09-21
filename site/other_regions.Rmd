@@ -24,7 +24,7 @@ county_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "
 cape <- filter(county_data, geoid %in% c("29031", "29157", "29186",  "29187", "29017"))
 mid_mo <- filter(county_data, geoid %in% c("29135", "29019", "29051", "29007", "29027"))
 ozark <- filter(county_data, geoid %in% c("29029", "29131", "29141", "29015", "29169", "29105"))
-ozark_mtns <- filter(county_data, geoid %in% c("29153", "29215", "29091"))
+ozark_mtns <- filter(county_data, geoid %in% c("29153", "29215", "29091", "29229"))
 nomo <- filter(county_data, geoid %in% c("29211", "29001", "29075", "29079", "29147"))
 semo <- filter(county_data, geoid %in% c("29133", "29155", "29201",  "29207", "29143", "29023", "29069"))
 spring <- filter(county_data, geoid %in% c("29043", "29077", "29167", "29213"))
