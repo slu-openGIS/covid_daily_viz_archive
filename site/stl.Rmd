@@ -72,10 +72,18 @@ Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_vi
 ### New Infections
 
 ```{r metro-infection-avg, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/stl_metro/d_case_log_avg.png")
+knitr::include_graphics("img/stl_metro/e_new_case.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/d_case_log_avg.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/d_case_log_avg.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/e_new_case.png" target="_blank">Low-res</a>]
+
+### New Infections Pace
+
+```{r metro-infection-avg-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_metro/f_new_case_log.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/f_new_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/f_new_case_log.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -115,34 +123,34 @@ These plots show patterns in deaths for counties within the St. Louis <a href="f
 ### Static Map
 
 ```{r metro-death-map, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/stl_metro/e_mortality_map.png")
+knitr::include_graphics("img/stl_metro/g_mortality_map.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/e_mortality_map.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/e_mortality_map.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/g_mortality_map.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/g_mortality_map.png" target="_blank">Low-res</a>]
 
 ### Mortality Rates
 
 ```{r metro-death-rate, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/stl_metro/f_mortality_rate.png")
+knitr::include_graphics("img/stl_metro/h_mortality_rate.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/f_mortality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/f_mortality_rate.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/h_mortality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/h_mortality_rate.png" target="_blank">Low-res</a>]
 
 ### Mortality Pace
 
 ```{r metro-death-log, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/stl_metro/g_mortality_log.png")
+knitr::include_graphics("img/stl_metro/i_mortality_log.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/g_mortality_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/g_mortality_log.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/i_mortality_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/i_mortality_log.png" target="_blank">Low-res</a>]
 
 ### Case Fatality Rate
 
 ```{r metro-cfr, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/stl_metro/j_case_fatality_rate.png")
+knitr::include_graphics("img/stl_metro/m_case_fatality_rate.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/j_case_fatality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/j_case_fatality_rate.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_metro/m_case_fatality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_metro/m_case_fatality_rate.png" target="_blank">Low-res</a>]
 
 ### Data Table
 

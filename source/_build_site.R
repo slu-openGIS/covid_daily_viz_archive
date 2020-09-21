@@ -22,4 +22,4 @@ rm(params, pal, snapshot, map_breaks, map_bins, bins, round_any,
    county_data, stl_hosp, zip_snapshot, metro_counties, factpal,
    cape, mid_mo, nomo, ozark, semo, st_jo, swmo, metro_data,
    regional_counties, spring, state_live_data, stl_race, stl_race_gender,
-   west)
+   west, ozark_mtns)
