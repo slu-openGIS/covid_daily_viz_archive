@@ -111,7 +111,7 @@ save_plots(filename = "results/low_res/county_west/c_case_log.png", plot = p, pr
 
 # =============================================================================
 
-# plot confirmed rate
+# plot 7-day average rate ####
 
 ## subset data
 county_subset <- filter(county_data, report_date >= values$plot_date) %>%
@@ -120,19 +120,27 @@ county_subset <- filter(county_data, report_date >= values$plot_date) %>%
 ## define top_val
 top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 10, f = ceiling)
 
+## re-order counties
+counties <- unique(county_subset$county)
+unique_counties <- counties[!counties %in% c("Kansas City", "St. Louis", "St. Louis City")]
+unique_counties <- c(unique_counties, c("Kansas City", "St. Louis", "St. Louis City"))
+
+county_subset <- mutate(county_subset, county_fct = fct_relevel(county, unique_counties))
+
+rm(counties, unique_counties)
+
 ## create factors
-county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, case_avg_rate))
-county_points <- mutate(county_points, factor_var = fct_reorder2(county, report_date, case_avg_rate))
+county_subset <- mutate(county_subset, factor_var = fct_reorder2(county_fct, report_date, case_avg_rate))
 
 ## create plot
 p <- ggplot(county_subset) +
-  geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), size = 2) +
-  geom_point(county_points, mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
-             size = 4, show.legend = FALSE) +
+  geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
+            size = 1.5, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_x_date(date_breaks = values$date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = "2 months", date_labels = "%b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 10)) + 
+  facet_wrap(~county_fct) +
   labs(
     title = "Pace of New COVID-19 Cases in Select Missouri Counties",
     subtitle = paste0("West-Central Missouri Focus\n",as.character(values$plot_date), " through ", as.character(values$date)),
@@ -141,7 +149,7 @@ p <- ggplot(county_subset) +
     caption = values$caption_text_census
   ) +
   sequoia_theme(base_size = 22, background = "white") +
-  theme(axis.text.x = element_text(angle = values$x_angle))
+  theme(axis.text=element_text(size = 15))
 
 ## save plot
 save_plots(filename = "results/high_res/county_west/e_new_case.png", plot = p, preset = "lg")
