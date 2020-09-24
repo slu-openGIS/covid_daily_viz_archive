@@ -154,17 +154,16 @@ top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 10, f = ce
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, case_avg_rate))
-county_points <- mutate(county_points, factor_var = fct_reorder2(county, report_date, case_avg_rate))
 
 ## create plot
 p <- ggplot(county_subset) +
-  geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), size = 2) +
-  geom_point(county_points, mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
-             size = 4, show.legend = FALSE) +
+  geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
+            size = 2, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_x_date(date_breaks = values$date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = values$date_breaks_facet, date_labels = "%b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 10)) + 
+  facet_wrap(~county) +
   labs(
     title = "Pace of New COVID-19 Cases in Metro St. Louis",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
@@ -173,7 +172,7 @@ p <- ggplot(county_subset) +
     caption = values$caption_text_census
   ) +
   sequoia_theme(base_size = 22, background = "white") +
-  theme(axis.text.x = element_text(angle = values$x_angle))
+  theme(axis.text=element_text(size = 15))
 
 ## save plot
 save_plots(filename = "results/high_res/stl_metro/e_new_case.png", plot = p, preset = "lg")

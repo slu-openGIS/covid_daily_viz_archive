@@ -111,20 +111,20 @@ save_plots(filename = "results/low_res/metro/c_case_log.png", plot = p, preset =
 metro_subset <- filter(metro_data, report_date >= values$plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(metro_subset$case_avg_rate), accuracy = 10, f = ceiling)
+top_val <- round_any(x = max(metro_subset$case_avg_rate), accuracy = 20, f = ceiling)
 
 ## create factors
 metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, case_avg_rate))
-metro_points <- mutate(metro_points, factor_var = fct_reorder2(short_name, report_date, case_avg_rate))
 
 ## create plot
 p <- ggplot(metro_subset) +
-  geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), size = 2) +
-  geom_point(metro_points, mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
-             size = 4, show.legend = FALSE) +
+  geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
+            size = 2, show.legend = FALSE) +
+  gghighlight(geoid %in% unique(metro_subset$geoid), use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "Metro Area") +
-  scale_x_date(date_breaks = values$date_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 10)) + 
+  scale_x_date(date_breaks = values$date_breaks_facet, date_labels = "%b") +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 20)) + 
+  facet_wrap(~short_name) +
   labs(
     title = "Pace of New COVID-19 Cases by Metro Area",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
@@ -133,7 +133,7 @@ p <- ggplot(metro_subset) +
     caption = values$caption_text_census
   ) +
   sequoia_theme(base_size = 22, background = "white") +
-  theme(axis.text.x = element_text(angle = values$x_angle))
+  theme(axis.text=element_text(size = 15))
 
 ## save plot
 save_plots(filename = "results/high_res/metro/e_new_case.png", plot = p, preset = "lg")
