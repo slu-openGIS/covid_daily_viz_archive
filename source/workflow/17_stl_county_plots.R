@@ -1,42 +1,45 @@
-# plot st. louis metro level data
+# county data, st. louis metro
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# load data
+# load data ####
+
+## spatial data
 stl_sf <- st_read("data/MO_HEALTH_Covid_Tracking/data/metro/daily_snapshot_stl.geojson", crs = 4326,
                   stringsAsFactors = FALSE) %>%
   st_transform(crs = "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs ") %>%
   mutate(county = ifelse(GEOID %in% c("29189"), NA, county))
 
+## longitudinal data
 county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.csv") %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(geoid %in% c("17005", "17013", "17027", "17083", "17117", 
                       "17119", "17133", "17163", "29071", "29099", 
                       "29113", "29183", "29189", "29219", "29510"))
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# define cols object
+# prep data ####
+
+## define cols object
 cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2], 
           "St. Charles" = values$pal[3], "Monroe" = values$pal[4], 
           "Clinton" = values$pal[5], "St. Clair" = values$pal[6],
           "Jefferson" = values$pal[7], "Madison" = values$pal[8],  
           "Franklin" = values$pal[9], "Lincoln" = values$pal[10])
 
-# define focal metros
+## define focal counties
 county_focal <- c("29510", "29189", "29183", "17133", "17027", "17163",
                   "29099", "17119", "29071", "29113")
 
-# =============================================================================
-
-# create points
-## create end points
+## create points
 county_points <- filter(county_data, report_date == values$date) %>%
   filter(geoid %in% county_focal)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# map st. louis rates
+# cumulative case, map ####
+
 ## create breaks
 stl_sf <- map_breaks(stl_sf, var = "case_rate", newvar = "case_breaks",
                      style = "fisher", classes = 5, dig_lab = 2)
@@ -57,9 +60,10 @@ p <- ggplot(data = stl_sf) +
 save_plots(filename = "results/high_res/stl_metro/a_case_map.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/stl_metro/a_case_map.png", plot = p, preset = "lg", dpi = 72)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# plot confirmed rate
+# cumulative cases, rate
+
 ## subset data
 county_subset <- filter(county_data, report_date >= values$plot_date)
 
@@ -93,9 +97,9 @@ p <- ggplot() +
 save_plots(filename = "results/high_res/stl_metro/b_case_rate.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/stl_metro/b_case_rate.png", plot = p, preset = "lg", dpi = 72)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# create days from 5th confirmed infection data
+# cumulative cases, log ####
 
 ## subset data
 county_data %>%
@@ -142,9 +146,9 @@ p <- ggplot(data = county_subset) +
 save_plots(filename = "results/high_res/stl_metro/c_case_log.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/stl_metro/c_case_log.png", plot = p, preset = "lg", dpi = 72)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# plot confirmed rate
+# 7-day average of new cases, rate ####
 
 ## subset data
 county_subset <- filter(county_data, report_date >= values$plot_date)
@@ -156,31 +160,25 @@ top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 10, f = ce
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, case_avg_rate))
 
 ## create plot
-p <- ggplot(county_subset) +
-  geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
-            size = 2, show.legend = FALSE) +
-  gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  scale_colour_manual(values = cols, name = "County") +
-  scale_x_date(date_breaks = values$date_breaks_facet, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 10)) + 
-  facet_wrap(~county) +
-  labs(
-    title = "Pace of New COVID-19 Cases in Metro St. Louis",
-    subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
-    x = "Date",
-    y = "7-Day Average Rate per 100,000",
-    caption = values$caption_text_census
-  ) +
-  sequoia_theme(base_size = 22, background = "white") +
-  theme(axis.text=element_text(size = 15))
+p <- facet_rate(county_subset, 
+                type = "county", 
+                pal = cols, 
+                x_breaks = values$date_breaks_facet,
+                y_breaks = 10,
+                y_upper_limit = top_val,
+                highlight = county_focal,
+                plot_date = values$plot_date,
+                date = values$date,
+                title = "Pace of New COVID-19 Cases in Metro St. Louis",
+                caption = values$caption_text_census)
 
 ## save plot
 save_plots(filename = "results/high_res/stl_metro/e_new_case.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/stl_metro/e_new_case.png", plot = p, preset = "lg", dpi = 72)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# create days from first day where average confirmed infections were at least 5
+# 7-day average of new cases, log ####
 
 ## subset data
 county_data %>%
@@ -242,9 +240,10 @@ save_plots(filename = "results/low_res/stl_metro/f_new_case_log.png", plot = p, 
 ## remove extras
 rm(x, y, corrected_stl_point)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# map mortality rate
+# cumulative mortality, map ####
+
 ## create breaks
 stl_sf <- map_breaks(stl_sf, var = "mortality_rate", newvar = "mortality_breaks",
                      style = "fisher", classes = 5, dig_lab = 2)
@@ -265,9 +264,10 @@ p <- ggplot(data = stl_sf) +
 save_plots(filename = "results/high_res/stl_metro/g_mortality_map.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/stl_metro/g_mortality_map.png", plot = p, preset = "lg", dpi = 72)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# plot mortality rate
+# cumulative mortality, rate ####
+
 ## subset data
 county_subset <- filter(county_data, report_date >= values$plot_date)
 
@@ -301,9 +301,9 @@ p <- ggplot() +
 save_plots(filename = "results/high_res/stl_metro/h_mortality_rate.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/stl_metro/h_mortality_rate.png", plot = p, preset = "lg", dpi = 72)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# plot days from 3rd confirmed death data
+# cumulative mortality, log ####
 
 ## subset data
 county_data %>%
@@ -350,9 +350,10 @@ p <- ggplot(data = county_subset) +
 save_plots(filename = "results/high_res/stl_metro/i_mortality_log.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/stl_metro/i_mortality_log.png", plot = p, preset = "lg", dpi = 72)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# map case fatality rate
+# case fatality rate, map ####
+
 ## create breaks
 stl_sf <- map_breaks(stl_sf, var = "case_fatality_rate", newvar = "case_fatality_breaks",
                      style = "fisher", classes = 5, dig_lab = 2)
@@ -373,9 +374,9 @@ p <- ggplot(data = stl_sf) +
 save_plots(filename = "results/high_res/stl_metro/l_case_fatality_map.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/stl_metro/l_case_fatality_map.png", plot = p, preset = "lg", dpi = 72)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# plot case fatality rate
+# case fatality rate, longitudinal ####
 
 ## re-subset data
 county_subset <- filter(county_data, report_date >= values$plot_date)
@@ -407,9 +408,9 @@ p <- ggplot() +
 save_plots(filename = "results/high_res/stl_metro/m_case_fatality_rate.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/stl_metro/m_case_fatality_rate.png", plot = p, preset = "lg", dpi = 72)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# clean-up
+# clean-up ####
 rm(stl_sf, county_focal, county_points, county_subset,
    county_data, county_day_points, stl_prior)
 rm(top_val, cols, p)

@@ -103,9 +103,9 @@ p <- ggplot(data = metro_subset) +
 save_plots(filename = "results/high_res/metro/c_case_log.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/metro/c_case_log.png", plot = p, preset = "lg", dpi = 72)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# plot confirmed rate
+# per-capita 7-day average ####
 
 ## subset data
 metro_subset <- filter(metro_data, report_date >= values$plot_date)
@@ -117,29 +117,23 @@ top_val <- round_any(x = max(metro_subset$case_avg_rate), accuracy = 20, f = cei
 metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, case_avg_rate))
 
 ## create plot
-p <- ggplot(metro_subset) +
-  geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
-            size = 2, show.legend = FALSE) +
-  gghighlight(geoid %in% unique(metro_subset$geoid), use_direct_label = FALSE, use_group_by = FALSE) +
-  scale_colour_manual(values = cols, name = "Metro Area") +
-  scale_x_date(date_breaks = values$date_breaks_facet, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 20)) + 
-  facet_wrap(~short_name) +
-  labs(
-    title = "Pace of New COVID-19 Cases by Metro Area",
-    subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
-    x = "Date",
-    y = "7-Day Average Rate per 100,000",
-    caption = values$caption_text_census
-  ) +
-  sequoia_theme(base_size = 22, background = "white") +
-  theme(axis.text=element_text(size = 15))
+p <- facet_rate(metro_subset, 
+                type = "metro", 
+                pal = cols, 
+                x_breaks = values$date_breaks_facet,
+                y_breaks = 20,
+                y_upper_limit = top_val,
+                highlight = unique(metro_subset$geoid),
+                plot_date = values$plot_date,
+                date = values$date,
+                title = "Pace of New COVID-19 Cases by Metro Area",
+                caption = values$caption_text_census)
 
 ## save plot
 save_plots(filename = "results/high_res/metro/e_new_case.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/metro/e_new_case.png", plot = p, preset = "lg", dpi = 72)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # create days from first day where average confirmed infections were at least 5
 

@@ -94,6 +94,7 @@ library(zoo)
 # functions
 source("source/functions/calculate_days.R")
 source("source/functions/map_breaks.R")
+source("source/functions/plots.R")
 source("source/functions/round_any.R")
 source("source/functions/save_plots.R")
 source("source/functions/sequoia_theme.R")
