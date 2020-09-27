@@ -1,9 +1,20 @@
 # plot regional data ####
 
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
 # load data ####
 region_data <- read_csv("data/region_meso.csv",
                         col_types = cols(region = col_character()
                        ))
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+# define color palette ####
+
+cols <- c("St. Louis" = values$pal[1], "Kansas City" = values$pal[2],
+          "Outstate" = values$pal[3], "Missouri" = values$pal[4])
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # define plotting values, state trend ####
 ## primary values
@@ -27,8 +38,10 @@ state_values[["peak_tbl"]] <- region_data %>%
 
 state_values[["current_tbl"]] <- region_data %>%
   filter(region == "Missouri") %>%
-  filter(report_date == date) %>%
+  filter(report_date == values$date) %>%
   mutate(text = paste0("current average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # define plotting values, st. louis trend ####
 ## primary values
@@ -51,8 +64,10 @@ stl_values[["peak_tbl"]] <- region_data %>%
 
 stl_values[["current_tbl"]] <- region_data %>%
   filter(region == "St. Louis") %>%
-  filter(report_date == date) %>%
+  filter(report_date == values$date) %>%
   mutate(text = paste0("current average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # define plotting values, kansas city trend ####
 ## primary values
@@ -75,8 +90,10 @@ kc_values[["peak_tbl"]]  <- region_data %>%
 
 kc_values[["current_tbl"]] <- region_data %>%
   filter(region == "Kansas City") %>%
-  filter(report_date == date) %>%
+  filter(report_date == values$date) %>%
   mutate(text = paste0("current average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # define plotting values, outstate trend ####
 ## primary values
@@ -99,5 +116,38 @@ os_values[["peak_tbl"]] <- region_data %>%
 
 os_values[["current_tbl"]] <- region_data %>%
   filter(region == "Outstate") %>%
-  filter(report_date == date) %>%
+  filter(report_date == values$date) %>%
   mutate(text = paste0("current average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+# facet plot ####
+
+## subset data
+region_data %>%
+  filter(region != "Missouri") %>%
+  filter(report_date >= values$plot_date) %>%
+  mutate(region = fct_relevel(region, "St. Louis", "Kansas City", "Outstate")) -> region_subset
+
+## construct plot
+p <- ggplot() +
+  geom_area(region_subset, mapping = aes(x = report_date, y = case_avg, fill = region),
+            show.legend = FALSE) +
+  scale_fill_manual(values = cols) +
+  facet_wrap(vars(region), nrow = 3) +
+  scale_x_date(date_breaks = values$date_breaks_long, date_labels = "%b") +
+  labs(
+    title = "Pace of New COVID-19 Cases in Missouri by Region",
+    subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
+    caption = values$caption_text,
+    x = "Date",
+    y = "7-day Average of New Cases"
+  ) +
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.x = element_text(angle = values$x_angle))
+
+## save plot
+save_plots(filename = "results/high_res/regional/a_avg_all.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/regional/a_avg_all.png", plot = p, preset = "lg", dpi = 72)
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#

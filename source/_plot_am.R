@@ -21,6 +21,7 @@ values <- list(
   
   plot_date = "2020-03-10",
   date_breaks = "14 days",
+  date_breaks_long = "1 month",
   date_breaks_log = 10,
   date_breaks_facet = "2 months",
   x_angle = 25,
