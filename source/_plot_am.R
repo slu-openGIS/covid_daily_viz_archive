@@ -48,35 +48,6 @@ rm(pal_a, pal_b, pal_c, pal_d)
 
 # =============================================================================
 
-# UPDATE date value
-# date <- lubridate::mdy("05-16-2020")
-date <- Sys.Date()-1
-
-# define first date for plotting
-plot_date <- "2020-03-10"
-date_breaks <- "14 days"
-date_breaks_alt <- "14 days"
-date_breaks_log <- 10
-x_angle <- 25
-
-# county region plot values
-county_log_max <- 30000
-county_rate_val <- 5
-county_rate_pos <- 30
-county_rate_x <- 2
-county_rate_y <- 25
-county_log_x <- -3
-county_log_y <- .4
-
-# create caption
-# Johns Hopkins University CSSE
-caption_text <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project"
-caption_text_census <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau"
-caption_text_census_map <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau"
-caption_text_census_map2 <- "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project"
-
-# =============================================================================
-
 # dependencies
 library(dplyr)
 library(forcats)
