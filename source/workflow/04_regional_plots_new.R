@@ -3,7 +3,7 @@
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # load data ####
-region_data <- read_csv("data/region_meso.csv",
+region_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/region/region_meso.csv",
                         col_types = cols(region = col_character()
                        ))
 
