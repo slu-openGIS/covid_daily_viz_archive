@@ -1,34 +1,57 @@
 # regional plot b/c/e - 7-day average counts ####
 
-regional_count <- function(.data, region, point_data, state_data, region_data){
+regional_count <- function(.data, region, point_data, state_data, region_data, plot_data, palette){
+  
+  # create region label
+  if (region == "St. Louis"){
+    region_label <- "St. Louis Metro Focus (MO Counties Only)\n"
+  } else if (region == "Kansas City"){
+    region_label <- "Kansas City Metro Focus (MO Counties Only)\n"
+  } else if (region == "Outstate"){
+    region_label <- "Outstate Focus\n"
+  }
   
   # construct plot
   p <- ggplot() +
     geom_line(.data, mapping = aes(x = report_date, y = case_avg, color = factor_var), size = 2) +
-    geom_point(points, mapping = aes(x = report_date, y = case_avg, color = factor_var), 
+    geom_point(data = point_data, mapping = aes(x = report_date, y = case_avg, color = factor_var), 
                size = 4, show.legend = FALSE) +
-    geom_point(peak_point, mapping = aes(x = report_date, y = case_avg), size = 4, shape = 16) +
-    geom_point(peak_point_nostl, mapping = aes(x = report_date, y = case_avg), size = 4, shape = 16) +
-    geom_text_repel(data = peak_point, mapping = aes(x = report_date, y = case_avg, label = text),
-                    nudge_y = peak_point_y, nudge_x = peak_point_x, size = 5) +
-    geom_text_repel(data = current_point, mapping = aes(x = report_date, y = case_avg, label = text),
-                    nudge_y = current_point_y, nudge_x = current_point_x, size = 5) +
-    geom_text_repel(data = peak_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                    nudge_y = -80, nudge_x = -110, size = 5) +
-    geom_text_repel(data = current_point_nostl, mapping = aes(x = report_date, y = case_avg, label = text),
-                    nudge_y = -900, nudge_x = 0, size = 5) +
-    scale_color_brewer(palette = "Dark2", name = "Category") +
-    scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 100)) +
-    scale_x_date(date_breaks = date_breaks_alt, date_labels = "%d %b") +
+    geom_point(data = state_data$peak_tbl, mapping = aes(x = report_date, y = case_avg), 
+               size = 4, shape = 16) +
+    geom_point(data = region_data$peak_tbl, mapping = aes(x = report_date, y = case_avg), 
+               size = 4, shape = 16) +
+    geom_text_repel(data = state_data$peak_tbl, mapping = aes(x = report_date, y = case_avg, label = text),
+                    nudge_y = state_data$peak_y, nudge_x = state_data$peak_x, size = 5) +
+    geom_text_repel(data = region_data$peak_tbl, mapping = aes(x = report_date, y = case_avg, label = text),
+                    nudge_y = region_data$peak_y, nudge_x = region_data$peak_x, size = 5) +
+    scale_color_manual(values = palette, name = "Region") +
+    scale_y_continuous(limits = c(0, state_data$top_val), breaks = seq(0, state_data$top_val, by = 100)) +
+    scale_x_date(date_breaks = plot_data$date_breaks, date_labels = "%d %b") +
     labs(
       title = "Pace of New COVID-19 Cases in Missouri",
-      subtitle = paste0("Outstate Focus\n", as.character(state_subset$report_date[1]), " through ", as.character(date)),
-      caption = caption_text,
+      subtitle = paste0(region_label, as.character(plot_data$plot_date), " through ", as.character(plot_data$date)),
+      caption = plot_data$caption_text,
       x = "Date",
       y = "7-day Average of New Cases"
     ) +
     sequoia_theme(base_size = 22, background = "white") +
-    theme(axis.text.x = element_text(angle = x_angle))
+    theme(axis.text.x = element_text(angle = plot_data$x_angle))
+  
+  # add current points
+  if (state_data$current_display == TRUE){
+    p <- p + geom_text_repel(data = state_data$current_tbl, 
+                             mapping = aes(x = report_date, y = case_avg, label = text), 
+                             nudge_y = state_data$current_y, nudge_x = state_data$current_x, size = 5) 
+  }
+  
+  if (region_data$current_display == TRUE){
+    p <- p + geom_text_repel(data = region_data$current_tbl, 
+                             mapping = aes(x = report_date, y = case_avg, label = text), 
+                             nudge_y = region_data$current_y, nudge_x = region_data$current_x, size = 5)   
+  }
+  
+  # return output
+  return(p)
   
 }
 
