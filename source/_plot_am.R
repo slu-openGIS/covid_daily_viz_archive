@@ -97,7 +97,6 @@ source("source/workflow/21_kc_county_plots.R")
 # =============================================================================
 
 # clean-up
-rm(plot_date, save_plots, sequoia_theme, date_breaks, calculate_days, filter_date,
-   map_breaks, map_bins, round_any, caption_text, caption_text_census,
-   caption_text_census_map, caption_text_census_map2, x_angle,
-   start_date, date_breaks_alt, county_rate_val)
+rm(values, calculate_days, facet_rate, filter_date, map_bins, map_breaks,
+   round_any, save_plots, sequoia_theme)
+
