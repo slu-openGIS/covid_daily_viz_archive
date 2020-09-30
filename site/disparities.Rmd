@@ -31,7 +31,11 @@ These plots show patterns in infections and mortality by race and ethnicity for 
 
 ### Infections
 
-***Please note that these data have been removed temporarily because of very high quantities of missing data. The infection demographic data have always had missing data, but it hovered around 16-18%. The amount is now more than 55%. This plot will be replaced once the issues with missing data are rectified.***
+```{r mo-infections, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/mo_individual/a_race_case.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/mo_individual/a_race_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/mo_individual/a_race_case.png" target="_blank">Low-res</a>]
 
 ### Mortality
 
@@ -45,16 +49,20 @@ Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_vi
 
 ```{r state-table, echo=FALSE, out.width = '100%'}
 state_data %>%
-  select(value, deaths_est, mortality_rate) %>% # cases_est, case_rate, 
+  select(value, cases_est, case_rate, deaths_est, mortality_rate) %>% 
   mutate(
+    cases_est = round(cases_est, digits = 0), 
+    case_rate = round(case_rate, digits = 2),
     deaths_est = round(deaths_est, digits = 0),
     mortality_rate = round(mortality_rate, digits = 2)
-  ) %>% # cases_est = round(cases_est, digits = 0), case_rate = round(case_rate, digits = 2),
+  ) %>%
   rename(
     Identity = value,
+    `Estimated Cases` = cases_est, 
+    `Cases Per Capita` = case_rate,
     `Estimated Deaths` = deaths_est,
     `Deaths Per Capita` = mortality_rate
-  ) -> data_table # `Estimated Cases` = cases_est, `Cases Per Capita` = case_rate,
+  ) -> data_table
 
 DT::datatable(data_table, rownames= FALSE)
 ```
