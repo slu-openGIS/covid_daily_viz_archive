@@ -120,7 +120,7 @@ county_subset <- filter(county_data, report_date >= values$plot_date) %>%
   filter(geoid %in% county_focal)
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 10, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 20, f = ceiling)
 
 ## re-order counties
 counties <- unique(county_subset$county)
@@ -141,7 +141,7 @@ p <- ggplot(county_subset) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = values$date_breaks_facet, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 10)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 20)) + 
   facet_wrap(~county_fct) +
   labs(
     title = "Pace of New COVID-19 Cases in Select Missouri Counties",
