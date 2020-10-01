@@ -270,7 +270,7 @@ DT::datatable(data_table)
   * The FAQ contains a short explanation of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
 
 ## Average New Cases by County {.tabset .tabset-fade .tabset-pills .padtop}
-This map shows a seven-day rolling average of new cases. For this map, this covers `r params$date_val` back through `r params$prior_date_val`. There is not a threshold for what constitutes a high or low average, but the higher the average number of new cases, the more new spread we can infer. For mapping purposes, these are displayed as a rate per 1,000 residents. As with the prior map, additional details are available by clicking on each county or on the data table.
+This map shows a seven-day rolling average of new cases. For this map, this covers `r params$date_val` back through `r params$prior_date_val`. There is not a threshold for what constitutes a high or low average, but the higher the average number of new cases, the more new spread we can infer. For mapping purposes, these are displayed as a rate per 100,000 residents. As with the prior map, additional details are available by clicking on each county or on the data table.
 
 ### Interactive Map
 
