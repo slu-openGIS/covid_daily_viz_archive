@@ -421,7 +421,7 @@ Select an area below to view additional plots that focus on trends within a vari
 <div class="row">
   <div class="column">
   <a href="states.html">`r fa("chart-area", height = 40)`</i>
-  <br><p style="font-size:20px">States</p></a><p>Includes testing data</p></div>
+  <br><p style="font-size:20px">States</p></a></div>
   <div class="column">
   <a href="regions.html">`r fa("chart-pie", height = 40)`</i>
   <br><p style="font-size:20px">Meso Regions</p></div>
