@@ -123,13 +123,13 @@ county_subset <- filter(county_data, report_date >= values$plot_date) %>%
 ## modify McDonald County
 county_subset <- mutate(county_subset,
                         case_avg_rate = ifelse(geoid == 29117 & 
-                                                 (report_date == "2020-09-04" | report_date == "2020-09-10"), 100, case_avg_rate),
+                                                 (report_date == "2020-09-04" | report_date == "2020-09-10"), 120, case_avg_rate),
                         case_avg_rate = ifelse(geoid == 29117 & 
                                                  (report_date >= "2020-09-05" & report_date <= "2020-09-09"), NA, case_avg_rate)
 )
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 50, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 20, f = ceiling)
 
 ## re-order counties
 counties <- unique(county_subset$county)
