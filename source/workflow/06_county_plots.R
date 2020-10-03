@@ -32,6 +32,9 @@ save_plots(filename = "results/low_res/county/a_case_map.png", plot = p, preset 
 # =============================================================================
 
 # map missouri new case rates ####
+## clean up NAs
+mo_sf <- mutate(mo_sf, case_avg_rate = ifelse(case_avg_rate < 0, NA, case_avg_rate))
+
 ## create breaks
 mo_sf <- map_breaks(mo_sf, var = "case_avg_rate", newvar = "map_breaks",
                     style = "fisher", classes = 5, dig_lab = 3)
@@ -39,7 +42,7 @@ mo_sf <- map_breaks(mo_sf, var = "case_avg_rate", newvar = "map_breaks",
 ## create map
 p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   geom_sf() +
-  scale_fill_brewer(palette = "RdPu", name = "Rate per 100,000") +
+  scale_fill_brewer(palette = "RdPu", name = "Rate per 100,000", na.value = "grey30") +
   labs(
     title = "7-day Average of New COVID-19 Cases by Missouri County",
     subtitle = paste0("Current as of ", as.character(values$date)),
