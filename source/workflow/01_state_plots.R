@@ -82,7 +82,7 @@ p <- ggplot() +
   geom_point(state_day_points, mapping = aes(x = day, y = cases, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(5, 300000), 
+  scale_y_log10(limits = c(5, 350000), 
                 breaks = c(5, 100, 1000, 10000, 100000, 300000), 
                 labels = comma) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +

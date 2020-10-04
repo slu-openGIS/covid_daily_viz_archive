@@ -27,7 +27,7 @@ state_values <- list(
   peak_x = 0,
   peak_y = 125,
   current_x = -80,
-  current_y = 50,
+  current_y = 70,
   current_display = TRUE
 )
 
@@ -81,7 +81,7 @@ kc_values <- list(
   peak_x = -80, 
   peak_y = 170, 
   current_x = 0, 
-  current_y = -200,
+  current_y = -80,
   current_display = TRUE
 )
 
