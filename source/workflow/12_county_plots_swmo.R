@@ -122,7 +122,7 @@ county_subset <- filter(county_data, report_date >= values$plot_date) %>%
 ## modify McDonald County
 county_subset <- mutate(county_subset,
   case_avg_rate = ifelse(geoid == 29119 & 
-                           (report_date == "2020-06-21" | report_date == "2020-07-01"), 160, case_avg_rate),
+                           (report_date == "2020-06-21" | report_date == "2020-07-01"), 180, case_avg_rate),
   case_avg_rate = ifelse(geoid == 29119 & 
                            (report_date >= "2020-06-22" & report_date <= "2020-06-30"), NA, case_avg_rate)
 )

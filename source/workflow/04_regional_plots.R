@@ -27,7 +27,7 @@ state_values <- list(
   peak_x = 0,
   peak_y = 125,
   current_x = -80,
-  current_y = 70,
+  current_y = 100,
   current_display = TRUE
 )
 
@@ -54,7 +54,7 @@ stl_values <- list(
   peak_x = -70, 
   peak_y = 70, 
   current_x = 0, 
-  current_y = -380,
+  current_y = -350,
   current_display = TRUE
 )
 

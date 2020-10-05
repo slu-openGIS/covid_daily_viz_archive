@@ -42,7 +42,7 @@ mo_sf <- map_breaks(mo_sf, var = "case_avg_rate", newvar = "map_breaks",
 ## create map
 p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   geom_sf() +
-  scale_fill_brewer(palette = "RdPu", name = "Rate per 100,000", na.value = "grey30") +
+  scale_fill_brewer(palette = "RdPu", name = "Rate per 100,000", na.value = "grey70") +
   labs(
     title = "7-day Average of New COVID-19 Cases by Missouri County",
     subtitle = paste0("Current as of ", as.character(values$date)),
