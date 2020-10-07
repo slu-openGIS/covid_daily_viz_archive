@@ -135,23 +135,18 @@ rm(counties, unique_counties)
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county_fct, report_date, case_avg_rate))
 
 ## create plot
-p <- ggplot(county_subset) +
-  geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
-            size = 2, show.legend = FALSE) +
-  gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  scale_colour_manual(values = cols, name = "County") +
-  scale_x_date(date_breaks = values$date_breaks_facet, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 20)) + 
-  facet_wrap(~county_fct) +
-  labs(
-    title = "Pace of New COVID-19 Cases in Select Missouri Counties",
-    subtitle = paste0("Mid-Missouri Focus\n",as.character(values$plot_date), " through ", as.character(values$date)),
-    x = "Date",
-    y = "7-Day Average Rate per 100,000",
-    caption = values$caption_text_census
-  ) +
-  sequoia_theme(base_size = 22, background = "white") +
-  theme(axis.text=element_text(size = 15))
+p <- facet_rate(county_subset, 
+                type = "county", 
+                subtype = "Mid-Missouri",
+                pal = cols, 
+                x_breaks = values$date_breaks_facet,
+                y_breaks = 20,
+                y_upper_limit = top_val,
+                highlight = county_focal,
+                plot_date = values$plot_date,
+                date = values$date,
+                title = "Pace of New COVID-19 Cases in Select Missouri Counties",
+                caption = values$caption_text_census)
 
 ## save plot
 save_plots(filename = "results/high_res/county_midmo/e_new_case.png", plot = p, preset = "lg")

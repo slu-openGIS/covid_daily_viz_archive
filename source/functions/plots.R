@@ -57,31 +57,128 @@ regional_count <- function(.data, region, point_data, state_data, region_data, p
 
 # state/county plot e - facet rate ####
 
-facet_rate <- function(.data, type, pal, x_breaks, y_breaks, y_upper_limit, highlight, plot_date, date, title, caption){
+facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_upper_limit, highlight, plot_date, date, title, caption){
+  
+  # address Kansas City
+  if (type == "county"){
+    .data <- filter(.data, (geoid == "29511" & report_date > "2020-09-29") == FALSE) 
+  }
+  
+  # create name
+  if (type == "metro"){
+    scale_name <- "Metro Area"
+  } else if (type == "county"){
+    scale_name <- "County"
+  } else if (type == "state"){
+    scale_name <- "State"
+  }
   
   # construct plot
   p <- ggplot(.data) +
     geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
-              size = 2, show.legend = FALSE) +
-    gghighlight(geoid %in% highlight, use_direct_label = FALSE, use_group_by = FALSE) +
-    scale_colour_manual(values = pal, name = "Metro Area") +
+              size = 2, show.legend = FALSE)
+  
+  # optionally highlight trends
+  if (type == "metro" | type == "county"){
+    p <- p + gghighlight(geoid %in% highlight, use_direct_label = FALSE, use_group_by = FALSE)
+  } 
+    
+  # finish plot
+  p <- p +
+    scale_colour_manual(values = pal, name = scale_name) +
     scale_x_date(date_breaks = x_breaks, date_labels = "%b") +
     scale_y_continuous(limits = c(0,y_upper_limit), breaks = seq(0, y_upper_limit, by = y_breaks)) + 
     labs(
       title = title,
-      subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
       x = "Date",
-      y = "7-Day Average Rate per 100,000",
-      caption = caption
+      y = "7-Day Average Rate per 100,000"
     ) +
     sequoia_theme(base_size = 22, background = "white") +
     theme(axis.text=element_text(size = 15))
   
+  # add subtitle and captions
+  if (is.null(subtype) == TRUE){
+    p <- p + labs(
+      subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
+      caption = caption
+    )
+  } else if (is.null(subtype) == FALSE){
+    
+    if (subtype == "Southeast"){
+      p <- p + labs(
+        subtitle = paste0("Southeast Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Mid-Missouri"){
+      p <- p + labs(
+        subtitle = paste0("Mid-Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "St. Joseph"){
+      p <- p + labs(
+        subtitle = paste0("St. Joseph Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Northern"){
+      p <- p + labs(
+        subtitle = paste0("Northern Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Ozark"){
+      p <- p + labs(
+        subtitle = paste0("Lake of the Ozarks Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Southwest"){
+      p <- p + labs(
+        subtitle = paste0("Southwest Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Cape"){
+      p <- p + labs(
+        subtitle = paste0("Cape Girardeau Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "West-Central"){
+      p <- p + labs(
+        subtitle = paste0("West-Central Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Springfield"){
+      p <- p + labs(
+        subtitle = paste0("Springfield Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Ozark Mountains"){
+      p <- p + labs(
+        subtitle = paste0("Ozark Mountains Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Kansas City"){
+      p <- p + labs(
+        subtitle = paste0(as.character(plot_date), " through ", as.character(date))
+      )
+    }
+    
+    p <- p + labs(caption = paste0(caption, "\nKansas City's trend is omitted after 2020-09-29 due to data quality issues"))
+    
+  }
+  
   # add facet
   if (type == "metro"){
     p <- p + facet_wrap(~short_name)
-  } else if (type == "county"){
+  } else if (type == "county" & is.null(subtype) == TRUE){
     p <- p + facet_wrap(~county)
+  } else if (type == "county" & is.null(subtype) == FALSE){
+    
+    if (subtype == "Kansas City"){
+      p <- p + facet_wrap(~county)
+    } else {
+      p <- p + facet_wrap(~county_fct)
+    }
+    
+  } else if (type == "state"){
+    p <- p + facet_wrap(~state)
   }
   
   # return output
