@@ -87,6 +87,37 @@ save_plots(filename = "results/low_res/stl_zip/a_case_map_regional.png", plot = 
 
 # =============================================================================
 
+# map 14-day average rate
+## create breaks
+zip_valid <- filter(regional_zip_sf, is.na(case_avg_rate) == FALSE)
+zip_na <- filter(regional_zip_sf, is.na(case_avg_rate) == TRUE)
+zip_valid <- map_breaks(zip_valid, var = "case_avg_rate", newvar = "map_breaks",
+                        style = "fisher", classes = 5, dig_lab = 2)
+
+## create map
+p <- ggplot() +
+  geom_sf(data = zip_na, fill = "#9d9d9d") +
+  geom_sf(data = zip_valid, mapping = aes(fill = map_breaks)) +
+  geom_sf(data = regional_counties, fill = NA, color = "black", size = .75) +
+  geom_text_repel(data = regional_centroids, mapping = aes(x = x, y = y, label = county),
+                  nudge_x = c(-35000, -20000, -40000, 10000),
+                  nudge_y = c(-10000, 20000, -20000, -35000),
+                  size = 6) +
+  scale_fill_brewer(palette = "RdPu", name = "Rate per 10,000") +
+  labs(
+    title = "14-day Average of New COVID-19 Cases\nby Regional St. Louis ZCTA",
+    subtitle = paste0("Current as of ", as.character(date)),
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the included counties and the U.S. Census Bureau"
+  )  +
+  sequoia_theme(base_size = 22, background = "white", map = TRUE)
+
+## save map
+save_plots(filename = "results/high_res/stl_zip/d_avg_map_regional.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/stl_zip/d_avg_map_regional.png", plot = p, preset = "lg", dpi = 72)
+
+
+# =============================================================================
+
 # modify regional objects
 regional_centroids <- filter(regional_centroids, GEOID %in% c("29510", "29189"))
 regional_counties <- filter(regional_counties, GEOID %in% c("29510", "29189"))

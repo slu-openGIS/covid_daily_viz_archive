@@ -4,14 +4,16 @@
 
 # load data
 covid_race <-  read_csv("data/MO_HEALTH_Covid_Tracking/data/individual/mo_race_rates.csv") %>%
-  filter(value %in% c("Asian", "Unknown Race", "Unknown Ethnicity") == FALSE)
+  filter(value %in% c("Unknown Race", "Unknown Ethnicity") == FALSE) %>%
+  mutate(case_rate = ifelse(value == "Asian", cases_est/116720*100000, case_rate)) %>%
+  mutate(mortality_rate = ifelse(value == "Asian", deaths_est/116720*100000, mortality_rate))
 
 # =============================================================================
 
 # create factor
 covid_race %>%
   mutate(value = as_factor(value)) %>%
-  mutate(value = fct_relevel(value, "White", "Black", "Two or More")) -> covid_race
+  mutate(value = fct_relevel(value, "White", "Black", "Asian", "Two or More", "Latino")) -> covid_race
 
 # =============================================================================
 
