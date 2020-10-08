@@ -50,10 +50,10 @@ Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_vi
 ### New Infections
 
 ```{r state-infection-avg, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/state/d_case_log_avg.png")
+knitr::include_graphics("img/state/f_new_case_log.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/d_case_log_avg.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/d_case_log_avg.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/f_new_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/f_new_case_log.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
