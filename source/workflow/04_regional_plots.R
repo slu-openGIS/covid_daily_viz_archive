@@ -24,8 +24,8 @@ state_values <- list(
     filter(region == "Missouri") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = -80, # 0
-  peak_y = -80, # 125
+  peak_x = -60, # 0
+  peak_y = -60, # 125
   current_x = 0, # -80
   current_y = 250, # 150
   current_display = TRUE
@@ -51,10 +51,10 @@ stl_values <- list(
     filter(region == "St. Louis") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = -70, 
+  peak_x = -80, 
   peak_y = 70, 
   current_x = 0, 
-  current_y = -350,
+  current_y = -310,
   current_display = TRUE
 )
 
@@ -81,7 +81,7 @@ kc_values <- list(
   peak_x = -80, 
   peak_y = 170, 
   current_x = 0, 
-  current_y = -150,
+  current_y = -270,
   current_display = TRUE
 )
 
