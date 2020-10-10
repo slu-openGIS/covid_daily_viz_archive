@@ -81,7 +81,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_x_date(date_breaks = values$date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 2)) + 
   labs(
     title = "Reported COVID-19 Cases in Metro St. Louis",
@@ -285,7 +285,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_x_date(date_breaks = values$date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .05)) +
   labs(
     title = "Reported COVID-19 Mortality in Metro St. Louis",
@@ -392,7 +392,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_x_date(date_breaks = values$date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
   scale_y_continuous(limits = c(0,12), breaks = seq(0, 12, by = 1)) +
   labs(
     title = "COVID-19 Case Fatality in Metro St. Louis",

@@ -24,23 +24,23 @@ state_values <- list(
     filter(region == "Missouri") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = -60, # 0
-  peak_y = -60, # 125
-  current_x = 0, # -80
-  current_y = 250, # 150
-  current_display = TRUE
+  peak_x = 0, # 0
+  peak_y = 125, # 125
+  current_x = -80, # -80
+  current_y = 150, # 150
+  current_display = FALSE
 )
 
 ## tables
 state_values[["peak_tbl"]] <- region_data %>%
   filter(region == "Missouri") %>%
   filter(case_avg == state_values$peak_val) %>%
-  mutate(text = paste0("peak average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+  mutate(text = paste0("peak average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%b")))
 
 state_values[["current_tbl"]] <- region_data %>%
   filter(region == "Missouri") %>%
   filter(report_date == values$date) %>%
-  mutate(text = paste0("current average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+  mutate(text = paste0("current average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%b")))
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
@@ -62,12 +62,12 @@ stl_values <- list(
 stl_values[["peak_tbl"]] <- region_data %>%
   filter(region == "St. Louis") %>%
   filter(case_avg == stl_values$peak_val) %>%
-  mutate(text = paste0("peak average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+  mutate(text = paste0("peak average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%b")))
 
 stl_values[["current_tbl"]] <- region_data %>%
   filter(region == "St. Louis") %>%
   filter(report_date == values$date) %>%
-  mutate(text = paste0("current average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+  mutate(text = paste0("current average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%b")))
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
@@ -89,12 +89,12 @@ kc_values <- list(
 kc_values[["peak_tbl"]]  <- region_data %>%
   filter(region == "Kansas City") %>%
   filter(case_avg == kc_values$peak_val) %>%
-  mutate(text = paste0("peak average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+  mutate(text = paste0("peak average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%b")))
 
 kc_values[["current_tbl"]] <- region_data %>%
   filter(region == "Kansas City") %>%
   filter(report_date == values$date) %>%
-  mutate(text = paste0("current average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+  mutate(text = paste0("current average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%b")))
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
@@ -116,12 +116,12 @@ os_values <- list(
 os_values[["peak_tbl"]] <- region_data %>%
   filter(region == "Outstate") %>%
   filter(case_avg == os_values$peak_val) %>%
-  mutate(text = paste0("peak average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+  mutate(text = paste0("peak average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%b")))
 
 os_values[["current_tbl"]] <- region_data %>%
   filter(region == "Outstate") %>%
   filter(report_date == values$date) %>%
-  mutate(text = paste0("current average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+  mutate(text = paste0("current average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%b")))
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 

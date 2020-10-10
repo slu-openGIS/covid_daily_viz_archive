@@ -39,7 +39,7 @@ p <- ggplot(state_subset) +
   geom_point(state_points, mapping = aes(x = report_date, y = case_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_x_date(date_breaks = values$date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 200)) + 
   labs(
     title = "Reported COVID-19 Cases by State",
@@ -198,7 +198,7 @@ p <- ggplot() +
   geom_point(state_points, mapping = aes(x = report_date, y = mortality_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_x_date(date_breaks = values$date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 5)) +
   labs(
     title = "Reported COVID-19 Mortality by State",
@@ -323,7 +323,7 @@ p <- ggplot() +
   geom_point(state_points, mapping = aes(x = report_date, y = case_fatality_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_x_date(date_breaks = values$date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
   scale_y_continuous(limits = c(0,12), breaks = seq(0, 12, by = 1)) +
   labs(
     title = "COVID-19 Case Fatality by State",

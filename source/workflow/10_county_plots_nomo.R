@@ -48,7 +48,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_x_date(date_breaks = values$date_breaks, date_labels = "%d %b") +
+  scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = values$county_rate_val)) + 
   labs(
     title = "Reported COVID-19 Cases by Select Missouri Counties",
