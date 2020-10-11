@@ -26,7 +26,7 @@ regional_count <- function(.data, region, point_data, state_data, region_data, p
                     nudge_y = region_data$peak_y, nudge_x = region_data$peak_x, size = 5) +
     scale_color_manual(values = palette, name = "Region") +
     scale_y_continuous(limits = c(0, state_data$top_val), breaks = seq(0, state_data$top_val, by = 100)) +
-    scale_x_date(date_breaks = plot_data$date_breaks, date_labels = "%d %b") +
+    scale_x_date(date_breaks = plot_data$date_breaks, date_labels = "%b") +
     labs(
       title = "Pace of New COVID-19 Cases in Missouri",
       subtitle = paste0(region_label, as.character(plot_data$plot_date), " through ", as.character(plot_data$date)),
