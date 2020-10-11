@@ -272,6 +272,83 @@ DT::datatable(data_table)
   * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `zip_stl_city.csv` and `zip_stl_county.csv` tables, which are assembled from data provided by [St. Louis City and County](faq.html#Where_Do_These_Data_Come_From). These data are also available as `.geojson` files for mapping.
   * The FAQ contains a short explanation of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
 
+## Average New Infections by ZCTA (Zip Code) {.tabset .tabset-fade .tabset-pills .padtop}
+This map shows the 14-day average of new infections as a rate per 10,000 residents for all ZCTAs with five or more patients. It is important not to map the raw counts themselves, but if you want to see those data, click on a ZCTA or the data table.
+
+### Interactive Map
+
+```{r map-avg-infections-zip, echo = FALSE, out.width = '100%', out.height='600px', warning=FALSE}
+# calculate breaks
+bins <- map_bins(zip_snapshot, var = "case_avg_rate", style = "fisher", classes = 5, dig_lab = 2,
+                 round = 2)
+bins[1] <- round_any(x = min(zip_snapshot$case_avg_rate, na.rm = TRUE), accuracy = .01, f = floor)
+bins[length(bins)] <- round_any(x = max(zip_snapshot$case_avg_rate, na.rm = TRUE), accuracy = .01, f = ceiling)
+
+# create color palette
+pal <- colorBin("RdPu", domain = zip_snapshot$case_avg_rate, bins = bins)
+
+# map
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = zip_snapshot,
+    color = "#444444", 
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.75,
+    fillColor = ~pal(case_avg_rate),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste0("<b>Zip:</b> ", zip_snapshot$GEOID_ZCTA, " <br> ",
+                 "<b>Current Cumulative Count:</b> ", zip_snapshot$cases, "<br>",
+                 "<b>Current 14-day Average Rate per 10,000:</b> ", round(zip_snapshot$case_avg_rate, digits = 2), " <br> ",
+                 "<b>Population Below Poverty Line:</b> ", round(zip_snapshot$pvty_pct, digits = 2), "% <br> ",
+                 "<b>African American Population:</b> ", round(zip_snapshot$blk_pct, digits = 2), "% ")
+  )  %>%
+  addPolylines(
+    data = regional_counties,
+    color = "#000000",
+    weight = 3
+  ) %>%
+  addLegend(pal = pal, values = zip_snapshot$case_avg_rate, opacity = .75, title = "Rate")
+```
+
+### Static Map
+
+```{r avg-confirmed-static, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/stl_zip/d_avg_map_regional.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/d_avg_map_regional.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/d_avg_map_regional.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r zip-avg-data-table, echo=FALSE, out.width = '100%'}
+zip_snapshot %>%
+  select(GEOID_ZCTA, cases, case_avg_rate, pvty_pct, blk_pct) %>%
+  mutate(
+    case_avg_rate = round(case_avg_rate, digits = 2),
+    pvty_pct = round(pvty_pct, digits = 2),
+    blk_pct = round(blk_pct, digits = 2)
+  ) %>%
+  rename(
+    `Zip Code` = GEOID_ZCTA,
+    `Cumulative Cases` = cases,
+    `14-day Average Rate per 10,000` = case_avg_rate,
+    `Poverty Rate (%)` = pvty_pct,
+    `% African American` = blk_pct
+  ) -> data_table
+st_geometry(data_table) <- NULL
+DT::datatable(data_table)
+```
+
+### Notes
+
+  * If a ZCTA straddles two counties, and only has reported infection numbers in one entity, its estimated partial population will be displayed. Similarly, estimated partial populations for zip codes that straddle outlying counties are used.
+  * ZCTA stands for "<a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html" target="_blank">ZIP Code Tabulation Area</a>. These are not identical to zip codes, but they are essential for mapping zip codes as regions on a map.
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `zip_stl_city.csv` and `zip_stl_county.csv` tables, which are assembled from data provided by [St. Louis City and County](faq.html#Where_Do_These_Data_Come_From). These data are also available as `.geojson` files for mapping.
+  * The FAQ contains a short explanation of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
+
 ## Hospitalizations {.padtop}
 St. Louis has had a regional pandemic task force that covers four major health care systems: SSM (SLU), BJC Healthcare, Mercy, and St. Luke's Hospital. The task force has been providing daily media briefings since April 5th. Their data covers the largest hospital systems in the region, so while it does not include every possible hospital, it does include a large share of COVID-19 patients. All averages presented are 7-day rolling averages.
 
