@@ -57,6 +57,14 @@ knitr::include_graphics("img/county_cape/c_case_log.png")
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_cape/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_cape/c_case_log.png" target="_blank">Low-res</a>]
 
+### New Infections
+
+```{r cape-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_cape/e_new_case.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_cape/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_cape/e_new_case.png" target="_blank">Low-res</a>]
+
 ### Data Table
 
 ```{r cape-infection-table, echo=FALSE, out.width = '100%'}
@@ -107,6 +115,14 @@ knitr::include_graphics("img/county_midmo/c_case_log.png")
 ```
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_midmo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_midmo/c_case_log.png" target="_blank">Low-res</a>]
+
+### New Infections
+
+```{r midmo-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_midmo/e_new_case.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_midmo/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_midmo/e_new_case.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -159,6 +175,14 @@ knitr::include_graphics("img/county_ozark/c_case_log.png")
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_ozark/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_ozark/c_case_log.png" target="_blank">Low-res</a>]
 
+### New Infections
+
+```{r ozark-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_ozark/e_new_case.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_ozark/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_ozark/e_new_case.png" target="_blank">Low-res</a>]
+
 ### Data Table
 
 ```{r ozark-infection-table, echo=FALSE, out.width = '100%'}
@@ -209,6 +233,14 @@ knitr::include_graphics("img/county_nomo/c_case_log.png")
 ```
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_nomo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_nomo/c_case_log.png" target="_blank">Low-res</a>]
+
+### New Infections
+
+```{r nomo-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_nomo/e_new_case.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_nomo/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_nomo/e_new_case.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -261,6 +293,14 @@ knitr::include_graphics("img/county_ozkmtns/c_case_log.png")
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_ozkmtns/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_ozkmtns/c_case_log.png" target="_blank">Low-res</a>]
 
+### New Infections
+
+```{r ozkmtn-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_ozkmtns/e_new_case.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_ozkmtns/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_ozkmtns/e_new_case.png" target="_blank">Low-res</a>]
+
 ### Data Table
 
 ```{r ozkmtn-infection-table, echo=FALSE, out.width = '100%'}
@@ -311,6 +351,14 @@ knitr::include_graphics("img/county_semo/c_case_log.png")
 ```
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_semo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_semo/c_case_log.png" target="_blank">Low-res</a>]
+
+### New Infections
+
+```{r semo-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_semo/e_new_case.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_semo/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_semo/e_new_case.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -363,6 +411,14 @@ knitr::include_graphics("img/county_swmo/c_case_log.png")
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_swmo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_swmo/c_case_log.png" target="_blank">Low-res</a>]
 
+### New Infections
+
+```{r swmo-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_swmo/e_new_case.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_swmo/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_swmo/e_new_case.png" target="_blank">Low-res</a>]
+
 ### Data Table
 
 ```{r swmo-infection-table, echo=FALSE, out.width = '100%'}
@@ -413,6 +469,14 @@ knitr::include_graphics("img/county_spring/c_case_log.png")
 ```
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_spring/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_spring/c_case_log.png" target="_blank">Low-res</a>]
+
+### New Infections
+
+```{r spring-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_spring/e_new_case.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_spring/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_spring/e_new_case.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -465,6 +529,14 @@ knitr::include_graphics("img/county_stjo/c_case_log.png")
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_stjo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_stjo/c_case_log.png" target="_blank">Low-res</a>]
 
+### New Infections
+
+```{r st_jo-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_stjo/e_new_case.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_stjo/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_stjo/e_new_case.png" target="_blank">Low-res</a>]
+
 ### Data Table
 
 ```{r st_jo-infection-table, echo=FALSE, out.width = '100%'}
@@ -515,6 +587,14 @@ knitr::include_graphics("img/county_west/c_case_log.png")
 ```
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_west/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_west/c_case_log.png" target="_blank">Low-res</a>]
+
+### New Infections
+
+```{r west-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_west/e_new_case.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_west/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_west/e_new_case.png" target="_blank">Low-res</a>]
 
 ### Data Table
 

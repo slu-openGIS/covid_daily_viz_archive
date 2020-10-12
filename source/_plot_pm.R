@@ -48,7 +48,7 @@ source("source/workflow/03_state_individual_plots.R")
 source("source/workflow/18_stl_zip_plots.R")
 source("source/workflow/18_stl_zip_plots_v2.R")
 source("source/workflow/19_stl_individual_plots.R")
-# source("source/workflow/20_stl_hospital_plots.R")
+source("source/workflow/20_stl_hospital_plots.R")
 
 # =============================================================================
 

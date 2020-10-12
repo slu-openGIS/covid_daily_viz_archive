@@ -52,17 +52,17 @@ knitr::include_graphics("img/kc_metro/c_case_log.png")
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/kc_metro/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/c_case_log.png" target="_blank">Low-res</a>]
 
-### New Infections Rate
+### New Infections
 
-```{r metro-infection-avg-rate, echo=FALSE, out.width = '100%'}
+```{r kc-infection-avg, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/kc_metro/e_new_case.png")
 ```
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/kc_metro/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/kc_metro/e_new_case.png" target="_blank">Low-res</a>]
 
-### New Infections Count
+### New Infections Pace
 
-```{r metro-infection-avg, echo=FALSE, out.width = '100%'}
+```{r kc-infection-avg-log, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/kc_metro/f_new_case_log.png")
 ```
 
@@ -70,7 +70,7 @@ Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_vi
 
 ### Data Table
 
-```{r metro-infection-table, echo=FALSE, out.width = '100%'}
+```{r kc-infection-table, echo=FALSE, out.width = '100%'}
 county_data %>%
   select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
   mutate(
