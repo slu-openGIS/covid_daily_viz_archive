@@ -69,9 +69,13 @@ snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "coun
   mutate(icu_rate = ifelse(hospitals == 0, NA, icu_rate))
 ```
 
+<div class="alert">
+The State of Missouri has not updated its data since Saturday, October 10th. Data on this site show a drop for the October 11th report date. I've made the decision to pause most updates for the next few days until they begin updating their dashboard again. All statewide, regional, metro, and county-level data are affected by this (with the exceptions of St. Louis City and County). St. Louis ZIP Code, disparity, and hospitalization data are not affected by this issue, and will continue to be updated.
+</div>
+
 Welcome to the overhauled version of <a href="https://chris-prener.github.io" target="_blank">Chris Prener's</a> tracking site for the SARS-CoV-2 pandemic in Missouri. This site is updated nightly using data from a variety of federal, state, and local data sources as well as the <a href="https://nytimes.com" target="_blank">New York Times'</a> <a href="https://github.com/nytimes/covid-19-data" target="_blank">COVID-19 Project</a>. Chris also posts <a href="https://twitter.com/chrisprener" target="_blank">Twitter</a> threads on Tuesday and Thursday evenings breaking down current trends in Missouri. If you are new to the site, please read the [About page](about.html) for an overview of these data.
 
-Starting Friday, October 9th, Chris will be emailing out a weekly round-up of COVID-19 trends for Missouri. These weekly newsletters, named "River City Data," will also feature some exclusive content, including short interviews with COVID-19 experts, health care providers, and others who have insight into the pandemic. Sign up below:
+Chris also emails out a weekly round-up of COVID-19 trends for Missouri. These weekly newsletters, named "River City Data," also feature some exclusive content, including short interviews with COVID-19 experts, health care providers, and others who have insight into the pandemic. Sign up below:
 
 <iframe src="https://chrisprener.substack.com/embed" width="480" height="320" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe>
 
