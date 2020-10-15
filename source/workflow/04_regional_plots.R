@@ -26,7 +26,7 @@ state_values <- list(
     max(),
   peak_x = 0, # 0
   peak_y = 125, # 125
-  current_x = -60, # -80
+  current_x = -80, # -80
   current_y = -75, # 150
   current_display = TRUE
 )
@@ -81,7 +81,7 @@ kc_values <- list(
   peak_x = 0, 
   peak_y = 140, 
   current_x = 0, 
-  current_y = -370,
+  current_y = -280,
   current_display = TRUE
 )
 
@@ -108,7 +108,7 @@ os_values <- list(
   peak_x = -100, 
   peak_y = 380, 
   current_x = -0, 
-  current_y = -900,
+  current_y = -1000,
   current_display = TRUE
 )
 

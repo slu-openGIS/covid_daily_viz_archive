@@ -89,6 +89,7 @@ save_plots(filename = "results/low_res/stl_zip/a_case_map_regional.png", plot = 
 
 # map 14-day average rate
 ## create breaks
+regional_zip_sf <- mutate(regional_zip_sf, case_avg_rate = ifelse(case_avg_rate < 0, NA, case_avg_rate))
 zip_valid <- filter(regional_zip_sf, is.na(case_avg_rate) == FALSE)
 zip_na <- filter(regional_zip_sf, is.na(case_avg_rate) == TRUE)
 zip_valid <- map_breaks(zip_valid, var = "case_avg_rate", newvar = "map_breaks",
