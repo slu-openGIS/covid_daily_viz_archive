@@ -60,9 +60,9 @@ regional_count <- function(.data, region, point_data, state_data, region_data, p
 facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_upper_limit, highlight, plot_date, date, title, caption){
   
   # address Kansas City
-  if (type == "county"){
-    .data <- filter(.data, (geoid == "29511" & report_date > "2020-09-29") == FALSE) 
-  }
+  # if (type == "county"){
+  #  .data <- filter(.data, (geoid == "29511" & report_date > "2020-09-29") == FALSE) 
+  # }
   
   # create name
   if (type == "metro"){
