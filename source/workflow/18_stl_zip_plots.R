@@ -41,7 +41,7 @@ stl_county <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snapshot_stl
 # =============================================================================
 
 # store breaks
-breaks <- classInt::classIntervals(regional_zip_sf$case_rate, n = 5, style = "fisher")
+breaks <- classInt::classIntervals(regional_zip_sf$case_rate, n = 5, style = "quantile")
 
 # identify minimum value and apply to breaks
 breaks$brks[1] <- min(c(min(city_county_zip_sf$case_rate, na.rm = TRUE), 
@@ -93,7 +93,7 @@ regional_zip_sf <- mutate(regional_zip_sf, case_avg_rate = ifelse(case_avg_rate 
 zip_valid <- filter(regional_zip_sf, is.na(case_avg_rate) == FALSE)
 zip_na <- filter(regional_zip_sf, is.na(case_avg_rate) == TRUE)
 zip_valid <- map_breaks(zip_valid, var = "case_avg_rate", newvar = "map_breaks",
-                        style = "fisher", classes = 5, dig_lab = 2)
+                        style = "quantile", classes = 5, dig_lab = 2)
 
 ## create map
 p <- ggplot() +
