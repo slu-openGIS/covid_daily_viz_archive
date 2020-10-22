@@ -452,6 +452,8 @@ Select an area below to view additional plots that focus on trends within a vari
   <div class="column">
   <a href="disparities.html">`r fa("chart-pie", height = 40)`</i>
   <br><p style="font-size:20px">Disparities</p></a><p>Includes race, sex, and poverty data for Missouri and St. Louis</p></div>
-  <div class="column"></div>
+  <div class="column">
+  <a href="lct.html">`r fa("chart-pie", height = 40)`</i>
+  <br><p style="font-size:20px">Nursing Homes</p></a><p>Includes facility and county data for Missouri</p></div>
   <div class="column"></div>
 </div>
