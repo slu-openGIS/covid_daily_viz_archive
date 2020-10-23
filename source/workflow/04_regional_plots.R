@@ -81,7 +81,7 @@ kc_values <- list(
   peak_x = 0, 
   peak_y = 140, 
   current_x = 0, 
-  current_y = -200,
+  current_y = -250,
   current_display = TRUE
 )
 
@@ -108,7 +108,7 @@ os_values <- list(
   peak_x = -100, 
   peak_y = 380, 
   current_x = -0, 
-  current_y = -800,
+  current_y = -850,
   current_display = TRUE
 )
 
