@@ -23,15 +23,17 @@ source(here::here("source", "functions", "round_any.R"))
 # load data
 # state <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", 
 #  "nursing_home_ltc", "state_ltc.csv"))
-# county <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", 
-#  "nursing_home_ltc", "mo_xl_ltc_county.geojson")) 
-# facility <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", 
-#  "nursing_home_ltc", "mo_xl_ltc_full.geojson")) 
+county <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", 
+  "nursing_home_ltc", "mo_xl_ltc_county.geojson")) 
+facility <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", 
+  "nursing_home_ltc", "mo_xl_ltc_full.geojson")) 
+last_dates <- load(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
+                              "source", "ltc", "last_update.rda"))
 
 state <- read_csv(here::here("data", "state.csv"))
-county <- st_read(here::here("data", "mo_xl_ltc_county.geojson")) 
-facility <- st_read(here::here("data", "mo_xl_ltc_full.geojson")) %>%
-  arrange(p_state, p_county, p_name)
+# county <- st_read(here::here("data", "mo_xl_ltc_county.geojson")) 
+# facility <- st_read(here::here("data", "mo_xl_ltc_full.geojson")) %>%
+#  arrange(p_state, p_county, p_name)
 
 # pre-process data views
 county_outline <- select(county, GEOID)
@@ -67,15 +69,19 @@ mo_data %>%
   mutate(deaths_ltc_pct = deaths_ltc_all/deaths*100) -> mo_data
 ```
 
-COVID-19 has been implicated in substantial morbidity and mortality in nursing home residents since the onset of the outbreak in the United States. However, it is still unknown as to how the cases are distributed geographically and if clusters are correlated with overall geographic burden of COVID-19 cases. Moreover, the State of Missouri and local county health departments have refused, generally, to name nursing homes and long term care facilities (LTCs) associated with COVID-19 outbreaks. Using the Centers for Medicare and Medicaid Services (CMS) nursing home COVID-19 data set, which is publicly available, my colleague <a href="https://www.slu.edu/slucor/faculty/wiemken-timothy.php" target="_blank">Timothy Wiemken</a> and I have put together the following maps and tables that illustrate the extent of COVID-19 within facilities and relative to the counties these facilities reside in.
+<div class="note">
+<b>This section was last updated on `r last_update$current_date`. The nursing home data are current as of `r last_update$last_date`.</b>
+</div>
 
-## Overview {.padtop}
-As of October 22, 2020, a total of `r format(mo_data$cases_ltc_all, digits = 5)` cases have been reported in Missouri nursing homes and LTCs. These represent `r round(mo_data$cases_ltc_pct, digits = 2)`% of all cases reported to date in Missouri. Of these cases, `r mo_data$cases_ltc_res` have occurred among residents and `r mo_data$cases_ltc_staff` have occurred among staff.
+COVID-19 has been implicated in substantial morbidity and mortality in nursing home residents since the onset of the outbreak in the United States. However, it is still unknown as to how the cases are distributed geographically and if clusters are correlated with overall geographic burden of COVID-19 cases. Moreover, the State of Missouri and local county health departments have refused, generally, to name nursing homes and long term care facilities (LTCs) associated with COVID-19 outbreaks. Using the Centers for Medicare and Medicaid Services (CMS) nursing home COVID-19 data set, which is <a href="https://data.cms.gov/Special-Programs-Initiatives-COVID-19-Nursing-Home/COVID-19-Nursing-Home-Dataset/s2uc-8wxp" target="_blank">publicly available</a>, my colleague <a href="https://www.slu.edu/slucor/faculty/wiemken-timothy.php" target="_blank">Timothy Wiemken</a> and I have put together the following maps and tables that illustrate the extent of COVID-19 within facilities and relative to the counties these facilities reside in.
+
+## Missouri Overview {.padtop}
+As of `r last_update$last_date`, a total of `r format(mo_data$cases_ltc_all, digits = 5)` cases have been reported in Missouri nursing homes and LTCs. These represent `r round(mo_data$cases_ltc_pct, digits = 2)`% of all cases reported to date in Missouri. Of these cases, `r mo_data$cases_ltc_res` have occurred among residents and `r mo_data$cases_ltc_staff` have occurred among staff.
 
 In terms of mortality, a total of `r mo_data$deaths_ltc_all` deaths have been reported in Missouri nursing homes and LTCs. These represent `r round(mo_data$deaths_ltc_pct, digits = 2)`% of all deaths reported to date in Missouri. Of these deaths, `r mo_data$deaths_ltc_res` have occurred among residents and `r mo_data$deaths_ltc_staff` have occurred among staff.
 
-## Missouri in Comparison {.tabset .tabset-fade .tabset-pills .padtop}
-Health care transmission of SARS-CoV-2 has been documented but it is unknown as to how much transmission is occurring in nursing homes. The plot below depicts one approach to exploring this issue. Here, we subtracted the aggregate total admissions with COVID-19 from the total resident COVID-19 cases by state to approximate transmission. Dividing by the total number of nursing home beds in a state allows a more standardized rate-based evaluation of health care-associated COVID-19 transmission. The red line is the average. Missouri is slightly above average, so LTC transmission is happening here more than the average.
+## State Comparisons {.tabset .tabset-fade .tabset-pills .padtop}
+Health care transmission of SARS-CoV-2 has been documented but it is unknown as to how much transmission is occurring in nursing homes. The plot below depicts one approach to exploring this issue. Here, we subtracted the aggregate total admissions with COVID-19 from the total resident COVID-19 cases by state to approximate transmission. Dividing by the total number of nursing home beds in a state allows a more standardized rate-based evaluation of health care-associated COVID-19 transmission. The red line is the average, meaning Missouri is slightly above average.
 
 ### Static Plot
 
@@ -96,10 +102,13 @@ state %>%
 DT::datatable(data_table)
 ```
 
-## Cases by Facility {.tabset .tabset-fade .tabset-pills .padtop}
+## Morbidity {.padtop}
+The following maps track *confirmed* case rates by facility, new case rates in the last two weeks, and compare facility rates to county rates.
+
+### Cases by Facility {.tabset .tabset-fade .tabset-pills .padtop}
 This map shows the rate of *confirmed* COVID-19 cases per 100 beds at each LTC facility. The size of each circle is related to the rate - the larger the size, the higher the rate per 100 beds. It is possible for a facility to have a rate higher than 100 because our calculation also includes staff cases and because of resident turnover. The pop-up associated with each circle will reveal facility details as well as a breakdown of resident and staff cases.
 
-### Interactive Map
+#### Interactive Map
 
 ```{r facility-cases, echo=FALSE, warning=FALSE, out.width = '100%', out.height='600px'}
 # calculate breaks
@@ -141,7 +150,7 @@ leaflet() %>%
                   "<b>Staff Cases:</b> ", facility_cases$cases_staff))
 ```
 
-### Data Table
+#### Data Table
 
 ```{r facility-cases-table, echo=FALSE, out.width = '100%'}
 facility_cases %>%
@@ -165,10 +174,10 @@ st_geometry(data_table) <- NULL
 DT::datatable(data_table)
 ```
 
-## New Cases by Facility {.tabset .tabset-fade .tabset-pills .padtop}
-This map shows the rate of *new, confirmed* COVID-19 cases per 100 beds at each LTC facility. These are cases added at the facility in the last two weeks. For the purposes of this report, this is the period ending 2020-10-11. The size of each circle is related to the rate - the larger the size, the higher the rate per 100 beds. The pop-up associated with each circle will reveal facility details as well as a breakdown of resident and staff cases.
+### New Cases by Facility {.tabset .tabset-fade .tabset-pills .padtop}
+This map shows the rate of *new, confirmed* COVID-19 cases per 100 beds at each LTC facility. These are cases added at the facility in the last two weeks. For the purposes of this report, this is the period between `r last_update$last_date-14` and `r last_update$last_date`. The size of each circle is related to the rate - the larger the size, the higher the rate per 100 beds. The pop-up associated with each circle will reveal facility details as well as a breakdown of resident and staff cases.
 
-### Interactive Map
+#### Interactive Map
 
 ```{r facility-new-cases, warning=FALSE, echo=FALSE, out.width = '100%', out.height='600px'}
 # calculate breaks
@@ -210,7 +219,7 @@ leaflet() %>%
                   "<b>New Staff Cases:</b> ", facility_new_cases$new_cases_staff, "<br>"))
 ```
 
-### Data Table
+#### Data Table
 
 ```{r facility-new-cases-table, echo=FALSE, out.width = '100%'}
 facility_new_cases %>%
@@ -234,16 +243,17 @@ st_geometry(data_table) <- NULL
 DT::datatable(data_table)
 ```
 
-## Cases by County {.tabset .tabset-fade .tabset-pills .padtop}
-This map shows the number of cases in LTC facilities as a percentage of the total number of cases reported by individual counties. There is a temporal mismatch here - the LTC data are from 2020-10-11 while the county case data are the most recent available. This is done to compensate for difference reporting practices and time lines between the two data sets. The pop-up associated with each county will reveal counts as well as a breakdown of resident and staff cases.
+### Cases by County {.tabset .tabset-fade .tabset-pills .padtop}
+This map shows the number of cases in LTC facilities as a percentage of the total number of cases reported by individual counties. There is a temporal mismatch here - the LTC data are from `r last_update$last_date` while the county case data are from `r last_update$statewide_date`. This is done to compensate for difference reporting practices and time lines between the two data sets. The pop-up associated with each county will reveal counts as well as a breakdown of resident and staff cases.
 
-### Interactive Map
+#### Interactive Map
 
 ```{r county-cases, echo = FALSE, out.width = '100%', out.height='600px'}
 # calculate breaks
 # bins <- map_bins(counties, var = "cases_ltc_pct", style = "fisher", classes = 5, dig_lab = 2,
 #                 round = 2)
-bins <- c(0, 10, 20, 30, 40, round(max(county_cases$cases_ltc_pct, na.rm = TRUE)+1, digits = 0))
+bins <- c(min(county_cases$cases_ltc_pct, na.rm = TRUE), 10, 20, 30, 40, 
+          round(max(county_cases$cases_ltc_pct, na.rm = TRUE)+1, digits = 0))
 
 # create color palette
 pal <- colorBin("BuGn", domain = county_cases$cases_ltc_pct, bins = bins)
@@ -271,7 +281,7 @@ leaflet() %>%
     addLegend(pal = pal, values = county_cases$cases_ltc_pct, opacity = .75, title = "Percent")
 ```
 
-### Data Table
+#### Data Table
 
 ```{r county-cases-data-table, echo=FALSE, out.width = '100%'}
 county_cases %>%
@@ -295,10 +305,13 @@ st_geometry(data_table) <- NULL
 DT::datatable(data_table)
 ```
 
-## Deaths by Facility {.tabset .tabset-fade .tabset-pills .padtop}
+## Mortality {.padtop}
+The following maps track *confirmed* mortality rates by facility, new mortality rates in the last two weeks, and compare facility rates to county rates.
+
+### Deaths by Facility {.tabset .tabset-fade .tabset-pills .padtop}
 This map shows the rate of *confirmed* COVID-19 deaths per 100 beds at each LTC facility. The size of each circle is related to the rate - the larger the size, the higher the rate per 100 beds. It is possible for a facility to have a rate higher than 100 because our calculation also includes staff deaths and because of resident turnover. The pop-up associated with each circle will reveal facility details as well as a breakdown of resident and staff deaths.
 
-### Interactive Map
+#### Interactive Map
 
 ```{r facility-deaths, echo=FALSE, warning=FALSE, out.width = '100%', out.height='600px'}
 # calculate breaks
@@ -340,7 +353,7 @@ leaflet() %>%
                   "<b>Staff Deaths:</b> ", facility_deaths$deaths_staff))
 ```
 
-### Data Table
+#### Data Table
 
 ```{r facility-deaths-table, echo=FALSE, out.width = '100%'}
 facility_deaths %>%
@@ -364,10 +377,10 @@ st_geometry(data_table) <- NULL
 DT::datatable(data_table)
 ```
 
-## New Deaths by Facility {.tabset .tabset-fade .tabset-pills .padtop}
-This map shows the rate of *new, confirmed* COVID-19 deaths per 100 beds at each LTC facility. These are deaths added at the facility in the last two weeks. For the purposes of this report, this is the period ending 2020-10-11. The size of each circle is related to the rate - the larger the size, the higher the rate per 100 beds. The pop-up associated with each circle will reveal facility details as well as a breakdown of resident and staff deaths.
+### New Deaths by Facility {.tabset .tabset-fade .tabset-pills .padtop}
+This map shows the rate of *new, confirmed* COVID-19 deaths per 100 beds at each LTC facility. These are deaths added at the facility in the last two weeks. For the purposes of this report, this is the period between `r last_update$last_date-14` and `r last_update$last_date`. The size of each circle is related to the rate - the larger the size, the higher the rate per 100 beds. The pop-up associated with each circle will reveal facility details as well as a breakdown of resident and staff deaths.
 
-### Interactive Map
+#### Interactive Map
 
 ```{r facility-new-deaths, warning=FALSE, echo=FALSE, out.width = '100%', out.height='600px'}
 # calculate breaks
@@ -409,7 +422,7 @@ leaflet() %>%
                   "<b>New Staff Deaths:</b> ", facility_new_deaths$new_deaths_staff, "<br>"))
 ```
 
-### Data Table
+#### Data Table
 
 ```{r facility-new-deaths-table, echo=FALSE, out.width = '100%'}
 facility_new_deaths %>%
@@ -433,16 +446,17 @@ st_geometry(data_table) <- NULL
 DT::datatable(data_table)
 ```
 
-## Deaths by County {.tabset .tabset-fade .tabset-pills .padtop}
-This map shows the number of deaths in LTC facilities as a percentage of the total number of deaths reported by individual counties. There is a temporal mismatch here - the LTC data are from 2020-10-11 while the county case data are the most recent available. This is done to compensate for difference reporting practices and time lines between the two data sets. The pop-up associated with each county will reveal counts as well as a breakdown of resident and staff deaths.
+### Deaths by County {.tabset .tabset-fade .tabset-pills .padtop}
+This map shows the number of deaths in LTC facilities as a percentage of the total number of deaths reported by individual counties. There is a temporal mismatch here - the LTC data are from `r last_update$last_date` while the county case data are from `r last_update$statewide_date`. This is done to compensate for difference reporting practices and time lines between the two data sets. The pop-up associated with each county will reveal counts as well as a breakdown of resident and staff deaths.
 
-### Interactive Map
+#### Interactive Map
 
 ```{r county-deaths, echo = FALSE, out.width = '100%', out.height='600px'}
 # calculate breaks
 # bins <- map_bins(counties, var = "deaths_ltc_pct", style = "fisher", classes = 5, dig_lab = 2,
 #                 round = 2)
-bins <- c(0L, 25, 50, 75, 100, round(max(county_deaths$deaths_ltc_pct, na.rm = TRUE)+1, digits = 0))
+bins <- c(min(county_deaths$deaths_ltc_pct, na.rm = TRUE), 25, 50, 75, 100,
+          round(max(county_deaths$deaths_ltc_pct, na.rm = TRUE)+1, digits = 0))
 
 # create color palette
 pal <- colorBin("OrRd", domain = county_deaths$deaths_ltc_pct, bins = bins)
@@ -470,7 +484,7 @@ leaflet() %>%
     addLegend(pal = pal, values = county_deaths$deaths_ltc_pct, opacity = .75, title = "Percent")
 ```
 
-### Data Table
+#### Data Table
 
 ```{r county-deaths-data-table, echo=FALSE, out.width = '100%'}
 county_deaths %>%

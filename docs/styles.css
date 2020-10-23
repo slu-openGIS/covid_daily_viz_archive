@@ -27,3 +27,10 @@
   color: white;
   margin-bottom: 15px;
 }
+
+.note {
+  padding: 20px;
+  background-color: #4336f4; /* Blue */
+  color: white;
+  margin-bottom: 15px;
+}
