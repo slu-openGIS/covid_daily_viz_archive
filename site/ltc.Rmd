@@ -366,7 +366,7 @@ facility_deaths %>%
     City = p_city,
     State = p_state,
     County = p_county,
-    `Case Rate` = deaths_rate_all,
+    `Mortality Rate` = deaths_rate_all,
     `Total Deaths` = deaths_all,
     `Resident Deaths` = deaths_res,
     `Staff Deaths` = deaths_staff
@@ -435,7 +435,7 @@ facility_new_deaths %>%
     City = p_city,
     State = p_state,
     County = p_county,
-    `New Case Rate` = new_deaths_rate_all,
+    `New Mortality Rate` = new_deaths_rate_all,
     `Total New Deaths` = new_deaths_all,
     `New Resident Deaths` = new_deaths_res,
     `New Staff Deaths` = new_deaths_staff
@@ -497,7 +497,7 @@ county_deaths %>%
     County = county,
     `Total Deaths` = deaths,
     `Total LTC Deaths` = deaths_ltc_all,
-    `LTC Case %` = deaths_ltc_pct,
+    `LTC Mortality %` = deaths_ltc_pct,
     `LTC Resident Deaths` = deaths_ltc_res,
     `LTC Staff Deaths` = deaths_ltc_staff
   ) %>%
