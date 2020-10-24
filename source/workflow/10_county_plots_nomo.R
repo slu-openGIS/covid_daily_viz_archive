@@ -13,13 +13,13 @@ county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.c
 cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2], 
           "Kansas City" = values$pal[3], "Sullivan" = values$pal[4], 
           "Adair" = values$pal[5], "Gentry" = values$pal[6], 
-          "Pike" = values$pal[7], "Nodaway" = values$pal[8], 
+          "Pike" = values$pal[7], "Randolph" = values$pal[8], 
           "Marion" = values$pal[9], "Ralls" = values$pal[10], 
           "Livingston" = values$pal[11])
 
 # define focal metros
 county_focal <- c("29510", "29189", "29511", "29211", "29001", "29075",
-                  "29147", "29127", "29163", "29173", "29117")
+                  "29127", "29163", "29173", "29117", "29175")
 
 # =============================================================================
 
@@ -120,6 +120,9 @@ save_plots(filename = "results/low_res/county_nomo/c_case_log.png", plot = p, pr
 county_subset <- filter(county_data, report_date >= values$plot_date) %>%
   filter(geoid %in% county_focal)
 
+## address negative values
+county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
+
 ## modify Livingston County
 county_subset <- mutate(county_subset,
                         case_avg_rate = ifelse(geoid == 29117 & 
@@ -155,7 +158,7 @@ p <- facet_rate(county_subset,
                 plot_date = values$plot_date,
                 date = values$date,
                 title = "Pace of New COVID-19 Cases in Select Missouri Counties",
-                caption = values$caption_text_census)
+                caption = paste0(values$caption_text_census,"\nValues above 120 for Livingston County truncated to increase readability"))
 
 ## save plot
 save_plots(filename = "results/high_res/county_nomo/e_new_case.png", plot = p, preset = "lg")

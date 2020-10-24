@@ -153,6 +153,9 @@ save_plots(filename = "results/low_res/kc_metro/c_case_log.png", plot = p, prese
 ## subset data
 county_subset <- filter(county_data, report_date >= values$plot_date)
 
+## address negative values
+county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
+
 ## define top_val
 top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 20, f = ceiling)
 

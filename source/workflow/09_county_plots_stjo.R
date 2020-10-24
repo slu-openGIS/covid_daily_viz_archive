@@ -13,10 +13,11 @@ county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.c
 cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2], 
           "Kansas City" = values$pal[3], "Andrew" = values$pal[4], 
           "Buchanan" = values$pal[5], "DeKalb" = values$pal[8], 
-          "Clinton" = values$pal[6])
+          "Clinton" = values$pal[6], "Nodaway" = values$pal[7])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29003", "29021", "29063", "29049")
+county_focal <- c("29510", "29189", "29511", "29003", "29021", "29063", "29049",
+                  "29147")
 
 # =============================================================================
 
@@ -49,7 +50,7 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = values$county_rate_val)) + 
   labs(
     title = "Reported COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("St. Joseph Focus\n", as.character(values$plot_date), " through ", 
+    subtitle = paste0("St. Joseph and Northwestern Missouri Focus\n", as.character(values$plot_date), " through ", 
                       as.character(values$date)),
     x = "Date",
     y = "Rate per 1,000",
@@ -98,7 +99,7 @@ p <- ggplot(data = county_subset) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
   labs(
     title = "Pace of COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("St. Joseph Focus\n", "Current as of ", as.character(values$date)),
+    subtitle = paste0("St. Joseph and Northwestern Missouri Focus\n", "Current as of ", as.character(values$date)),
     caption = values$caption_text,
     x = "Days Since Fifth Case Reported",
     y = "Count of Reported Cases (Log)"
@@ -117,8 +118,11 @@ save_plots(filename = "results/low_res/county_stjo/c_case_log.png", plot = p, pr
 county_subset <- filter(county_data, report_date >= values$plot_date) %>%
   filter(geoid %in% county_focal)
 
+## address negative values
+county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
+
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 10, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 20, f = ceiling)
 
 ## re-order counties
 counties <- unique(county_subset$county)
@@ -135,10 +139,10 @@ county_subset <- mutate(county_subset, factor_var = fct_reorder2(county_fct, rep
 ## create plot
 p <- facet_rate(county_subset, 
                 type = "county", 
-                subtype = "St. Jospeh",
+                subtype = "St. Joseph",
                 pal = cols, 
                 x_breaks = values$date_breaks_facet,
-                y_breaks = 10,
+                y_breaks = 20,
                 y_upper_limit = top_val,
                 highlight = county_focal,
                 plot_date = values$plot_date,

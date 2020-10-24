@@ -153,8 +153,11 @@ save_plots(filename = "results/low_res/stl_metro/c_case_log.png", plot = p, pres
 ## subset data
 county_subset <- filter(county_data, report_date >= values$plot_date)
 
+## address negative values
+county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
+
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 10, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 20, f = ceiling)
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, case_avg_rate))
@@ -164,7 +167,7 @@ p <- facet_rate(county_subset,
                 type = "county", 
                 pal = cols, 
                 x_breaks = values$date_breaks_facet,
-                y_breaks = 10,
+                y_breaks = 20,
                 y_upper_limit = top_val,
                 highlight = county_focal,
                 plot_date = values$plot_date,

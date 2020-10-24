@@ -14,11 +14,12 @@ cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2],
           "Kansas City" = values$pal[3], "Camden" = values$pal[4], 
           "Miller" = values$pal[5], "Morgan" = values$pal[6], 
           "Benton" = values$pal[7], "Pulaski" = values$pal[8], 
-          "Laclede" = values$pal[9])
+          "Laclede" = values$pal[9], "Maries" = values$pal[10],
+          "Phelps" = values$pal[11])
 
 # define focal metros
 county_focal <- c("29510", "29189", "29511", "29029", "29131", "29141", "29015",
-                  "29169", "29105")
+                  "29169", "29105", "29125", "29161")
 
 # =============================================================================
 
@@ -52,7 +53,7 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = values$county_rate_val)) + 
   labs(
     title = "Reported COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("Lake of the Ozarks Focus\n", as.character(values$plot_date), " through ", 
+    subtitle = paste0("Lake of the Ozarks and South-Central Missouri Focus\n", as.character(values$plot_date), " through ", 
                       as.character(values$date)),
     x = "Date",
     y = "Rate per 1,000",
@@ -101,7 +102,7 @@ p <- ggplot(data = county_subset) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
   labs(
     title = "Pace of COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("Lake of the Ozarks Focus\n", "Current as of ", as.character(values$date)),
+    subtitle = paste0("Lake of the Ozarks and South-Central Missouri Focus\n", "Current as of ", as.character(values$date)),
     caption = values$caption_text,
     x = "Days Since Fifth Case Reported",
     y = "Count of Reported Cases (Log)"
@@ -120,8 +121,11 @@ save_plots(filename = "results/low_res/county_ozark/c_case_log.png", plot = p, p
 county_subset <- filter(county_data, report_date >= values$plot_date) %>%
   filter(geoid %in% county_focal)
 
+## address negative values
+county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
+
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 10, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 20, f = ceiling)
 
 ## re-order counties
 counties <- unique(county_subset$county)
@@ -141,7 +145,7 @@ p <- facet_rate(county_subset,
                 subtype = "Ozark",
                 pal = cols, 
                 x_breaks = values$date_breaks_facet,
-                y_breaks = 10,
+                y_breaks = 20,
                 y_upper_limit = top_val,
                 highlight = county_focal,
                 plot_date = values$plot_date,

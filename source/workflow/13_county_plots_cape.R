@@ -119,6 +119,13 @@ save_plots(filename = "results/low_res/county_cape/c_case_log.png", plot = p, pr
 county_subset <- filter(county_data, report_date >= values$plot_date) %>%
   filter(geoid %in% county_focal)
 
+## address negative values
+county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
+
+## modify Bollinger County
+county_subset <- mutate(county_subset,
+                        case_avg_rate = ifelse(geoid == 29017 & report_date == "2020-09-17", 120, case_avg_rate))
+
 ## define top_val
 top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 20, f = ceiling)
 
@@ -146,7 +153,7 @@ p <- facet_rate(county_subset,
                 plot_date = values$plot_date,
                 date = values$date,
                 title = "Pace of New COVID-19 Cases in Select Missouri Counties",
-                caption = values$caption_text_census)
+                caption = paste0(values$caption_text_census,"\nValues above 120 for Bollinger County truncated to increase readability"))
 
 ## save plot
 save_plots(filename = "results/high_res/county_cape/e_new_case.png", plot = p, preset = "lg")

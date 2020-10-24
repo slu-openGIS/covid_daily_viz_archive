@@ -119,8 +119,26 @@ save_plots(filename = "results/low_res/county_midmo/c_case_log.png", plot = p, p
 county_subset <- filter(county_data, report_date >= values$plot_date) %>%
   filter(geoid %in% county_focal)
 
+## address negative values
+county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
+
+## modify Audrain and Osage counties
+county_subset <- mutate(county_subset,
+                        case_avg_rate = ifelse(geoid == 29007 & 
+                                                 (report_date == "2020-10-02" | report_date == "2020-10-06"), 140, case_avg_rate),
+                        case_avg_rate = ifelse(geoid == 29007 & 
+                                                 (report_date >= "2020-10-03" & report_date <= "2020-10-05"), NA, case_avg_rate)
+)
+
+county_subset <- mutate(county_subset,
+                        case_avg_rate = ifelse(geoid == 29151 & 
+                                                 (report_date == "2020-10-17" | report_date == "2020-10-21"), 140, case_avg_rate),
+                        case_avg_rate = ifelse(geoid == 29151 & 
+                                                 (report_date >= "2020-10-18" & report_date <= "2020-10-20"), NA, case_avg_rate)
+)
+
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 20, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 20, f = ceiling)
 
 ## re-order counties
 counties <- unique(county_subset$county)
@@ -146,7 +164,7 @@ p <- facet_rate(county_subset,
                 plot_date = values$plot_date,
                 date = values$date,
                 title = "Pace of New COVID-19 Cases in Select Missouri Counties",
-                caption = values$caption_text_census)
+                caption = paste0(values$caption_text_census,"\nValues above 140 for Audrain and Osage counties truncated to increase readability"))
 
 ## save plot
 save_plots(filename = "results/high_res/county_midmo/e_new_case.png", plot = p, preset = "lg")

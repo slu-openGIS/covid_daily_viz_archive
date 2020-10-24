@@ -116,7 +116,7 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
       )
     } else if (subtype == "St. Joseph"){
       p <- p + labs(
-        subtitle = paste0("St. Joseph Focus\n",as.character(values$plot_date), 
+        subtitle = paste0("St. Joseph and Northwestern Missouri Focus\n",as.character(values$plot_date), 
                           " through ", as.character(values$date))
       )
     } else if (subtype == "Northern"){
@@ -126,7 +126,7 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
       )
     } else if (subtype == "Ozark"){
       p <- p + labs(
-        subtitle = paste0("Lake of the Ozarks Focus\n",as.character(values$plot_date), 
+        subtitle = paste0("Lake of the Ozarks and South-Central Missouri Focus\n",as.character(values$plot_date), 
                           " through ", as.character(values$date))
       )
     } else if (subtype == "Southwest"){
@@ -160,7 +160,7 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
       )
     }
     
-    p <- p + labs(caption = paste0(caption, "\nKansas City's trend is omitted after 2020-09-29 due to data quality issues"))
+    p <- p + labs(caption = caption)
     
   }
   

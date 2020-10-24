@@ -119,6 +119,9 @@ save_plots(filename = "results/low_res/county_semo/c_case_log.png", plot = p, pr
 county_subset <- filter(county_data, report_date >= values$plot_date) %>%
   filter(geoid %in% county_focal)
 
+## address negative values
+county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
+
 ## define top_val
 top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 10, f = ceiling)
 
