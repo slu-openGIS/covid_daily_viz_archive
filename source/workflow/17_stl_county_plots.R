@@ -26,11 +26,12 @@ cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2],
           "St. Charles" = values$pal[3], "Monroe" = values$pal[4], 
           "Clinton" = values$pal[5], "St. Clair" = values$pal[6],
           "Jefferson" = values$pal[7], "Madison" = values$pal[8],  
-          "Franklin" = values$pal[9], "Lincoln" = values$pal[10])
+          "Franklin" = values$pal[9], "Lincoln" = values$pal[10],
+          "Jersey" = values$pal[11], "Bond" = values$pal[12])
 
 ## define focal counties
 county_focal <- c("29510", "29189", "29183", "17133", "17027", "17163",
-                  "29099", "17119", "29071", "29113")
+                  "29099", "17119", "29071", "29113", "17083", "17005")
 
 ## create points
 county_points <- filter(county_data, report_date == values$date) %>%

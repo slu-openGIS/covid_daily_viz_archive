@@ -1,6 +1,6 @@
 # plot data ####
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # manual values ####
 
@@ -14,6 +14,8 @@ pal_c <- RColorBrewer::brewer.pal(n = 6, name = "Blues")
 pal_c <- pal_c[c(6)]
 pal_d <- RColorBrewer::brewer.pal(n = 6, name = "Greens")
 pal_d <- pal_d[c(6)]
+pal_e <- RColorBrewer::brewer.pal(n = 6, name = "Purples")
+pal_e <- pal_e[c(6)]
 
 ## create list
 values <- list(
@@ -39,14 +41,14 @@ values <- list(
   caption_text_census_map = "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau",
   caption_text_census_map2 = "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project",
   
-  pal = c(pal_a, pal_b, pal_c, pal_d)
+  pal = c(pal_a, pal_b, pal_c, pal_d, pal_e)
   
 )
 
 ## clean-up
-rm(pal_a, pal_b, pal_c, pal_d)
+rm(pal_a, pal_b, pal_c, pal_d, pal_e)
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # dependencies
 library(dplyr)
@@ -71,7 +73,27 @@ source("source/functions/round_any.R")
 source("source/functions/save_plots.R")
 source("source/functions/sequoia_theme.R")
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+# construct regional objects ####
+## build
+regional_geoids <- list(
+  cape = c("29031", "29157", "29186",  "29187", "29017", "29221", "29123", "29055"),
+  mid_mo = c("29135", "29019", "29051", "29007", "29027", "29053", "29151", "29073", "29139"),
+  ozark = c("29029", "29131", "29141", "29015", "29169", "29105", "29125", "29161"),
+  ozark_mtns = c("29153", "29215", "29091", "29229", "29203", "29035", "29181"),
+  nomo = c("29211", "29001", "29079", "29127", "29163", "29173", "29117", "29175", "29137"),
+  semo = c("29511", "29133", "29155", "29201",  "29207", "29143", "29023", "29069"),
+  spring = c("29043", "29077", "29167", "29213", "29209", "29225", "29059"),
+  st_jo = c("29003", "29021", "29063", "29049", "29147", "29075", "29081"),
+  swmo = c("29097", "29119", "29145", "29011", "29009", "29512", "29109"),
+  west = c("29033", "29101", "29159", "29195")
+)
+
+## save for site generation
+save(regional_geoids, file = "data/regional_geoids.rda")
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # update plots
 ## overview plots
@@ -98,5 +120,5 @@ source("source/workflow/21_kc_county_plots.R")
 
 # clean-up
 rm(values, calculate_days, facet_rate, filter_date, map_bins, map_breaks,
-   round_any, save_plots, sequoia_theme)
+   round_any, save_plots, sequoia_theme, regional_geoids)
 

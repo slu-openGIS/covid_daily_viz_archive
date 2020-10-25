@@ -27,7 +27,7 @@ county <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
   "nursing_home_ltc", "mo_xl_ltc_county.geojson")) 
 facility <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", 
   "nursing_home_ltc", "mo_xl_ltc_full.geojson")) 
-last_dates <- load(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
+load(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
                               "source", "ltc", "last_update.rda"))
 
 state <- read_csv(here::here("data", "state.csv"))

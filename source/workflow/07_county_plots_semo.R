@@ -17,8 +17,7 @@ cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2],
           "Butler" = values$pal[9], "Dunklin" = values$pal[10])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29133", "29155", 
-                  "29201",  "29207", "29143", "29023", "29069")
+county_focal <- c("29510", "29189", "29511", regional_geoids$semo)
 
 # =============================================================================
 

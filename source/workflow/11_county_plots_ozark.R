@@ -18,8 +18,7 @@ cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2],
           "Phelps" = values$pal[11])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29029", "29131", "29141", "29015",
-                  "29169", "29105", "29125", "29161")
+county_focal <- c("29510", "29189", "29511", regional_geoids$ozark)
 
 # =============================================================================
 

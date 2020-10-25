@@ -15,33 +15,28 @@ library(dplyr)
 library(readr)
 
 # load data
-county_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "county", "county_full.csv")) %>%
+county_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", 
+                                   "county", "county_full.csv")) %>%
   mutate(geoid = as.character(geoid)) %>%
   filter(state == "Missouri") %>%
   arrange(desc(report_date), county)
 
+load(here::here("data/regional_geoids.rda"))
+
 # subset data
-cape <- filter(county_data, geoid %in% c("29031", "29157", "29186",  "29187",
-                  "29017", "29221", "29123"))
-mid_mo <- filter(county_data, geoid %in% c("29135", "29019", "29051", "29007", 
-                  "29027", "29053", "29151"))
-ozark <- filter(county_data, geoid %in% c("29029", "29131", "29141", "29015",
-                  "29169", "29105", "29125", "29161"))
-ozark_mtns <- filter(county_data, geoid %in% c("29153", "29215", "29091", "29229"))
-nomo <- filter(county_data, geoid %in% c("29211", "29001", "29075",
-                  "29127", "29163", "29173", "29117", "29175"))
-semo <- filter(county_data, geoid %in% c("29511", "29133", "29155", 
-                  "29201",  "29207", "29143", "29023", "29069"))
-spring <- filter(county_data, geoid %in% c("29043", "29077", "29167", 
-                  "29213", "29209", "29225"))
-st_jo <- filter(county_data, geoid %in% c("29003", "29021", "29063", "29049",
-                  "29147"))
-swmo <- filter(county_data, geoid %in% c("29097", "29119", "29145", "29011", 
-                  "29009", "29512"))
-west <- filter(county_data, geoid %in% c("29033", "29101", "29159", "29195"))
+cape <- filter(county_data, geoid %in% regional_geoids$cape)
+mid_mo <- filter(county_data, geoid %in% regional_geoids$mid_mo)
+ozark <- filter(county_data, geoid %in% regional_geoids$ozark)
+ozark_mtns <- filter(county_data, geoid %in% regional_geoids$ozark_mtns)
+nomo <- filter(county_data, geoid %in% regional_geoids$nomo)
+semo <- filter(county_data, geoid %in% regional_geoids$semo)
+spring <- filter(county_data, geoid %in% regional_geoids$spring)
+st_jo <- filter(county_data, geoid %in% regional_geoids$st_jo)
+swmo <- filter(county_data, geoid %in% regional_geoids$swmo)
+west <- filter(county_data, geoid %in% regional_geoids$west)
 
 # remove county data
-rm(county_data)
+rm(county_data, regional_geoids)
 ```
 
 <div class="alert">

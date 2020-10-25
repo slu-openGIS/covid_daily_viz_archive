@@ -14,11 +14,11 @@ cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2],
           "Kansas City" = values$pal[3], "Cape Girardeau" = values$pal[4], 
           "Perry" = values$pal[5], "St. Francois" = values$pal[6],
           "Ste. Genevieve" = values$pal[7], "Bollinger" = values$pal[8], 
-          "Washington" = values$pal[9], "Madison" = values$pal[10])
+          "Washington" = values$pal[9], "Madison" = values$pal[10],
+          "Crawford" = values$pal[11])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", "29031", "29157", "29186",  "29187",
-                  "29017", "29221", "29123")
+county_focal <- c("29510", "29189", "29511", regional_geoids$cape)
 
 # =============================================================================
 

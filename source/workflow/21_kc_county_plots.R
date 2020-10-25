@@ -26,11 +26,12 @@ cols <- c("Kansas City" = values$pal[1], "Wyandotte" = values$pal[2],
           "Leavenworth" = values$pal[3], "Lafayette" = values$pal[4], 
           "Jackson" = values$pal[5], "Johnson" = values$pal[6],
           "Clay" = values$pal[7], "Cass" = values$pal[8], 
-          "Platte" = values$pal[9])
+          "Platte" = values$pal[9], "Clinton" = values$pal[10],
+          "Caldwell" = values$pal[11])
 
 ## define focal counties
 county_focal <- c("20209", "20103", "29511", "29107", "29095", "20091", "29047",
-                  "29037", "29165")
+                  "29037", "29165", "29025", "29049")
 
 ## create points
 county_points <- filter(county_data, report_date == values$date) %>%
