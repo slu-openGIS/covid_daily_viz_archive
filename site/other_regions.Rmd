@@ -40,7 +40,7 @@ rm(county_data, regional_geoids)
 ```
 
 <div class="alert">
-<b>Nodaway County, which had been included in the "Northern Missouri" plots, is now included in the "St. Joseph and Northwestern Missouri" plots.</b>
+<b>As of 2020-10-25, Nodaway and Gentry counties, which had been included in the "Northern Missouri" plots, are now included in the "St. Joseph and Northwestern Missouri" plots. New counties have been added to a number of regions' plots, including "Northern Missouri," "St. Joseph and Northwestern Missouri," "Mid-Missouri," "Ozark Mountains," and "Springfield." </b>
 </div>
 
 The following plots focus on a number of regions around Missouri. Unlike the pages for [St. Louis](stl.html) and [Kansas City](kc.html), these regions do not encompass officially designated regions. Rather, they attempt to group counties together based on geographic proximity.
