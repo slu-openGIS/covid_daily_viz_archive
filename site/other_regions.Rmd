@@ -21,21 +21,32 @@ county_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "
   arrange(desc(report_date), county)
 
 # subset data
-cape <- filter(county_data, geoid %in% c("29031", "29157", "29186",  "29187", "29017"))
-mid_mo <- filter(county_data, geoid %in% c("29135", "29019", "29051", "29007", "29027",
-                                           "29053", "29151"))
-ozark <- filter(county_data, geoid %in% c("29029", "29131", "29141", "29015", "29169", "29105"))
+cape <- filter(county_data, geoid %in% c("29031", "29157", "29186",  "29187",
+                  "29017", "29221", "29123"))
+mid_mo <- filter(county_data, geoid %in% c("29135", "29019", "29051", "29007", 
+                  "29027", "29053", "29151"))
+ozark <- filter(county_data, geoid %in% c("29029", "29131", "29141", "29015",
+                  "29169", "29105", "29125", "29161"))
 ozark_mtns <- filter(county_data, geoid %in% c("29153", "29215", "29091", "29229"))
-nomo <- filter(county_data, geoid %in% c("29211", "29001", "29075", "29079", "29147"))
-semo <- filter(county_data, geoid %in% c("29133", "29155", "29201",  "29207", "29143", "29023", "29069"))
-spring <- filter(county_data, geoid %in% c("29043", "29077", "29167", "29213"))
-st_jo <- filter(county_data, geoid %in% c("29003", "29021", "29063", "29049"))
-swmo <- filter(county_data, geoid %in% c("29097", "29119", "29145", "29011", "29009", "29512"))
+nomo <- filter(county_data, geoid %in% c("29211", "29001", "29075",
+                  "29127", "29163", "29173", "29117", "29175"))
+semo <- filter(county_data, geoid %in% c("29511", "29133", "29155", 
+                  "29201",  "29207", "29143", "29023", "29069"))
+spring <- filter(county_data, geoid %in% c("29043", "29077", "29167", 
+                  "29213", "29209", "29225"))
+st_jo <- filter(county_data, geoid %in% c("29003", "29021", "29063", "29049",
+                  "29147"))
+swmo <- filter(county_data, geoid %in% c("29097", "29119", "29145", "29011", 
+                  "29009", "29512"))
 west <- filter(county_data, geoid %in% c("29033", "29101", "29159", "29195"))
 
 # remove county data
 rm(county_data)
 ```
+
+<div class="alert">
+<b>Nodaway County, which had been included in the "Northern Missouri" plots, is now included in the "St. Joseph and Northwestern Missouri" plots.</b>
+</div>
 
 The following plots focus on a number of regions around Missouri. Unlike the pages for [St. Louis](stl.html) and [Kansas City](kc.html), these regions do not encompass officially designated regions. Rather, they attempt to group counties together based on geographic proximity.
 
@@ -157,7 +168,7 @@ DT::datatable(data_table, rownames= FALSE)
   * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
 
-## Lake of the Ozarks {.tabset .tabset-fade .tabset-pills .padtop}
+## Lake of the Ozarks and South-Central Missouri {.tabset .tabset-fade .tabset-pills .padtop}
 These plots show patterns in infections for a number of counties in central Missouri's Lake of the Ozarks region. Camden County is the primary county at the heart of the region, containing much of Osage Beach, MO. These counties are south of the Mid-Missouri region.
 
 ### Infection Rates
@@ -511,7 +522,7 @@ DT::datatable(data_table, rownames= FALSE)
   * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
 
-## St. Joseph {.tabset .tabset-fade .tabset-pills .padtop}
+## St. Joseph and Northwestern Missouri {.tabset .tabset-fade .tabset-pills .padtop}
 These plots show patterns in infections for a number of counties in the northwestern part Missouri, including parts (but not all of) of the St. Joseph <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>. These counties lie just to the north of the Kansas City <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a> along the Missouri River.
 
 ### Infection Rates
