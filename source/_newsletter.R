@@ -67,7 +67,8 @@ county_data %>%
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# create list ####
+# create output ####
+## construct list
 output <- list(
   total_cases = total_cases,
   new_cases = new_cases,
@@ -76,6 +77,15 @@ output <- list(
   new_deaths = new_deaths
 )
 
+## clean-up
 rm(state_data, state_summary, county_summary, new_cases, new_deaths, total_cases, total_deaths)
 
+## print top 10 county 7-day average rates
+county_data %>%
+  as_tibble() %>%
+  select(county, case_avg_rate) %>%
+  arrange(desc(case_avg_rate)) %>%
+  print(.)
+
+## print list
 print(output)
