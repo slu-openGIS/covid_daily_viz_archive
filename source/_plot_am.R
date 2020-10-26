@@ -6,16 +6,8 @@
 
 ## define color palettes
 # define colors
-pal_a <- RColorBrewer::brewer.pal(n = 8, name = "Set1")
-pal_a[6] <- "#FFD60C"
-pal_b <- RColorBrewer::brewer.pal(n = 6, name = "Reds")
-pal_b <- pal_b[c(6)]
-pal_c <- RColorBrewer::brewer.pal(n = 6, name = "Blues")
-pal_c <- pal_c[c(6)]
-pal_d <- RColorBrewer::brewer.pal(n = 6, name = "Greens")
-pal_d <- pal_d[c(6)]
-pal_e <- RColorBrewer::brewer.pal(n = 6, name = "Purples")
-pal_e <- pal_e[c(6)]
+pal <- RColorBrewer::brewer.pal(n = 8, name = "Set1")
+pal[6] <- "#FFD60C"
 
 ## create list
 values <- list(
@@ -41,12 +33,15 @@ values <- list(
   caption_text_census_map = "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau",
   caption_text_census_map2 = "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project",
   
-  pal = c(pal_a, pal_b, pal_c, pal_d, pal_e)
-  
+  pal = c(pal, 
+          RColorBrewer::brewer.pal(n = 6, name = "Reds")[c(6)], 
+          RColorBrewer::brewer.pal(n = 6, name = "Blues")[c(6)], 
+          RColorBrewer::brewer.pal(n = 6, name = "Greens")[c(6)], 
+          RColorBrewer::brewer.pal(n = 6, name = "Purples")[c(6)])
 )
 
 ## clean-up
-rm(pal_a, pal_b, pal_c, pal_d, pal_e)
+rm(pal)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
