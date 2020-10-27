@@ -206,23 +206,23 @@ county_subset %>%
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, day, case_avg))
 county_day_points <- mutate(county_day_points, factor_var = fct_reorder2(county, day, case_avg))
 
-## fix st louis
-corrected_stl_point <- filter(county_subset, geoid == 29510 & (report_date == "2020-06-19" | report_date == "2020-07-02"))
-x <- filter(county_subset, geoid == 29510 & report_date > "2020-07-01")
-y <- filter(county_subset, geoid != 29510)
-stl_prior <- filter(county_subset, geoid == 29510 & report_date < "2020-06-20")
-county_subset <- bind_rows(x,y)
+## fix counties with anomalies
+### remove from primary data
+county_subset %>%
+  mutate(case_avg = ifelse(geoid == 29510 & (report_date >= "2020-06-25" & 
+                                               report_date <= "2020-06-27"), NA,
+                           case_avg)) -> county_subset
+### create interpolated data
+alt_county_subset <- filter(county_subset, geoid == 29510 & 
+                              (report_date == "2020-06-24" | report_date == "2020-06-28"))
 
 ## create plot
 p <- ggplot() +
   geom_line(data = county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), size = 2) +
-  geom_line(data = stl_prior, mapping = aes(x = day, y = case_avg), size = 2, color = values$pal[1]) +
+  geom_line(data = alt_county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), 
+            size = 2, show.legend = FALSE) +
   geom_point(county_day_points, mapping = aes(x = day, y = case_avg, color = factor_var),
              size = 4, show.legend = FALSE) +
-  geom_point(corrected_stl_point, mapping = aes(x = day, y = case_avg), color = values$pal[1], shape = 15,
-             size = 4, show.legend = FALSE) +
-  geom_line(corrected_stl_point, mapping = aes(x = day, y = case_avg), color = values$pal[1],
-            size = 2, linetype = "dotted", show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(.1, 1000), breaks = c(.1, .3, 1, 3, 10, 30, 100, 300, 1000), 
@@ -231,7 +231,7 @@ p <- ggplot() +
   labs(
     title = "Pace of New COVID-19 Cases in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(values$date)),
-    caption = paste0(values$caption_text, "\nSt. Louis City's trend omitted between 2020-06-19 and 2020-07-01 due to data quality issues"),
+    caption = paste0(values$caption_text, "\nSmall portions of the trend for St. Louis interpolated to provide smoother trend lines"),
     x = "Days Since Average of Five Cases Reached",
     y = "7-day Average of Reported Cases (Log)"
   ) +

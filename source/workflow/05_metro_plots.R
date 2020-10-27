@@ -319,7 +319,7 @@ p <- ggplot(data = metro_subset) +
     title = "Pace of New COVID-19 Deaths by Metro Area",
     subtitle = paste0("Current as of ", as.character(values$date)),
     # caption = values$caption_text,
-    caption = paste0(values$caption_text, "\nSmall portions of trends for St. Louis and Kansas City interpolated to provide smoother trend lines."),
+    caption = paste0(values$caption_text, "\nSmall portions of trends for St. Louis and Kansas City interpolated to provide smoother trend lines"),
     x = "Days Since Average of Three Deaths Reported",
     y = "7-day Average of New Deaths (Log)"
   ) +

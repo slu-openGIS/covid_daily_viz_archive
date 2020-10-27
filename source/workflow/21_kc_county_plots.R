@@ -251,7 +251,7 @@ p <- ggplot() +
     title = "Pace of New COVID-19 Cases in Metro Kansas City",
     subtitle = paste0("Current as of ", as.character(values$date)),
     # caption = values$caption_text,
-    caption = paste0(values$caption_text, "\nSmall portions of trends for Kansas City as well as Jackson, Leavenworth, and Platte counties\ninterpolated to provide smoother trend lines."),
+    caption = paste0(values$caption_text, "\nSmall portions of trends for Kansas City as well as Jackson, Leavenworth, and Platte counties\n  interpolated to provide smoother trend lines"),
     x = "Days Since Average of Five Cases Reached",
     y = "7-day Average of Reported Cases (Log)"
   ) +
