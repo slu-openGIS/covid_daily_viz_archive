@@ -27,7 +27,7 @@ metro_points <- filter(metro_data, report_date == values$date)
 metro_subset <- filter(metro_data, report_date >= values$plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(metro_subset$case_rate), accuracy = 2, f = ceiling)
+top_val <- round_any(x = max(metro_subset$case_rate), accuracy = 5, f = ceiling)
 
 ## create factors
 metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, case_rate))
@@ -40,7 +40,7 @@ p <- ggplot(metro_subset) +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 2)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 5)) + 
   labs(
     title = "Reported COVID-19 Cases by Metro Area",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
@@ -188,7 +188,7 @@ save_plots(filename = "results/low_res/metro/f_new_case_log.png", preset = "lg",
 metro_subset <- filter(metro_data, report_date >= values$plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(metro_subset$mortality_rate), accuracy = .04, f = ceiling)
+top_val <- round_any(x = max(metro_subset$mortality_rate), accuracy = .05, f = ceiling)
 
 ## create factors
 metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, mortality_rate))
@@ -201,7 +201,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .04)) +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .05)) +
   labs(
     title = "Reported COVID-19 Mortality by Metro Area",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
@@ -289,9 +289,26 @@ metro_subset %>%
 metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, day, deaths_avg))
 metro_day_points <- mutate(metro_day_points, factor_var = fct_reorder2(short_name, day, deaths_avg))
 
+## fix counties with anomalies
+### remove from primary data
+metro_subset %>%
+  mutate(deaths_avg = ifelse(short_name == "Kansas City" & (report_date >= "2020-09-30" & 
+                                                            report_date <= "2020-10-06"), NA,
+                             deaths_avg)) %>%
+  mutate(deaths_avg = ifelse(short_name == "St. Louis" & report_date =="2020-10-21", NA,
+                             deaths_avg)) -> metro_subset
+
+### create interpolated data
+alt_metro_subset <- list(
+  kc = filter(metro_subset, short_name == "Kansas City" & (report_date == "2020-09-29" | report_date == "2020-10-07")),
+  stl = filter(metro_subset, short_name == "St. Louis" & (report_date == "2020-10-20" | report_date == "2020-10-22"))) %>%
+  map_df(bind_rows)
+
 ## create plot
 p <- ggplot(data = metro_subset) +
   geom_line(mapping = aes(x = day, y = deaths_avg, color = factor_var), size = 2) +
+  geom_line(data = alt_metro_subset, mapping = aes(x = day, y = deaths_avg, color = factor_var), 
+            size = 2, show.legend = FALSE) +
   geom_point(metro_day_points, mapping = aes(x = day, y = deaths_avg, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Metro Area") +
@@ -301,7 +318,8 @@ p <- ggplot(data = metro_subset) +
   labs(
     title = "Pace of New COVID-19 Deaths by Metro Area",
     subtitle = paste0("Current as of ", as.character(values$date)),
-    caption = values$caption_text,
+    # caption = values$caption_text,
+    caption = paste0(values$caption_text, "\nSmall portions of trends for St. Louis and Kansas City interpolated to provide smoother trend lines."),
     x = "Days Since Average of Three Deaths Reported",
     y = "7-day Average of New Deaths (Log)"
   ) +
@@ -346,5 +364,5 @@ save_plots(filename = "results/low_res/metro/m_case_fatality_rate.png", plot = p
 # =============================================================================
 
 # clean-up
-rm(metro_data, metro_subset, metro_points, metro_day_points)
+rm(metro_data, metro_subset, metro_points, metro_day_points, alt_metro_subset)
 rm(top_val, cols, p)

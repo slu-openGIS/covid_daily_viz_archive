@@ -69,7 +69,7 @@ save_plots(filename = "results/low_res/kc_metro/a_case_map.png", plot = p, prese
 county_subset <- filter(county_data, report_date >= values$plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_rate), accuracy = 2, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_rate), accuracy = 5, f = ceiling)
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, case_rate))
@@ -83,7 +83,7 @@ p <- ggplot() +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 2)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 5)) + 
   labs(
     title = "Reported COVID-19 Cases in Metro Kansas City",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
@@ -205,27 +205,43 @@ county_subset %>%
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, day, case_avg))
-county_day_points <- mutate(county_day_points, factor_var = fct_reorder2(county, day, case_avg)) # %>%
-  # filter(geoid != "29511")
+county_day_points <- mutate(county_day_points, factor_var = fct_reorder2(county, day, case_avg)) 
 
-## fix st louis
-# corrected_stl_point <- filter(county_subset, geoid == 29511 & (report_date == "2020-09-29")) # | report_date == "2020-07-02"
-# county_subset <- filter(county_subset, (geoid == "29511" & report_date > "2020-09-29") == FALSE)
-# x <- filter(county_subset, geoid == 29511 & report_date > "2020-07-01")
-# y <- filter(county_subset, geoid != 29511)
-# stl_prior <- filter(county_subset, geoid == 29511 & report_date < "2020-09-29")
-# county_subset <- bind_rows(x,y)
+## fix counties with anomalies
+### remove from primary data
+county_subset %>%
+  mutate(case_avg = ifelse(geoid == 29165 & (report_date >= "2020-10-08" & 
+                                               report_date <= "2020-10-14"), NA,
+                           case_avg)) %>%
+  mutate(case_avg = ifelse(geoid == 20103 & (report_date >= "2020-09-07" & 
+                                               report_date <= "2020-09-08"), NA,
+                           case_avg)) %>%
+  mutate(case_avg = ifelse(geoid == 29511 & (report_date >= "2020-10-04" & 
+                                               report_date <= "2020-10-06"), NA,
+                           case_avg)) %>%
+  mutate(case_avg = ifelse(geoid == 29095 & (report_date >= "2020-10-03" &
+                                               report_date <= "2020-10-05"), NA,
+                           case_avg)) %>%
+  mutate(case_avg = ifelse(geoid == 29095 & report_date == "2020-10-13", NA,
+                           case_avg)) -> county_subset
+
+### create interpolated data
+alt_county_subset <- list(
+  platte = filter(county_subset, geoid == 29165 & (report_date == "2020-10-07" | report_date == "2020-10-15")),
+  leavenworth = filter(county_subset, geoid == 20103 & (report_date == "2020-09-06" | report_date == "2020-09-09")),
+  kc = filter(county_subset, geoid == 29511 & (report_date == "2020-10-03" | report_date == "2020-10-07")),
+  jackson_a = filter(county_subset, geoid == 29095 & (report_date == "2020-10-02" | report_date == "2020-10-06")),
+  jackson_b = filter(county_subset, geoid == 29095 & (report_date == "2020-10-12" | report_date == "2020-10-14"))
+) %>%
+  map_df(bind_rows)
 
 ## create plot
 p <- ggplot() +
   geom_line(data = county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), size = 2) +
-  # geom_line(data = stl_prior, mapping = aes(x = day, y = case_avg), size = 2, color = values$pal[1]) +
+  geom_line(data = alt_county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), 
+            size = 2, show.legend = FALSE) +
   geom_point(county_day_points, mapping = aes(x = day, y = case_avg, color = factor_var),
              size = 4, show.legend = FALSE) +
-  # geom_point(corrected_stl_point, mapping = aes(x = day, y = case_avg), color = values$pal[1], shape = 15,
-  #           size = 4, show.legend = FALSE) +
-  # geom_line(corrected_stl_point, mapping = aes(x = day, y = case_avg), color = values$pal[1],
-  #          size = 2, linetype = "dotted", show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(.1, 1000), breaks = c(.1, .3, 1, 3, 10, 30, 100, 300, 1000), 
@@ -234,8 +250,8 @@ p <- ggplot() +
   labs(
     title = "Pace of New COVID-19 Cases in Metro Kansas City",
     subtitle = paste0("Current as of ", as.character(values$date)),
-    caption = values$caption_text,
-    # caption = paste0(values$caption_text, "\nKansas City's trend is omitted after 2020-09-29 due to data quality issues"),
+    # caption = values$caption_text,
+    caption = paste0(values$caption_text, "\nSmall portions of trends for Kansas City as well as Jackson, Leavenworth, and Platte counties\ninterpolated to provide smoother trend lines."),
     x = "Days Since Average of Five Cases Reached",
     y = "7-day Average of Reported Cases (Log)"
   ) +
@@ -280,7 +296,7 @@ save_plots(filename = "results/low_res/kc_metro/g_mortality_map.png", plot = p, 
 county_subset <- filter(county_data, report_date >= values$plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$mortality_rate), accuracy = .05, f = ceiling)
+top_val <- round_any(x = max(county_subset$mortality_rate), accuracy = .1, f = ceiling)
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, mortality_rate))
@@ -294,7 +310,7 @@ p <- ggplot() +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .05)) +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .1)) +
   labs(
     title = "Reported COVID-19 Mortality in Metro Kansas City",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
@@ -420,5 +436,5 @@ save_plots(filename = "results/low_res/kc_metro/m_case_fatality_rate.png", plot 
 
 # clean-up ####
 rm(kc_sf, county_focal, county_points, county_subset,
-   county_data, county_day_points, stl_prior)
+   county_data, county_day_points, alt_county_subset)
 rm(top_val, cols, p)

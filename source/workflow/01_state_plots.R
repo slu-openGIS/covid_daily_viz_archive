@@ -27,7 +27,7 @@ state_points <- filter(state_data, report_date == values$date)
 state_subset <- filter(state_data, report_date >= values$plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$case_rate), accuracy = 200, f = ceiling)
+top_val <- round_any(x = max(state_subset$case_rate), accuracy = 250, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, case_rate))
@@ -40,7 +40,7 @@ p <- ggplot(state_subset) +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 200)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 250)) + 
   labs(
     title = "Reported COVID-19 Cases by State",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
@@ -84,9 +84,9 @@ p <- ggplot(data = state_subset) +
   geom_point(state_day_points, mapping = aes(x = day, y = cases, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(5, 400000), 
-                breaks = c(5, 100, 1000, 10000, 100000, 300000), 
-                labels = comma) +
+  scale_y_log10(limits = c(5, 1000000), 
+                breaks = c(5, 10, 30, 100, 300, 1000, 3000, 10000, 30000, 100000, 300000, 1000000), 
+                labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
   labs(
     title = "Pace of COVID-19 Cases by State",
@@ -163,7 +163,7 @@ p <- ggplot(data = state_subset) +
   geom_point(state_day_points, mapping = aes(x = day, y = case_avg, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(1, 5000), breaks = c(1, 3, 10, 30, 100, 300, 1000, 3000), 
+  scale_y_log10(limits = c(1, 10000), breaks = c(1, 3, 10, 30, 100, 300, 1000, 3000, 10000), 
                 labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
   labs(
