@@ -69,6 +69,11 @@ snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "coun
   mutate(icu_rate = ifelse(hospitals == 0, NA, icu_rate))
 ```
 
+<div class="note">
+<b>The site was last updated on `r Sys.Date()`. All county, metro, and state level morbidity and mortality data are current as of `r Sys.Date()-1`. ZIP code, disparity, and St. Louis hospitalization are current as of `r Sys.Date()`. </b>
+</div>
+<br>
+
 Welcome to <a href="https://chris-prener.github.io" target="_blank">Chris Prener's</a> tracking site for the SARS-CoV-2 pandemic in Missouri. This site is updated nightly using data from a variety of federal, state, and local data sources as well as the <a href="https://nytimes.com" target="_blank">New York Times'</a> <a href="https://github.com/nytimes/covid-19-data" target="_blank">COVID-19 Project</a>. Chris also posts <a href="https://twitter.com/chrisprener" target="_blank">Twitter</a> threads on Tuesday and Thursday evenings breaking down current trends in Missouri. If you are new to the site, please read the [About page](about.html) for an overview of these data.
 
 Chris also emails out a weekly round-up of COVID-19 trends for Missouri. These weekly newsletters, named "River City Data," also feature some exclusive content, including short interviews with COVID-19 experts, health care providers, and others who have insight into the pandemic. Sign up below:
