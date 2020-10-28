@@ -95,7 +95,7 @@ p <- ggplot(data = county_subset) +
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(5, values$county_log_max), breaks = c(5,10,30,100,300,1000,3000,10000,30000), 
+  scale_y_log10(limits = c(5, values$county_log_max), breaks = values$county_log_breaks,
                 labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
   labs(

@@ -20,7 +20,8 @@ values <- list(
   date_breaks_facet = "2 months",
   x_angle = 25,
   
-  county_log_max = 30000,
+  county_log_max = 100000,
+  county_log_breaks = c(5,10,30,100,300,1000,3000,10000,30000,100000),
   county_rate_val = 5,
   county_rate_pos = 30,
   county_rate_x = 2,
