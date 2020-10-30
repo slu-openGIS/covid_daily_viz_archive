@@ -24,11 +24,11 @@ state_values <- list(
     filter(region == "Missouri") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = -70, # 0
-  peak_y = -40, # 125
-  current_x = 0, # -80
-  current_y = 200, # 125
-  current_display = TRUE
+  peak_x = 0, # 0
+  peak_y = 200, # 125
+  current_x = -80, # -80
+  current_y = 125, # 125
+  current_display = FALSE
 )
 
 ## tables
@@ -51,18 +51,18 @@ stl_values <- list(
     filter(region == "St. Louis") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = -80, 
-  peak_y = 70, 
+  peak_x = -10, 
+  peak_y = 200, 
   current_x = 0, 
   current_y = -550,
-  current_display = TRUE
+  current_display = FALSE
 )
 
 ## tables
 stl_values[["peak_tbl"]] <- region_data %>%
   filter(region == "St. Louis") %>%
   filter(case_avg == stl_values$peak_val) %>%
-  mutate(text = paste0("peak average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+  mutate(text = paste0("peak average of ", round(case_avg, digits = 2), "\ncases reported on ", format(report_date, format = "%d %b")))
 
 stl_values[["current_tbl"]] <- region_data %>%
   filter(region == "St. Louis") %>%
@@ -78,8 +78,8 @@ kc_values <- list(
     filter(region == "Kansas City") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = 0, 
-  peak_y = 140, 
+  peak_x = -10, 
+  peak_y = 200, 
   current_x = 0, 
   current_y = -350,
   current_display = TRUE
