@@ -106,10 +106,10 @@ os_values <- list(
     pull(var = case_avg) %>% 
     max(),
   peak_x = -100, 
-  peak_y = 380, 
+  peak_y = 480, 
   current_x = -0, 
   current_y = -1100,
-  current_display = TRUE
+  current_display = FALSE
 )
 
 ## tables

@@ -14,7 +14,8 @@ cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2],
           "Kansas City" = values$pal[3], "Christian" = values$pal[4], 
           "Greene" = values$pal[5], "Polk" = values$pal[7], 
           "Taney" = values$pal[8], "Stone" = values$pal[9], 
-          "Webster" = values$pal[6], "Dallas" = values$pal[10])
+          "Webster" = values$pal[6], "Dallas" = values$pal[10],
+          "Hickory" = values$pal[11])
 
 # define focal metros
 county_focal <- c("29510", "29189", "29511", regional_geoids$spring)
@@ -122,7 +123,7 @@ county_subset <- filter(county_data, report_date >= values$plot_date) %>%
 county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 10, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 20, f = ceiling)
 
 ## re-order counties
 counties <- unique(county_subset$county)
@@ -142,7 +143,7 @@ p <- facet_rate(county_subset,
                 subtype = "Springfield",
                 pal = cols, 
                 x_breaks = values$date_breaks_facet,
-                y_breaks = 10,
+                y_breaks = 20,
                 y_upper_limit = top_val,
                 highlight = county_focal,
                 plot_date = values$plot_date,
