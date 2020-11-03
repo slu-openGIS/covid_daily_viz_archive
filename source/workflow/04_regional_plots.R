@@ -82,7 +82,7 @@ kc_values <- list(
   peak_y = 200, 
   current_x = 0, 
   current_y = -350,
-  current_display = TRUE
+  current_display = FALSE
 )
 
 ## tables
