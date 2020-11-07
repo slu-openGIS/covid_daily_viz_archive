@@ -30,11 +30,16 @@ county_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "
   filter(report_date >= "2020-03-07") %>%
   arrange(desc(report_date), county)
 
-regional_counties <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "county", "daily_snapshot_mo.geojson")) %>%
-  filter(GEOID %in% c("29099", "29183", "29189", "29510")) %>%
+regional_counties <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "county", "daily_snapshot_mo_xl.geojson")) %>%
+  filter(GEOID %in% c("17005", "17013", "17027", "17083", "17117", 
+                      "17119", "17133", "17163", "29071", "29099", 
+                      "29113", "29183", "29189", "29219", "29510")) %>%
   select(GEOID, county)
 
-zip_snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_regional.geojson"), 
+zip_snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_metro.geojson"), 
+                        stringsAsFactors = FALSE) 
+
+zip_snapshot2 <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_regional.geojson"), 
                         stringsAsFactors = FALSE) 
 
 stl_hosp <-  read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "metro", "stl_hospital.csv"))
@@ -216,16 +221,18 @@ leaflet() %>%
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
     popup = paste0("<b>Zip:</b> ", zip_snapshot$GEOID_ZCTA, " <br> ",
                  "<b>Current Cumulative Count:</b> ", zip_snapshot$cases, "<br>",
-                 "<b>Current Cumulative Rate per 1,000:</b> ", round(zip_snapshot$case_rate, digits = 2), " <br> ",
-                 "<b>Population Below Poverty Line:</b> ", round(zip_snapshot$pvty_pct, digits = 2), "% <br> ",
-                 "<b>African American Population:</b> ", round(zip_snapshot$blk_pct, digits = 2), "% ")
-  )  %>%
+                 "<b>Current Cumulative Rate per 1,000:</b> ", round(zip_snapshot$case_rate, digits = 2))) %>%
   addPolylines(
     data = regional_counties,
     color = "#000000",
     weight = 3
   ) %>%
   addLegend(pal = pal, values = zip_snapshot$case_rate, opacity = .75, title = "Rate")
+  
+#  , " <br> ",
+#                 "<b>Population Below Poverty Line:</b> ", round(zip_snapshot$pvty_pct, digits = 2), "% <br> ",
+#                 "<b>African American Population:</b> ", round(zip_snapshot$blk_pct, digits = 2), "% ")
+  
 ```
 
 ### Static Map
@@ -236,30 +243,22 @@ knitr::include_graphics("img/stl_zip/a_case_map_regional.png")
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_regional.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_regional.png" target="_blank">Low-res</a>]
 
-### Other Maps
-
-  * St. Louis City and County [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_core.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_core.png" target="_blank">Low-res</a>]
-  * St. Louis City [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_stl_city.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_stl_city.png" target="_blank">Low-res</a>]
-  * St. Louis County [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_stl_county.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_stl_county.png" target="_blank">Low-res</a>]
-  * St. Charles County [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_st_charles.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_st_charles.png" target="_blank">Low-res</a>]
-  * Jefferson County [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_jefferson.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_jefferson.png" target="_blank">Low-res</a>]
-
 ### Data Table
 
 ```{r zip-data-table, echo=FALSE, out.width = '100%'}
 zip_snapshot %>%
-  select(GEOID_ZCTA, cases, case_rate, pvty_pct, blk_pct) %>%
+  select(GEOID_ZCTA, cases, case_rate) %>% # , pvty_pct, blk_pct
   mutate(
-    case_rate = round(case_rate, digits = 2),
-    pvty_pct = round(pvty_pct, digits = 2),
-    blk_pct = round(blk_pct, digits = 2)
+    case_rate = round(case_rate, digits = 2) #,
+    # pvty_pct = round(pvty_pct, digits = 2),
+    # blk_pct = round(blk_pct, digits = 2)
   ) %>%
   rename(
     `Zip Code` = GEOID_ZCTA,
     `Cumulative Cases` = cases,
-    `Rate per 1,000 Residents` = case_rate,
-    `Poverty Rate (%)` = pvty_pct,
-    `% African American` = blk_pct
+    `Rate per 1,000 Residents` = case_rate #,
+    # `Poverty Rate (%)` = pvty_pct,
+    # `% African American` = blk_pct
   ) -> data_table
 st_geometry(data_table) <- NULL
 DT::datatable(data_table)
@@ -278,20 +277,23 @@ This map shows the 14-day average of new infections as a rate per 10,000 residen
 ### Interactive Map
 
 ```{r map-avg-infections-zip, echo = FALSE, out.width = '100%', out.height='600px', warning=FALSE}
+regional_counties <- filter(regional_counties, GEOID %in% c("29071", "29099", 
+                      "29113", "29183", "29189", "29219", "29510"))
+
 # calculate breaks
-bins <- map_bins(zip_snapshot, var = "case_avg_rate", style = "quantile", classes = 5, dig_lab = 2,
+bins <- map_bins(zip_snapshot2, var = "case_avg_rate", style = "quantile", classes = 5, dig_lab = 2,
                  round = 2)
-bins[1] <- round_any(x = min(zip_snapshot$case_avg_rate, na.rm = TRUE), accuracy = .01, f = floor)
-bins[length(bins)] <- round_any(x = max(zip_snapshot$case_avg_rate, na.rm = TRUE), accuracy = .01, f = ceiling)
+bins[1] <- round_any(x = min(zip_snapshot2$case_avg_rate, na.rm = TRUE), accuracy = .01, f = floor)
+bins[length(bins)] <- round_any(x = max(zip_snapshot2$case_avg_rate, na.rm = TRUE), accuracy = .01, f = ceiling)
 
 # create color palette
-pal <- colorBin("RdPu", domain = zip_snapshot$case_avg_rate, bins = bins)
+pal <- colorBin("RdPu", domain = zip_snapshot2$case_avg_rate, bins = bins)
 
 # map
 leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolygons(
-    data = zip_snapshot,
+    data = zip_snapshot2,
     color = "#444444", 
     weight = 1, 
     opacity = 1.0, 
@@ -299,11 +301,9 @@ leaflet() %>%
     fillOpacity = 0.75,
     fillColor = ~pal(case_avg_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
-    popup = paste0("<b>Zip:</b> ", zip_snapshot$GEOID_ZCTA, " <br> ",
-                 "<b>Current Cumulative Count:</b> ", zip_snapshot$cases, "<br>",
-                 "<b>Current 14-day Average Rate per 10,000:</b> ", round(zip_snapshot$case_avg_rate, digits = 2), " <br> ",
-                 "<b>Population Below Poverty Line:</b> ", round(zip_snapshot$pvty_pct, digits = 2), "% <br> ",
-                 "<b>African American Population:</b> ", round(zip_snapshot$blk_pct, digits = 2), "% ")
+    popup = paste0("<b>Zip:</b> ", zip_snapshot2$GEOID_ZCTA, " <br> ",
+                 "<b>Current Cumulative Count:</b> ", zip_snapshot2$cases, "<br>",
+                 "<b>Current 14-day Average Rate per 10,000:</b> ", round(zip_snapshot2$case_avg_rate, digits = 2))
   )  %>%
   addPolylines(
     data = regional_counties,
@@ -311,6 +311,10 @@ leaflet() %>%
     weight = 3
   ) %>%
   addLegend(pal = pal, values = zip_snapshot$case_avg_rate, opacity = .75, title = "Rate")
+
+# , " <br> ",
+#                 "<b>Population Below Poverty Line:</b> ", round(zip_snapshot$pvty_pct, digits = 2), "% <br> ",
+#                 "<b>African American Population:</b> ", round(zip_snapshot$blk_pct, digits = 2), "% "
 ```
 
 ### Static Map
@@ -324,19 +328,19 @@ Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_vi
 ### Data Table
 
 ```{r zip-avg-data-table, echo=FALSE, out.width = '100%'}
-zip_snapshot %>%
-  select(GEOID_ZCTA, cases, case_avg_rate, pvty_pct, blk_pct) %>%
+zip_snapshot2 %>%
+  select(GEOID_ZCTA, cases, case_avg_rate) %>% # , pvty_pct, blk_pct
   mutate(
-    case_avg_rate = round(case_avg_rate, digits = 2),
-    pvty_pct = round(pvty_pct, digits = 2),
-    blk_pct = round(blk_pct, digits = 2)
+    case_avg_rate = round(case_avg_rate, digits = 2) #,
+    # pvty_pct = round(pvty_pct, digits = 2),
+    # blk_pct = round(blk_pct, digits = 2)
   ) %>%
   rename(
     `Zip Code` = GEOID_ZCTA,
     `Cumulative Cases` = cases,
-    `14-day Average Rate per 10,000` = case_avg_rate,
-    `Poverty Rate (%)` = pvty_pct,
-    `% African American` = blk_pct
+    `14-day Average Rate per 10,000` = case_avg_rate #,
+    # `Poverty Rate (%)` = pvty_pct,
+    # `% African American` = blk_pct
   ) -> data_table
 st_geometry(data_table) <- NULL
 DT::datatable(data_table)
