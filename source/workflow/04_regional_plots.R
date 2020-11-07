@@ -51,8 +51,8 @@ stl_values <- list(
     filter(region == "St. Louis") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = -10, 
-  peak_y = 200, 
+  peak_x = -40, 
+  peak_y = -45, 
   current_x = 0, 
   current_y = -550,
   current_display = FALSE
