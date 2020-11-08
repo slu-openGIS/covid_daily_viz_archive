@@ -8,7 +8,7 @@
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# prompt for submodule update ####
+# qa prompts ####
 
 ## prompt
 q <- usethis::ui_yeah("Have you updated the data submodule?")
