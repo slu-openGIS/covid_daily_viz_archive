@@ -125,14 +125,14 @@ county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0,
 ## modify Audrain and Osage counties
 county_subset <- mutate(county_subset,
                         case_avg_rate = ifelse(geoid == 29007 & 
-                                                 (report_date == "2020-10-02" | report_date == "2020-10-06"), 140, case_avg_rate),
+                                                 (report_date == "2020-10-02" | report_date == "2020-10-06"), 160, case_avg_rate),
                         case_avg_rate = ifelse(geoid == 29007 & 
                                                  (report_date >= "2020-10-03" & report_date <= "2020-10-05"), NA, case_avg_rate)
 )
 
 county_subset <- mutate(county_subset,
                         case_avg_rate = ifelse(geoid == 29151 & 
-                                                 (report_date == "2020-10-17" | report_date == "2020-10-21"), 140, case_avg_rate),
+                                                 (report_date == "2020-10-17" | report_date == "2020-10-21"), 160, case_avg_rate),
                         case_avg_rate = ifelse(geoid == 29151 & 
                                                  (report_date >= "2020-10-18" & report_date <= "2020-10-20"), NA, case_avg_rate)
 )
@@ -164,7 +164,7 @@ p <- facet_rate(county_subset,
                 plot_date = values$plot_date,
                 date = values$date,
                 title = "Pace of New COVID-19 Cases in Select Missouri Counties",
-                caption = paste0(values$caption_text_census,"\nValues above 140 for Audrain and Osage counties truncated to increase readability"))
+                caption = paste0(values$caption_text_census,"\nValues above 160 for Audrain and Osage counties truncated to increase readability"))
 
 ## save plot
 save_plots(filename = "results/high_res/county_midmo/e_new_case.png", plot = p, preset = "lg")

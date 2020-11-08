@@ -81,7 +81,9 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
   # optionally highlight trends
   if (type == "metro" | type == "county"){
     p <- p + gghighlight(geoid %in% highlight, use_direct_label = FALSE, use_group_by = FALSE)
-  } 
+  } else if (type == "state"){
+    p <- p + gghighlight(state %in% highlight, use_direct_label = FALSE, use_group_by = FALSE)
+  }
     
   # finish plot
   p <- p +

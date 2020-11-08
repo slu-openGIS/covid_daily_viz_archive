@@ -109,7 +109,7 @@ save_plots(filename = "results/low_res/state/c_case_log.png", plot = p, preset =
 state_subset <- filter(state_data, report_date >= values$plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$case_avg_rate), accuracy = 5, f = ceiling)
+top_val <- round_any(x = max(state_subset$case_avg_rate), accuracy = 10, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, case_avg_rate))
@@ -119,7 +119,7 @@ p <- facet_rate(state_subset,
                 type = "state", 
                 pal = cols, 
                 x_breaks = values$date_breaks_facet,
-                y_breaks = 5,
+                y_breaks = 10,
                 y_upper_limit = top_val,
                 highlight = unique(state_subset$state),
                 plot_date = values$plot_date,
@@ -163,7 +163,7 @@ p <- ggplot(data = state_subset) +
   geom_point(state_day_points, mapping = aes(x = day, y = case_avg, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
-  scale_y_log10(limits = c(1, 10000), breaks = c(1, 3, 10, 30, 100, 300, 1000, 3000, 10000), 
+  scale_y_log10(limits = c(1, 30000), breaks = c(1, 3, 10, 30, 100, 300, 1000, 3000, 10000, 30000), 
                 labels = comma_format(accuracy = 1)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
   labs(

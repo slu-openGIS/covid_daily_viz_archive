@@ -192,7 +192,7 @@ county_data %>%
   mutate(case_avg = ifelse(case_avg < .1, .1, case_avg)) -> county_subset
 
 # define top_val
-top_val <- round_any(x = max(county_subset$day), accuracy = 5, f = ceiling)
+top_val <- round_any(x = max(county_subset$day), accuracy = 50, f = ceiling)
 
 ## identify max day
 county_subset %>%
@@ -218,16 +218,18 @@ alt_county_subset <- filter(county_subset, geoid == 29510 &
 
 ## create plot
 p <- ggplot() +
-  geom_line(data = county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), size = 2) +
+  geom_line(data = county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), 
+            size = 2, show.legend = FALSE) +
   geom_line(data = alt_county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), 
             size = 2, show.legend = FALSE) +
   geom_point(county_day_points, mapping = aes(x = day, y = case_avg, color = factor_var),
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(.1, 1000), breaks = c(.1, .3, 1, 3, 10, 30, 100, 300, 1000), 
+  scale_y_log10(limits = c(.1, 1000), breaks = c(.1, 1, 10, 100, 1000), 
                 labels = comma_format(accuracy = .2)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 50)) +
+  facet_wrap(~county) +
   labs(
     title = "Pace of New COVID-19 Cases in Metro St. Louis",
     subtitle = paste0("Current as of ", as.character(values$date)),

@@ -52,7 +52,7 @@ stl_values <- list(
     pull(var = case_avg) %>% 
     max(),
   peak_x = -40, 
-  peak_y = -45, 
+  peak_y = -75, 
   current_x = 0, 
   current_y = -550,
   current_display = FALSE

@@ -2,6 +2,18 @@
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
+# prompt for submodule update ####
+
+## prompt
+q <- usethis::ui_yeah("Have you updated the data submodule?")
+
+## evaluate prompt
+if (q == FALSE){
+  stop("AM plot build aborted!")
+}
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
 # manual values ####
 
 ## define color palettes
@@ -116,5 +128,5 @@ source("source/workflow/21_kc_county_plots.R")
 
 # clean-up
 rm(values, calculate_days, facet_rate, filter_date, map_bins, map_breaks,
-   round_any, save_plots, sequoia_theme, regional_geoids)
+   round_any, save_plots, sequoia_theme, regional_geoids, q)
 
