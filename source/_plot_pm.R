@@ -1,12 +1,27 @@
-# plot data, PM only
+# Plot PM Data ####
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+# these plots include:
+#   - state, regional, and metro trends
+#   - county-level plots in a variety of metro and non-metro regions
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+# prompt for submodule update ####
+
+## prompt
+q <- usethis::ui_yeah("Have you updated the data submodule?")
+
+## evaluate prompt
+if (q == FALSE){
+  stop("PM plot build aborted!")
+}
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # UPDATE date value
 date <- Sys.Date()
-
-# UPDATE remove last row value
-remove_last <- FALSE
 
 # define first date for plotting
 test_date_breaks <- "14 days"
@@ -18,26 +33,33 @@ x_angle <- 25
 caption_text_tests <- "Plot by Christopher Prener, Ph.D.\nData via The Atlantic COVID-19 Tracking Project and the State of Missouri"
 caption_text_tests_census <- "Plot by Christopher Prener, Ph.D.\nData via The Atlantic COVID-19 Tracking Project, the State of Missouri, and and the U.S. Census Bureau"
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # dependencies
-library(dplyr)
-library(forcats)
-library(ggplot2)
-library(ggrepel)
-library(RColorBrewer)
-library(readr)
-library(sf)
-library(tidyr)
 
-# functions
-source("source/functions/map_breaks.R")
-source("source/functions/get_coords.R")
-source("source/functions/round_any.R")
-source("source/functions/save_plots.R")
-source("source/functions/sequoia_theme.R")
+## packages
+### tidyverse
+library(dplyr)          # data wrangling
+library(forcats)        # factor tools
+library(ggplot2)        # mapping and plotting
+library(readr)          # csv file tools
+library(tidyr)          # data wrangling
 
-# =============================================================================
+### spatial packages
+library(sf)             # mapping tools
+
+### other packages
+library(ggrepel)        # map labeling
+library(RColorBrewer)   # color palettes
+
+## functions
+source("source/functions/get_coords.R")        # convert sf geometry to x,y columns
+source("source/functions/map_breaks.R")        # creating map beaks
+source("source/functions/round_any.R")         # rounding
+source("source/functions/save_plots.R")        # save plots and maps
+source("source/functions/sequoia_theme.R")     # theme for plots and maps
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # update plots
 ## overview plots
@@ -50,7 +72,7 @@ source("source/workflow/03_state_individual_plots.R")
 source("source/workflow/19_stl_individual_plots.R")
 source("source/workflow/20_stl_hospital_plots.R")
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # clean-up
 rm(map_bins, map_breaks, round_any, save_plots, sequoia_theme, x_angle)

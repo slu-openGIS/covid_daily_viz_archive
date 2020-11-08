@@ -1,4 +1,10 @@
-# plot data ####
+# Plot AM Data ####
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+# these plots include:
+#   - state, regional, and metro trends
+#   - county-level plots in a variety of metro and non-metro regions
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
@@ -15,6 +21,8 @@ if (q == FALSE){
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # manual values ####
+
+# the resulting object contains global values for adjusting plots
 
 ## define color palettes
 # define colors
@@ -58,32 +66,10 @@ rm(pal)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# dependencies
-library(dplyr)
-library(forcats)
-library(ggplot2)
-library(gghighlight)
-library(ggrepel)
-library(purrr)
-library(RColorBrewer)
-library(readr)
-library(scales)
-library(sf)
-library(tibble)
-library(tidyr)
-library(zoo)
-
-# functions
-source("source/functions/calculate_days.R")
-source("source/functions/map_breaks.R")
-source("source/functions/plots.R")
-source("source/functions/round_any.R")
-source("source/functions/save_plots.R")
-source("source/functions/sequoia_theme.R")
-
-#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
-
 # construct regional objects ####
+
+# the resulting object contains master lists of GEOIDs for regional mapping
+
 ## build
 regional_geoids <- list(
   cape = c("29031", "29157", "29186",  "29187", "29017", "29221", "29123", "29055"),
@@ -103,30 +89,62 @@ save(regional_geoids, file = "data/regional_geoids.rda")
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# update plots
+# dependencies ####
+
+## packages
+### tidyverse
+library(dplyr)          # data wrangling
+library(forcats)        # factor tools
+library(ggplot2)        # mapping and plotting
+library(purrr)          # functional programming
+library(readr)          # csv file tools
+library(tibble)         # data wrangling
+library(tidyr)          # data wrangling
+
+### spatial packages
+library(sf)             # mapping tools
+
+### other packages
+library(gghighlight)    # highlight trends on plots
+library(ggrepel)        # map labeling
+library(RColorBrewer)   # color palettes
+library(scales)         # plot scales
+library(zoo)            # rolling means
+
+## functions
+source("source/functions/calculate_days.R")    # data wrangling for log plots 
+source("source/functions/map_breaks.R")        # creating map beaks
+source("source/functions/plots.R")             # standardized plots
+source("source/functions/round_any.R")         # rounding
+source("source/functions/save_plots.R")        # save plots and maps
+source("source/functions/sequoia_theme.R")     # theme for plots and maps
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+# plotting workflow ####
+
 ## overview plots
-source("source/workflow/01_state_plots.R")
-source("source/workflow/04_regional_plots.R")
-source("source/workflow/05_metro_plots.R")
-source("source/workflow/06_county_plots.R")
+source("source/workflow/01_state_plots.R")        # statewide plots
+source("source/workflow/04_regional_plots.R")     # St. Louis, Kansas City, and Outstate
+source("source/workflow/05_metro_plots.R")        # metropolitan statistical areas
+source("source/workflow/06_county_plots.R")       # county maps for all of MO
 
 ## regional plots
-source("source/workflow/07_county_plots_semo.R")
-source("source/workflow/08_county_plots_midmo.R")
-source("source/workflow/09_county_plots_stjo.R")
-source("source/workflow/10_county_plots_nomo.R")
-source("source/workflow/11_county_plots_ozark.R")
-source("source/workflow/12_county_plots_swmo.R")
-source("source/workflow/13_county_plots_cape.R")
-source("source/workflow/14_county_plots_west.R")
-source("source/workflow/15_county_plots_spring.R")
-source("source/workflow/16_county_plots_ozkmtns.R")
-source("source/workflow/17_stl_county_plots.R")
-source("source/workflow/21_kc_county_plots.R")
+source("source/workflow/07_county_plots_semo.R")  # Bootheel
+source("source/workflow/08_county_plots_midmo.R") # Mid-Missouri
+source("source/workflow/09_county_plots_stjo.R")  # St. Joseph and Northwest MO
+source("source/workflow/10_county_plots_nomo.R")  # Northern MO
+source("source/workflow/11_county_plots_ozark.R") # Lake of the Ozarks
+source("source/workflow/12_county_plots_swmo.R")  # Jopolin and Southwest MO
+source("source/workflow/13_county_plots_cape.R")  # Cape Girardeau region
+source("source/workflow/14_county_plots_west.R")  # West-Central MO
+source("source/workflow/15_county_plots_spring.R") # Springfield
+source("source/workflow/16_county_plots_ozkmtns.R") # Ozark Mountains
+source("source/workflow/17_stl_county_plots.R")   # St. Louis MSA
+source("source/workflow/21_kc_county_plots.R")    # Kansas City MSA
 
-# =============================================================================
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# clean-up
+# clean-up ####
 rm(values, calculate_days, facet_rate, filter_date, map_bins, map_breaks,
    round_any, save_plots, sequoia_theme, regional_geoids, q)
-
