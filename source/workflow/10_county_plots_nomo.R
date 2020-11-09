@@ -138,7 +138,7 @@ county_subset <- mutate(county_subset,
 )
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 25, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 20, f = ceiling)
 
 ## re-order counties
 counties <- unique(county_subset$county)
