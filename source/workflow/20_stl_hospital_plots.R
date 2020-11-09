@@ -214,5 +214,5 @@ save_plots(filename = "results/low_res/stl_metro/q_vent.png", plot = p, preset =
 # =============================================================================
 
 # clean-up
-rm(stl_hosp, stl_subset, hosp_points, avg_line, hosp_breaks)
+rm(stl_hosp, stl_subset, hosp_points, avg_line)
 rm(top_val, p, cols, pal)
