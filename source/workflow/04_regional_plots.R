@@ -19,7 +19,7 @@ cols <- c("St. Louis" = values$pal[1], "Kansas City" = values$pal[2],
 # define plotting values, state trend ####
 ## primary values
 state_values <- list(
-  top_val = round_any(x = max(region_data$case_avg), accuracy = 200, f = ceiling),
+  top_val = round_any(x = max(region_data$case_avg), accuracy = 250, f = ceiling),
   peak_val = region_data %>% 
     filter(region == "Missouri") %>% 
     pull(var = case_avg) %>% 
@@ -55,7 +55,7 @@ stl_values <- list(
   peak_y = 600, 
   current_x = -40, 
   current_y = -85,
-  current_display = TRUE
+  current_display = FALSE
 )
 
 ## tables

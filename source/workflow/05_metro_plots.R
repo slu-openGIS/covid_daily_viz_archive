@@ -85,8 +85,8 @@ p <- ggplot(data = metro_subset) +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_y_log10(
-    limits = c(5, 100000), 
-    breaks = c(5,10,30,100,300,1000,3000,10000,30000,100000), 
+    limits = c(5, 300000), 
+    breaks = c(5,10,30,100,300,1000,3000,10000,30000,100000,300000), 
     labels = comma_format(accuracy = 1)
   ) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +

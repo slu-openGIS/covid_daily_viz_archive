@@ -244,9 +244,10 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(.1, 1000), breaks = c(.1, .3, 1, 3, 10, 30, 100, 300, 1000), 
+  scale_y_log10(limits = c(.1, 1000), breaks = c(.1, 1, 10, 100, 1000), 
                 labels = comma_format(accuracy = .2)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 50)) +
+  facet_wrap(~county) +
   labs(
     title = "Pace of New COVID-19 Cases in Metro Kansas City",
     subtitle = paste0("Current as of ", as.character(values$date)),
@@ -262,7 +263,7 @@ save_plots(filename = "results/high_res/kc_metro/f_new_case_log.png", plot = p, 
 save_plots(filename = "results/low_res/kc_metro/f_new_case_log.png", plot = p, preset = "lg", dpi = 72)
 
 ## remove extras
-rm(x, y, corrected_stl_point)
+rm(x, y)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
