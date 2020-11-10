@@ -456,5 +456,7 @@ Select an area below to view additional plots that focus on trends within a vari
   <div class="column">
   <a href="ltc.html">`r fa("chart-line", height = 40)`</i>
   <br><p style="font-size:20px">Nursing Homes</p></a><p>Includes facility and county data for Missouri</p></div>
-  <div class="column"></div>
+  <div class="column">
+  <a href="mortality.html">`r fa("chart-area", height = 40)`</i>
+  <br><p style="font-size:20px">Mortality</p></a><p>Includes excess mortality and comparisons of actual vs. reported deaths</p></div>
 </div>

@@ -1,0 +1,21 @@
+---
+title: "Mortality in Missouri"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+The following plots offer two alternative perspectives to the <a href="states.html#Mortality">reported mortality data</a> shared on the state comparison page. Those data are based on *mortality reports*, which could be off by days, weeks, or even months from the actual date of death. These data are based on provisional data that reflect the actual date of death. We can use these data to explore differences between report date and actual date of death as well as excess mortality. 
+
+## Reported Deaths vs. Actual {.tabset .tabset-fade .tabset-pills .padtop}
+A routine criticism of mortality data during the COVID-19 pandemic has been that they do not accurately reflect current temporal trends because deaths are often reported weeks or months after they occur. While the reported data do not perfectly match the actual death trend, they are also not radically different for much of the course of the pandemic to this point.
+
+### Static Plot
+
+```{r metro-infection-map, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/state/n_mortality_compare.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/n_mortality_compare.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/n_mortality_compare.png" target="_blank">Low-res</a>]
