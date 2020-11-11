@@ -30,10 +30,18 @@ knitr::include_graphics("img/state/n_mortality_compare.png")
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/n_mortality_compare.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/n_mortality_compare.png" target="_blank">Low-res</a>]
 
-## Excess Mortality, Missouri {.tabset .tabset-fade .tabset-pills .padtop}
-"Excess deaths" refer to deaths that occur beyond what we would expect in a given time period. This plot shows forecasted mortality based on all-cause mortality dating back to 1999. The difference between the red line (provisional mortality during COVID-19) and the forecast suggests the burden of excess death experienced during the COVID-19 pandemic.
+## Excess Mortality
+"Excess deaths" refer to deaths that occur beyond what we would expect in a given time period. This plot shows a forecast of mortality based on all-cause mortality dating back to 1999. The difference between the red line (provisional mortality during COVID-19) and the forecast suggests the burden of excess death experienced during the COVID-19 pandemic. These plots are created and maintained by <a href="https://www.slu.edu/slucor/faculty/wiemken-timothy.php" target="_blank">Timothy Wiemken, Ph.D</a>.
 
-### Interactive Plot
+Both excess mortality plots below use the same fundamental data - all-cause mortality data from the CDC as well as the State of Missouri. We forecast mortality during the pandemic using all-cause mortality data dating back to 1999, and then overlay the provisional observed mortality during the COVID-19 pandemic in red. The confidence bands highlight the estimated amount of uncertainty in the forecast. 80 out of 100 estimates fall within the 80% confidence band, while 95 out of 100 estimates fall in the 95% band. By comparing the red line to the forecast trend as well as the confidence bands, we can get a sense of where the observed (but provisional) mortality trend fits within the forecast's expected variation.
+
+```{r metro-infection-map, echo=FALSE}
+knitr::include_graphics("img/forecast_legend.png")
+```
+
+### Excess Mortality, Missouri {.tabset .tabset-fade .tabset-pills .padtop}
+
+#### Interactive Plot
 
 ```{r excess-mortality, echo=FALSE, out.width = '100%'}
 df<-read.csv(here::here("data","totaldeaths_timeseries_missouri.csv"))
@@ -68,7 +76,7 @@ interval_value_formatter <- "function(num, opts, seriesName, g, row, col) {
 
 
 pre %>%
-  stlf(lambda = 0, h = 36) %>%
+  stlf(lambda = 0, h = 36, method="arima") %>%
   {cbind(actuals=.$x, forecast_mean=.$mean,
          lower_95=.$lower[,"95%"], upper_95=.$upper[,"95%"],
          lower_80=.$lower[,"80%"], upper_80=.$upper[,"80%"],
@@ -94,16 +102,18 @@ pre %>%
   )
 ```
 
-### Notes
+#### Notes
+* All-cause mortality data in Missouri from January 1, 1999 through December 2018 were gathered from [CDC WONDER](https://wonder.cdc.gov/controller/datarequest/D76) grouped by month. 
+* Provisional all-cause mortality from January 2019-Present were gathered from [The Missouri Department of Health & Senior Services Vital Statistics](https://health.mo.gov/data/vitalstatistics/). 
+
 * Analysis is conducted using the Seasonal and Trend decomposition using Loess Forecasting model, as implemented in the [Forecast](https://cran.r-project.org/web/packages/forecast/forecast.pdf) package in [R](https://cran.r-project.org). 
 * Forecasting is done on data from January 1999 through February 2020, since COVID-19 began circulating more in March 2020 in the USA. There is a 36 month forecast. 
 * The black lines on the plot are the actual observed mortality in the USA during the pre-COVID-19 time frame (mortality counts from 2019 and 2020 are still considered provisional). 
-* Observed all-cause mortality is plotted through September, 2020.
+* Observed all-cause mortality is plotted through July, 2020.
 
 ## Excess Mortality, United States {.tabset .tabset-fade .tabset-pills .padtop}
-"Excess deaths" refer to deaths that occur beyond what we would expect in a given time period. This plot shows forecasted mortality based on all-cause mortality dating back to 1999. The difference between the red line (provisional mortality during COVID-19) and the forecast suggests the burden of excess death experienced during the COVID-19 pandemic.
 
-### Interactive Plot
+#### Interactive Plot
 
 ```{r excess-mortality-us, echo=FALSE, out.width = '100%'}
 #### Historical Data from: CDC wonder and NVSS = 1999 through 2019
@@ -137,7 +147,7 @@ names(out)<-c("date", "deaths")
 
 out %>%
   group_by(date) %>%
-  summarise(deaths = sum(deaths, na.rm=T)) -> out2
+  summarise(deaths = sum(deaths, na.rm=T), .groups = "drop_last") -> out2
 
 ### final data
 df <- rbind(df, out2)
@@ -154,9 +164,6 @@ df.pre<-df[1:254,]
 df.post<-df[255:(nrow(df)-1),]
 #### create time series object - monthly
 pre<-ts(df.pre$deaths, start=c(1999,1), end = c(2020,2), frequency = 12)
-
-library(forecast)
-library(dygraphs)
 
 #### make actuals overlay
 df.post2<-c(rep(NA, times=254), df.post$deaths[-nrow(df.post)], rep(NA, times=(36-nrow(df.post)+1)))
@@ -176,7 +183,7 @@ interval_value_formatter <- "function(num, opts, seriesName, g, row, col) {
 
 
 pre %>%
-  stlf(lambda = 0, h = 36) %>%
+  stlf(lambda = 0, h = 36, method="arima") %>%
   {cbind(actuals=.$x, forecast_mean=.$mean,
          lower_95=.$lower[,"95%"], upper_95=.$upper[,"95%"],
          lower_80=.$lower[,"80%"], upper_80=.$upper[,"80%"],
@@ -203,3 +210,12 @@ pre %>%
 
 ```
 
+#### Notes
+* All-cause mortality data in the USA from January 1, 1999 through December 2018 were gathered from [CDC WONDER](https://wonder.cdc.gov/controller/datarequest/D76) grouped by month. 
+* Provisional all-cause mortality from January 2019-December 2019 were gathered from [The National Center for Health Statistics](https://www.cdc.gov/nchs/nvss/vsrr/provisional-tables.htm). 
+* Finally, provisional all-cause mortality data for January, 2020 to present are scraped on-demand from the [CDC COVID View](https://www.cdc.gov/coronavirus/2019-ncov/covid-data/covidview/index.html) website.
+
+* Analysis is conducted using the Seasonal and Trend decomposition using Loess Forecasting model, as implemented in the [Forecast](https://cran.r-project.org/web/packages/forecast/forecast.pdf) package in [R](https://cran.r-project.org). 
+* Forecasting is done on data from January 1999 through February 2020, since COVID-19 began circulating more in March 2020 in the USA. There is a 36 month forecast. 
+* The black lines on the plot are the actual observed mortality in the USA during the pre-COVID-19 time frame (mortality counts from 2019 and 2020 are still considered provisional). 
+* Observed all-cause mortality is plotted through September, 2020.
