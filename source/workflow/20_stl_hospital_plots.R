@@ -16,7 +16,7 @@ cols <- c("7-day Average" = pal[1], "Count" = pal[2])
 # plot new in patient
 
 ## define top_val
-top_val <- round_any(x = max(stl_hosp$new_in_pt, na.rm = TRUE), accuracy = 5, f = ceiling)
+top_val <- round_any(x = max(stl_hosp$new_in_pt, na.rm = TRUE), accuracy = 10, f = ceiling)
 
 ## subset
 stl_hosp %>%
@@ -46,7 +46,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Measure") +
   scale_x_date(date_breaks = hosp_breaks, date_labels = "%d %b") +
-  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) + 
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 10)) + 
   labs(
     title = "New COVID-19 Hospitalizations in Metro St. Louis",
     subtitle = paste0("St. Louis Metropolitan Pandemic Task Force Hospitals\n", min(stl_subset$report_date), " through ", as.character(date-2)),
