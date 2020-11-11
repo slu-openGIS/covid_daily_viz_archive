@@ -24,18 +24,18 @@ A routine criticism of mortality data during the COVID-19 pandemic has been that
 
 ### Static Plot
 
-```{r metro-infection-map, echo=FALSE, out.width = '100%'}
+```{r mortality-compare, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/state/n_mortality_compare.png")
 ```
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/n_mortality_compare.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/n_mortality_compare.png" target="_blank">Low-res</a>]
 
-## Excess Mortality
+## Excess Mortality {.padtop}
 "Excess deaths" refer to deaths that occur beyond what we would expect in a given time period. This plot shows a forecast of mortality based on all-cause mortality dating back to 1999. The difference between the red line (provisional mortality during COVID-19) and the forecast suggests the burden of excess death experienced during the COVID-19 pandemic. These plots are created and maintained by <a href="https://www.slu.edu/slucor/faculty/wiemken-timothy.php" target="_blank">Timothy Wiemken, Ph.D</a>.
 
 Both excess mortality plots below use the same fundamental data - all-cause mortality data from the CDC as well as the State of Missouri. We forecast mortality during the pandemic using all-cause mortality data dating back to 1999, and then overlay the provisional observed mortality during the COVID-19 pandemic in red. The confidence bands highlight the estimated amount of uncertainty in the forecast. 80 out of 100 estimates fall within the 80% confidence band, while 95 out of 100 estimates fall in the 95% band. By comparing the red line to the forecast trend as well as the confidence bands, we can get a sense of where the observed (but provisional) mortality trend fits within the forecast's expected variation.
 
-```{r metro-infection-map, echo=FALSE}
+```{r legend, echo=FALSE, out.height='150%'}
 knitr::include_graphics("img/forecast_legend.png")
 ```
 
@@ -111,7 +111,7 @@ pre %>%
 * The black lines on the plot are the actual observed mortality in the USA during the pre-COVID-19 time frame (mortality counts from 2019 and 2020 are still considered provisional). 
 * Observed all-cause mortality is plotted through July, 2020.
 
-## Excess Mortality, United States {.tabset .tabset-fade .tabset-pills .padtop}
+### Excess Mortality, United States {.tabset .tabset-fade .tabset-pills .padtop}
 
 #### Interactive Plot
 
