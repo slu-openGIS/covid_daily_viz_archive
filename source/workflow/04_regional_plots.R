@@ -54,8 +54,8 @@ stl_values <- list(
   peak_x = -100, 
   peak_y = 600, 
   current_x = -40, 
-  current_y = -85,
-  current_display = FALSE
+  current_y = -250,
+  current_display = TRUE
 )
 
 ## tables

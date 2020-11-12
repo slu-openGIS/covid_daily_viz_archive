@@ -14,7 +14,8 @@ cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2],
           "Kansas City" = values$pal[3], "Ozark" = values$pal[4], 
           "Howell" = values$pal[5], "Texas" = values$pal[6], 
           "Wright" = values$pal[7], "Shannon" = values$pal[8],
-          "Carter" = values$pal[9], "Ripley" = values$pal[10])
+          "Carter" = values$pal[9], "Ripley" = values$pal[10],
+          "Reynolds" = values$pal[11])
 
 # define focal metros
 county_focal <- c("29510", "29189", "29511", regional_geoids$ozark_mtns)
@@ -122,7 +123,7 @@ county_subset <- filter(county_data, report_date >= values$plot_date) %>%
 county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 20, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 50, f = ceiling)
 
 ## re-order counties
 counties <- unique(county_subset$county)
@@ -142,7 +143,7 @@ p <- facet_rate(county_subset,
                 subtype = "Ozark Mountains",
                 pal = cols, 
                 x_breaks = values$date_breaks_facet,
-                y_breaks = 20,
+                y_breaks = 50,
                 y_upper_limit = top_val,
                 highlight = county_focal,
                 plot_date = values$plot_date,
