@@ -39,9 +39,6 @@ regional_counties <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "dat
 zip_snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_metro.geojson"), 
                         stringsAsFactors = FALSE) 
 
-zip_snapshot2 <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_regional.geojson"), 
-                        stringsAsFactors = FALSE) 
-
 stl_hosp <-  read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "metro", "stl_hospital.csv"))
 ```
 
@@ -281,19 +278,19 @@ regional_counties <- filter(regional_counties, GEOID %in% c("29071", "29099",
                       "29113", "29183", "29189", "29219", "29510"))
 
 # calculate breaks
-bins <- map_bins(zip_snapshot2, var = "case_avg_rate", style = "quantile", classes = 5, dig_lab = 2,
+bins <- map_bins(zip_snapshot, var = "case_avg_rate", style = "quantile", classes = 5, dig_lab = 2,
                  round = 2)
-bins[1] <- round_any(x = min(zip_snapshot2$case_avg_rate, na.rm = TRUE), accuracy = .01, f = floor)
-bins[length(bins)] <- round_any(x = max(zip_snapshot2$case_avg_rate, na.rm = TRUE), accuracy = .01, f = ceiling)
+bins[1] <- round_any(x = min(zip_snapshot$case_avg_rate, na.rm = TRUE), accuracy = .01, f = floor)
+bins[length(bins)] <- round_any(x = max(zip_snapshot$case_avg_rate, na.rm = TRUE), accuracy = .01, f = ceiling)
 
 # create color palette
-pal <- colorBin("RdPu", domain = zip_snapshot2$case_avg_rate, bins = bins)
+pal <- colorBin("RdPu", domain = zip_snapshot$case_avg_rate, bins = bins)
 
 # map
 leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolygons(
-    data = zip_snapshot2,
+    data = zip_snapshot,
     color = "#444444", 
     weight = 1, 
     opacity = 1.0, 
@@ -301,9 +298,9 @@ leaflet() %>%
     fillOpacity = 0.75,
     fillColor = ~pal(case_avg_rate),
     highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
-    popup = paste0("<b>Zip:</b> ", zip_snapshot2$GEOID_ZCTA, " <br> ",
-                 "<b>Current Cumulative Count:</b> ", zip_snapshot2$cases, "<br>",
-                 "<b>Current 14-day Average Rate per 10,000:</b> ", round(zip_snapshot2$case_avg_rate, digits = 2))
+    popup = paste0("<b>Zip:</b> ", zip_snapshot$GEOID_ZCTA, " <br> ",
+                 "<b>Current Cumulative Count:</b> ", zip_snapshot$cases, "<br>",
+                 "<b>Current 14-day Average Rate per 10,000:</b> ", round(zip_snapshot$case_avg_rate, digits = 2))
   )  %>%
   addPolylines(
     data = regional_counties,
@@ -328,7 +325,7 @@ Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_vi
 ### Data Table
 
 ```{r zip-avg-data-table, echo=FALSE, out.width = '100%'}
-zip_snapshot2 %>%
+zip_snapshot %>%
   select(GEOID_ZCTA, cases, case_avg_rate) %>% # , pvty_pct, blk_pct
   mutate(
     case_avg_rate = round(case_avg_rate, digits = 2) #,
