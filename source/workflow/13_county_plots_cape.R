@@ -153,7 +153,9 @@ p <- facet_rate(county_subset,
                 plot_date = values$plot_date,
                 date = values$date,
                 title = "Pace of New COVID-19 Cases in Select Missouri Counties",
-                caption = paste0(values$caption_text_census,"\nValues above 120 for Bollinger County truncated to increase readability"))
+                caption = values$caption_text_census)
+
+# paste0(values$caption_text_census,"\nValues above 120 for Bollinger County truncated to increase readability")
 
 ## save plot
 save_plots(filename = "results/high_res/county_cape/e_new_case.png", plot = p, preset = "lg")
