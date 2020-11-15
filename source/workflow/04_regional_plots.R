@@ -78,8 +78,8 @@ kc_values <- list(
     filter(region == "Kansas City") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = 0, 
-  peak_y = 300, 
+  peak_x = -100, 
+  peak_y = 1000, 
   current_x = 0, 
   current_y = -350,
   current_display = FALSE
@@ -105,7 +105,7 @@ os_values <- list(
     filter(region == "Outstate") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = -80, 
+  peak_x = -50, 
   peak_y = 300, 
   current_x = -0, 
   current_y = -1100,
@@ -138,6 +138,9 @@ region_data %>%
   filter(report_date >= values$plot_date) %>%
   mutate(region = fct_relevel(region, "St. Louis", "Kansas City", "Outstate")) -> region_subset
 
+## define top_val
+top_val <- round_any(x = max(region_subset$case_avg_rate), accuracy = 20, f = ceiling)
+
 ## construct plot
 p <- ggplot() +
   geom_area(region_subset, mapping = aes(x = report_date, y = case_avg_rate, fill = region),
@@ -145,6 +148,7 @@ p <- ggplot() +
   scale_fill_manual(values = cols) +
   facet_wrap(vars(region), nrow = 3) +
   scale_x_date(date_breaks = values$date_breaks_long, date_labels = "%b") +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 20)) + 
   labs(
     title = "Pace of New COVID-19 Cases in Missouri by Region",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
