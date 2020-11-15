@@ -28,6 +28,7 @@ cape <- filter(county_data, geoid %in% regional_geoids$cape)
 mid_mo <- filter(county_data, geoid %in% regional_geoids$mid_mo)
 ozark <- filter(county_data, geoid %in% regional_geoids$ozark)
 ozark_mtns <- filter(county_data, geoid %in% regional_geoids$ozark_mtns)
+nemo <- filter(county_data, geoid %in% regional_geoids$nemo)
 nomo <- filter(county_data, geoid %in% regional_geoids$nomo)
 semo <- filter(county_data, geoid %in% regional_geoids$semo)
 spring <- filter(county_data, geoid %in% regional_geoids$spring)
@@ -40,7 +41,7 @@ rm(county_data, regional_geoids)
 ```
 
 <div class="alert">
-<b>As of 2020-10-25, Nodaway and Gentry counties, which had been included in the "Northern Missouri" plots, are now included in the "St. Joseph and Northwestern Missouri" plots. New counties have been added to a number of regions' plots, including "Northern Missouri," "St. Joseph and Northwestern Missouri," "Mid-Missouri," "Ozark Mountains," and "Springfield." </b>
+<b>As of 2020-11-14, counties formerly on the "Northern Missouri" plots have been split into "Northern" and "Northeastern" plots. Additional counties have been added to the "Lake of the Ozarks and South-Central Missouri," "Southwest Missouri," "St. Joseph and Northwestern Missouri," and "West-Central Missouri" plots.</b>
 </div>
 
 The following plots focus on a number of regions around Missouri. Unlike the pages for [St. Louis](stl.html) and [Kansas City](kc.html), these regions do not encompass officially designated regions. Rather, they attempt to group counties together based on geographic proximity.
@@ -194,6 +195,65 @@ Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_vi
 
 ```{r ozark-infection-table, echo=FALSE, out.width = '100%'}
 ozark %>%
+  select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
+  mutate(
+    case_avg = round(case_avg, digits = 2),
+    case_rate = round(case_rate, digits = 2),
+    state = case_when(
+      state == "Kansas" ~ "KS",
+      state == "Missouri" ~ "MO"
+    )
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    County = county,
+    State = state,
+    `Cumulative Cases` = cases,
+    `New Cases` = new_cases,
+    `Average New Cases` = case_avg,
+    `Per Capita Rate` = case_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
+### Notes
+
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `county_full.csv` table, which is assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
+  * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
+  * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+
+## Northeastern Missouri {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in infections for a number of counties in the northeastern part Missouri. These counties lie along the Mississippi River from the St. Louis Metro area north to the Iowa border.
+
+### Infection Rates
+
+```{r nemo-infection-rate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_nemo/b_case_rate.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_nemo/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_nemo/b_case_rate.png" target="_blank">Low-res</a>]
+
+### Infection Pace
+
+```{r nemo-infection-log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_nemo/c_case_log.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_nemo/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_nemo/c_case_log.png" target="_blank">Low-res</a>]
+
+### New Infections
+
+```{r nemo-infection-avg, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county_nemo/e_new_case.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county_nemo/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county_nemo/e_new_case.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r nemo-infection-table, echo=FALSE, out.width = '100%'}
+nemo %>%
   select(report_date, county, state, cases, new_cases, case_avg, case_rate) %>%
   mutate(
     case_avg = round(case_avg, digits = 2),
