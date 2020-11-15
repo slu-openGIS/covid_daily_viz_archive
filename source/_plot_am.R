@@ -74,14 +74,15 @@ rm(pal)
 regional_geoids <- list(
   cape = c("29031", "29157", "29186",  "29187", "29017", "29221", "29123", "29055"),
   mid_mo = c("29135", "29019", "29051", "29007", "29027", "29053", "29151", "29073", "29139"),
-  ozark = c("29029", "29131", "29141", "29015", "29169", "29105", "29125", "29161"),
+  ozark = c("29029", "29131", "29141", "29015", "29169", "29105", "29125", "29161", "29055"),
   ozark_mtns = c("29153", "29215", "29091", "29229", "29203", "29035", "29181", "29179"),
-  nomo = c("29211", "29001", "29079", "29127", "29163", "29173", "29117", "29175", "29137"),
+  nemo = c("29045", "29103", "29111", "29127", "29137", "29163", "29173", "29199", "29205"),
+  nomo = c("29211", "29001", "29079", "29121", "29041", "29197", "29117", "29175"),
   semo = c("29511", "29133", "29155", "29201",  "29207", "29143", "29023", "29069"),
   spring = c("29043", "29077", "29167", "29213", "29209", "29225", "29059", "29085"),
-  st_jo = c("29003", "29021", "29063", "29049", "29147", "29075", "29081"),
-  swmo = c("29097", "29119", "29145", "29011", "29009", "29512", "29109"),
-  west = c("29033", "29101", "29159", "29195")
+  st_jo = c("29003", "29021", "29063", "29049", "29147", "29075", "29081", "29005", "29061"),
+  swmo = c("29097", "29119", "29145", "29011", "29009", "29512", "29109", "29057"),
+  west = c("29033", "29101", "29159", "29195", "29083")
 )
 
 ## save for site generation
@@ -134,12 +135,13 @@ source("source/workflow/07_county_plots_semo.R")  # Bootheel
 source("source/workflow/08_county_plots_midmo.R") # Mid-Missouri
 source("source/workflow/09_county_plots_stjo.R")  # St. Joseph and Northwest MO
 source("source/workflow/10_county_plots_nomo.R")  # Northern MO
-source("source/workflow/11_county_plots_ozark.R") # Lake of the Ozarks
-source("source/workflow/12_county_plots_swmo.R")  # Jopolin and Southwest MO
+source("source/workflow/11_county_plots_ozark.R") # Lake of the Ozarks & South-Central MO
+source("source/workflow/12_county_plots_swmo.R")  # Joplin and Southwest MO
 source("source/workflow/13_county_plots_cape.R")  # Cape Girardeau region
 source("source/workflow/14_county_plots_west.R")  # West-Central MO
 source("source/workflow/15_county_plots_spring.R") # Springfield
 source("source/workflow/16_county_plots_ozkmtns.R") # Ozark Mountains
+source("source/workflow/17_county_plots_nemo.R") # Northeastern Missouri
 source("source/workflow/17_stl_county_plots.R")   # St. Louis MSA
 source("source/workflow/21_kc_county_plots.R")    # Kansas City MSA
 
