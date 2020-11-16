@@ -274,9 +274,6 @@ This map shows the 14-day average of new infections as a rate per 10,000 residen
 ### Interactive Map
 
 ```{r map-avg-infections-zip, echo = FALSE, out.width = '100%', out.height='600px', warning=FALSE}
-regional_counties <- filter(regional_counties, GEOID %in% c("29071", "29099", 
-                      "29113", "29183", "29189", "29219", "29510"))
-
 # calculate breaks
 bins <- map_bins(zip_snapshot, var = "case_avg_rate", style = "quantile", classes = 5, dig_lab = 2,
                  round = 2)
