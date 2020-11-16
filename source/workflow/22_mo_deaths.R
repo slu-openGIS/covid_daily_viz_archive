@@ -14,7 +14,8 @@ cols <- c("Deaths, Actual" = pal[1], "Deaths, Reported" = pal[2])
 # =============================================================================
 
 ## remove final week
-mo_deaths <- filter(mo_deaths, date <= max(unique(mo_deaths$date-7)))
+mo_deaths <- filter(mo_deaths, date <= max(unique(mo_deaths$date-14))) %>%
+  filter(lubridate::year(date) >= "2020")
 
 ## define top_val
 top_val <- round_any(x = max(mo_deaths$avg, na.rm = TRUE), accuracy = 5, f = ceiling)
@@ -51,7 +52,7 @@ p <- ggplot() +
     subtitle = paste0("Current as of ", as.character(date-7)),
     x = "Date",
     y = "7-day Average of Deaths",
-    caption = paste0("Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the New York Times COVID-19 Project\nTrends include ", total_deaths$count[1], " actual deaths and ", total_deaths$count[2], " reported deaths.\nActual deaths refer to those confirmed by the State of Missouri and are subject to revision.\nDue to the provisional nature of actual death counts for recent days, these trends are kept a week behind\n   the current date.")
+    caption = paste0("Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the New York Times COVID-19 Project\nTrends include ", total_deaths$count[1], " actual deaths and ", total_deaths$count[2], " reported deaths.\nActual deaths refer to those confirmed by the State of Missouri and are subject to revision.\nDue to the provisional nature of actual death counts for recent days, these trends are kept two weeks behind\n   the current date.")
   ) +
   sequoia_theme(base_size = 22, background = "white") +
   theme(axis.text.x = element_text(angle = x_angle))
