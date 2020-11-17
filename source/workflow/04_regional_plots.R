@@ -27,7 +27,7 @@ state_values <- list(
   peak_x = 0, # 0
   peak_y = 200, # 125
   current_x = -80, # -80
-  current_y = 125, # 125
+  current_y = -125, # 125
   current_display = TRUE
 )
 
