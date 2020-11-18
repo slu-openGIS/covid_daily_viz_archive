@@ -25,7 +25,7 @@ regional_count <- function(.data, region, point_data, state_data, region_data, p
     geom_text_repel(data = region_data$peak_tbl, mapping = aes(x = report_date, y = case_avg, label = text),
                     nudge_y = region_data$peak_y, nudge_x = region_data$peak_x, size = 5) +
     scale_color_manual(values = palette, name = "Region") +
-    scale_y_continuous(limits = c(0, state_data$top_val), breaks = seq(0, state_data$top_val, by = 250)) +
+    scale_y_continuous(limits = c(0, state_data$top_val), breaks = seq(0, state_data$top_val, by = 500)) +
     scale_x_date(date_breaks = plot_data$date_breaks, date_labels = "%b") +
     labs(
       title = "Pace of New COVID-19 Cases in Missouri",

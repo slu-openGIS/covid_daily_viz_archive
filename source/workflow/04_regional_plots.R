@@ -19,7 +19,7 @@ cols <- c("St. Louis" = values$pal[1], "Kansas City" = values$pal[2],
 # define plotting values, state trend ####
 ## primary values
 state_values <- list(
-  top_val = round_any(x = max(region_data$case_avg), accuracy = 250, f = ceiling),
+  top_val = round_any(x = max(region_data$case_avg), accuracy = 500, f = ceiling),
   peak_val = region_data %>% 
     filter(region == "Missouri") %>% 
     pull(var = case_avg) %>% 
@@ -27,7 +27,7 @@ state_values <- list(
   peak_x = 0, # 0
   peak_y = 200, # 125
   current_x = -80, # -80
-  current_y = -125, # 125
+  current_y = -200, # 125
   current_display = TRUE
 )
 
@@ -53,9 +53,9 @@ stl_values <- list(
     max(),
   peak_x = -100, 
   peak_y = 600, 
-  current_x = -40, 
-  current_y = -250,
-  current_display = FALSE
+  current_x = 0, 
+  current_y = -1700,
+  current_display = TRUE
 )
 
 ## tables
@@ -67,7 +67,7 @@ stl_values[["peak_tbl"]] <- region_data %>%
 stl_values[["current_tbl"]] <- region_data %>%
   filter(region == "St. Louis") %>%
   filter(report_date == values$date) %>%
-  mutate(text = paste0("current average of ", round(case_avg, digits = 2), "\ncases reported on ", format(report_date, format = "%d %b")))
+  mutate(text = paste0("current average of ", round(case_avg, digits = 2), "cases reported on ", format(report_date, format = "%d %b")))
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 

@@ -13,7 +13,8 @@ county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.c
 cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2], 
           "Kansas City" = values$pal[3], "Carroll" = values$pal[4], 
           "Johnson" = values$pal[5], "Pettis" = values$pal[7], 
-          "Saline" = values$pal[8], "Henry" = values$pal[6])
+          "Saline" = values$pal[8], "Henry" = values$pal[6],
+          "St. Clair" = values$pal[9])
 
 # define focal metros
 county_focal <- c("29510", "29189", "29511", regional_geoids$west)
