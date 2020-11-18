@@ -24,9 +24,9 @@ if (q == FALSE){
 date <- Sys.Date()
 
 # define first date for plotting
-test_date_breaks <- "14 days"
-total_test_date_breaks <- "14 days"
-hosp_breaks <- "14 days"
+test_date_breaks <- "20 days"
+total_test_date_breaks <- "20 days"
+hosp_breaks <- "20 days"
 x_angle <- 25
 
 # create caption
