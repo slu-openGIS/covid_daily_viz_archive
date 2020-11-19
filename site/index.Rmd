@@ -80,6 +80,11 @@ Chris also emails out a weekly round-up of COVID-19 trends for Missouri. These w
 
 <iframe src="https://chrisprener.substack.com/embed" width="480" height="320" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe>
 
+## Contributors {.padtop}
+<a href="https://chris-prener.github.io" target="_blank">Chris Prener</a>, an Assistant Professor of Sociology at Saint Louis University, is the primary maintainer of this site and the data behind it. <a href="https://www.slu.edu/slucor/faculty/wiemken-timothy.php" target="_blank">Tim Wiemken</a>, an Associate Professor in Health and Clinical Outcomes Research and Infectious Disease at Saint Louis University School of Medicine, has contributed to both the <a href="mortality.html">mortality</a> and <a href="ltc.html">nursing home</a> data. He has also provided technical guidance on other aspects of the site.
+
+In addition, Saint Louis University Computer Science majors Alvin Do, Eric Quach, and Metta Pham are all working on this site as part of the Senior Capstone project. Alvin, Eric, and Metta have contributed to building underlying data, especially ZIP code data, and are supporting the automation of web scraping. Big thanks are due to them, and to the Department of Computer Science for selecting this site for inclusion in its Senior Capstone program this year.
+
 ## Daily Data {.tabset .tabset-fade .tabset-pills .padtop}
 While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1), and [Kansas City](https://www.kcmo.gov/city-hall/departments/health/coronavirus-covid-19/covid-19-totals) provide day-by-day tracking of cumulative cases on their respective dashboards, the State of Missouri does not. The following tabs provide daily breakdowns of COVID data as well as additional statistics not included in the existing dashboards. Data are also provided for the wider St. Louis and Kansas City metro areas. Please note that the two average columns for reported cases and deaths are both seven-day rolling averages.
 
