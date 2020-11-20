@@ -125,14 +125,14 @@ county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0,
 ## modify Livingston and Sullivan counties
 county_subset <- mutate(county_subset,
                         case_avg_rate = ifelse(geoid == 29117 & 
-                                                 (report_date == "2020-09-04" | report_date == "2020-09-10"), 140, case_avg_rate),
+                                                 (report_date == "2020-09-04" | report_date == "2020-09-10"), 160, case_avg_rate),
                         case_avg_rate = ifelse(geoid == 29117 & 
                                                  (report_date >= "2020-09-05" & report_date <= "2020-09-09"), NA, case_avg_rate)
 )
 
 county_subset <- mutate(county_subset,
                         case_avg_rate = ifelse(geoid == 29211 & 
-                                                 (report_date == "2020-10-30" | report_date == "2020-11-06"), 140, case_avg_rate),
+                                                 (report_date == "2020-10-30" | report_date == "2020-11-06"), 160, case_avg_rate),
                         case_avg_rate = ifelse(geoid == 29211 & 
                                                  (report_date >= "2020-10-31" & report_date <= "2020-11-05"), NA, case_avg_rate)
 )
@@ -164,7 +164,7 @@ p <- facet_rate(county_subset,
                 plot_date = values$plot_date,
                 date = values$date,
                 title = "Pace of New COVID-19 Cases in Select Missouri Counties",
-                caption = paste0(values$caption_text_census,"\nValues above 140 for Livingston and Sullivan counties truncated to increase readability"))
+                caption = paste0(values$caption_text_census,"\nValues above 160 for Livingston and Sullivan counties truncated to increase readability"))
 
 ## save plot
 save_plots(filename = "results/high_res/county_nomo/e_new_case.png", plot = p, preset = "lg")

@@ -28,7 +28,7 @@ state_values <- list(
   peak_y = 400, # 125
   current_x = -80, # -80
   current_y = -200, # 125
-  current_display = FALSE
+  current_display = TRUE
 )
 
 ## tables
@@ -55,7 +55,7 @@ stl_values <- list(
   peak_y = 600, 
   current_x = 0, 
   current_y = -1700,
-  current_display = FALSE
+  current_display = TRUE
 )
 
 ## tables
