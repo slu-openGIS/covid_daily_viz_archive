@@ -77,7 +77,7 @@ mo_data %>%
 COVID-19 has been implicated in substantial morbidity and mortality in nursing home residents since the onset of the outbreak in the United States. However, it is still unknown as to how the cases are distributed geographically and if clusters are correlated with overall geographic burden of COVID-19 cases. Moreover, the State of Missouri and local county health departments have refused, generally, to name nursing homes and long term care facilities (LTCs) associated with COVID-19 outbreaks. Using the Centers for Medicare and Medicaid Services (CMS) nursing home COVID-19 data set, which is <a href="https://data.cms.gov/Special-Programs-Initiatives-COVID-19-Nursing-Home/COVID-19-Nursing-Home-Dataset/s2uc-8wxp" target="_blank">publicly available</a>, my colleague <a href="https://www.slu.edu/slucor/faculty/wiemken-timothy.php" target="_blank">Timothy Wiemken</a> and I have put together the following maps and tables that illustrate the extent of COVID-19 within facilities and relative to the counties these facilities reside in.
 
 ## Missouri Overview {.padtop}
-As of `r last_update$last_date`, a total of `r format(mo_data$cases_ltc_all, digits = 5)` cases have been reported in Missouri nursing homes and LTCs. These represent `r round(mo_data$cases_ltc_pct, digits = 2)`% of all cases reported to date in Missouri. Of these cases, `r mo_data$cases_ltc_res` have occurred among residents and `r mo_data$cases_ltc_staff` have occurred among staff.
+As of `r last_update$last_date[2]`, a total of `r format(mo_data$cases_ltc_all, digits = 5)` cases have been reported in Missouri nursing homes and LTCs. These represent `r round(mo_data$cases_ltc_pct, digits = 2)`% of all cases reported to date in Missouri. Of these cases, `r format(mo_data$cases_ltc_res, digits = 5)` have occurred among residents and `r format(mo_data$cases_ltc_staff, digits = 5)` have occurred among staff.
 
 In terms of mortality, a total of `r mo_data$deaths_ltc_all` deaths have been reported in Missouri nursing homes and LTCs. These represent `r round(mo_data$deaths_ltc_pct, digits = 2)`% of all deaths reported to date in Missouri. Of these deaths, `r mo_data$deaths_ltc_res` have occurred among residents and `r mo_data$deaths_ltc_staff` have occurred among staff.
 
@@ -176,7 +176,7 @@ DT::datatable(data_table)
 ```
 
 ### New Cases by Facility {.tabset .tabset-fade .tabset-pills .padtop}
-This map shows the rate of *new, confirmed* COVID-19 cases per 100 beds at each LTC facility. These are cases added at the facility in the last two weeks. For the purposes of this report, this is the period between `r last_update$last_date-14` and `r last_update$last_date`. The size of each circle is related to the rate - the larger the size, the higher the rate per 100 beds. The pop-up associated with each circle will reveal facility details as well as a breakdown of resident and staff cases.
+This map shows the rate of *new, confirmed* COVID-19 cases per 100 beds at each LTC facility. These are cases added at the facility in the last two weeks. For the purposes of this report, this is the period between `r last_update$last_date[2]-14` and `r last_update$last_date[2]`. The size of each circle is related to the rate - the larger the size, the higher the rate per 100 beds. The pop-up associated with each circle will reveal facility details as well as a breakdown of resident and staff cases.
 
 #### Interactive Map
 
@@ -379,7 +379,7 @@ DT::datatable(data_table)
 ```
 
 ### New Deaths by Facility {.tabset .tabset-fade .tabset-pills .padtop}
-This map shows the rate of *new, confirmed* COVID-19 deaths per 100 beds at each LTC facility. These are deaths added at the facility in the last two weeks. For the purposes of this report, this is the period between `r last_update$last_date-14` and `r last_update$last_date`. The size of each circle is related to the rate - the larger the size, the higher the rate per 100 beds. The pop-up associated with each circle will reveal facility details as well as a breakdown of resident and staff deaths.
+This map shows the rate of *new, confirmed* COVID-19 deaths per 100 beds at each LTC facility. These are deaths added at the facility in the last two weeks. For the purposes of this report, this is the period between `r last_update$last_date[2]-14` and `r last_update$last_date[2]`. The size of each circle is related to the rate - the larger the size, the higher the rate per 100 beds. The pop-up associated with each circle will reveal facility details as well as a breakdown of resident and staff deaths.
 
 #### Interactive Map
 
