@@ -111,7 +111,7 @@ save_plots(filename = "results/low_res/metro/c_case_log.png", plot = p, preset =
 metro_subset <- filter(metro_data, report_date >= values$plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(metro_subset$case_avg_rate), accuracy = 20, f = ceiling)
+top_val <- round_any(x = max(metro_subset$case_avg_rate), accuracy = 25, f = ceiling)
 
 ## create factors
 metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, case_avg_rate))
@@ -121,7 +121,7 @@ p <- facet_rate(metro_subset,
                 type = "metro", 
                 pal = cols, 
                 x_breaks = values$date_breaks_facet,
-                y_breaks = 20,
+                y_breaks = 25,
                 y_upper_limit = top_val,
                 highlight = unique(metro_subset$geoid),
                 plot_date = values$plot_date,
