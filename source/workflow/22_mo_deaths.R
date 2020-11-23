@@ -49,7 +49,7 @@ p <- ggplot() +
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) + 
   labs(
     title = "COVID-19 Mortality in Missouri, Reported vs. Actual",
-    subtitle = paste0("Current as of ", as.character(date-7)),
+    subtitle = paste0("Current as of ", as.character(date-14)),
     x = "Date",
     y = "7-day Average of Deaths",
     caption = paste0("Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the New York Times COVID-19 Project\nTrends include ", total_deaths$count[1], " actual deaths and ", total_deaths$count[2], " reported deaths.\nActual deaths refer to those confirmed by the State of Missouri and are subject to revision.\nDue to the provisional nature of actual death counts for recent days, these trends are kept two weeks behind\n   the current date.")
