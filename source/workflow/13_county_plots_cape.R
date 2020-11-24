@@ -122,12 +122,23 @@ county_subset <- filter(county_data, report_date >= values$plot_date) %>%
 ## address negative values
 county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
 
-## modify Bollinger County
-county_subset <- mutate(county_subset,
-                        case_avg_rate = ifelse(geoid == 29017 & report_date == "2020-09-17", 120, case_avg_rate))
+## modify Cape Girardeau, Perry, Ste. Gen counties
+county_subset %>%
+  mutate(case_avg_rate = ifelse(geoid == 29031 & 
+                                  (report_date == "2020-11-20" | report_date == "2020-11-22"), 160, case_avg_rate),
+         case_avg_rate = ifelse(geoid == 29031 & report_date == "2020-11-21", NA, case_avg_rate)
+  ) %>% 
+  mutate(case_avg_rate = ifelse(geoid == 29157 & 
+                                  (report_date == "2020-11-14" | report_date == "2020-11-20"), 160, case_avg_rate),
+         case_avg_rate = ifelse(geoid == 29157 & 
+                                  (report_date >= "2020-11-15" & report_date <= "2020-11-19"), NA, case_avg_rate)
+  ) %>%
+  mutate(case_avg_rate = ifelse(geoid == 29186 & 
+                                  (report_date == "2020-11-12" | report_date == "2020-11-14"), 160, case_avg_rate)
+  ) -> county_subset
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 25, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 20, f = ceiling)
 
 ## re-order counties
 counties <- unique(county_subset$county)
@@ -147,15 +158,15 @@ p <- facet_rate(county_subset,
                 subtype = "Cape",
                 pal = cols, 
                 x_breaks = values$date_breaks_facet,
-                y_breaks = 25,
+                y_breaks = 20,
                 y_upper_limit = top_val,
                 highlight = county_focal,
                 plot_date = values$plot_date,
                 date = values$date,
                 title = "Pace of New COVID-19 Cases in Select Missouri Counties",
-                caption = values$caption_text_census)
+                caption = paste0(values$caption_text_census,"\nValues above 160 for Cape Girardeu, Perry, and Ste. Genevieve counties truncated to increase readability"))
 
-# paste0(values$caption_text_census,"\nValues above 120 for Bollinger County truncated to increase readability")
+# values$caption_text_census
 
 ## save plot
 save_plots(filename = "results/high_res/county_cape/e_new_case.png", plot = p, preset = "lg")
