@@ -70,7 +70,7 @@ snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "coun
 ```
 
 <div class="alert">
-<b>Updates to the site will not be made after 2020-11-25 due to the Thanksgiving holiday. Updates will resume 2020-12-01. All daily background data will continue, though we anticipate that Missouri and local county health departments will slow data reporting both on Thanksgiving day and for a few days after.</b>
+<b>Updates to the site have resumed as of 2020-12-01. However, there was a very likely artifical drop in the number of cases reported, so 7-day average trends should be treated with caution until at least 2020-12-08.</b>
 </div>
 <br>
 
