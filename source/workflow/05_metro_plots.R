@@ -110,8 +110,18 @@ save_plots(filename = "results/low_res/metro/c_case_log.png", plot = p, preset =
 ## subset data
 metro_subset <- filter(metro_data, report_date >= values$plot_date)
 
+## address negative values
+metro_subset <- mutate(metro_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
+
+## modify Mississippi County
+metro_subset %>%
+  mutate(case_avg_rate = ifelse(short_name == "Cape Girardeau" & 
+                                  (report_date == "2020-11-20" | report_date == "2020-11-22"), 160, case_avg_rate),
+         case_avg_rate = ifelse(short_name == "Cape Girardeau" & report_date == "2020-11-21", NA, case_avg_rate)
+  ) -> metro_subset
+
 ## define top_val
-top_val <- round_any(x = max(metro_subset$case_avg_rate), accuracy = 25, f = ceiling)
+top_val <- round_any(x = max(metro_subset$case_avg_rate, na.rm = TRUE), accuracy = 20, f = ceiling)
 
 ## create factors
 metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, case_avg_rate))
@@ -121,13 +131,15 @@ p <- facet_rate(metro_subset,
                 type = "metro", 
                 pal = cols, 
                 x_breaks = values$date_breaks_facet,
-                y_breaks = 25,
+                y_breaks = 20,
                 y_upper_limit = top_val,
                 highlight = unique(metro_subset$geoid),
                 plot_date = values$plot_date,
                 date = values$date,
                 title = "Pace of New COVID-19 Cases by Metro Area",
-                caption = values$caption_text_census)
+                caption = paste0(values$caption_text_census,"\nValues above 160 for Cape Girardeau truncated to increase readability"))
+
+# values$caption_text_census
 
 ## save plot
 save_plots(filename = "results/high_res/metro/e_new_case.png", plot = p, preset = "lg")

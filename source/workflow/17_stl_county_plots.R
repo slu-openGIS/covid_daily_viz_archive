@@ -192,7 +192,7 @@ county_data %>%
   mutate(case_avg = ifelse(case_avg < .1, .1, case_avg)) -> county_subset
 
 # define top_val
-top_val <- round_any(x = max(county_subset$day), accuracy = 50, f = ceiling)
+top_val <- round_any(x = max(county_subset$day), accuracy = 75, f = ceiling)
 
 ## identify max day
 county_subset %>%
@@ -228,7 +228,7 @@ p <- ggplot() +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(limits = c(.1, 1000), breaks = c(.1, 1, 10, 100, 1000), 
                 labels = comma_format(accuracy = .2)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 50)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 75)) +
   facet_wrap(~county) +
   labs(
     title = "Pace of New COVID-19 Cases in Metro St. Louis",
