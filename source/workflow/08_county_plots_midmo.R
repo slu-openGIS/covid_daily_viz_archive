@@ -139,7 +139,6 @@ county_subset %>%
          case_avg_rate = ifelse(geoid == 29135 & 
                                   (report_date >= "2020-11-11" & report_date <= "2020-11-19"), NA, case_avg_rate)
   ) -> county_subset
-  
 
 ## define top_val
 top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 20, f = ceiling)
