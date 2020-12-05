@@ -324,7 +324,7 @@ p <- ggplot(data = metro_subset) +
   geom_point(metro_day_points, mapping = aes(x = day, y = deaths_avg, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Metro Area") +
-  scale_y_log10(limits = c(.1, 30), breaks = c(.1, .3, 1, 3, 10, 30), 
+  scale_y_log10(limits = c(.1, 100), breaks = c(.1, .3, 1, 3, 10, 30, 100), 
                 labels = comma_format(accuracy = .2)) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
   labs(
