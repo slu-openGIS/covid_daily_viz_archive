@@ -45,7 +45,7 @@ p <- ggplot(state_subset) +
     title = "Reported COVID-19 Cases by State",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
     x = "Date",
-    y = "Rate per 1,000",
+    y = "Rate per 100,000",
     caption = values$caption_text_census
   ) +
   sequoia_theme(base_size = 22, background = "white") +
@@ -204,7 +204,7 @@ p <- ggplot() +
     title = "Reported COVID-19 Mortality by State",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
     x = "Date",
-    y = "Mortality Rate per 1,000",
+    y = "Mortality Rate per 100,000",
     caption = values$caption_text_census
   ) +
   sequoia_theme(base_size = 22, background = "white") +
