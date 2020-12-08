@@ -129,8 +129,8 @@ p <- ggplot(data = county_subset) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(
-    limits = c(5, 30000), 
-    breaks = c(5,10,30,100,300,1000,3000,10000,30000),
+    limits = c(5, 100000), 
+    breaks = c(5,10,30,100,300,1000,3000,10000,30000,100000),
     labels = comma_format(accuracy = 1)
   ) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
@@ -297,7 +297,7 @@ save_plots(filename = "results/low_res/kc_metro/g_mortality_map.png", plot = p, 
 county_subset <- filter(county_data, report_date >= values$plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$mortality_rate), accuracy = .1, f = ceiling)
+top_val <- round_any(x = max(county_subset$mortality_rate), accuracy = .2, f = ceiling)
 
 ## create factors
 county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, mortality_rate))
@@ -311,7 +311,7 @@ p <- ggplot() +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .1)) +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .2)) +
   labs(
     title = "Reported COVID-19 Mortality in Metro Kansas City",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
@@ -358,8 +358,8 @@ p <- ggplot(data = county_subset) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
   scale_y_log10(
-    limits = c(3, 300), 
-    breaks = c(3, 10, 30, 100, 300), 
+    limits = c(3, 1000), 
+    breaks = c(3, 10, 30, 100, 300, 1000), 
     labels = comma_format(accuracy = 1)
   ) +
   scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
