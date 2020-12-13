@@ -69,11 +69,6 @@ snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "coun
   mutate(icu_rate = ifelse(hospitals == 0, NA, icu_rate))
 ```
 
-<div class="alert">
-<b>Updates to the site have resumed as of 2020-12-01. However, there was a very likely artifical drop in the number of cases reported, so 7-day average trends should be treated with caution until at least 2020-12-08.</b>
-</div>
-<br>
-
 <div class="note">
 <b>The site was last updated on `r Sys.Date()`. All county, metro, and state level morbidity and mortality data are current as of `r Sys.Date()-1`. ZIP code, disparity, and St. Louis hospitalization are current as of `r Sys.Date()`. </b>
 </div>
