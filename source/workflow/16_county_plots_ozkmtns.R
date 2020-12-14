@@ -125,7 +125,7 @@ county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0,
 ## modify Audrain and Osage counties
 county_subset <- mutate(county_subset,
                         case_avg_rate = ifelse(geoid == 29179 & 
-                                                 (report_date == "2020-11-11" | report_date == "2020-11-17"), 140, case_avg_rate),
+                                                 (report_date == "2020-11-11" | report_date == "2020-11-17"), 160, case_avg_rate),
                         case_avg_rate = ifelse(geoid == 29179 & 
                                                  (report_date >= "2020-11-12" & report_date <= "2020-11-16"), NA, case_avg_rate)
 )
