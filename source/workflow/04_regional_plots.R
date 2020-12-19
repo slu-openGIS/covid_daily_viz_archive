@@ -108,7 +108,7 @@ os_values <- list(
   peak_x = -50, 
   peak_y = 300, 
   current_x = -0, 
-  current_y = -1500,
+  current_y = -1700,
   current_display = TRUE
 )
 
