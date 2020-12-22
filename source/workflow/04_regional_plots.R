@@ -26,7 +26,7 @@ state_values <- list(
     max(),
   peak_x = 0, # 0
   peak_y = 400, # 125
-  current_x = -80, # -80
+  current_x = -90, # -80
   current_y = 200, # 125
   current_display = TRUE
 )
@@ -54,7 +54,7 @@ stl_values <- list(
   peak_x = -80, 
   peak_y = 600, 
   current_x = 0, 
-  current_y = -1200,
+  current_y = -1100,
   current_display = TRUE
 )
 
