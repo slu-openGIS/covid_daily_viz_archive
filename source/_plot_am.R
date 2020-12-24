@@ -42,7 +42,7 @@ values <- list(
   
   county_log_max = 100000,
   county_log_breaks = c(5,10,30,100,300,1000,3000,10000,30000,100000),
-  county_rate_val = 5,
+  county_rate_val = 10,
   county_rate_pos = 30,
   county_rate_x = 2,
   county_rate_y = 25,
