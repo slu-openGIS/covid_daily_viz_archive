@@ -69,6 +69,11 @@ snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "coun
   mutate(icu_rate = ifelse(hospitals == 0, NA, icu_rate))
 ```
 
+<div class="alert">
+ <b>Updates to the site will not be made after 2020-12-24 due to the Christmas holiday. Updates will resume 2020-12-29. All daily background data will continue, though we already have indications that local health departments will pause reporting through 2020-12-28. Given our experience with Thanksgiving, we also anticipate minimal data updates from Missouri on at least the 24th and 25th. These delays, combined with a similar set of issues for New Year's Eve and Day, mean that our daily numbers will be unstable through 2021-01-04 and our 7-day averages will be unstable through 2021-01-11.</b>
+ </div>
+ <br>
+ 
 <div class="note">
 <b>The site was last updated on `r Sys.Date()`. All county, metro, and state level morbidity and mortality data are current as of `r Sys.Date()-1`. ZIP code, disparity, and St. Louis hospitalization are current as of `r Sys.Date()`. </b>
 </div>
