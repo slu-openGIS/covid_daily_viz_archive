@@ -72,7 +72,7 @@ rm(pal)
 
 ## build
 regional_geoids <- list(
-  cape = c("29031", "29157", "29186",  "29187", "29017", "29221", "29123", "29055"),
+  cape = c("29031", "29157", "29186",  "29187", "29017", "29221", "29123", "29055", "29093"),
   mid_mo = c("29135", "29019", "29051", "29007", "29027", "29053", "29151", "29073", "29139"),
   ozark = c("29029", "29131", "29141", "29015", "29169", "29105", "29125", "29161", "29055"),
   ozark_mtns = c("29153", "29215", "29091", "29229", "29203", "29035", "29149", "29181", "29179"),
@@ -149,4 +149,4 @@ source("source/workflow/21_kc_county_plots.R")    # Kansas City MSA
 
 # clean-up ####
 rm(values, calculate_days, facet_rate, filter_date, map_bins, map_breaks,
-   round_any, save_plots, sequoia_theme, regional_geoids, q)
+   round_any, save_plots, sequoia_theme, regional_geoids, q, region_count)

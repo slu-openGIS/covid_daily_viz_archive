@@ -26,8 +26,8 @@ state_values <- list(
     max(),
   peak_x = 0, # 0
   peak_y = 400, # 125
-  current_x = -90, # -80
-  current_y = 200, # 125
+  current_x = -105, # -80
+  current_y = 1000, # 125
   current_display = TRUE
 )
 
@@ -54,7 +54,7 @@ stl_values <- list(
   peak_x = -80, 
   peak_y = 600, 
   current_x = 0, 
-  current_y = -1100,
+  current_y = -700,
   current_display = TRUE
 )
 
@@ -78,9 +78,9 @@ kc_values <- list(
     filter(region == "Kansas City") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = -100, 
+  peak_x = -105, 
   peak_y = 1000, 
-  current_x = -90, 
+  current_x = -110, 
   current_y = 2000,
   current_display = TRUE
 )
@@ -105,10 +105,10 @@ os_values <- list(
     filter(region == "Outstate") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = -50, 
-  peak_y = 300, 
+  peak_x = -60, 
+  peak_y = 200, 
   current_x = -0, 
-  current_y = -1400,
+  current_y = -1000,
   current_display = TRUE
 )
 
@@ -259,6 +259,5 @@ rm(state_values, os_values)
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # clean-up ####
-rm(region_data, region_subset, region_points, region_points_subset,
-   regional_count)
+rm(region_data, region_subset, region_points, region_points_subset)
 rm(cols, p)
