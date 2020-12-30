@@ -141,7 +141,7 @@ source("source/workflow/13_county_plots_cape.R")  # Cape Girardeau region
 source("source/workflow/14_county_plots_west.R")  # West-Central MO
 source("source/workflow/15_county_plots_spring.R") # Springfield
 source("source/workflow/16_county_plots_ozkmtns.R") # Ozark Mountains
-source("source/workflow/17_county_plots_nemo.R") # Northeastern Missouri
+source("source/workflow/17_county_plots_nemo.R")  # Northeastern Missouri
 source("source/workflow/17_stl_county_plots.R")   # St. Louis MSA
 source("source/workflow/21_kc_county_plots.R")    # Kansas City MSA
 
