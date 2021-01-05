@@ -70,7 +70,7 @@ snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "coun
 ```
 
 <div class="alert">
- <b>Updates to the site will not be made after 2020-12-31 due to the New Year's holiday. Updates will resume 2020-12-29. All daily background data will continue, though we've already had some local public health departments pause data updates, and some will likely remain without update until 2021-01-04. Given our experience with Thanksgiving and Christmas, we also anticipate minimal data updates from Missouri on New Year's Eve and Day. These delays, combined with a lingering instability from Christmas, mean that our daily numbers will be unstable through 2021-01-04 and our 7-day averages will be unstable through 2021-01-11.</b>
+ <b>Updates to the site have resumed! However, given reporting delays we experienced over the Christmas and New Years holidays, our 7-day averages will be unstable through at least 2021-01-11.</b>
  </div>
  <br>
  
