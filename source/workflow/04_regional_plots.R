@@ -54,7 +54,7 @@ stl_values <- list(
   peak_x = -80, 
   peak_y = 600, 
   current_x = 0, 
-  current_y = -1000,
+  current_y = -1200,
   current_display = TRUE
 )
 
