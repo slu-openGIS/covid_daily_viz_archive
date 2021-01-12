@@ -27,11 +27,11 @@ cols <- c("Kansas City" = values$pal[1], "Wyandotte" = values$pal[2],
           "Jackson" = values$pal[5], "Johnson" = values$pal[6],
           "Clay" = values$pal[7], "Cass" = values$pal[8], 
           "Platte" = values$pal[9], "Clinton" = values$pal[10],
-          "Caldwell" = values$pal[11])
+          "Caldwell" = values$pal[11], "Linn" = values$pal[12])
 
 ## define focal counties
 county_focal <- c("20209", "20103", "29511", "29107", "29095", "20091", "29047",
-                  "29037", "29165", "29025", "29049")
+                  "29037", "29165", "29025", "29049", "20107")
 
 ## create points
 county_points <- filter(county_data, report_date == values$date) %>%
@@ -169,7 +169,7 @@ p <- facet_rate(county_subset,
                 subtype = "Kansas City",
                 pal = cols, 
                 x_breaks = values$date_breaks_facet,
-                y_breaks = 20,
+                y_breaks = 25,
                 y_upper_limit = top_val,
                 highlight = county_focal,
                 plot_date = values$plot_date,
