@@ -24,10 +24,10 @@ state_values <- list(
     filter(region == "Missouri") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = 0, # 0
-  peak_y = 400, # 125
-  current_x = -105, # -80
-  current_y = 1000, # 125
+  peak_x = -60, # 0
+  peak_y = -200, # 400
+  current_x = 0, # -105
+  current_y = 3000, # 1000
   current_display = TRUE
 )
 
@@ -35,7 +35,7 @@ state_values <- list(
 state_values[["peak_tbl"]] <- region_data %>%
   filter(region == "Missouri") %>%
   filter(case_avg == state_values$peak_val) %>%
-  mutate(text = paste0("peak average of ", round(case_avg, digits = 2), " cases reported on ", format(report_date, format = "%d %b")))
+  mutate(text = paste0("peak average of ", round(case_avg, digits = 2), "\ncases reported on ", format(report_date, format = "%d %b")))
 
 state_values[["current_tbl"]] <- region_data %>%
   filter(region == "Missouri") %>%
@@ -80,7 +80,7 @@ kc_values <- list(
     max(),
   peak_x = -105, 
   peak_y = 1000, 
-  current_x = -110, 
+  current_x = -130, 
   current_y = 2000,
   current_display = TRUE
 )
