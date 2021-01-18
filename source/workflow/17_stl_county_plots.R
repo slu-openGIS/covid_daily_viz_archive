@@ -43,7 +43,7 @@ county_points <- filter(county_data, report_date == values$date) %>%
 
 ## create breaks
 stl_sf <- map_breaks(stl_sf, var = "case_rate", newvar = "case_breaks",
-                     style = "fisher", classes = 5, dig_lab = 2)
+                     style = "fisher", classes = 5, dig_lab = 3)
 
 ## create maps
 p <- ggplot(data = stl_sf) +
