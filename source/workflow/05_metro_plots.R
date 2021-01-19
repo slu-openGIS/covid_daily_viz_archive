@@ -179,7 +179,8 @@ p <- ggplot(data = metro_subset) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_y_log10(limits = c(.1, 3000), breaks = c(.1, .3, 1, 3, 10, 30, 100, 300, 1000, 3000, 3000), 
                 labels = comma_format(accuracy = .2)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 75)) +
+  facet_wrap(~short_name) +
   labs(
     title = "Pace of New COVID-19 Cases by Metro Area",
     subtitle = paste0("Current as of ", as.character(values$date)),
@@ -326,7 +327,8 @@ p <- ggplot(data = metro_subset) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_y_log10(limits = c(.1, 100), breaks = c(.1, .3, 1, 3, 10, 30, 100), 
                 labels = comma_format(accuracy = .2)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
+  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 75)) +
+  facet_wrap(~short_name) +
   labs(
     title = "Pace of New COVID-19 Deaths by Metro Area",
     subtitle = paste0("Current as of ", as.character(values$date)),
