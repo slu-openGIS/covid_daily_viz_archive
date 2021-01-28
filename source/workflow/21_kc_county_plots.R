@@ -237,7 +237,8 @@ alt_county_subset <- list(
 
 ## create plot
 p <- ggplot() +
-  geom_line(data = county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), size = 2) +
+  geom_line(data = county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), 
+            size = 2, show.legend = FALSE) +
   geom_line(data = alt_county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), 
             size = 2, show.legend = FALSE) +
   geom_point(county_day_points, mapping = aes(x = day, y = case_avg, color = factor_var),

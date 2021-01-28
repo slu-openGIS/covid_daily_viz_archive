@@ -54,7 +54,7 @@ stl_values <- list(
   peak_x = -80, 
   peak_y = 600, 
   current_x = 0, 
-  current_y = -800,
+  current_y = -700,
   current_display = TRUE
 )
 
@@ -80,8 +80,8 @@ kc_values <- list(
     max(),
   peak_x = -105, 
   peak_y = 1000, 
-  current_x = -130, 
-  current_y = 2000,
+  current_x = -30, 
+  current_y = 1000,
   current_display = TRUE
 )
 
@@ -108,7 +108,7 @@ os_values <- list(
   peak_x = -60, 
   peak_y = 200, 
   current_x = -0, 
-  current_y = -900,
+  current_y = -650,
   current_display = TRUE
 )
 
