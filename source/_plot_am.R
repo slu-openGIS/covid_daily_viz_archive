@@ -11,12 +11,17 @@
 # qa prompts ####
 
 ## prompt
-q <- usethis::ui_yeah("Have you updated the data submodule?")
+# q <- usethis::ui_yeah("Have you updated the data submodule?")
 
 ## evaluate prompt
-if (q == FALSE){
-  stop("AM plot build aborted!")
-}
+# if (q == FALSE){
+#  stop("AM plot build aborted!")
+# }
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+# update submodule ####
+system("git submodule update --remote")
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
