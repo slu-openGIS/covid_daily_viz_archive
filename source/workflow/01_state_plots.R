@@ -27,7 +27,7 @@ state_points <- filter(state_data, report_date == values$date)
 state_subset <- filter(state_data, report_date >= values$plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(state_subset$case_rate), accuracy = 500, f = ceiling)
+top_val <- round_any(x = max(state_subset$case_rate), accuracy = 1000, f = ceiling)
 
 ## create factors
 state_subset <- mutate(state_subset, factor_var = fct_reorder2(state, report_date, case_rate))
@@ -40,7 +40,7 @@ p <- ggplot(state_subset) +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "State") +
   scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 500)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 1000)) + 
   labs(
     title = "Reported COVID-19 Cases by State",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),

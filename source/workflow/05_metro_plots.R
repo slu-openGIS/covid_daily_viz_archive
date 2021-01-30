@@ -27,7 +27,7 @@ metro_points <- filter(metro_data, report_date == values$date)
 metro_subset <- filter(metro_data, report_date >= values$plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(metro_subset$case_rate), accuracy = 5, f = ceiling)
+top_val <- round_any(x = max(metro_subset$case_rate), accuracy = 10, f = ceiling)
 
 ## create factors
 metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, case_rate))
@@ -40,7 +40,7 @@ p <- ggplot(metro_subset) +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 5)) + 
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 10)) + 
   labs(
     title = "Reported COVID-19 Cases by Metro Area",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
@@ -173,7 +173,8 @@ metro_day_points <- mutate(metro_day_points, factor_var = fct_reorder2(short_nam
 
 ## create plot
 p <- ggplot(data = metro_subset) +
-  geom_line(mapping = aes(x = day, y = case_avg, color = factor_var), size = 2) +
+  geom_line(mapping = aes(x = day, y = case_avg, color = factor_var), 
+            size = 2, show.legend = FALSE) +
   geom_point(metro_day_points, mapping = aes(x = day, y = case_avg, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Metro Area") +
@@ -188,7 +189,8 @@ p <- ggplot(data = metro_subset) +
     x = "Days Since Average of Five Cases Reached",
     y = "7-day Average of Reported Cases (Log)"
   ) +
-  sequoia_theme(base_size = 22, background = "white")
+  sequoia_theme(base_size = 22, background = "white") +
+  theme(axis.text.y = element_text(size=15))
 
 ## save plots
 save_plots(filename = "results/high_res/metro/f_new_case_log.png", preset = "lg")
@@ -319,7 +321,8 @@ alt_metro_subset <- list(
 
 ## create plot
 p <- ggplot(data = metro_subset) +
-  geom_line(mapping = aes(x = day, y = deaths_avg, color = factor_var), size = 2) +
+  geom_line(mapping = aes(x = day, y = deaths_avg, color = factor_var), 
+            size = 2, show.legend = FALSE) +
   geom_line(data = alt_metro_subset, mapping = aes(x = day, y = deaths_avg, color = factor_var), 
             size = 2, show.legend = FALSE) +
   geom_point(metro_day_points, mapping = aes(x = day, y = deaths_avg, color = factor_var), 
