@@ -80,8 +80,8 @@ kc_values <- list(
     max(),
   peak_x = -105, 
   peak_y = 1000, 
-  current_x = -30, 
-  current_y = 1000,
+  current_x = -50, 
+  current_y = 1100,
   current_display = TRUE
 )
 
