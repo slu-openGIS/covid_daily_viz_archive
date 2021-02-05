@@ -1,6 +1,20 @@
+# Build Site and Push ####
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
 # dependencies
 library(fs)
 library(rmarkdown)
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+## store date value
+date <- Sys.Date()
+
+## confirm auto update data
+auto_update <- usethis::ui_yeah("Do you want to automatically update the remote GitHub repo?")
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # copy images into site root directory
 dir_copy(path = "results/low_res", new_path = "site/img/", overwrite = TRUE) 
@@ -23,3 +37,17 @@ rm(params, pal, snapshot, map_breaks, map_bins, bins, round_any,
    cape, mid_mo, nomo, ozark, semo, st_jo, swmo, metro_data,
    regional_counties, spring, state_live_data, stl_race, stl_race_gender,
    west, ozark_mtns)
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+# optionally pushed to GitHub
+if (auto_update == TRUE){
+   
+   system("git add -A")
+   system(paste0("git commit -a -m 'build site for ", as.character(date), "'"))
+   system("git push origin master")
+   
+}
+
+# clean-up
+rm(date)
