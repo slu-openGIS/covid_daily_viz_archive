@@ -36,7 +36,8 @@ rm(params, pal, snapshot, map_breaks, map_bins, bins, round_any,
    county_data, stl_hosp, zip_snapshot, metro_counties, factpal,
    cape, mid_mo, nomo, ozark, semo, st_jo, swmo, metro_data,
    regional_counties, spring, state_live_data, stl_race, stl_race_gender,
-   west, ozark_mtns)
+   west, ozark_mtns, df, df.post, df.pre, nemo, df.post2, interval_value_formatter,
+   pre)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
@@ -50,4 +51,4 @@ if (auto_update == TRUE){
 }
 
 # clean-up
-rm(date)
+rm(date, auto_update)
