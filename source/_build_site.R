@@ -11,9 +11,6 @@ library(rmarkdown)
 ## store date value
 date <- Sys.Date()
 
-## confirm auto update data
-auto_update <- usethis::ui_yeah("Do you want to automatically update the remote GitHub repo?")
-
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # copy images into site root directory
@@ -38,6 +35,14 @@ rm(params, pal, snapshot, map_breaks, map_bins, bins, round_any,
    regional_counties, spring, state_live_data, stl_race, stl_race_gender,
    west, ozark_mtns, df, df.post, df.pre, nemo, df.post2, interval_value_formatter,
    pre)
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+## store date value
+date <- Sys.Date()
+
+## confirm auto update data
+auto_update <- usethis::ui_yeah("Do you want to automatically update the remote GitHub repo?")
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
