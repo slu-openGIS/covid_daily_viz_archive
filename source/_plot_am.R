@@ -142,4 +142,4 @@ source("source/workflow/21_kc_county_plots.R")    # Kansas City MSA
 
 # clean-up ####
 rm(values, calculate_days, facet_rate, filter_date, map_bins, map_breaks,
-   round_any, save_plots, sequoia_theme, regional_geoids, q, region_count)
+   round_any, save_plots, sequoia_theme, regional_geoids, q, regional_count)

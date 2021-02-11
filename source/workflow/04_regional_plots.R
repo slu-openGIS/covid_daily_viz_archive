@@ -25,9 +25,9 @@ state_values <- list(
     pull(var = case_avg) %>% 
     max(),
   peak_x = -60, # 0
-  peak_y = -200, # 400
+  peak_y = 140, # 400
   current_x = 0, # -105
-  current_y = 4000, # 1000
+  current_y = 4400, # 1000
   current_display = TRUE
 )
 
@@ -80,8 +80,8 @@ kc_values <- list(
     max(),
   peak_x = -105, 
   peak_y = 1000, 
-  current_x = -50, 
-  current_y = 1100,
+  current_x = -60, 
+  current_y = 1200,
   current_display = TRUE
 )
 
