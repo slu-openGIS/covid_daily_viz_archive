@@ -141,5 +141,14 @@ source("source/workflow/21_kc_county_plots.R")    # Kansas City MSA
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # clean-up ####
-rm(values, calculate_days, facet_rate, filter_date, map_bins, map_breaks,
+rm(calculate_days, facet_rate, filter_date, map_bins, map_breaks,
    round_any, save_plots, sequoia_theme, regional_geoids, q, regional_count)
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+commit <- function(){
+  
+  system("git add -A")
+  system(paste0("git commit -a -m 'build am plots for ", as.character(values$date+1), "'"))
+  
+}
