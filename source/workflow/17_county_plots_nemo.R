@@ -123,19 +123,19 @@ county_subset <- filter(county_data, report_date >= values$plot_date) %>%
 county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
 
 ## modify Livingston and Sullivan counties
-county_subset <- mutate(county_subset,
-                        case_avg_rate = ifelse(geoid == 29117 & 
-                                                 (report_date == "2020-09-04" | report_date == "2020-09-10"), 140, case_avg_rate),
-                        case_avg_rate = ifelse(geoid == 29117 & 
-                                                 (report_date >= "2020-09-05" & report_date <= "2020-09-09"), NA, case_avg_rate)
-)
-
-county_subset <- mutate(county_subset,
-                        case_avg_rate = ifelse(geoid == 29211 & 
-                                                 (report_date == "2020-10-30" | report_date == "2020-11-06"), 140, case_avg_rate),
-                        case_avg_rate = ifelse(geoid == 29211 & 
-                                                 (report_date >= "2020-10-31" & report_date <= "2020-11-05"), NA, case_avg_rate)
-)
+# county_subset <- mutate(county_subset,
+#                        case_avg_rate = ifelse(geoid == 29117 & 
+#                                                 (report_date == "2020-09-04" | report_date == "2020-09-10"), 140, case_avg_rate),
+#                        case_avg_rate = ifelse(geoid == 29117 & 
+#                                                 (report_date >= "2020-09-05" & report_date <= "2020-09-09"), NA, case_avg_rate)
+# )
+#
+# county_subset <- mutate(county_subset,
+#                        case_avg_rate = ifelse(geoid == 29211 & 
+#                                                 (report_date == "2020-10-30" | report_date == "2020-11-06"), 140, case_avg_rate),
+#                        case_avg_rate = ifelse(geoid == 29211 & 
+#                                                 (report_date >= "2020-10-31" & report_date <= "2020-11-05"), NA, case_avg_rate)
+# )
 
 ## define top_val
 top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 20, f = ceiling)

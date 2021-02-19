@@ -31,7 +31,7 @@ cols <- c("Kansas City" = values$pal[1], "Wyandotte" = values$pal[2],
 
 ## define focal counties
 county_focal <- c("20209", "20103", "29511", "29107", "29095", "20091", "29047",
-                  "29037", "29165", "29025", "29049", "20107")
+                  "29037", "29165", "29025", "29049")
 
 ## create points
 county_points <- filter(county_data, report_date == values$date) %>%
@@ -157,6 +157,14 @@ county_subset <- filter(county_data, report_date >= values$plot_date)
 ## address negative values
 county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
 
+## modify Linn County
+county_subset <- mutate(county_subset,
+                        case_avg_rate = ifelse(geoid == 20107 & 
+                                                 (report_date == "2021-01-06" | 
+                                                    report_date == "2021-01-07" |
+                                                    report_date == "2021-01-10"), 160, case_avg_rate)
+)
+
 ## define top_val
 top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 20, f = ceiling)
 
@@ -169,13 +177,13 @@ p <- facet_rate(county_subset,
                 subtype = "Kansas City",
                 pal = cols, 
                 x_breaks = values$date_breaks_facet,
-                y_breaks = 25,
+                y_breaks = 20,
                 y_upper_limit = top_val,
                 highlight = county_focal,
                 plot_date = values$plot_date,
                 date = values$date,
                 title = "Pace of New COVID-19 Cases in Metro Kansas City",
-                caption = values$caption_text_census)
+                caption = paste0(values$caption_text_census,"\nValues above 160 for Linn County (not highlighted) truncated to increase readability"))
 
 ## save plot
 save_plots(filename = "results/high_res/kc_metro/e_new_case.png", plot = p, preset = "lg")
