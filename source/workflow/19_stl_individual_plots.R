@@ -8,10 +8,28 @@ covid_race_gender <-  read_csv("data/MO_HEALTH_Covid_Tracking/data/individual/st
 
 # =============================================================================
 
+# add native data
+if (nrow(filter(covid_race, geoid == 29189 & value == "Native")) == 0){
+  native_county <- dplyr::tibble(
+    geoid = 29189,
+    county = "St. Louis",
+    value = "Native",
+    cases = 0,
+    case_rate = 0,
+    deaths = NA,
+    mortality_rate = NA,
+    report_date = date
+  )
+  
+  covid_race <- bind_rows(covid_race, native_county)
+}
+
+# =============================================================================
+
 # create factor
 covid_race %>%
   mutate(value = as_factor(value)) %>%
-  mutate(value = fct_relevel(value, "White", "Black", "Asian", "Two or More")) -> covid_race
+  mutate(value = fct_relevel(value, "White", "Black", "Latino", "Asian", "Native", "Two or More")) -> covid_race
 
 # create factor
 covid_race_gender %>%
@@ -35,7 +53,7 @@ p <- ggplot(data = covid_race, mapping = aes(x = value, y = case_rate, fill = co
     subtitle = paste0("Current as of ", as.character(date)),
     x = "Race",
     y = "Rate per 1,000 Individuals",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis, St. Louis County, and the U.S. Census Bureau"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the City of St. Louis, St. Louis County, and the U.S. Census Bureau\nData on cases among indigenous residents of St. Louis County not available"
   ) +
   sequoia_theme(base_size = 22, background = "white", map = FALSE)
 
@@ -50,7 +68,7 @@ save_plots(filename = "results/low_res/stl_individual/a_race_case.png", plot = p
 # plot mortality rates, race
 
 ## define top_val
-top_val <- round_any(x = max(covid_race$mortality_rate, na.rm = TRUE), accuracy = .1, f = ceiling)
+top_val <- round_any(x = max(covid_race$mortality_rate, na.rm = TRUE), accuracy = .2, f = ceiling)
 
 ## create plot
 p <- covid_race %>%
@@ -58,7 +76,7 @@ p <- covid_race %>%
   ggplot(data = ., mapping = aes(x = value, y = mortality_rate, fill = county)) +
     geom_bar(position = "dodge", stat = "identity", width = .75) +
     scale_fill_brewer(palette = "Set1", name = "County") +
-    scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = .1)) +
+    scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = .2)) +
     labs(
       title = "Reported Deaths by Race, St. Louis City & County",
       subtitle = paste0("Current as of ", as.character(date)),
