@@ -65,6 +65,7 @@ source("source/workflow/03_state_individual_plots.R")
 source("source/workflow/19_stl_individual_plots.R")
 source("source/workflow/20_stl_hospital_plots.R")
 source("source/workflow/22_mo_deaths.R")
+source("source/workflow/23_vaccines.R")
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
