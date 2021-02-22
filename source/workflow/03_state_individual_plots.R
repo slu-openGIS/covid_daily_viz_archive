@@ -116,22 +116,22 @@ covid_race <-  read_csv("data/MO_HEALTH_Covid_Tracking/data/individual/mo_vaccin
 
 missing <- list(
   race = covid_race %>%
-    filter(value %in% c("Unknown, Race")) %>%
-    select(total_dose) %>%
+    filter(value %in% c("Unknown Race")) %>%
+    select(first_dose) %>%
     pull(),
   ethnic = covid_race %>%
-    filter(value %in% c("Unknown, Ethnicity")) %>%
-    select(total_dose) %>%
+    filter(value %in% c("Unknown Ethnicity")) %>%
+    select(first_dose) %>%
     pull(),
   total = covid_race %>%
-    filter(value %in% c("Unknown, Ethnicity", "Latino") == FALSE) %>%
+    filter(value %in% c("Unknown Ethnicity", "Latino") == FALSE) %>%
     group_by(geoid) %>%
-    summarise(total = sum(total_dose)) %>%
+    summarise(total = sum(first_dose)) %>%
     select(total) %>%
     pull()
 )
 
-covid_race <- filter(covid_race, value %in% c("Unknown, Race", "Unknown, Ethnicity", "Two or More") == FALSE)
+covid_race <- filter(covid_race, value %in% c("Unknown Race", "Unknown Ethnicity", "Two or More") == FALSE)
 
 # =============================================================================
 
@@ -147,18 +147,18 @@ covid_race <- covid_race %>%
 # plot total dose rates, race
 
 ## define top_val
-top_val <- round_any(x = max(covid_race$total_dose_rate, na.rm = TRUE), accuracy = 2500, f = ceiling)
+top_val <- round_any(x = max(covid_race$first_dose_rate, na.rm = TRUE), accuracy = 2000, f = ceiling)
 
 ## create plot
-p <- ggplot(data = covid_race, mapping = aes(x = reorder(value, -total_dose_rate), y = total_dose_rate)) +
+p <- ggplot(data = covid_race, mapping = aes(x = reorder(value, -first_dose_rate), y = first_dose_rate)) +
   geom_bar(position = "dodge", stat = "identity", width = .65, show.legend = FALSE,
            fill = RColorBrewer::brewer.pal(4, "Set1")[4]) +
-  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 2500)) +
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 2000)) +
   labs(
     title = "Vaccinations by Race and Ethnicity, Missouri",
     subtitle = paste0("Current as of ", as.character(date)),
     x = "Race",
-    y = "Total Doses per 100,000 Individuals",
+    y = "First Doses per 100,000 Individuals",
     caption = paste0("Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the U.S. Census Bureau",
                      "\nStatewide, ", round(missing$race/missing$total*100, 2),"% of race data are missing, as are ", 
                      round(missing$ethnic/missing$total*100, 2), "% of ethnicity data")  
