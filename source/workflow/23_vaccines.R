@@ -130,4 +130,4 @@ save_plots(filename = "results/low_res/county/v_total_dose_map.png", plot = p, p
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # clean-up
-rm(p, mo_sf, caption_text_census_map)
+rm(p, mo_sf)
