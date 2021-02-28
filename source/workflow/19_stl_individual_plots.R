@@ -147,5 +147,5 @@ save_plots(filename = "results/low_res/stl_individual/d_race_sex_mortality.png",
 # =============================================================================
 
 # clean-up
-rm(covid_race, covid_race_gender)
+rm(covid_race, covid_race_gender, native_county)
 rm(top_val, p)
