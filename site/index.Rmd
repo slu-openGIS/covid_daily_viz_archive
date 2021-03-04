@@ -80,11 +80,6 @@ Chris also emails out a weekly round-up of COVID-19 trends for Missouri. These w
 
 <iframe src="https://chrisprener.substack.com/embed" width="480" height="320" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe>
 
-## Contributors {.padtop}
-<a href="https://chris-prener.github.io" target="_blank">Chris Prener</a>, an Assistant Professor of Sociology at Saint Louis University, is the primary maintainer of this site and the data behind it. <a href="https://www.slu.edu/slucor/faculty/wiemken-timothy.php" target="_blank">Tim Wiemken</a>, an Associate Professor in Health and Clinical Outcomes Research and Infectious Disease at Saint Louis University School of Medicine, has contributed to both the <a href="mortality.html">mortality</a> and <a href="ltc.html">nursing home</a> data. He has also provided technical guidance on other aspects of the site.
-
-In addition, Saint Louis University Computer Science majors Alvin Do, Eric Quach, and Metta Pham are all working on this site as part of the Senior Capstone project. Alvin, Eric, and Metta have contributed to building underlying data, especially ZIP code data, and are supporting the automation of web scraping. Big thanks are due to them, and to the Department of Computer Science for selecting this site for inclusion in its Senior Capstone program this year.
-
 ## Daily Data {.tabset .tabset-fade .tabset-pills .padtop}
 While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1), and [Kansas City](https://www.kcmo.gov/city-hall/departments/health/coronavirus-covid-19/covid-19-totals) provide day-by-day tracking of cumulative cases on their respective dashboards, the State of Missouri does not. The following tabs provide daily breakdowns of COVID data as well as additional statistics not included in the existing dashboards. Data are also provided for the wider St. Louis and Kansas City metro areas. Please note that the two average columns for reported cases and deaths are both seven-day rolling averages.
 
@@ -428,40 +423,32 @@ DT::datatable(data_table)
   * The FAQ contains a short explanation of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
 
 ## Additional Plots and Data {.padtop}
-Select an area below to view additional plots that focus on trends within a variety of areas of Missouri.
+### Data via Geographic Area
+Additional data are available at the following geographic levels:
 
-<br>
+  * [Missouri and surrounding states](states.html)
+  * [Regions](regions.html)
+  * [Metropolitan areas](metros.html)
+  * Counties in the [St. Louis](stl.html) and [Kansas City](kc.html) metropolitan areas
+  * Counties in [other regions of Missouri](other_regions.html)
+  * Zip codes in the [St. Louis](stl.html#Infection_Rates_by_ZCTA_(Zip_Code)) and [Kansas City](kc.html#Infection_Rates_by_ZCTA_(Zip_Code)) metropolitan areas
 
-<div class="row">
-  <div class="column">
-  <a href="states.html">`r fa("chart-area", height = 40)`</i>
-  <br><p style="font-size:20px">States</p></a></div>
-  <div class="column">
-  <a href="regions.html">`r fa("chart-pie", height = 40)`</i>
-  <br><p style="font-size:20px">Meso Regions</p></div>
-  <div class="column">
-  <a href="metros.html">`r fa("chart-line", height = 40)`</i>
-  <br><p style="font-size:20px">Metro Areas</p></div></div>
-</div>
-<div class="row">
-  <div class="column">
-  <a href="kc.html">`r fa("chart-line", height = 40)`</i>
-  <br><p style="font-size:20px">Kansas City Metro</p></a></div>
-  <div class="column">
-  <a href="stl.html">`r fa("chart-area", height = 40)`</i>
-  <br><p style="font-size:20px">St. Louis Metro</p></a><p>Includes zip code and hospitalization data</p></div>
-  <div class="column">
-  <a href="other_regions.html">`r fa("chart-pie", height = 40)`</i>
-  <br><p style="font-size:20px">Non-Metro Regions</p></a></div>
-</div>
-<div class="row">
-  <div class="column">
-  <a href="disparities.html">`r fa("chart-pie", height = 40)`</i>
-  <br><p style="font-size:20px">Disparities</p></a><p>Includes race, sex, and poverty data for Missouri and St. Louis</p></div>
-  <div class="column">
-  <a href="ltc.html">`r fa("chart-line", height = 40)`</i>
-  <br><p style="font-size:20px">Nursing Homes</p></a><p>Includes facility and county data for Missouri</p></div>
-  <div class="column">
-  <a href="mortality.html">`r fa("chart-area", height = 40)`</i>
-  <br><p style="font-size:20px">Mortality</p></a><p>Includes excess mortality and comparisons of actual vs. reported deaths</p></div>
-</div>
+### Data via Topic
+Additional data are available for the following topics:
+
+  * Cases
+      * [State](states.html#Infections); [Region](regions.html); [Metropolitan areas](metros.html#Infections); counties in [St. Louis](stl.html#Infections), [Kansas City](kc.html#Infections), and [other regions of Missouri](other_regions.html); [Long Term Care facilities](ltc.html#Morbidity)
+  * Disparities
+      * Cases and Deaths
+          * [State](disparities.html#Statewide); [St. Louis City and County](disparities.html#St_Louis)
+  * [Excess Mortality](mortality.html)
+  * Hospitalizations
+      * [St. Louis](stl.html#Hospitalizations)
+  * [Long Term Care and Nursing Homes](ltc.html)
+  * Mortality
+      * [State](states.html#Mortality); [Metropolitan areas](metros.html#Mortality); counties in [St. Louis](stl.html#Mortality), [Kansas City](kc.html#Mortality); [Long Term Care facilities](ltc.html#Mortality)
+
+## Contributors {.padtop}
+<a href="https://chris-prener.github.io" target="_blank">Chris Prener</a>, an Assistant Professor of Sociology at Saint Louis University, is the primary maintainer of this site and the data behind it. <a href="https://www.slu.edu/slucor/faculty/wiemken-timothy.php" target="_blank">Tim Wiemken</a>, an Associate Professor in Health and Clinical Outcomes Research and Infectious Disease at Saint Louis University School of Medicine, has contributed to both the <a href="mortality.html">mortality</a> and <a href="ltc.html">nursing home</a> data. He has also provided technical guidance on other aspects of the site.
+
+In addition, Saint Louis University Computer Science majors Alvin Do, Eric Quach, and Metta Pham are all working on this site as part of the Senior Capstone project. Alvin, Eric, and Metta have contributed to building underlying data, especially ZIP code data, and are supporting the automation of web scraping. Big thanks are due to them, and to the Department of Computer Science for selecting this site for inclusion in its Senior Capstone program this year.

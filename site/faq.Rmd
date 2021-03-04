@@ -54,11 +54,25 @@ snapshot %>%
 Data for this site is compiled from a number of sources on a daily basis:
 
   1. County and state COVID-19 data - the <a href="https://nytimes.com" target="_blank">New York Times'</a> <a href="https://github.com/nytimes/covid-19-data" target="_blank">COVID-19 Project</a>
-  2. State testing data - the <a href="https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/" target="_blank">Missouri Department of Health and Senior Services</a> for Missouri specific data and the <a href="https://covidtracking.com" target="_blank">COVID Tracking Project</a> for surrounding states
-  3. State health disparities data - the <a href="https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/" target="_blank">Missouri Department of Health and Senior Services</a>
-  4. St. Louis area health disparities data - the <a href="https://www.stlouis-mo.gov/covid-19/data/index.cfm" target="_blank">City of St. Louis</a> and <a href="https://stlcorona.com/resources/covid-19-statistics1/" target="_blank">St. Louis County</a>
-  5. St. Louis area zip code data - the <a href="https://www.stlouis-mo.gov/covid-19/data/index.cfm" target="_blank">City of St. Louis</a> and <a href="https://stlcorona.com/resources/covid-19-statistics1/" target="_blank">St. Louis County</a>
-  6. St. Louis area hospitalization data - the St. Louis Metropolitan Pandemic Task Force
+  2. State health disparities data - the <a href="https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/" target="_blank">Missouri Department of Health and Senior Services</a>
+  3. St. Louis area health disparities data - the <a href="https://www.stlouis-mo.gov/covid-19/data/index.cfm" target="_blank">City of St. Louis</a> and <a href="https://stlcorona.com/resources/covid-19-statistics1/" target="_blank">St. Louis County</a>
+  4. St. Louis area zip code data:
+      * Franklin County
+      * <a href="https://www.jeffcohealth.org/covid19-data" target="_blank">Jefferson County</a>
+      * <a href="https://experience.arcgis.com/experience/61207258c1f243cabcec743c23064fa6" target="_blank">Lincoln County</a>
+      * <a href="https://www.sccmo.org/2105/COVID-19" target="_blank">St. Charles County</a>
+      * <a href="https://www.stlouis-mo.gov/covid-19/data/index.cfm" target="_blank">St. Louis City</a>
+      * <a href="https://stlcorona.com/resources/covid-19-statistics1/" target="_blank">St. Louis County</a>
+      * <a href="https://www.dph.illinois.gov/covid19/covid19-statistics" target="_blank">State of Illinois</a>
+      * <a href="https://www.warrencountyhealth.com/covid-19-dashboard/" target="_blank">Warren County</a>
+  5. St. Louis area hospitalization data - the <a href="https://www.facebook.com/StLouisMetropolitanPandemicTaskForce/" target="_blank">St. Louis Metropolitan Pandemic Task Force</a>
+  6. Kansas City area zip code data:
+      * <a href="https://experience.arcgis.com/experience/34f9ef5e486b4ef3a0a1364c457944bb/page/page_1/" target="_blank">Clay County</a>
+      * <a href="https://jacohd.org/data-dashboard/" target="_blank">Jackson County</a>
+      * <a href="https://viz.jocogov.org/t/Public/views/JohnsonCountyKS-COVID-19Update/Dashboard?:isGuestRedirectFromVizportal=y&:embed=y" target="_blank">Johnson County</a>
+      * <a href="https://data.kcmo.org/Health/COVID-19-Data-by-ZIP-Code/374j-h7xt" target="_blank">Kansas City</a>
+      * <a href="https://www.plattecountyhealthdept.com/emergency.aspx" target="_blank">Platte County</a>
+      * <a href="https://wyandotte-county-covid-19-hub-unifiedgov.hub.arcgis.com" target="_blank">Wyandotte County</a>
   7. Demographic data - the U.S. Census Bureau's American Community Survey 5-year estimates (2014-2018)
   
 See the [Technical Notes page](data.html) for additional details.
@@ -67,10 +81,10 @@ See the [Technical Notes page](data.html) for additional details.
 Due to lags in reporting, both at the public health department level and at the New York Times itself, case and mortality numbers may lag behind other figures reported in the media. At the same time, because the New York Times obtains data from multiple sources, some case and mortality numbers may actually be higher than what is reported by the state.
 
 ## What Are Probable Cases? {.padtop}
-On May 6th, the New York Times began including probable cases - those without a confirmatory test result but where symptoms indicate a COVID-19 infection. Not all counties report probable cases, however, and so I include markers on plots to indicate when the reporting change beginning on April 15th may have occurred.
+On May 6th, the New York Times began including probable cases - those without a confirmatory test result but where symptoms indicate a COVID-19 infection. Not all counties report probable cases, however.
 
 ## What are Per Capita Rates? {.padtop}
-In order to compare rates across neighborhoods, cities, states, or countries, use utilize per capita statistics. When we calculate a "rate per capita" or a "per capita rate," we take our rate and multiply it by a set number of individuals. This helps us ensure that our data are expressed relative to the size of the population they describe. For example, we typically calculate infant mortality rate by multiplying a given entity’s rate by 1,000. In the United States, we typically calculate per capita crime rates by taking a city’s or state’s rate, and multiplying it by 100,000. 
+In order to compare rates across neighborhoods, cities, states, or countries, use utilize per capita statistics. When we calculate a "rate per capita" or a "per capita rate," we take our rate and multiply it by a set number of individuals. This helps us ensure that our data are expressed relative to the size of the population they describe. For example, we typically calculate infant mortality rate by multiplying a given jurisdiction's rate by 1,000. In the United States, we typically calculate per capita crime rates by taking a city’s or state’s rate, and multiplying it by 100,000. 
 
 Calculating rates is particularly important for mapping these quantities. This is sometimes called "normalization" by cartographers. By ensuring that we adjust the values mapped for the number of people in a given area, we ensure that our map is not just reflecting variations in population between jurisdictions.
 

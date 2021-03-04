@@ -235,10 +235,10 @@ leaflet() %>%
 ### Static Map
 
 ```{r confirmed-static, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/stl_zip/a_case_map_regional.png")
+knitr::include_graphics("img/stl_zip/a_case_map_metro.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_regional.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_regional.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/a_case_map_metro.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/a_case_map_metro.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -265,7 +265,17 @@ DT::datatable(data_table)
 
   * If a ZCTA straddles two counties, and only has reported infection numbers in one entity, its estimated partial population will be displayed. Similarly, estimated partial populations for zip codes that straddle outlying counties are used.
   * ZCTA stands for "<a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html" target="_blank">ZIP Code Tabulation Area</a>. These are not identical to zip codes, but they are essential for mapping zip codes as regions on a map.
-  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `zip_stl_city.csv` and `zip_stl_county.csv` tables, which are assembled from data provided by [St. Louis City and County](faq.html#Where_Do_These_Data_Come_From). These data are also available as `.geojson` files for mapping.
+  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the following tables: 
+      * Franklin County - `zip_franklin_county.csv`
+      * Jefferson County - `zip_jefferson_county.csv`
+      * Lincoln County - `zip_lincoln_county.csv`
+      * Metro East - `zip_metro_east.csv`
+      * St. Charles County - `zip_st_charles_county.csv`
+      * St. Louis City - `zip_stl_city.csv`
+      * St. Louis County - `zip_stl_county.csv`
+      * Warren County - `zip_warren_county.csv`
+  * These data are also available as `.geojson` files for mapping.
+  * These tables are assembled from data provided by [local health departments in Missouri and the Illinois Department of Public Health](faq.html#Where_Do_These_Data_Come_From).
   * The FAQ contains a short explanation of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
 
 ## Average New Infections by ZCTA (Zip Code) {.tabset .tabset-fade .tabset-pills .padtop}
@@ -314,10 +324,10 @@ leaflet() %>%
 ### Static Map
 
 ```{r avg-confirmed-static, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/stl_zip/d_avg_map_regional.png")
+knitr::include_graphics("img/stl_zip/d_avg_map_metro.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/d_avg_map_regional.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/d_avg_map_regional.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/d_avg_map_metro.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/d_avg_map_metro.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
