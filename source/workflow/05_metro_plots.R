@@ -390,27 +390,30 @@ rm(top_val, p)
 # per-capita 7-day average ####
 
 ## define top_val
-top_val <- round_any(x = max(metro_hosp$covid_per_cap, na.rm = TRUE), accuracy = 50, f = ceiling)
+# top_val <- round_any(x = max(metro_hosp$covid_per_cap, na.rm = TRUE), accuracy = 50, f = ceiling)
 
 ## create factors
-metro_hosp <- mutate(metro_hosp, factor_var = fct_reorder2(short_name, report_date, covid_per_cap))
+# metro_hosp <- mutate(metro_hosp, factor_var = fct_reorder2(short_name, report_date, covid_per_cap))
 
 ## create plot
-p <- facet_rate(metro_hosp, 
-                type = "metro HHS", 
-                pal = cols, 
-                x_breaks = values$date_breaks,
-                y_breaks = 50,
-                y_upper_limit = top_val,
-                highlight = unique(metro_hosp$geoid),
-                plot_date = values$plot_date,
-                date = values$date,
-                title = "COVID-19 Hospitalizations by Metro Area",
-                caption = "Data via HHS and the U.S. Census Bureau")
+# p <- facet_rate(metro_hosp, 
+#                type = "metro HHS", 
+#                pal = cols, 
+#                x_breaks = values$date_breaks,
+#                y_breaks = 50,
+#                y_upper_limit = top_val,
+#                highlight = unique(metro_hosp$geoid),
+#                plot_date = values$plot_date,
+#                date = values$date,
+#                title = "COVID-19 Hospitalizations by Metro Area",
+#                caption = "Data via HHS and the U.S. Census Bureau")
 
 ## save plot
-save_plots(filename = "results/high_res/metro/o_in_pt.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/metro/o_in_pt.png", plot = p, preset = "lg", dpi = 72)
+# save_plots(filename = "results/high_res/metro/o_in_pt.png", plot = p, preset = "lg")
+# save_plots(filename = "results/low_res/metro/o_in_pt.png", plot = p, preset = "lg", dpi = 72)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
+## clean-up
+rm(metro_hosp)
+rm(top_val, cols)
