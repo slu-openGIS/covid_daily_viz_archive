@@ -65,7 +65,7 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
   # }
   
   # create name
-  if (type == "metro"){
+  if (type == "metro" | type == "metro HHS"){
     scale_name <- "Metro Area"
   } else if (type == "county"){
     scale_name <- "County"
@@ -74,9 +74,16 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
   }
   
   # construct plot
-  p <- ggplot(.data) +
-    geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
-              size = 2, show.legend = FALSE)
+  if (type == "metro HHS"){
+    p <- ggplot(.data) +
+      geom_line(mapping = aes(x = report_date, y = covid_per_cap, color = factor_var), 
+                size = 2, show.legend = FALSE)    
+  } else {
+    p <- ggplot(.data) +
+      geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
+                size = 2, show.legend = FALSE)   
+  }
+
   
   # optionally highlight trends
   if (type == "metro" | type == "county"){
@@ -172,7 +179,7 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
   }
   
   # add facet
-  if (type == "metro"){
+  if (type == "metro" | type == "metro HHS"){
     p <- p + facet_wrap(~short_name)
   } else if (type == "county" & is.null(subtype) == TRUE){
     p <- p + facet_wrap(~county)

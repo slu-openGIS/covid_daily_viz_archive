@@ -4,6 +4,7 @@
 
 # load data
 metro_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/metro_all/metro_full.csv")
+metro_hosp <- read_csv("data/MO_HEALTH_Covid_Tracking/data/metro_all/metro_hospital.csv")
 
 # =============================================================================
 
@@ -113,7 +114,7 @@ metro_subset <- filter(metro_data, report_date >= values$plot_date)
 ## address negative values
 metro_subset <- mutate(metro_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
 
-## modify Mississippi County
+## modify Cape Girardeau
 metro_subset %>%
   mutate(case_avg_rate = ifelse(short_name == "Cape Girardeau" & 
                                   (report_date == "2020-11-20" | report_date == "2020-11-22"), 160, case_avg_rate),
@@ -382,4 +383,34 @@ save_plots(filename = "results/low_res/metro/m_case_fatality_rate.png", plot = p
 
 # clean-up
 rm(metro_data, metro_subset, metro_points, metro_day_points, alt_metro_subset)
-rm(top_val, cols, p)
+rm(top_val, p)
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+# per-capita 7-day average ####
+
+## define top_val
+top_val <- round_any(x = max(metro_hosp$covid_per_cap, na.rm = TRUE), accuracy = 50, f = ceiling)
+
+## create factors
+metro_hosp <- mutate(metro_hosp, factor_var = fct_reorder2(short_name, report_date, covid_per_cap))
+
+## create plot
+p <- facet_rate(metro_hosp, 
+                type = "metro HHS", 
+                pal = cols, 
+                x_breaks = values$date_breaks,
+                y_breaks = 50,
+                y_upper_limit = top_val,
+                highlight = unique(metro_hosp$geoid),
+                plot_date = values$plot_date,
+                date = values$date,
+                title = "COVID-19 Hospitalizations by Metro Area",
+                caption = "Data via HHS and the U.S. Census Bureau")
+
+## save plot
+save_plots(filename = "results/high_res/metro/o_in_pt.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/metro/o_in_pt.png", plot = p, preset = "lg", dpi = 72)
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
