@@ -65,7 +65,7 @@ mo_sf <- st_read("data/MO_HEALTH_Covid_Tracking/data/county/daily_snapshot_mo_va
 
 # map first dose_rate
 ## create breaks
-mo_sf <- map_breaks(mo_sf, var = "first_dose_rate", newvar = "map_breaks",
+mo_sf <- map_breaks(mo_sf, var = "initiated_rate", newvar = "map_breaks",
                     style = "fisher", classes = 5, dig_lab = 3)
 
 ## create map
@@ -73,21 +73,21 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   geom_sf() +
   scale_fill_brewer(palette = "Oranges", name = "Rate per 1,000") +
   labs(
-    title = "First Vaccine Doses by Missouri County",
+    title = "Initiated Vaccinations by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text_census_map
+    caption = paste0(caption_text_census_map,"\nInitiation means a person has recieved at least one dose of the Moderna, Pfizer, or Johnson & Johnson vaccine.")
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
 ## save map
-save_plots(filename = "results/high_res/county/r_first_dose_map.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county/r_first_dose_map.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/county/r_vaccine_initial.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county/r_vaccine_initial.png", plot = p, preset = "lg", dpi = 72)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # map second dose_rate
 ## create breaks
-mo_sf <- map_breaks(mo_sf, var = "second_dose_rate", newvar = "map_breaks",
+mo_sf <- map_breaks(mo_sf, var = "complete_rate", newvar = "map_breaks",
                     style = "fisher", classes = 5, dig_lab = 3)
 
 ## create map
@@ -95,21 +95,21 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   geom_sf() +
   scale_fill_brewer(palette = "OrRd", name = "Rate per 1,000") +
   labs(
-    title = "Second Vaccine Doses by Missouri County",
+    title = "Completed Vaccinations by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text_census_map
+    caption = paste0(caption_text_census_map,"\nCompleted vaccination means having recieved both doses of the Moderna and Pfizer vaccines, \n  or one dose of the Johnson & Johnson vaccine.")
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
 ## save map
-save_plots(filename = "results/high_res/county/t_second_dose_map.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county/t_second_dose_map.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/county/t_vaccine_complete.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county/t_vaccine_complete.png", plot = p, preset = "lg", dpi = 72)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # map total dose_rate
 ## create breaks
-mo_sf <- map_breaks(mo_sf, var = "total_dose_rate", newvar = "map_breaks",
+mo_sf <- map_breaks(mo_sf, var = "last7_rate", newvar = "map_breaks",
                     style = "fisher", classes = 5, dig_lab = 3)
 
 ## create map
@@ -117,15 +117,15 @@ p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
   geom_sf() +
   scale_fill_brewer(palette = "YlOrRd", name = "Rate per 1,000") +
   labs(
-    title = "Total Vaccine Doses by Missouri County",
+    title = "New Vaccinations by Missouri County",
     subtitle = paste0("Current as of ", as.character(date)),
-    caption = caption_text_census_map
+    caption = paste0(caption_text_census_map,"\nNew vaccines include those administered in the last week.")
   ) +
   sequoia_theme(base_size = 22, background = "white", map = TRUE)
 
 ## save map
-save_plots(filename = "results/high_res/county/v_total_dose_map.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county/v_total_dose_map.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/county/v_vaccine_last7.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county/v_vaccine_last7.png", plot = p, preset = "lg", dpi = 72)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 

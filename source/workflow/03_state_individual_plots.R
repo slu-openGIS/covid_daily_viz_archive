@@ -117,16 +117,16 @@ covid_race <-  read_csv("data/MO_HEALTH_Covid_Tracking/data/individual/mo_vaccin
 missing <- list(
   race = covid_race %>%
     filter(value %in% c("Unknown Race")) %>%
-    select(first_dose) %>%
+    select(initiated) %>%
     pull(),
   ethnic = covid_race %>%
     filter(value %in% c("Unknown Ethnicity")) %>%
-    select(first_dose) %>%
+    select(initiated) %>%
     pull(),
   total = covid_race %>%
     filter(value %in% c("Unknown Ethnicity", "Latino") == FALSE) %>%
     group_by(geoid) %>%
-    summarise(total = sum(first_dose)) %>%
+    summarise(total = sum(initiated)) %>%
     select(total) %>%
     pull()
 )
@@ -147,15 +147,15 @@ covid_race <- covid_race %>%
 # plot total dose rates, race
 
 ## define top_val
-top_val <- round_any(x = max(covid_race$first_dose_rate, na.rm = TRUE), accuracy = 2000, f = ceiling)
+top_val <- round_any(x = max(covid_race$iniitiated_rate, na.rm = TRUE), accuracy = 2000, f = ceiling)
 
 ## create plot
-p <- ggplot(data = covid_race, mapping = aes(x = reorder(value, -first_dose_rate), y = first_dose_rate)) +
+p <- ggplot(data = covid_race, mapping = aes(x = reorder(value, -iniitiated_rate), y = iniitiated_rate)) +
   geom_bar(position = "dodge", stat = "identity", width = .65, show.legend = FALSE,
            fill = RColorBrewer::brewer.pal(4, "Set1")[4]) +
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 2000)) +
   labs(
-    title = "Vaccinations by Race and Ethnicity, Missouri",
+    title = "Initiated Vaccinations by Race and Ethnicity, Missouri",
     subtitle = paste0("Current as of ", as.character(date)),
     x = "Race",
     y = "First Doses per 100,000 Individuals",
