@@ -94,6 +94,7 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
     
   # finish plot
   p <- p +
+    geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8) +
     scale_colour_manual(values = pal, name = scale_name) +
     scale_x_date(date_breaks = x_breaks, date_labels = "%b") +
     scale_y_continuous(limits = c(0,y_upper_limit), breaks = seq(0, y_upper_limit, by = y_breaks)) + 
@@ -174,7 +175,7 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
       )
     }
     
-    p <- p + labs(caption = caption)
+    p <- p + labs(caption = paste0(caption,"\nVertical line represents addition of antigen test data for most counties on 2021-03-08"))
     
   }
   
@@ -199,3 +200,119 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
   return(p)
   
 }
+
+cumulative_rate <- function(.data, point_data, type, subtype = NULL, pal, x_breaks, 
+                            y_breaks, y_upper_limit, highlight, plot_date, date, title, 
+                            caption, x_angle){
+  
+  if (type != "county"){ stop("Geography not supported") }
+
+  # create name
+  if (type == "metro" | type == "metro HHS"){
+    scale_name <- "Metro Area"
+  } else if (type == "county"){
+    scale_name <- "County"
+  } else if (type == "state"){
+    scale_name <- "State"
+  }
+  
+  label <- tibble(
+    report_date = as.Date("2021-03-08"),
+    y_val = 136,
+    text = "Antigen tests added to most counties on 2021-03-08"
+  )
+  
+  # build main part of plot
+  p <- ggplot() +
+    geom_line(.data, mapping = aes(x = report_date, y = case_rate, color = factor_var), size = 2) +
+    geom_point(point_data, mapping = aes(x = report_date, y = case_rate, color = factor_var), 
+               size = 4, show.legend = FALSE) +
+    gghighlight(geoid %in% highlight, use_direct_label = FALSE, use_group_by = FALSE) +
+    geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8) +
+    geom_text_repel(data = label, mapping = aes(x = report_date, y = y_val, label = text),
+                    nudge_y = 100, nudge_x = -120, size = 5) +
+    scale_colour_manual(values = pal, name = scale_name) +
+    scale_x_date(date_breaks = x_breaks, date_labels = "%b") +
+    scale_y_continuous(limits = c(0,y_upper_limit), breaks = seq(0, y_upper_limit, by = y_breaks)) + 
+    labs(
+      title = title,
+      x = "Date",
+      y = "Rate per 1,000"
+    ) +
+    sequoia_theme(base_size = 22, background = "white") +
+    theme(axis.text.x = element_text(angle = x_angle)) 
+  
+  # add subtitle and captions
+  if (is.null(subtype) == TRUE){
+    p <- p + labs(
+      subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
+      caption = caption
+    )
+  } else if (is.null(subtype) == FALSE){
+    
+    if (subtype == "Southeast"){
+      p <- p + labs(
+        subtitle = paste0("Southeast Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Mid-Missouri"){
+      p <- p + labs(
+        subtitle = paste0("Mid-Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "St. Joseph"){
+      p <- p + labs(
+        subtitle = paste0("St. Joseph and Northwestern Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Northern"){
+      p <- p + labs(
+        subtitle = paste0("Northern Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Ozark"){
+      p <- p + labs(
+        subtitle = paste0("Lake of the Ozarks and South-Central Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Southwest"){
+      p <- p + labs(
+        subtitle = paste0("Southwest Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Cape"){
+      p <- p + labs(
+        subtitle = paste0("Cape Girardeau Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "West-Central"){
+      p <- p + labs(
+        subtitle = paste0("West-Central Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Springfield"){
+      p <- p + labs(
+        subtitle = paste0("Springfield Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Ozark Mountains"){
+      p <- p + labs(
+        subtitle = paste0("Ozark Mountains Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    } else if (subtype == "Kansas City"){
+      p <- p + labs(
+        subtitle = paste0(as.character(plot_date), " through ", as.character(date))
+      )
+    } else if (subtype == "Northeastern"){
+      p <- p + labs(
+        subtitle = paste0("Northeastern Missouri Focus\n",as.character(values$plot_date), 
+                          " through ", as.character(values$date))
+      )
+    }
+    
+    p <- p + labs(caption = caption)
+  
+  }
+}
+
