@@ -37,6 +37,7 @@ library(dplyr)          # data wrangling
 library(forcats)        # factor tools
 library(ggplot2)        # mapping and plotting
 library(readr)          # csv file tools
+library(stringr)        # string tools
 library(tidyr)          # data wrangling
 
 ### spatial packages
