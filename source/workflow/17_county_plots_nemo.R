@@ -41,24 +41,16 @@ county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_
 county_points <- mutate(county_points, factor_var = fct_reorder2(county, report_date, case_rate))
 
 ## create plot
-p <- ggplot() +
-  geom_line(county_subset, mapping = aes(x = report_date, y = case_rate, color = factor_var), size = 2) +
-  geom_point(county_points, mapping = aes(x = report_date, y = case_rate, color = factor_var), 
-             size = 4, show.legend = FALSE) +
-  gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  scale_colour_manual(values = cols, name = "County") +
-  scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = values$county_rate_val)) + 
-  labs(
-    title = "Reported COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("Northeastern Missouri Focus\n", as.character(values$plot_date), " through ", 
-                      as.character(values$date)),
-    x = "Date",
-    y = "Rate per 1,000",
-    caption = values$caption_text_census
-  ) +
-  sequoia_theme(base_size = 22, background = "white") +
-  theme(axis.text.x = element_text(angle = values$x_angle))
+p <- cumulative_rate(county_subset, 
+                     point_data = county_points,
+                     type = "county", 
+                     subtype = "Northeastern",
+                     plot_values = values,
+                     highlight = county_focal,
+                     y_upper_limit = top_val,
+                     pal = cols, 
+                     title = "Reported COVID-19 Cases by Select Missouri Counties",
+                     caption = values$caption_text_census)
 
 ## save plot
 save_plots(filename = "results/high_res/county_nemo/b_case_rate.png", plot = p, preset = "lg")
@@ -66,76 +58,15 @@ save_plots(filename = "results/low_res/county_nemo/b_case_rate.png", plot = p, p
 
 # =============================================================================
 
-# create days from 10th confirmed infection data
-
-## subset data
-county_data %>%
-  calculate_days(group_var = "geoid", stat_var = "cases", val = 5) %>%
-  select(day, report_date, geoid, county, cases) %>%
-  arrange(county, day) -> county_subset
-
-## define top_val
-top_val <- round_any(x = max(county_subset$day), accuracy = 5, f = ceiling)
-
-## identify max day
-county_subset %>%
-  group_by(geoid) %>%
-  summarise(day = max(day), .groups = "drop_last") %>%
-  left_join(county_points, ., by = "geoid") %>%
-  filter(county %in% unique(county_subset$county)) -> county_day_points
-
-## create factors
-county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, day, cases))
-county_day_points <- mutate(county_day_points, factor_var = fct_reorder2(county, day, cases))
-
-## create plot
-p <- ggplot(data = county_subset) +
-  geom_line(mapping = aes(x = day, y = cases, color = factor_var), size = 2) +
-  geom_point(county_day_points, mapping = aes(x = day, y = cases, color = factor_var), 
-             size = 4, show.legend = FALSE) +
-  gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(5, values$county_log_max), breaks = values$county_log_breaks,
-                labels = comma_format(accuracy = 1)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
-  labs(
-    title = "Pace of COVID-19 Cases by Select Missouri Counties",
-    subtitle = paste0("Northeastern Missouri Focus\n", "Current as of ", as.character(values$date)),
-    caption = values$caption_text,
-    x = "Days Since Fifth Case Reported",
-    y = "Count of Reported Cases (Log)"
-  ) +
-  sequoia_theme(base_size = 22, background = "white")
-
-## save plots
-save_plots(filename = "results/high_res/county_nemo/c_case_log.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county_nemo/c_case_log.png", plot = p, preset = "lg", dpi = 72)
-
-# =============================================================================
-
 # plot 7-day average rate ####
 
 ## subset data
 county_subset <- filter(county_data, report_date >= values$plot_date) %>%
-  filter(geoid %in% county_focal)
+  filter(geoid %in% county_focal) %>%
+  filter(report_date < as.Date("2021-03-08") | report_date >= as.Date("2021-03-15"))
 
 ## address negative values
 county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
-
-## modify Livingston and Sullivan counties
-# county_subset <- mutate(county_subset,
-#                        case_avg_rate = ifelse(geoid == 29117 & 
-#                                                 (report_date == "2020-09-04" | report_date == "2020-09-10"), 140, case_avg_rate),
-#                        case_avg_rate = ifelse(geoid == 29117 & 
-#                                                 (report_date >= "2020-09-05" & report_date <= "2020-09-09"), NA, case_avg_rate)
-# )
-#
-# county_subset <- mutate(county_subset,
-#                        case_avg_rate = ifelse(geoid == 29211 & 
-#                                                 (report_date == "2020-10-30" | report_date == "2020-11-06"), 140, case_avg_rate),
-#                        case_avg_rate = ifelse(geoid == 29211 & 
-#                                                 (report_date >= "2020-10-31" & report_date <= "2020-11-05"), NA, case_avg_rate)
-# )
 
 ## define top_val
 top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 20, f = ceiling)
@@ -166,8 +97,6 @@ p <- facet_rate(county_subset,
                 title = "Pace of New COVID-19 Cases in Select Missouri Counties",
                 caption = values$caption_text_census)
 
-# paste0(values$caption_text_census,"\nValues above 140 for Livingston and Sullivan counties truncated to increase readability")
-
 ## save plot
 save_plots(filename = "results/high_res/county_nemo/e_new_case.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/county_nemo/e_new_case.png", plot = p, preset = "lg", dpi = 72)
@@ -175,6 +104,5 @@ save_plots(filename = "results/low_res/county_nemo/e_new_case.png", plot = p, pr
 # =============================================================================
 
 # clean-up
-rm(county_data, county_subset, county_points, county_day_points, 
-   county_focal)
+rm(county_data, county_subset, county_points, county_focal)
 rm(top_val, cols, p)

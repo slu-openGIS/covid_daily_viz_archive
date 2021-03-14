@@ -44,16 +44,12 @@ p <- cumulative_rate(county_subset,
                 point_data = county_points,
                 type = "county", 
                 subtype = "Southeast",
-                pal = cols, 
-                x_breaks = values$date_breaks,
-                y_breaks = values$county_rate_val,
-                y_upper_limit = top_val,
+                plot_values = values,
                 highlight = county_focal,
-                plot_date = values$plot_date,
-                date = values$date,
+                y_upper_limit = top_val,
+                pal = cols, 
                 title = "Reported COVID-19 Cases by Select Missouri Counties",
-                caption = values$caption_text_census,
-                x_angle = values$x_angle)
+                caption = values$caption_text_census)
 
 ## save plot
 save_plots(filename = "results/high_res/county_semo/b_case_rate.png", plot = p, preset = "lg")

@@ -52,57 +52,11 @@ p <- ggplot(metro_subset) +
   sequoia_theme(base_size = 22, background = "white") +
   theme(axis.text.x = element_text(angle = values$x_angle))
 
+title = "Reported COVID-19 Cases by Metro Area",
+
 ## save plot
 save_plots(filename = "results/high_res/metro/b_case_rate.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/metro/b_case_rate.png", plot = p, preset = "lg", dpi = 72)
-
-# =============================================================================
-
-# create days from 10th confirmed infection data
-
-## subset data
-metro_data %>%
-  calculate_days(group_var = "geoid", stat_var = "cases", val = 5) %>%
-  select(day, report_date, short_name, cases) %>%
-  arrange(short_name, day) -> metro_subset
-
-## define top_val
-top_val <- round_any(x = max(metro_subset$day), accuracy = 5, f = ceiling)
-
-## identify max day
-metro_subset %>%
-  group_by(short_name) %>%
-  summarise(day = max(day), .groups = "drop_last") %>%
-  left_join(metro_points, ., by = "short_name") -> metro_day_points
-
-## create factors
-metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, day, cases))
-metro_day_points <- mutate(metro_day_points, factor_var = fct_reorder2(short_name, day, cases))
-
-## create plot
-p <- ggplot(data = metro_subset) +
-  geom_line(mapping = aes(x = day, y = cases, color = factor_var), size = 2) +
-  geom_point(metro_day_points, mapping = aes(x = day, y = cases, color = factor_var), 
-             size = 4, show.legend = FALSE) +
-  scale_colour_manual(values = cols, name = "Metro Area") +
-  scale_y_log10(
-    limits = c(5, 300000), 
-    breaks = c(5,10,30,100,300,1000,3000,10000,30000,100000,300000), 
-    labels = comma_format(accuracy = 1)
-  ) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
-  labs(
-    title = "Pace of COVID-19 Cases by Metro Area",
-    subtitle = paste0("Current as of ", as.character(values$date)),
-    caption = values$caption_text,
-    x = "Days Since Fifth Case Reported",
-    y = "Count of Reported Cases (Log)"
-  ) +
-  sequoia_theme(base_size = 22, background = "white")
-
-## save plots
-save_plots(filename = "results/high_res/metro/c_case_log.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/metro/c_case_log.png", plot = p, preset = "lg", dpi = 72)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 

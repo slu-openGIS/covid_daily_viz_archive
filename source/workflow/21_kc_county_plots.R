@@ -76,23 +76,15 @@ county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_
 county_points <- mutate(county_points, factor_var = fct_reorder2(county, report_date, case_rate))
 
 ## create plot
-p <- ggplot() +
-  geom_line(county_subset, mapping = aes(x = report_date, y = case_rate, color = factor_var), size = 2) +
-  geom_point(county_points, mapping = aes(x = report_date, y = case_rate, color = factor_var), 
-             size = 4, show.legend = FALSE) +
-  gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  scale_colour_manual(values = cols, name = "County") +
-  scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = values$county_rate_val)) + 
-  labs(
-    title = "Reported COVID-19 Cases in Metro Kansas City",
-    subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
-    x = "Date",
-    y = "Rate per 1,000",
-    caption = values$caption_text_census
-  ) +
-  sequoia_theme(base_size = 22, background = "white") +
-  theme(axis.text.x = element_text(angle = values$x_angle))
+p <- cumulative_rate(county_subset, 
+                     point_data = county_points,
+                     type = "county",
+                     plot_values = values,
+                     highlight = county_focal,
+                     y_upper_limit = top_val,
+                     pal = cols, 
+                     title = "Reported COVID-19 Cases in Metro Kansas City",
+                     caption = values$caption_text_census)
 
 ## save plot
 save_plots(filename = "results/high_res/kc_metro/b_case_rate.png", plot = p, preset = "lg")
@@ -100,59 +92,11 @@ save_plots(filename = "results/low_res/kc_metro/b_case_rate.png", plot = p, pres
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# cumulative cases, log ####
-
-## subset data
-county_data %>%
-  calculate_days(group_var = "geoid", stat_var = "cases", val = 5) %>%
-  select(day, report_date, geoid, county, cases) %>%
-  arrange(county, day) -> county_subset
-
-## define top_val
-top_val <- round_any(x = max(county_subset$day), accuracy = 5, f = ceiling)
-
-## identify max day
-county_subset %>%
-  group_by(geoid) %>%
-  summarise(day = max(day), .groups = "drop_last") %>%
-  left_join(county_points, ., by = "geoid") -> county_day_points
-
-## create factors
-county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, day, cases))
-county_day_points <- mutate(county_day_points, factor_var = fct_reorder2(county, day, cases))
-
-## create plot
-p <- ggplot(data = county_subset) +
-  geom_line(mapping = aes(x = day, y = cases, color = factor_var), size = 2) +
-  geom_point(county_day_points, mapping = aes(x = day, y = cases, color = factor_var), 
-             size = 4, show.legend = FALSE) +
-  gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(
-    limits = c(5, 100000), 
-    breaks = c(5,10,30,100,300,1000,3000,10000,30000,100000),
-    labels = comma_format(accuracy = 1)
-  ) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
-  labs(
-    title = "Pace of COVID-19 Cases in Metro Kansas City",
-    subtitle = paste0("Current as of ", as.character(values$date)),
-    caption = values$caption_text,
-    x = "Days Since Fifth Case Reported",
-    y = "Count of Reported Cases (Log)"
-  ) +
-  sequoia_theme(base_size = 22, background = "white")
-
-## save plots
-save_plots(filename = "results/high_res/kc_metro/c_case_log.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/kc_metro/c_case_log.png", plot = p, preset = "lg", dpi = 72)
-
-#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
-
 # 7-day average of new cases, rate ####
 
 ## subset data
-county_subset <- filter(county_data, report_date >= values$plot_date)
+county_subset <- filter(county_data, report_date >= values$plot_date) %>%
+  filter(report_date < as.Date("2021-03-08") | report_date >= as.Date("2021-03-15"))
 
 ## address negative values
 county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
@@ -188,91 +132,6 @@ p <- facet_rate(county_subset,
 ## save plot
 save_plots(filename = "results/high_res/kc_metro/e_new_case.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/kc_metro/e_new_case.png", plot = p, preset = "lg", dpi = 72)
-
-#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
-
-# 7-day average of new cases, log ####
-
-## subset data
-county_data %>%
-  calculate_days(group_var = "geoid", stat_var = "case_avg", val = 5) %>%
-  select(day, report_date, geoid, county, case_avg) %>%
-  arrange(county, day) %>%
-  mutate(case_avg = ifelse(case_avg < .1, .1, case_avg)) -> county_subset
-
-# define top_val
-top_val <- round_any(x = max(county_subset$day), accuracy = 75, f = ceiling)
-
-## identify max day
-county_subset %>%
-  group_by(geoid) %>%
-  summarise(day = max(day), .groups = "drop_last") %>%
-  left_join(county_points, ., by = "geoid") %>%
-  filter(county %in% unique(county_subset$county)) %>%
-  mutate(case_avg = ifelse(case_avg < .1, .1, case_avg)) -> county_day_points
-
-## create factors
-county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, day, case_avg))
-county_day_points <- mutate(county_day_points, factor_var = fct_reorder2(county, day, case_avg)) 
-
-## fix counties with anomalies
-### remove from primary data
-county_subset %>%
-  mutate(case_avg = ifelse(geoid == 29165 & (report_date >= "2020-10-08" & 
-                                               report_date <= "2020-10-14"), NA,
-                           case_avg)) %>%
-  mutate(case_avg = ifelse(geoid == 20103 & (report_date >= "2020-09-07" & 
-                                               report_date <= "2020-09-08"), NA,
-                           case_avg)) %>%
-  mutate(case_avg = ifelse(geoid == 29511 & (report_date >= "2020-10-04" & 
-                                               report_date <= "2020-10-06"), NA,
-                           case_avg)) %>%
-  mutate(case_avg = ifelse(geoid == 29095 & (report_date >= "2020-10-03" &
-                                               report_date <= "2020-10-05"), NA,
-                           case_avg)) %>%
-  mutate(case_avg = ifelse(geoid == 29095 & report_date == "2020-10-13", NA,
-                           case_avg)) -> county_subset
-
-### create interpolated data
-alt_county_subset <- list(
-  platte = filter(county_subset, geoid == 29165 & (report_date == "2020-10-07" | report_date == "2020-10-15")),
-  leavenworth = filter(county_subset, geoid == 20103 & (report_date == "2020-09-06" | report_date == "2020-09-09")),
-  kc = filter(county_subset, geoid == 29511 & (report_date == "2020-10-03" | report_date == "2020-10-07")),
-  jackson_a = filter(county_subset, geoid == 29095 & (report_date == "2020-10-02" | report_date == "2020-10-06")),
-  jackson_b = filter(county_subset, geoid == 29095 & (report_date == "2020-10-12" | report_date == "2020-10-14"))
-) %>%
-  map_df(bind_rows)
-
-## create plot
-p <- ggplot() +
-  geom_line(data = county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), 
-            size = 2, show.legend = FALSE) +
-  geom_line(data = alt_county_subset, mapping = aes(x = day, y = case_avg, color = factor_var), 
-            size = 2, show.legend = FALSE) +
-  geom_point(county_day_points, mapping = aes(x = day, y = case_avg, color = factor_var),
-             size = 4, show.legend = FALSE) +
-  gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(limits = c(.1, 1000), breaks = c(.1, 1, 10, 100, 1000), 
-                labels = comma_format(accuracy = .2)) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 75)) +
-  facet_wrap(~county) +
-  labs(
-    title = "Pace of New COVID-19 Cases in Metro Kansas City",
-    subtitle = paste0("Current as of ", as.character(values$date)),
-    # caption = values$caption_text,
-    caption = paste0(values$caption_text, "\nSmall portions of trends for Kansas City as well as Jackson, Leavenworth, and Platte counties\n  interpolated to provide smoother trend lines"),
-    x = "Days Since Average of Five Cases Reached",
-    y = "7-day Average of Reported Cases (Log)"
-  ) +
-  sequoia_theme(base_size = 22, background = "white")
-
-## save plots
-save_plots(filename = "results/high_res/kc_metro/f_new_case_log.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/kc_metro/f_new_case_log.png", plot = p, preset = "lg", dpi = 72)
-
-## remove extras
-rm(x, y)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
@@ -334,55 +193,6 @@ p <- ggplot() +
 ## save plot
 save_plots(filename = "results/high_res/kc_metro/h_mortality_rate.png", plot = p, preset = "lg")
 save_plots(filename = "results/low_res/kc_metro/h_mortality_rate.png", plot = p, preset = "lg", dpi = 72)
-
-#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
-
-# cumulative mortality, log ####
-
-## subset data
-county_data %>%
-  calculate_days(group_var = "geoid", stat_var = "deaths", val = 3) %>%
-  select(day, report_date, geoid, county, deaths) %>%
-  arrange(county, day) -> county_subset
-
-## define top_val
-top_val <- round_any(x = max(county_subset$day), accuracy = 5, f = ceiling)
-
-## identify max day
-county_subset %>%
-  group_by(geoid) %>%
-  summarise(day = max(day), .groups = "drop_last") %>%
-  left_join(county_points, ., by = "geoid") %>%
-  filter(county %in% unique(county_subset$county)) -> county_day_points
-
-## create factors
-county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, day, deaths))
-county_day_points <- mutate(county_day_points, factor_var = fct_reorder2(county, day, deaths))
-
-## create plot
-p <- ggplot(data = county_subset) +
-  geom_line(mapping = aes(x = day, y = deaths, color = factor_var), size = 2) +
-  geom_point(county_day_points, mapping = aes(x = day, y = deaths, color = factor_var), 
-             size = 4, show.legend = FALSE) +
-  gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
-  scale_colour_manual(values = cols, name = "County") +
-  scale_y_log10(
-    limits = c(3, 1000), 
-    breaks = c(3, 10, 30, 100, 300, 1000), 
-    labels = comma_format(accuracy = 1)
-  ) +
-  scale_x_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = values$date_breaks_log)) +
-  labs(
-    title = "Pace of COVID-19 Deaths in Metro Kansas City",
-    subtitle = paste0("Current as of ", as.character(values$date)),
-    caption = values$caption_text,
-    x = "Days Since Third Death Reported",
-    y = "Count of Reported Deaths (Log)"
-  ) +
-  sequoia_theme(base_size = 22, background = "white")
-
-save_plots(filename = "results/high_res/kc_metro/i_mortality_log.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/kc_metro/i_mortality_log.png", plot = p, preset = "lg", dpi = 72)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 

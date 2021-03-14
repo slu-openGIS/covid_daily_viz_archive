@@ -101,7 +101,8 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
     labs(
       title = title,
       x = "Date",
-      y = "7-Day Average Rate per 100,000"
+      y = "7-Day Average Rate per 100,000",
+      caption = paste0(caption,"\nVertical line represents addition of antigen test data for most counties on 2021-03-08")
     ) +
     sequoia_theme(base_size = 22, background = "white") +
     theme(axis.text=element_text(size = 15))
@@ -109,8 +110,7 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
   # add subtitle and captions
   if (is.null(subtype) == TRUE){
     p <- p + labs(
-      subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
-      caption = caption
+      subtitle = paste0(as.character(plot_date), " through ", as.character(date))
     )
   } else if (is.null(subtype) == FALSE){
     
@@ -174,8 +174,6 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
                           " through ", as.character(values$date))
       )
     }
-    
-    p <- p + labs(caption = paste0(caption,"\nVertical line represents addition of antigen test data for most counties on 2021-03-08"))
     
   }
   
@@ -201,9 +199,7 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
   
 }
 
-cumulative_rate <- function(.data, point_data, type, subtype = NULL, pal, x_breaks, 
-                            y_breaks, y_upper_limit, highlight, plot_date, date, title, 
-                            caption, x_angle){
+cumulative_rate <- function(.data, point_data, type, subtype = NULL, plot_values, highlight, y_upper_limit, pal, title, caption){
   
   if (type != "county"){ stop("Geography not supported") }
 
@@ -218,7 +214,7 @@ cumulative_rate <- function(.data, point_data, type, subtype = NULL, pal, x_brea
   
   label <- tibble(
     report_date = as.Date("2021-03-08"),
-    y_val = 136,
+    y_val = top_val-5,
     text = "Antigen tests added to most counties on 2021-03-08"
   )
   
@@ -232,87 +228,97 @@ cumulative_rate <- function(.data, point_data, type, subtype = NULL, pal, x_brea
     geom_text_repel(data = label, mapping = aes(x = report_date, y = y_val, label = text),
                     nudge_y = 100, nudge_x = -120, size = 5) +
     scale_colour_manual(values = pal, name = scale_name) +
-    scale_x_date(date_breaks = x_breaks, date_labels = "%b") +
-    scale_y_continuous(limits = c(0,y_upper_limit), breaks = seq(0, y_upper_limit, by = y_breaks)) + 
+    scale_x_date(date_breaks = plot_values$date_breaks, date_labels = "%b") +
+    scale_y_continuous(limits = c(0,y_upper_limit), breaks = seq(0, y_upper_limit, by = plot_values$county_rate_val)) + 
     labs(
       title = title,
       x = "Date",
-      y = "Rate per 1,000"
+      y = "Rate per 1,000 Individuals",
+      caption = caption
     ) +
     sequoia_theme(base_size = 22, background = "white") +
-    theme(axis.text.x = element_text(angle = x_angle)) 
+    theme(axis.text.x = element_text(angle = plot_values$x_angle)) 
+  
+  # add subtitle
+  p <- plot_subtype(plot = p, plot_values = plot_values, subtype = subtype)
+  
+  # return output
+  return(p)
+  
+}
+
+plot_subtype <- function(plot, plot_values, subtype){
   
   # add subtitle and captions
   if (is.null(subtype) == TRUE){
-    p <- p + labs(
-      subtitle = paste0(as.character(plot_date), " through ", as.character(date)),
-      caption = caption
-    )
+    plot <- plot + labs(subtitle = paste0(as.character(plot_values$plot_date), 
+                                          " through ", as.character(plot_values$date)))
   } else if (is.null(subtype) == FALSE){
     
     if (subtype == "Southeast"){
-      p <- p + labs(
-        subtitle = paste0("Southeast Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+      plot <- plot + labs(
+        subtitle = paste0("Southeast Missouri Focus\n",as.character(plot_values$plot_date), 
+                          " through ", as.character(plot_values$date))
       )
     } else if (subtype == "Mid-Missouri"){
-      p <- p + labs(
-        subtitle = paste0("Mid-Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+      plot <- plot + labs(
+        subtitle = paste0("Mid-Missouri Focus\n",as.character(plot_values$plot_date), 
+                          " through ", as.character(plot_values$date))
       )
     } else if (subtype == "St. Joseph"){
-      p <- p + labs(
-        subtitle = paste0("St. Joseph and Northwestern Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+      plot <- plot + labs(
+        subtitle = paste0("St. Joseph and Northwestern Missouri Focus\n",as.character(plot_values$plot_date), 
+                          " through ", as.character(plot_values$date))
       )
     } else if (subtype == "Northern"){
-      p <- p + labs(
-        subtitle = paste0("Northern Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+      plot <- plot + labs(
+        subtitle = paste0("Northern Missouri Focus\n",as.character(plot_values$plot_date), 
+                          " through ", as.character(plot_values$date))
       )
     } else if (subtype == "Ozark"){
-      p <- p + labs(
-        subtitle = paste0("Lake of the Ozarks and South-Central Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+      plot <- plot + labs(
+        subtitle = paste0("Lake of the Ozarks and South-Central Missouri Focus\n",as.character(plot_values$plot_date), 
+                          " through ", as.character(plot_values$date))
       )
     } else if (subtype == "Southwest"){
-      p <- p + labs(
-        subtitle = paste0("Southwest Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+      plot <- plot + labs(
+        subtitle = paste0("Southwest Missouri Focus\n",as.character(plot_values$plot_date), 
+                          " through ", as.character(plot_values$date))
       )
     } else if (subtype == "Cape"){
-      p <- p + labs(
-        subtitle = paste0("Cape Girardeau Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+      plot <- plot + labs(
+        subtitle = paste0("Cape Girardeau Focus\n",as.character(plot_values$plot_date), 
+                          " through ", as.character(plot_values$date))
       )
     } else if (subtype == "West-Central"){
-      p <- p + labs(
-        subtitle = paste0("West-Central Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+      plot <- plot + labs(
+        subtitle = paste0("West-Central Missouri Focus\n",as.character(plot_values$plot_date), 
+                          " through ", as.character(plot_values$date))
       )
     } else if (subtype == "Springfield"){
-      p <- p + labs(
-        subtitle = paste0("Springfield Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+      plot <- plot + labs(
+        subtitle = paste0("Springfield Focus\n",as.character(plot_values$plot_date), 
+                          " through ", as.character(plot_values$date))
       )
     } else if (subtype == "Ozark Mountains"){
-      p <- p + labs(
-        subtitle = paste0("Ozark Mountains Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+      plot <- plot + labs(
+        subtitle = paste0("Ozark Mountains Focus\n",as.character(plot_values$plot_date), 
+                          " through ", as.character(plot_values$date))
       )
     } else if (subtype == "Kansas City"){
-      p <- p + labs(
-        subtitle = paste0(as.character(plot_date), " through ", as.character(date))
+      plot <- plot + labs(
+        subtitle = paste0(as.character(plot_values$plot_date), " through ", as.character(plot_values$date))
       )
     } else if (subtype == "Northeastern"){
-      p <- p + labs(
-        subtitle = paste0("Northeastern Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+      plot <- plot + labs(
+        subtitle = paste0("Northeastern Missouri Focus\n",as.character(plot_values$plot_date), 
+                          " through ", as.character(plot_values$date))
       )
     }
     
-    p <- p + labs(caption = caption)
-  
   }
+  
+  return(plot)
+  
 }
 
