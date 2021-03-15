@@ -64,7 +64,11 @@ source("source/workflow/03_state_individual_plots.R")
 # regional plots
 source("source/workflow/18_stl_zip_plots_v3.R")
 source("source/workflow/19_stl_individual_plots.R")
-source("source/workflow/20_stl_hospital_plots.R")
+
+if (weekdays(date) %in% c("Saturday", "Sunday") == FALSE){
+  source("source/workflow/20_stl_hospital_plots.R")  
+}
+
 source("source/workflow/22_mo_deaths.R")
 source("source/workflow/23_vaccines.R")
 source("source/workflow/24_district_vaccines.R")
