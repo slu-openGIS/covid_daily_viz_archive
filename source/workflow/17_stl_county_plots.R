@@ -125,6 +125,7 @@ county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_
 ## create plot
 p <- facet_rate(county_subset, 
                 type = "county", 
+                subtype = "St. Louis",
                 pal = cols, 
                 x_breaks = values$date_breaks_facet,
                 y_breaks = 20,
@@ -134,8 +135,6 @@ p <- facet_rate(county_subset,
                 date = values$date,
                 title = "Pace of New COVID-19 Cases in Metro St. Louis",
                 caption = paste0(values$caption_text_census,"\nValues above 160 for Clinton and Jersey counties truncated to increase readability"))
-
-# caption = paste0(values$caption_text_census,))
 
 ## save plot
 save_plots(filename = "results/high_res/stl_metro/e_new_case.png", plot = p, preset = "lg")
@@ -242,6 +241,7 @@ p <- ggplot() +
   geom_line(county_subset, mapping = aes(x = report_date, y = case_fatality_rate, color = factor_var), size = 2) +
   geom_point(county_points, mapping = aes(x = report_date, y = case_fatality_rate, color = factor_var), 
              size = 4, show.legend = FALSE) +
+  geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8) +
   gghighlight(geoid %in% county_focal, use_direct_label = FALSE, use_group_by = FALSE) +
   scale_colour_manual(values = cols, name = "County") +
   scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
@@ -251,7 +251,7 @@ p <- ggplot() +
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
     x = "Date",
     y = "Case Fatality (%)",
-    caption = values$caption_text
+    caption = paste0(values$caption_text,"\nVertical line represents addition of antigen test data for most Missouri counties on 2021-03-08")
   ) +
   sequoia_theme(base_size = 22, background = "white") +
   theme(axis.text.x = element_text(angle = values$x_angle))

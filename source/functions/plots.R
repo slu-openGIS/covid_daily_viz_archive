@@ -83,7 +83,6 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
       geom_line(mapping = aes(x = report_date, y = case_avg_rate, color = factor_var), 
                 size = 2, show.legend = FALSE)   
   }
-
   
   # optionally highlight trends
   if (type == "metro" | type == "county"){
@@ -92,9 +91,58 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
     p <- p + gghighlight(state %in% highlight, use_direct_label = FALSE, use_group_by = FALSE)
   }
     
+  # add vertical line
+  if (type == "metro"){
+    
+    p <- p + geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8)
+    
+  } else if (type == "state"){
+    
+    # create data frame
+    vline_df <- data.frame(
+      report_date = as.Date("2021-03-08"),
+      state = "Missouri"
+    )
+    
+    # add line
+    p <- p + geom_vline(data = vline_df, mapping = aes(xintercept = report_date), lwd = .8)
+    
+  } else if(type == "county"){
+    
+    if (subtype == "Kansas City"){
+      
+      # create data frame
+      vline_df <- data.frame(
+        report_date = rep(as.Date("2021-03-08"), 9),
+        county = c("Caldwell", "Cass", "Clay", "Clinton", "Jackson",
+                   "Kansas City", "Lafayette", "Platte", "Ray")
+      )
+      
+      # add line
+      p <- p + geom_vline(data = vline_df, mapping = aes(xintercept = report_date), lwd = .8)
+      
+    } else if (subtype == "St. Louis"){
+      
+      # create data frame
+      vline_df <- data.frame(
+        report_date = rep(as.Date("2021-03-08"), 6),
+        county = c("Franklin", "Jefferson", "Lincoln", "St. Charles", 
+                   "St. Louis", "St. Louis City")
+      )
+      
+      # add line
+      p <- p + geom_vline(data = vline_df, mapping = aes(xintercept = report_date), lwd = .8)
+      
+    } else {
+      
+      p <- p + geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8)
+      
+    }
+    
+  }
+  
   # finish plot
   p <- p +
-    geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8) +
     scale_colour_manual(values = pal, name = scale_name) +
     scale_x_date(date_breaks = x_breaks, date_labels = "%b") +
     scale_y_continuous(limits = c(0,y_upper_limit), breaks = seq(0, y_upper_limit, by = y_breaks)) + 
@@ -102,7 +150,7 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
       title = title,
       x = "Date",
       y = "7-Day Average Rate per 100,000",
-      caption = paste0(caption,"\nVertical line represents addition of antigen test data for most counties on 2021-03-08")
+      caption = paste0(caption,"\nVertical line represents addition of antigen test data for most Missouri counties on 2021-03-08")
     ) +
     sequoia_theme(base_size = 22, background = "white") +
     theme(axis.text=element_text(size = 15))
@@ -184,7 +232,7 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
     p <- p + facet_wrap(~county)
   } else if (type == "county" & is.null(subtype) == FALSE){
     
-    if (subtype == "Kansas City"){
+    if (subtype %in% c("Kansas City", "St. Louis")){
       p <- p + facet_wrap(~county)
     } else {
       p <- p + facet_wrap(~county_fct)
@@ -200,8 +248,6 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
 }
 
 cumulative_rate <- function(.data, point_data, type, subtype = NULL, plot_values, highlight, y_upper_limit, pal, title, caption){
-  
-  if (type != "county"){ stop("Geography not supported") }
 
   # create name
   if (type == "metro" | type == "metro HHS"){
@@ -212,18 +258,41 @@ cumulative_rate <- function(.data, point_data, type, subtype = NULL, plot_values
     scale_name <- "State"
   }
   
-  label <- tibble(
-    report_date = as.Date("2021-03-08"),
-    y_val = top_val-5,
-    text = "Antigen tests added to most counties on 2021-03-08"
-  )
+  if (type == "metro" | type == "county"){
+    
+    label <- tibble(
+      report_date = as.Date("2021-03-08"),
+      y_val = top_val-5,
+      text = "Antigen tests added to most counties on 2021-03-08"
+    )
+    
+  } else if (type == "state"){
+    
+    plot_values$county_rate_val <- 1000
+    
+    label <- tibble(
+      report_date = as.Date("2021-03-08"),
+      y_val = top_val-600,
+      text = "Antigen tests added to most Missouri counties on 2021-03-08"
+    )
+    
+  }
   
   # build main part of plot
   p <- ggplot() +
     geom_line(.data, mapping = aes(x = report_date, y = case_rate, color = factor_var), size = 2) +
     geom_point(point_data, mapping = aes(x = report_date, y = case_rate, color = factor_var), 
-               size = 4, show.legend = FALSE) +
-    gghighlight(geoid %in% highlight, use_direct_label = FALSE, use_group_by = FALSE) +
+               size = 4, show.legend = FALSE)
+  
+  # optionally highlight trends
+  if (type == "metro" | type == "county"){
+    p <- p + gghighlight(geoid %in% highlight, use_direct_label = FALSE, use_group_by = FALSE)
+  } else if (type == "state"){
+    p <- p + gghighlight(state %in% highlight, use_direct_label = FALSE, use_group_by = FALSE)
+  }
+  
+  # finish plot
+  p <- p + 
     geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8) +
     geom_text_repel(data = label, mapping = aes(x = report_date, y = y_val, label = text),
                     nudge_y = 100, nudge_x = -120, size = 5) +

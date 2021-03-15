@@ -119,7 +119,7 @@ source("source/functions/sequoia_theme.R")     # theme for plots and maps
 
 ## overview plots
 source("source/workflow/01_state_plots.R")        # statewide plots
-source("source/workflow/04_regional_plots.R")     # St. Louis, Kansas City, and Outstate
+# source("source/workflow/04_regional_plots.R")     # St. Louis, Kansas City, and Outstate
 source("source/workflow/05_metro_plots.R")        # metropolitan statistical areas
 source("source/workflow/06_county_plots.R")       # county maps for all of MO
 
