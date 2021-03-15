@@ -39,14 +39,6 @@ knitr::include_graphics("img/state/b_case_rate.png")
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/b_case_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/b_case_rate.png" target="_blank">Low-res</a>]
 
-### Infection Pace
-
-```{r state-infection-log, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/state/c_case_log.png")
-```
-
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/c_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/c_case_log.png" target="_blank">Low-res</a>]
-
 ### New Infections
 
 ```{r state-infection-avg, echo=FALSE, out.width = '100%'}
@@ -54,14 +46,6 @@ knitr::include_graphics("img/state/e_new_case.png")
 ```
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/e_new_case.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/e_new_case.png" target="_blank">Low-res</a>]
-
-### New Infections Pace
-
-```{r state-infection-avg-log, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/state/f_new_case_log.png")
-```
-
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/f_new_case_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/f_new_case_log.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
@@ -100,22 +84,6 @@ knitr::include_graphics("img/state/h_mortality_rate.png")
 ```
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/h_mortality_rate.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/h_mortality_rate.png" target="_blank">Low-res</a>]
-
-### Mortality Pace
-
-```{r state-death-log, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/state/i_mortality_log.png")
-```
-
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/i_mortality_log.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/i_mortality_log.png" target="_blank">Low-res</a>]
-
-### New Mortality
-
-```{r state-death-log-avg, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/state/k_mortality_log_avg.png")
-```
-
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/state/k_mortality_log_avg.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/state/k_mortality_log_avg.png" target="_blank">Low-res</a>]
 
 ### Case Fatality Rate
 
