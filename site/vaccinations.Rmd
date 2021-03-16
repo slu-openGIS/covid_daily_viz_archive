@@ -1,0 +1,36 @@
+---
+title: "Vaccinations"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# dependencies
+library(dplyr)
+library(leaflet)
+library(readr)
+library(sf)
+
+# functions
+source(here::here("source", "functions", "map_breaks.R"))
+source(here::here("source", "functions", "round_any.R"))
+
+# load data
+county_vax <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
+                                 "county", "daily_snapshot_mo_vaccines.geojson"),
+                      quiet = TRUE)
+dist_vax <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
+                                 "district", "daily_snapshot_mo_vaccines.csv"),
+                     col_types = cols(report_date = col_date(format = "")))
+```
+
+This page contains vaccination data for Missouri, which are being reported by [the State on their dashboard](https://covidvaccine.mo.gov/data/). We use the term **vaccination initiated** to refer to the number of people who have received *at least* an initial dose of the Moderna or Pfizer vaccines as well as those people who have received the single dose of the Johnson & Johnson vaccine. We use the term **vaccination completed** to refer to the number of people who have received *both* doses of the Moderna or Pfizer vaccines as well as those people who have received the single dose of the Johnson & Johnson vaccine. 
+
+
+
+
