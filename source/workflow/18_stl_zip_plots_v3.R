@@ -19,7 +19,7 @@ metro_counties <- st_read("data/MO_HEALTH_Covid_Tracking/data/county/daily_snaps
 # map case rate ####
 ## create breaks
 metro_zip_sf <- map_breaks(metro_zip_sf, var = "case_rate", newvar = "map_breaks",
-                    style = "quantile", classes = 5, dig_lab = 3)
+                    style = "quantile", classes = 5, dig_lab = 4)
 
 ## create map
 p <- ggplot() +
@@ -44,7 +44,7 @@ save_plots(filename = "results/low_res/stl_zip/a_case_map_metro.png", plot = p, 
 # map new case rate ####
 ## create breaks
 metro_zip_sf <- map_breaks(metro_zip_sf, var = "case_avg_rate", newvar = "map_breaks",
-                           style = "quantile", classes = 5, dig_lab = 2)
+                           style = "quantile", classes = 4, dig_lab = 2)
 
 ## create map
 p <- ggplot() +
