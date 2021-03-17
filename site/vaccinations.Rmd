@@ -29,8 +29,181 @@ dist_vax <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
                      col_types = cols(report_date = col_date(format = "")))
 ```
 
-This page contains vaccination data for Missouri, which are being reported by [the State on their dashboard](https://covidvaccine.mo.gov/data/). We use the term **vaccination initiated** to refer to the number of people who have received *at least* an initial dose of the Moderna or Pfizer vaccines as well as those people who have received the single dose of the Johnson & Johnson vaccine. We use the term **vaccination completed** to refer to the number of people who have received *both* doses of the Moderna or Pfizer vaccines as well as those people who have received the single dose of the Johnson & Johnson vaccine. 
+This page contains vaccination data for Missouri, which are being reported by [the State on their dashboard](https://covidvaccine.mo.gov/data/).
+
+## Initiated Vaccinations by County {.tabset .tabset-fade .tabset-pills .padtop}
+This map shows the per capita rate of people who have initiated vaccination. This means they received an initial dose of the Moderna or Pfizer vaccines, or the single dose of the Johnson & Johnson vaccine. It is important not to map the raw counts themselves, but if you want to see those data, click on a county or select the data table tab.
+
+### Interactive Map
+
+```{r map-vax-initiate, echo = FALSE, out.width = '100%', out.height='600px', warning=FALSE}
+# calculate breaks
+bins <- map_bins(county_vax, var = "initiated_rate", style = "fisher", classes = 5, dig_lab = 2,
+                 round = 2)
+bins[1] <- round_any(x = min(county_vax$initiated_rate, na.rm = TRUE), accuracy = .01, f = floor)
+bins[length(bins)] <- round_any(x = max(county_vax$initiated_rate), accuracy = .01, f = ceiling)
+
+# create color palette
+pal <- colorBin("Oranges", domain = county_vax$initiated_rate, bins = bins)
+
+# map
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = county_vax,
+    color = "#444444", 
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.75,
+    fillColor = ~pal(initiated_rate),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste0("<b>County:</b> ", county_vax$county, " <br> ",
+                 "<b>Current Cumulative Count:</b> ", county_vax$initiated, "<br>",
+                 "<b>Current Rate per 1,000:</b> ", round(county_vax$initiated_rate, digits = 2))
+  )  %>%
+  addLegend(pal = pal, values = county_vax$initiated_rate, opacity = .75, title = "Rate")
+```
+
+### Static Map
+
+```{r static-vax-initiate, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county/r_vaccine_initial.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county/r_vaccine_initial.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/r_vaccine_initial.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r data-table-vax-initiate, echo=FALSE, out.width = '100%'}
+county_vax %>%
+  select(county, initiated, initiated_rate) %>%
+  mutate(
+    initiated_rate = round(initiated_rate, digits = 2) 
+  ) %>%
+  rename(
+    County = county,
+    `Cumulative Initiated Vaccinations` = initiated,
+    `Rate per 1,000 Residents` = initiated_rate
+  ) -> data_table
+st_geometry(data_table) <- NULL
+DT::datatable(data_table)
+```
+
+## Completed Vaccinations by County {.tabset .tabset-fade .tabset-pills .padtop}
+This map shows the per capita rate of people who have completed vaccination. This means they received *both* doses of the Moderna or Pfizer vaccines, or the single dose of the Johnson & Johnson vaccine. It is important not to map the raw counts themselves, but if you want to see those data, click on a county or select the data table tab.
+
+### Interactive Map
+
+```{r map-vax-complete, echo = FALSE, out.width = '100%', out.height='600px', warning=FALSE}
+# calculate breaks
+bins <- map_bins(county_vax, var = "complete_rate", style = "fisher", classes = 5, dig_lab = 2,
+                 round = 2)
+bins[1] <- round_any(x = min(county_vax$complete_rate, na.rm = TRUE), accuracy = .01, f = floor)
+bins[length(bins)] <- round_any(x = max(county_vax$complete_rate), accuracy = .01, f = ceiling)
 
 
+# create color palette
+pal <- colorBin("OrRd", domain = county_vax$complete_rate, bins = bins)
 
+# map
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = county_vax,
+    color = "#444444", 
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.75,
+    fillColor = ~pal(complete_rate),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste0("<b>County:</b> ", county_vax$county, " <br> ",
+                 "<b>Current Cumulative Count:</b> ", county_vax$complete, "<br>",
+                 "<b>Current Rate per 1,000:</b> ", round(county_vax$complete_rate, digits = 2))
+  )  %>%
+  addLegend(pal = pal, values = county_vax$complete_rate, opacity = .75, title = "Rate")
+```
 
+### Static Map
+
+```{r static-vax-complete, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county/t_vaccine_complete.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county/t_vaccine_complete.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/t_vaccine_complete.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r data-table-vax-complete, echo=FALSE, out.width = '100%'}
+county_vax %>%
+  select(county, complete, complete_rate) %>%
+  mutate(
+    complete_rate = round(complete_rate, digits = 2) 
+  ) %>%
+  rename(
+    County = county,
+    `Cumulative Completed Vaccinations` = complete,
+    `Rate per 1,000 Residents` = complete_rate
+  ) -> data_table
+st_geometry(data_table) <- NULL
+DT::datatable(data_table)
+```
+
+## Completed Vaccinations by County {.tabset .tabset-fade .tabset-pills .padtop}
+This map shows the per capita rate of people who have received a vaccination in the last seven days. It is important not to map the raw counts themselves, but if you want to see those data, click on a county or select the data table tab.
+
+### Interactive Map
+
+```{r map-vax-last7, echo = FALSE, out.width = '100%', out.height='600px', warning=FALSE}
+# calculate breaks
+bins <- map_bins(county_vax, var = "last7_rate", style = "fisher", classes = 5, dig_lab = 2,
+                 round = 2)
+bins[1] <- round_any(x = min(county_vax$last7_rate, na.rm = TRUE), accuracy = .01, f = floor)
+
+# create color palette
+pal <- colorBin("YlOrRd", domain = county_vax$last7_rate, bins = bins)
+
+# map
+leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    data = county_vax,
+    color = "#444444", 
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.75,
+    fillColor = ~pal(last7_rate),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste0("<b>County:</b> ", county_vax$county, " <br> ",
+                 "<b>Count in Last 7 Days:</b> ", county_vax$last7, "<br>",
+                 "<b>Rate per 1,000:</b> ", round(county_vax$last7_rate, digits = 2))
+  )  %>%
+  addLegend(pal = pal, values = county_vax$last7_rate, opacity = .75, title = "Rate")
+```
+
+### Static Map
+
+```{r static-vax-last7, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/county/v_vaccine_last7.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/county/v_vaccine_last7.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/county/v_vaccine_last7.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r data-table-vax-last7, echo=FALSE, out.width = '100%'}
+county_vax %>%
+  select(county, last7, last7_rate) %>%
+  mutate(
+    last7_rate = round(last7_rate, digits = 2) 
+  ) %>%
+  rename(
+    County = county,
+    `Vaccinations in Last 7 Days` = last7,
+    `Rate per 1,000 Residents` = last7_rate
+  ) -> data_table
+st_geometry(data_table) <- NULL
+DT::datatable(data_table)
+```

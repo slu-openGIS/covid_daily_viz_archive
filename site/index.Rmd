@@ -438,6 +438,9 @@ Additional data are available at the following geographic levels:
   * [Missouri and surrounding states](states.html)
   * [Regions](regions.html)
   * [Metropolitan areas](metros.html)
+  * Counties statewide
+      * Cases and mortality are above
+      * [Vaccinations](vaccinations.html)
   * Counties in the [St. Louis](stl.html) and [Kansas City](kc.html) metropolitan areas
   * Counties in [other regions of Missouri](other_regions.html)
   * Zip codes in the [St. Louis](stl.html#Infection_Rates_by_ZCTA_(Zip_Code)) and [Kansas City](kc.html#Infection_Rates_by_ZCTA_(Zip_Code)) metropolitan areas
@@ -456,6 +459,7 @@ Additional data are available for the following topics:
   * [Long Term Care and Nursing Homes](ltc.html)
   * Mortality
       * [State](states.html#Mortality); [Metropolitan areas](metros.html#Mortality); counties in [St. Louis](stl.html#Mortality), [Kansas City](kc.html#Mortality); [Long Term Care facilities](ltc.html#Mortality)
+  * [Vaccinations](vaccinations.html)
 
 ## Contributors {.padtop}
 <a href="https://chris-prener.github.io" target="_blank">Chris Prener</a>, an Assistant Professor of Sociology at Saint Louis University, is the primary maintainer of this site and the data behind it. <a href="https://www.slu.edu/slucor/faculty/wiemken-timothy.php" target="_blank">Tim Wiemken</a>, an Associate Professor in Health and Clinical Outcomes Research and Infectious Disease at Saint Louis University School of Medicine, has contributed to both the <a href="mortality.html">mortality</a> and <a href="ltc.html">nursing home</a> data. He has also provided technical guidance on other aspects of the site.
