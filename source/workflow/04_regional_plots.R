@@ -5,7 +5,8 @@
 # load data ####
 region_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/region/region_meso.csv",
                         col_types = cols(region = col_character()
-                        ))
+                        )) %>%
+  filter(report_date < as.Date("2021-03-08") | report_date >= as.Date("2021-03-15"))
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
@@ -24,10 +25,10 @@ state_values <- list(
     filter(region == "Missouri") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = -60, # 0
+  peak_x = -80, # 0
   peak_y = 140, # 400
-  current_x = 0, # -105
-  current_y = 4400, # 1000
+  current_x = -55, # -105
+  current_y = 4000, # 1000
   current_display = TRUE
 )
 
@@ -51,10 +52,10 @@ stl_values <- list(
     filter(region == "St. Louis") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = -80, 
-  peak_y = 600, 
-  current_x = 0, 
-  current_y = -700,
+  peak_x = -100, 
+  peak_y = 500, 
+  current_x = -110, 
+  current_y = -1000,
   current_display = TRUE
 )
 
@@ -79,9 +80,9 @@ kc_values <- list(
     pull(var = case_avg) %>% 
     max(),
   peak_x = -105, 
-  peak_y = 1000, 
-  current_x = 0, 
-  current_y = -700,
+  peak_y = 1200, 
+  current_x = -110, 
+  current_y = -1000,
   current_display = TRUE
 )
 
@@ -105,10 +106,10 @@ os_values <- list(
     filter(region == "Outstate") %>% 
     pull(var = case_avg) %>% 
     max(),
-  peak_x = -60, 
+  peak_x = -70, 
   peak_y = 200, 
-  current_x = -0, 
-  current_y = -650,
+  current_x = -110, 
+  current_y = -1000,
   current_display = TRUE
 )
 

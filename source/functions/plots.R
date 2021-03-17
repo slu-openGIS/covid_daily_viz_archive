@@ -11,11 +11,21 @@ regional_count <- function(.data, region, point_data, state_data, region_data, p
     region_label <- "Outstate Focus\n"
   }
   
+  # create antigen label
+  label <- tibble(
+    report_date = as.Date("2021-03-08"),
+    y_val = state_data$top_val-30,
+    text = "Antigen tests added to most\nMissouri counties on 8 Mar"
+  )
+  
   # construct plot
   p <- ggplot() +
     geom_line(.data, mapping = aes(x = report_date, y = case_avg, color = factor_var), size = 2) +
     geom_point(data = point_data, mapping = aes(x = report_date, y = case_avg, color = factor_var), 
                size = 4, show.legend = FALSE) +
+    geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8) +
+    geom_text_repel(data = label, mapping = aes(x = report_date, y = y_val, label = text),
+                    nudge_y = 100, nudge_x = -70, size = 5) +
     geom_point(data = state_data$peak_tbl, mapping = aes(x = report_date, y = case_avg), 
                size = 4, shape = 16) +
     geom_point(data = region_data$peak_tbl, mapping = aes(x = report_date, y = case_avg), 
