@@ -207,3 +207,55 @@ county_vax %>%
 st_geometry(data_table) <- NULL
 DT::datatable(data_table)
 ```
+
+## Vaccinations by District {.tabset .tabset-fade .tabset-pills .padtop}
+Missouri has been using State Highway Patrol Districts to distribute vaccinations, but does not report vaccination progress by these same units. The following series of plots illustrate per capita vaccination rates for each Patrol District in St. Louis.
+
+Initiated means individuals have received an initial dose of the Moderna or Pfizer vaccines, or the single dose of the Johnson & Johnson vaccine. Completed means individuals have received *both* doses of the Moderna or Pfizer vaccines, or the single dose of the Johnson & Johnson vaccine.
+
+### Initiated Vaccinations
+
+```{r static-dist-initial, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/district/a_vaccine_initial.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/district/a_vaccine_initial.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/district/a_vaccine_initial.png" target="_blank">Low-res</a>]
+
+### Complete Vaccinations
+
+```{r static-dist-complete, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/district/b_vaccine_complete.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/district/b_vaccine_complete.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/district/b_vaccine_complete.png" target="_blank">Low-res</a>]
+
+### Complete Vaccinations
+
+```{r static-dist-last7, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/district/c_vaccine_last7.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/district/c_vaccine_last7.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/district/c_vaccine_last7.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r data-table-district, echo=FALSE, out.width = '100%'}
+dist_vax %>%
+  select(district, initiated, initiated_rate, complete, complete_rate, last7, last7_rate) %>%
+  mutate(
+    initiated_rate = round(initiated_rate, digits = 2),
+    complete_rate = round(complete_rate, digits = 2),
+    last7_rate = round(last7_rate, digits = 2) 
+  ) %>%
+  rename(
+    `MSHP District` = district,
+    `Initiated Count` = initiated,
+    `Initiated Per Capita Rate` = initiated_rate,
+    `Completed Count` = complete,
+    `Completed Per Capita Rate` = complete_rate,
+    `Last 7 Days` = last7,
+    `Last 7 Days Per Capita Rate` = last7_rate
+  ) -> data_table
+
+DT::datatable(data_table)
+```
