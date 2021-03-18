@@ -37,7 +37,10 @@ regional_counties <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "dat
   select(GEOID, county)
 
 zip_snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_metro.geojson"), 
-                        stringsAsFactors = FALSE) 
+                        stringsAsFactors = FALSE) %>%
+  mutate(case_avg_rate = ifelse(case_avg_rate < 0, NA, case_avg_rate)) %>%
+  mutate(case_rate = ifelse(GEOID_ZCTA == "63628", NA, case_rate)) %>%
+  mutate(case_avg_rate = ifelse(GEOID_ZCTA == "63628", NA, case_avg_rate))
 
 stl_hosp <-  read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "metro", "stl_hospital.csv"))
 ```
@@ -261,7 +264,7 @@ This map shows the 14-day average of new infections as a rate per 10,000 residen
 
 ```{r map-avg-infections-zip, echo = FALSE, out.width = '100%', out.height='600px', warning=FALSE}
 # calculate breaks
-bins <- map_bins(zip_snapshot, var = "case_avg_rate", style = "quantile", classes = 4, dig_lab = 2,
+bins <- map_bins(zip_snapshot, var = "case_avg_rate", style = "quantile", classes = 5, dig_lab = 2,
                  round = 2)
 bins[1] <- round_any(x = min(zip_snapshot$case_avg_rate, na.rm = TRUE), accuracy = .01, f = floor)
 bins[length(bins)] <- round_any(x = max(zip_snapshot$case_avg_rate, na.rm = TRUE), accuracy = .01, f = ceiling)

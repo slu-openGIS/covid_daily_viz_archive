@@ -69,15 +69,6 @@ snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "coun
   mutate(icu_rate = ifelse(hospitals == 0, NA, icu_rate))
 ```
 
-<div class="alert">
-<b><p>The site was offline beginning 2021-03-09 due to Missouri acknowledging approximately 80,000 cases identified using antigen ("rapid") tests. Approximately 50,000 of these cases were not accounted for on this site. You can read a bit more [about the issue on Chris's newsletter](https://chrisprener.substack.com/p/weekly-covid-19-round-up-31121).</p>
-
-As of 2021-03-14, Chris has completed updating plots to reflect the change in case counts. 7-day average data at the county level will not be updated until 2020-03-16, however, so that trends do not show the very large spikes due to the addition of these 50,000 new cases. </p>
-
-<p>Thanks for your patience as the site was offline!</p></b>
-</div>
-<br>
-
 <div class="note">
 <b>The site was last updated on `r Sys.Date()`. All county, metro, and state level morbidity and mortality data are current as of `r Sys.Date()-1`. ZIP code, disparity, and St. Louis hospitalization data are all current as of `r Sys.Date()`. </b>
 </div>
@@ -88,6 +79,10 @@ Welcome to <a href="https://chris-prener.github.io" target="_blank">Chris Prener
 Chris also emails out a weekly round-up of COVID-19 trends for Missouri. These weekly newsletters, named "River City Data," also feature some exclusive content, including short interviews with COVID-19 experts, health care providers, and others who have insight into the pandemic. Sign up below:
 
 <iframe src="https://chrisprener.substack.com/embed" width="480" height="320" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe>
+
+## Vaccination Data
+
+
 
 ## Daily Data {.tabset .tabset-fade .tabset-pills .padtop}
 While the [City of St. Louis](https://www.stlouis-mo.gov/covid-19/data/), [St. Louis County](https://stlcogis.maps.arcgis.com/apps/MapSeries/index.html?appid=6ae65dea4d804f2ea4f5d8ba79e96df1), and [Kansas City](https://www.kcmo.gov/city-hall/departments/health/coronavirus-covid-19/covid-19-totals) provide day-by-day tracking of cumulative cases on their respective dashboards, the State of Missouri does not. The following tabs provide daily breakdowns of COVID data as well as additional statistics not included in the existing dashboards. Data are also provided for the wider St. Louis and Kansas City metro areas. Please note that the two average columns for reported cases and deaths are both seven-day rolling averages.

@@ -5,7 +5,7 @@
 # load data ####
 metro_zip_sf <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snapshot_metro.geojson", crs = 4326) %>%
   st_transform(crs = 26915) %>%
-  mutate(case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate)) %>%
+  mutate(case_avg_rate = ifelse(case_avg_rate < 0, NA, case_avg_rate)) %>%
   mutate(case_rate = ifelse(GEOID_ZCTA == "63628", NA, case_rate)) %>%
   mutate(case_avg_rate = ifelse(GEOID_ZCTA == "63628", NA, case_avg_rate))
 
@@ -46,7 +46,7 @@ save_plots(filename = "results/low_res/stl_zip/a_case_map_metro.png", plot = p, 
 # map new case rate ####
 ## create breaks
 metro_zip_sf <- map_breaks(metro_zip_sf, var = "case_avg_rate", newvar = "map_breaks",
-                           style = "quantile", classes = 4, dig_lab = 2)
+                           style = "quantile", classes = 5, dig_lab = 2)
 
 ## create map
 p <- ggplot() +
