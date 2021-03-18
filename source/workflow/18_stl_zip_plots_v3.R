@@ -5,7 +5,9 @@
 # load data ####
 metro_zip_sf <- st_read("data/MO_HEALTH_Covid_Tracking/data/zip/daily_snapshot_metro.geojson", crs = 4326) %>%
   st_transform(crs = 26915) %>%
-  mutate(case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
+  mutate(case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate)) %>%
+  mutate(case_rate = ifelse(GEOID_ZCTA == "63628", NA, case_rate)) %>%
+  mutate(case_avg_rate = ifelse(GEOID_ZCTA == "63628", NA, case_avg_rate))
 
 metro_counties <- st_read("data/MO_HEALTH_Covid_Tracking/data/county/daily_snapshot_mo_xl.geojson") %>%
   st_transform(crs = 26915) %>%

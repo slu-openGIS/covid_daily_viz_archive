@@ -72,6 +72,7 @@ if (weekdays(date) %in% c("Saturday", "Sunday") == FALSE){
 source("source/workflow/22_mo_deaths.R")
 source("source/workflow/23_vaccines.R")
 source("source/workflow/24_district_vaccines.R")
+source("source/workflow/25_vaccination_progress.R")
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
