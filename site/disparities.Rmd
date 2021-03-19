@@ -82,6 +82,7 @@ DT::datatable(data_table, rownames= FALSE)
 
 ## Statewide Vaccinations {.tabset .tabset-fade .tabset-pills .padtop}
 Missouri currently releases data on race and ethnicity based on the number of people who have initiated vaccinations. Initiated means individuals have received an initial dose of the Moderna or Pfizer vaccines, or the single dose of the Johnson & Johnson vaccine.
+
 ### Static Plot
 
 ```{r static-race, echo=FALSE, out.width = '100%'}
