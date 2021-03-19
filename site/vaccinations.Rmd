@@ -221,7 +221,7 @@ knitr::include_graphics("img/district/a_vaccine_initial.png")
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/district/a_vaccine_initial.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/district/a_vaccine_initial.png" target="_blank">Low-res</a>]
 
-### Complete Vaccinations
+### Completed Vaccinations
 
 ```{r static-dist-complete, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/district/b_vaccine_complete.png")
@@ -229,7 +229,7 @@ knitr::include_graphics("img/district/b_vaccine_complete.png")
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/district/b_vaccine_complete.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/district/b_vaccine_complete.png" target="_blank">Low-res</a>]
 
-### Complete Vaccinations
+### Recent Vaccinations
 
 ```{r static-dist-last7, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("img/district/c_vaccine_last7.png")
@@ -259,3 +259,6 @@ dist_vax %>%
 
 DT::datatable(data_table)
 ```
+
+## Disparities in Vaccinations {.padtop}
+The [disparities page](disparities.html#Statewide_Vaccinations) on this website contains data on disparities in vaccinations by race and ethnicity.

@@ -22,6 +22,10 @@ stl_race_gender <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data
 zip_snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_city_county.geojson")) %>%
   filter(is.na(cases) == FALSE)
 st_geometry(zip_snapshot) <- NULL
+
+race_vax <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
+                                 "individual", "mo_vaccine_race_rates.csv"),
+                     col_types = cols(report_date = col_date(format = "")))
 ```
 
 One striking facet of the COVID-19 outbreak is the effect it has had on communities that have been historically been marginalized in the United States, including African Americans, indigenous nations (the Navajo Nation has one of the <a href="https://www.npr.org/2020/04/24/842945050/navajo-nation-sees-high-rate-of-covid-19-and-contact-tracing-is-a-challenge" target="_blank">highest infection rates in country</a>), and people incarcerated in jails/prisons. What ties these groups together is not inherent biological risk. Rather, disinvestment at the community level means the agencies and organizations that serve these communities often lack the resources needed to prevent the spread of infectious disease. This is long-standing social and health disparities that potentially leave individuals more susceptible to severe illness.
@@ -75,6 +79,33 @@ DT::datatable(data_table, rownames= FALSE)
   * Rates for other racial identities are combined into an 'other' category, which cannot be easily converted to a rate and so is not included here.
   * The Latino category is not exclusive of the racial identities shown.
   * There is a significant amount of missing data, typically around 16% to 20% on a given day.
+
+## Statewide Vaccinations {.tabset .tabset-fade .tabset-pills .padtop}
+Missouri currently releases data on race and ethnicity based on the number of people who have initiated vaccinations. Initiated means individuals have received an initial dose of the Moderna or Pfizer vaccines, or the single dose of the Johnson & Johnson vaccine.
+### Static Plot
+
+```{r static-race, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/mo_individual/c_race_vaccine_total.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/mo_individual/c_race_vaccine_total.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/mo_individual/c_race_vaccine_total.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r state-vax-table, echo=FALSE, out.width = '100%'}
+race_vax %>%
+  select(value, initiated, iniitiated_rate) %>%
+  filter(value %in% c("Two or More") == FALSE) %>%
+  arrange(desc(iniitiated_rate)) %>% 
+  mutate(iniitiated_rate = round(iniitiated_rate, digits = 0)) %>%
+  rename(
+    Identity = value,
+    `Cumulative Initiated Vaccinations` = initiated,
+    `Rate per 1,000 Individuals` = iniitiated_rate
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
 
 ## St. Louis {.padtop}
 Within the St. Louis region, I am currently tracking disparities data only for St. Louis City and County.

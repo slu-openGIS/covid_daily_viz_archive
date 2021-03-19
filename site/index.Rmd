@@ -456,13 +456,17 @@ Additional data are available for the following topics:
   * Disparities
       * Cases and Deaths
           * [State](disparities.html#Statewide); [St. Louis City and County](disparities.html#St_Louis)
+      * Vaccinations
+          * [State](disparities.html#Statewide_Vaccinations)
   * [Excess Mortality](mortality.html)
   * Hospitalizations
       * [St. Louis](stl.html#Hospitalizations)
   * [Long Term Care and Nursing Homes](ltc.html)
   * Mortality
       * [State](states.html#Mortality); [Metropolitan areas](metros.html#Mortality); counties in [St. Louis](stl.html#Mortality), [Kansas City](kc.html#Mortality); [Long Term Care facilities](ltc.html#Mortality)
-  * [Vaccinations](vaccinations.html)
+  * Vaccinations
+      * [General Trends](vaccinations.html)
+      * [Disparities](disparities.html#Statewide_Vaccinations)
 
 ## Contributors {.padtop}
 <a href="https://chris-prener.github.io" target="_blank">Chris Prener</a>, an Assistant Professor of Sociology at Saint Louis University, is the primary maintainer of this site and the data behind it. <a href="https://www.slu.edu/slucor/faculty/wiemken-timothy.php" target="_blank">Tim Wiemken</a>, an Associate Professor in Health and Clinical Outcomes Research and Infectious Disease at Saint Louis University School of Medicine, has contributed to both the <a href="mortality.html">mortality</a> and <a href="ltc.html">nursing home</a> data. He has also provided technical guidance on other aspects of the site.
