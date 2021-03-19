@@ -146,6 +146,7 @@ top_val <- round_any(x = max(region_subset$case_avg_rate), accuracy = 20, f = ce
 p <- ggplot() +
   geom_area(region_subset, mapping = aes(x = report_date, y = case_avg_rate, fill = region),
             show.legend = FALSE) +
+  geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8) +
   scale_fill_manual(values = cols) +
   facet_wrap(vars(region), nrow = 3) +
   scale_x_date(date_breaks = values$date_breaks_long, date_labels = "%b") +
@@ -153,7 +154,7 @@ p <- ggplot() +
   labs(
     title = "Pace of New COVID-19 Cases in Missouri by Region",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
-    caption = values$caption_text,
+    caption = paste0(values$caption_text, "\nVertical line represents addition of antigen test data for most Missouri counties on 2021-03-08"),
     x = "Date",
     y = "7-day Average of New Cases per 100,000"
   ) +

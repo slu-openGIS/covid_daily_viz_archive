@@ -1,18 +1,19 @@
 
 # load data
 initiated <-  read_csv("data/MO_HEALTH_Covid_Tracking/data/individual/mo_vaccine_race_rates.csv")
+totals <- read_csv(paste0("data/MO_HEALTH_Covid_Tracking/data/source/mo_daily_vaccines/mo_total_vaccines_",
+                          as.character(date), ".csv"))
 pop <- read_csv("data/MO_HEALTH_Covid_Tracking/data/source/state_pop.csv")
 
 # =============================================================================
 
 ## tidy values
-complete <- 664899
+complete <- totals %>%
+  select(complete) %>%
+  pull()
 
-initiated <- initiated %>%
-  filter(value %in% c("Unknown Ethnicity", "Latino") == FALSE) %>%
-  group_by(geoid) %>%
-  summarise(total = sum(initiated)) %>%
-  select(total) %>%
+initiated <- totals %>%
+  select(initiated) %>%
   pull()
 
 pop <- pop %>%
@@ -32,7 +33,7 @@ pct <- mutate(pct, subvalue = fct_relevel(subvalue, "Remaining", "Complete"))
 pct <- mutate(pct, value = str_wrap(value, width = 12))
 
 # clean-up
-rm(complete, initiated, pop)
+rm(complete, initiated, pop, totals)
 
 # =============================================================================
 

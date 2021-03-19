@@ -19,7 +19,7 @@ sf::st_geometry(county_data) <- NULL
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
-# calculate change since last Friday ####
+# calculate change since last Thursday ####
 ## subset and reformat
 state_data %>%
   slice(tail(row_number(), 7)) %>%
@@ -39,16 +39,16 @@ state_data %>%
 ## prepare text
 sign <- ifelse(state_summary$delta_cases >= 0, "+", "-")
 total_cases <- paste0(format(state_summary$total_cases, big.mark=",",scientific=FALSE), " (", sign,
-  format(abs(state_summary$delta_cases), big.mark=",",scientific=FALSE), " from last Friday)")
+  format(abs(state_summary$delta_cases), big.mark=",",scientific=FALSE), " from last Thursday)")
 sign <- ifelse(state_summary$delta_avg_cases >= 0, "+", "-")
 new_cases <- paste0(format(round(state_summary$current_avg_cases, digits = 2), big.mark=",",scientific=FALSE), " (", sign,
-  format(abs(round(state_summary$delta_avg_cases, digits = 2)), big.mark=",",scientific=FALSE), " from last Friday)")
+  format(abs(round(state_summary$delta_avg_cases, digits = 2)), big.mark=",",scientific=FALSE), " from last Thursday)")
 sign <- ifelse(state_summary$delta_deaths >= 0, "+", "-")
 total_deaths <- paste0(format(state_summary$total_deaths, big.mark=",",scientific=FALSE), " (", sign,
-                      format(abs(state_summary$delta_deaths), big.mark=",",scientific=FALSE), " from last Friday)")
+                      format(abs(state_summary$delta_deaths), big.mark=",",scientific=FALSE), " from last Thursday)")
 sign <- ifelse(state_summary$delta_avg_deaths >= 0, "+", "-")
 new_deaths <- paste0(format(round(state_summary$current_avg_deaths, digits = 2), big.mark=",",scientific=FALSE), " (", sign,
-                    format(abs(round(state_summary$delta_avg_deaths, digits = 2)), big.mark=",",scientific=FALSE), " from last Friday)")
+                    format(abs(round(state_summary$delta_avg_deaths, digits = 2)), big.mark=",",scientific=FALSE), " from last Thursday)")
 rm(sign)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
