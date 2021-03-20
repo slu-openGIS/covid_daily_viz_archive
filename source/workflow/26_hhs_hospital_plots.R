@@ -34,7 +34,7 @@ p <- facet_rate(metro_hosp,
                 highlight = unique(metro_hosp$geoid),
                 plot_date = sort(unique(metro_hosp$report_date))[1],
                 date = last_update$last_date,
-                title = "Pace of New COVID-19 Hospitalizations by Metro Area",
+                title = "Total COVID-19 Hospitalizations by Metro Area",
                 caption = values$caption_text_hosp)
 
 ## save plot
@@ -74,11 +74,11 @@ p <- ggplot() +
   scale_x_date(date_breaks = values$date_breaks_long, date_labels = "%b") +
   scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = 50)) + 
   labs(
-    title = "Pace of New COVID-19 Hospitalizations by Region",
+    title = "Total COVID-19 Hospitalizations by Region",
     subtitle = paste0(as.character(sort(unique(region_hosp$report_date))[1]), " through ", as.character(last_update$last_date)),
     caption = values$caption_text_hosp,
     x = "Date",
-    y = "New In-patients per 1,000 Staffed Beds"
+    y = "COVID Patients per 1,000 Staffed Beds"
   ) +
   sequoia_theme(base_size = 22, background = "white") +
   theme(axis.text.x = element_text(angle = values$x_angle))
@@ -90,5 +90,5 @@ save_plots(filename = "results/low_res/regional/o_in_pt.png", plot = p, preset =
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
 # clean-up
-rm(metro_hosp)
+rm(region_hosp, region_subset)
 rm(top_val, p, cols, last_update)

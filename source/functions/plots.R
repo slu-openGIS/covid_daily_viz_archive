@@ -69,11 +69,6 @@ regional_count <- function(.data, region, point_data, state_data, region_data, p
 
 facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_upper_limit, highlight, plot_date, date, title, caption){
   
-  # address Kansas City
-  # if (type == "county"){
-  #  .data <- filter(.data, (geoid == "29511" & report_date > "2020-09-29") == FALSE) 
-  # }
-  
   # create name
   if (type == "metro" | type == "metro HHS"){
     scale_name <- "Metro Area"
@@ -151,6 +146,14 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
     
   }
   
+  if (type == "metro HHS"){
+    y_string <- "COVID Patients per 1,000 Staffed Beds"
+    caption_string <- caption
+  } else if (type != "metro HHS"){
+    y_string <- "7-Day Average Rate per 100,000"
+    caption_string <- paste0(caption,"\nVertical line represents addition of antigen test data for most Missouri counties on 2021-03-08")
+  }
+  
   # finish plot
   p <- p +
     scale_colour_manual(values = pal, name = scale_name) +
@@ -159,8 +162,8 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
     labs(
       title = title,
       x = "Date",
-      y = "7-Day Average Rate per 100,000",
-      caption = paste0(caption,"\nVertical line represents addition of antigen test data for most Missouri counties on 2021-03-08")
+      y = y_string,
+      caption = caption_string
     ) +
     sequoia_theme(base_size = 22, background = "white") +
     theme(axis.text=element_text(size = 15))
