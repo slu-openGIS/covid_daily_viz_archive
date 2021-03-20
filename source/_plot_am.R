@@ -46,6 +46,7 @@ values <- list(
   caption_text_census = "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau",
   caption_text_census_map = "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau",
   caption_text_census_map2 = "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project",
+  caption_text_hosp = "Plot by Christopher Prener, Ph.D.\nData via HHS and the U.S. Census Bureau",
   
   pal = c(pal, 
           RColorBrewer::brewer.pal(n = 6, name = "Reds")[c(6)], 
@@ -106,7 +107,6 @@ library(scales)         # plot scales
 library(zoo)            # rolling means
 
 ## functions
-# source("source/functions/calculate_days.R")    # data wrangling for log plots 
 source("source/functions/map_breaks.R")        # creating map beaks
 source("source/functions/plots.R")             # standardized plots
 source("source/functions/round_any.R")         # rounding
@@ -137,6 +137,16 @@ source("source/workflow/16_county_plots_ozkmtns.R") # Ozark Mountains
 source("source/workflow/17_county_plots_nemo.R")  # Northeastern Missouri
 source("source/workflow/17_stl_county_plots.R")   # St. Louis MSA
 source("source/workflow/21_kc_county_plots.R")    # Kansas City MSA
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
+## check hospitalization metadata for update
+load("data/MO_HEALTH_Covid_Tracking/data/source/hhs/last_update.rda")
+
+## rebuild hhs data if there has been an update
+if ((values$date+1 == last_update$current_date) == TRUE){
+  source("source/workflow/26_hhs_hospital_plots.R") 
+}
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
