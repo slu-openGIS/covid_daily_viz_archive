@@ -253,7 +253,7 @@ This map shows the number of cases in LTC facilities as a percentage of the tota
 # calculate breaks
 # bins <- map_bins(counties, var = "cases_ltc_pct", style = "fisher", classes = 5, dig_lab = 2,
 #                 round = 2)
-bins <- c(min(county_cases$cases_ltc_pct, na.rm = TRUE), 10, 20, 30, 
+bins <- c(min(county_cases$cases_ltc_pct, na.rm = TRUE), 5, 10, 15, 20, 25,
           round(max(county_cases$cases_ltc_pct, na.rm = TRUE)+1, digits = 0))
 
 # create color palette
