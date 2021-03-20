@@ -152,7 +152,8 @@ if ((values$date+1 == last_update$current_date) == TRUE){
 
 # clean-up ####
 rm(calculate_days, facet_rate, filter_date, map_bins, map_breaks,
-   round_any, save_plots, sequoia_theme, regional_geoids, q, regional_count)
+   round_any, save_plots, sequoia_theme, regional_geoids, q, regional_count,
+   last_update, cumulative_rate, plot_subtype)
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
