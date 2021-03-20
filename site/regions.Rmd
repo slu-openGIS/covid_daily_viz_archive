@@ -15,9 +15,10 @@ library(dplyr)
 library(readr)
 
 # load data
-# regional_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "regional_all", "regional_full.csv")) %>%
-#  filter(report_date >= "2020-03-07") %>%
-#  arrange(desc(report_date), short_name)
+regional_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "region", 
+                                     "region_meso.csv")) %>%
+  filter(report_date >= "2020-03-07") %>%
+  arrange(desc(report_date), region)
 ```
 
 The following plots and maps focus on three "meso regions" in Missouri. The St. Louis and Kansas City regions only contain the Missouri countiesin those regionals, so the 7-day averages will be different than the values reported for the [full regionalpolitan statistical areas](regionals.html). The "outstate" region borrows a term used occasionally to describe areas outside of St. Louis and Kansas City. It includes all Missouri counties not included in either the St. Louis pr Kansas City MSAs.
@@ -59,22 +60,19 @@ Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_vi
 
 ### Data Table
 
-*These data are not currently published. The data set creation process will be modified to regularly export these data, and this tab will be updated when those updates are complete.*
-
 ```{r regional-infection-table, echo=FALSE, out.width = '100%', eval=FALSE}
 regional_data %>%
-  select(report_date, short_name, cases, new_cases, case_avg, case_rate) %>%
+  select(report_date, region, new_cases, case_avg, case_avg_rate) %>%
   mutate(
     case_avg = round(case_avg, digits = 2),
-    case_rate = round(case_rate, digits = 2)
+    case_avg_rate = round(case_avg_rate, digits = 2)
   ) %>%
   rename(
     `Report Date` = report_date,
-    MSA = short_name,
-    `Cumulative Cases` = cases,
+    Region = region,
     `New Cases` = new_cases,
     `Average New Cases` = case_avg,
-    `Per Capita Rate` = case_rate
+    `Per Capita Rate` = case_avg_rate
   ) -> data_table
 
 DT::datatable(data_table, rownames= FALSE)
