@@ -19,6 +19,10 @@ regional_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
                                      "region_meso.csv")) %>%
   filter(report_date >= "2020-03-07") %>%
   arrange(desc(report_date), region)
+
+regional_hosp <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "region", 
+                                     "region_meso_hospital.csv")) %>%
+  arrange(desc(report_date), region)
 ```
 
 The following plots and maps focus on three "meso regions" in Missouri. The St. Louis and Kansas City regions only contain the Missouri countiesin those regionals, so the 7-day averages will be different than the values reported for the [full regionalpolitan statistical areas](regionals.html). The "outstate" region borrows a term used occasionally to describe areas outside of St. Louis and Kansas City. It includes all Missouri counties not included in either the St. Louis pr Kansas City MSAs.
@@ -83,4 +87,35 @@ DT::datatable(data_table, rownames= FALSE)
   * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) the `county_full.csv` and `state_full.csv` tables, which are assembled from data provided by the [New York Times](faq.html#Where_Do_These_Data_Come_From).
   * The FAQ contains a short explanation of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
+
+## Hospitalizations {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in hospitalizations for these three meso regions. The federal government only began collecting these data systematically in mid-summer, and so these data do not reflect hospitalization patterns at the beginning of the pandemic.
+
+### Current Total In-Patients
+
+```{r region-hosp, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/regional/o_in_pt.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/regional/o_in_pt.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/regional/o_in_pt.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r region-hosp-table, echo=FALSE, out.width = '100%'}
+regional_hosp %>%
+  select(report_date, region, adult_covid, covid_per_cap) %>%
+  mutate(
+    adult_covid = round(adult_covid, digits = 2),
+    covid_per_cap = round(covid_per_cap, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    Region = region,
+    `7-day Average Adult COVID Patients` = adult_covid,
+    `7-day Average Adult COVID Patients Per Capita` = covid_per_cap,
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
+
   

@@ -15,8 +15,13 @@ library(dplyr)
 library(readr)
 
 # load data
-metro_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "metro_all", "metro_full.csv")) %>%
+metro_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", 
+                                  "metro_all", "metro_full.csv")) %>%
   filter(report_date >= "2020-03-07") %>%
+  arrange(desc(report_date), short_name)
+
+metro_hosp <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", 
+                                  "metro_all", "metro_hospital.csv")) %>%
   arrange(desc(report_date), short_name)
 ```
 
@@ -71,7 +76,7 @@ DT::datatable(data_table, rownames= FALSE)
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
 
 ## Mortality {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show patterns in infections for the Kansas City <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro area</a>.
+These plots show patterns in mortality for all of Missouri's <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro areas</a>.
 
 ### Mortality Rates
 
@@ -118,3 +123,33 @@ DT::datatable(data_table, rownames= FALSE)
   * The FAQ contains short explanations of [per-capita rates](faq.html#What_are_Per_Capita_Rates) and [log plots](faq.html#What_are_Log_Plots).
   * All averages presented are 7-day [rolling averages](faq.html#What_are_Rolling_Averages).
   * The abbreviation "CFR" states for case fatality rate (the number of deaths divided by the number of known cases, expressed as a percentage).
+
+## Hospitalizations {.tabset .tabset-fade .tabset-pills .padtop}
+These plots show patterns in hospitalizations for all of Missouri's <a href="faq.html#What_is_a_Metropolitan_Statistical_Area">metro areas</a>. The federal government only began collecting these data systematically in mid-summer, and so these data do not reflect hospitalization patterns at the beginning of the pandemic.
+
+### Current Total In-Patients
+
+```{r metro-hosp, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/metro/o_in_pt.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/metro/o_in_pt.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/metro/o_in_pt.png" target="_blank">Low-res</a>]
+
+### Data Table
+
+```{r metro-hosp-table, echo=FALSE, out.width = '100%'}
+metro_hosp %>%
+  select(report_date, short_name, adult_covid, covid_per_cap) %>%
+  mutate(
+    adult_covid = round(adult_covid, digits = 2),
+    covid_per_cap = round(covid_per_cap, digits = 2)
+  ) %>%
+  rename(
+    `Report Date` = report_date,
+    MSA = short_name,
+    `7-day Average Adult COVID Patients` = adult_covid,
+    `7-day Average Adult COVID Patients Per Capita` = covid_per_cap,
+  ) -> data_table
+
+DT::datatable(data_table, rownames= FALSE)
+```
