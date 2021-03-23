@@ -464,6 +464,8 @@ Additional data are available for the following topics:
           * [State](disparities.html#Statewide_Vaccinations)
   * [Excess Mortality](mortality.html)
   * Hospitalizations
+      * [Metropolitan areas](metros.html#Hospitalizations)
+      * [Regions](regions.html#Hospitalizations)
       * [St. Louis](stl.html#Hospitalizations)
   * [Long Term Care and Nursing Homes](ltc.html)
   * Mortality
