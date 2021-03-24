@@ -45,7 +45,7 @@ p <- ggplot() +
   geom_point(death_points, mapping = aes(x = date, y = avg, color = factor_var), 
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Measure") +
-  scale_x_date(date_breaks = "20 days", date_labels = "%d %b") +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b") +
   scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) + 
   labs(
     title = "COVID-19 Mortality in Missouri, Reported vs. Actual",
@@ -62,4 +62,5 @@ save_plots(filename = "results/high_res/state/n_mortality_compare.png", plot = p
 save_plots(filename = "results/low_res/state/n_mortality_compare.png", plot = p, preset = "lg", dpi = 72)
 
 ## clean-up
-rm(death_points, mo_deaths, p, cols, pal, top_val, hosp_breaks)
+rm(death_points, mo_deaths, p, cols, pal, top_val, hosp_breaks,
+   actual_deaths, total_deaths)

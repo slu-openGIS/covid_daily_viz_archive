@@ -147,13 +147,13 @@ covid_race <- covid_race %>%
 # plot total dose rates, race
 
 ## define top_val
-top_val <- round_any(x = max(covid_race$iniitiated_rate, na.rm = TRUE), accuracy = 2000, f = ceiling)
+top_val <- round_any(x = max(covid_race$iniitiated_rate, na.rm = TRUE), accuracy = 5000, f = ceiling)
 
 ## create plot
 p <- ggplot(data = covid_race, mapping = aes(x = reorder(value, -iniitiated_rate), y = iniitiated_rate)) +
   geom_bar(position = "dodge", stat = "identity", width = .65, show.legend = FALSE,
            fill = RColorBrewer::brewer.pal(4, "Set1")[4]) +
-  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 2000)) +
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5000)) +
   labs(
     title = "Initiated Vaccinations by Race and Ethnicity, Missouri",
     subtitle = paste0("Current as of ", as.character(date)),
