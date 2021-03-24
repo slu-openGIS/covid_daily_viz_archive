@@ -15,6 +15,7 @@ library(dplyr)
 library(leaflet)
 library(readr)
 library(sf)
+library(RColorBrewer)
 
 # functions
 source(here::here("source", "functions", "map_breaks.R"))
@@ -27,6 +28,9 @@ county_vax <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
 dist_vax <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
                                  "district", "daily_snapshot_mo_vaccines.csv"),
                      col_types = cols(report_date = col_date(format = "")))
+mshp <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
+                           "source", "mo_highway_districts.geojson")) %>%
+  st_transform(crs = 4326)
 ```
 
 This page contains vaccination data for Missouri, which are being reported by [the State on their dashboard](https://covidvaccine.mo.gov/data/).
@@ -236,6 +240,34 @@ knitr::include_graphics("img/district/c_vaccine_last7.png")
 ```
 
 Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/district/c_vaccine_last7.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/district/c_vaccine_last7.png" target="_blank">Low-res</a>]
+
+### Reference Map of MSHP Districts 
+
+```{r mshp-map, echo=FALSE, out.width = '100%'}
+# define colors
+pal <- brewer.pal(n = 8, name = "Set1")
+pal[6] <- "#FFD60C"
+pal <- c(pal[6], pal[3], pal[4], pal[7], pal[2], pal[5], pal[8], pal[1],
+         brewer.pal(n = 6, name = "Reds")[c(6)])
+factpal <- colorFactor(pal, as.factor(mshp$distrct))
+
+# create map
+mshp %>%
+  leaflet() %>%
+  setView(lat = 38.497191, lng = -92.631555, zoom = 6) %>%
+  addProviderTiles(providers$Esri.WorldStreetMap) %>%
+  addPolygons(
+    weight = 1, 
+    opacity = 1.0, 
+    smoothFactor = 0.5,
+    fillOpacity = 0.5,
+    color = ~factpal(distrct),
+    highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+    popup = paste("<b>District:</b> ", mshp$distrct)
+  ) %>%
+  addLegend(pal = factpal, values = mshp$distrct, opacity = .75, title = "MSHP District")
+```
+
 
 ### Data Table
 

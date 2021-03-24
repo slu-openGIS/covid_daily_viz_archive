@@ -131,7 +131,7 @@ factpal <- colorFactor(pal, as.factor(snapshot$metro))
 snapshot %>%
   leaflet() %>%
   setView(lat = 38.497191, lng = -92.631555, zoom = 6) %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
+  addProviderTiles(providers$Esri.WorldStreetMap) %>%
   addPolygons(
     weight = 1, 
     opacity = 1.0, 
