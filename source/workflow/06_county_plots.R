@@ -37,7 +37,7 @@ mo_sf <- mutate(mo_sf, case_avg_rate = ifelse(case_avg_rate < 0, NA, case_avg_ra
 
 ## create breaks
 mo_sf <- map_breaks(mo_sf, var = "case_avg_rate", newvar = "map_breaks",
-                    style = "fisher", classes = 5, dig_lab = 3)
+                    style = "fisher", classes = 7, dig_lab = 3)
 
 ## create map
 p <- ggplot(data = mo_sf, mapping = aes(fill = map_breaks)) +
