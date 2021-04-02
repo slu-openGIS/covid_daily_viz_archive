@@ -22,8 +22,8 @@ sf::st_geometry(county_data) <- NULL
 # calculate change since last Thursday ####
 ## subset and reformat
 state_data %>%
-  slice(tail(row_number(), 7)) %>%
-  filter(row_number() == n() | wday(report_date, label = TRUE) == "Fri") %>%
+  slice(tail(row_number(), 8)) %>%
+  filter(row_number() == n() | row_number() == 1) %>%
   group_by(state) %>%
   summarise(
     total_cases = last(cases),
