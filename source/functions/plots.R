@@ -308,7 +308,7 @@ cumulative_rate <- function(.data, point_data, type, subtype = NULL, plot_values
   p <- p + 
     geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8) +
     geom_text_repel(data = label, mapping = aes(x = report_date, y = y_val, label = text),
-                    nudge_y = 100, nudge_x = -120, size = 5) +
+                    nudge_y = 100, nudge_x = -140, size = 5) +
     scale_colour_manual(values = pal, name = scale_name) +
     scale_x_date(date_breaks = plot_values$date_breaks, date_labels = "%b") +
     scale_y_continuous(limits = c(0,y_upper_limit), breaks = seq(0, y_upper_limit, by = plot_values$county_rate_val)) + 
