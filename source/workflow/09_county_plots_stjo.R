@@ -13,7 +13,7 @@ county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.c
 cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2], 
           "Kansas City" = values$pal[3], "Andrew" = values$pal[4], 
           "Buchanan" = values$pal[5], "DeKalb" = values$pal[8], 
-          "Clinton" = values$pal[6], "Nodaway" = values$pal[7],
+          "Holt" = values$pal[6], "Nodaway" = values$pal[7],
           "Gentry" = values$pal[9], "Harrison" = values$pal[10],
           "Atchison" = values$pal[11], "Daviess" = values$pal[12])
 
@@ -72,10 +72,13 @@ county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0,
 county_subset %>%
   mutate(case_avg_rate = ifelse(geoid == 29075 & 
                                   (report_date == "2020-11-14" | report_date == "2020-11-15"), 160, case_avg_rate)) %>% 
-  mutate(case_avg_rate = ifelse(geoid == 29147 &  report_date == "2020-11-16", 160, case_avg_rate)) -> county_subset
+  mutate(case_avg_rate = ifelse(geoid == 29147 &  report_date == "2020-11-16", 160, case_avg_rate)) %>%
+  mutate(case_avg_rate = ifelse(geoid == 29087 &
+                                  (report_date == "2020-11-22" | report_date == "2020-11-24"), 160, case_avg_rate)) %>%
+  mutate(case_avg_rate = ifelse(geoid == 29087 &  report_date == "2020-11-23", NA, case_avg_rate)) -> county_subset
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_avg_rate), accuracy = 20, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 20, f = ceiling)
 
 ## re-order counties
 counties <- unique(county_subset$county)
@@ -101,7 +104,7 @@ p <- facet_rate(county_subset,
                 plot_date = values$plot_date,
                 date = values$date,
                 title = "Pace of New COVID-19 Cases in Select Missouri Counties",
-                caption = paste0(values$caption_text_census,"\nValues above 160 for Gentry and Nodaway counties truncated to increase readability"))
+                caption = paste0(values$caption_text_census,"\nValues above 160 for Holt, Gentry, and Nodaway counties truncated to increase readability"))
 
 ## save plot
 save_plots(filename = "results/high_res/county_stjo/e_new_case.png", plot = p, preset = "lg")
