@@ -115,23 +115,29 @@ covid_race <-  read_csv("data/MO_HEALTH_Covid_Tracking/data/individual/mo_vaccin
 # =============================================================================
 
 missing <- list(
-  race = covid_race %>%
-    filter(value %in% c("Unknown Race")) %>%
+  initiated_unkn = covid_race %>%
+    filter(value == "Unknown") %>%
     select(initiated) %>%
     pull(),
-  ethnic = covid_race %>%
-    filter(value %in% c("Unknown Ethnicity")) %>%
-    select(initiated) %>%
-    pull(),
-  total = covid_race %>%
-    filter(value %in% c("Unknown Ethnicity", "Latino") == FALSE) %>%
+  initiated_total = covid_race %>%
+    filter(value %in% c("Latino") == FALSE) %>%
     group_by(geoid) %>%
     summarise(total = sum(initiated)) %>%
+    select(total) %>%
+    pull(),
+  completed_unkn = covid_race %>%
+    filter(value == "Unknown") %>%
+    select(completed) %>%
+    pull(),
+  completed_total = covid_race %>%
+    filter(value %in% c("Latino") == FALSE) %>%
+    group_by(geoid) %>%
+    summarise(total = sum(completed)) %>%
     select(total) %>%
     pull()
 )
 
-covid_race <- filter(covid_race, value %in% c("Unknown Race", "Unknown Ethnicity", "Two or More") == FALSE)
+covid_race <- filter(covid_race, value %in% c("Unknown", "Two or More") == FALSE)
 
 # =============================================================================
 
@@ -144,27 +150,52 @@ covid_race <- covid_race %>%
 
 # =============================================================================
 
-# plot total dose rates, race
+# plot initiated dose rates, race
 
 ## define top_val
-# top_val <- round_any(x = max(covid_race$iniitiated_rate, na.rm = TRUE), accuracy = 5000, f = ceiling)
+top_val <- round_any(x = max(covid_race$initiated_rate, na.rm = TRUE), accuracy = 5000, f = ceiling)
 
 ## create plot
-# p <- ggplot(data = covid_race, mapping = aes(x = reorder(value, -iniitiated_rate), y = iniitiated_rate)) +
-#  geom_bar(position = "dodge", stat = "identity", width = .65, show.legend = FALSE,
-#           fill = RColorBrewer::brewer.pal(4, "Set1")[4]) +
-#  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5000)) +
-#  labs(
-#    title = "Initiated Vaccinations by Race and Ethnicity, Missouri",
-#    subtitle = paste0("Current as of ", as.character(date)),
-#    x = "Race",
-#    y = "First Doses per 100,000 Individuals",
-#    caption = paste0("Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the U.S. Census Bureau",
-#                     "\nStatewide, ", round(missing$race/missing$total*100, 2),"% of race data are missing, as are ", 
-#                     round(missing$ethnic/missing$total*100, 2), "% of ethnicity data")  
-#  ) +
-#  sequoia_theme(base_size = 22, background = "white", map = FALSE)
+p <- ggplot(data = covid_race, mapping = aes(x = reorder(value, -initiated_rate), y = initiated_rate)) +
+      geom_bar(position = "dodge", stat = "identity", width = .65, show.legend = FALSE,
+               fill = RColorBrewer::brewer.pal(4, "Set1")[4]) +
+      scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5000)) +
+      labs(
+        title = "Initiated Vaccinations by Race and Ethnicity, Missouri",
+        subtitle = paste0("Current as of ", as.character(date)),
+        x = "Race",
+        y = "Vaccinations per 100,000 Individuals",
+        caption = paste0("Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the U.S. Census Bureau",
+                         "\nStatewide, ", round(missing$initiated_unkn/missing$initiated_total*100, 2),"% of race data are missing")) +
+      sequoia_theme(base_size = 22, background = "white", map = FALSE)
 
 ## save plot
-# save_plots(filename = "results/high_res/mo_individual/c_race_vaccine_total.png", plot = p, preset = "lg")
-# save_plots(filename = "results/low_res/mo_individual/c_race_vaccine_total.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/mo_individual/c_race_vaccine_initiated.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/mo_individual/c_race_vaccine_initiated.png", plot = p, preset = "lg", dpi = 72)
+
+# =============================================================================
+
+# plot initiated dose rates, race
+
+## define top_val
+top_val <- round_any(x = max(covid_race$completed_rate, na.rm = TRUE), accuracy = 2500, f = ceiling)
+
+## create plot
+p <- ggplot(data = covid_race, mapping = aes(x = reorder(value, -completed_rate), y = completed_rate)) +
+  geom_bar(position = "dodge", stat = "identity", width = .65, show.legend = FALSE,
+           fill = RColorBrewer::brewer.pal(4, "Set1")[4]) +
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 2500)) +
+  labs(
+    title = "Completed Vaccinations by Race and Ethnicity, Missouri",
+    subtitle = paste0("Current as of ", as.character(date)),
+    x = "Race",
+    y = "Vaccinations per 100,000 Individuals",
+    caption = paste0("Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the U.S. Census Bureau",
+                     "\nStatewide, ", round(missing$completed_unkn/missing$completed_total*100, 2),"% of race data are missing")) +
+  sequoia_theme(base_size = 22, background = "white", map = FALSE)
+
+## save plot
+save_plots(filename = "results/high_res/mo_individual/c_race_vaccine_completed.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/mo_individual/c_race_vaccine_completed.png", plot = p, preset = "lg", dpi = 72)
+
+rm(covid_race, missing, p, top_val)
