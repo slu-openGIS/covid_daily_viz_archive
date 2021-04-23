@@ -424,8 +424,8 @@ div.tocify {
 </div>
 <div id="data-table" class="section level3">
 <h3>Data Table</h3>
-<div id="htmlwidget-01fc15e41a627a9b22f5" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-01fc15e41a627a9b22f5">{"x":{"filter":"none","data":[["White","Black","Native","Asian","Pacific Islander","Two or More","Unknown Race","Latino","Unknown Ethnicity"],[242603,41215,928,4227,20,101,103418,16505,182430],[4843.97,5846.97,3444.32,3621.37,299.67,64.85,null,6625.54,null],[4295,876,11,56,1,0,441,142,1286],[85.76,124.23,39.97,48.13,11.55,0,null,56.84,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Identity<\/th>\n      <th>Estimated Cases<\/th>\n      <th>Cases Per Capita<\/th>\n      <th>Estimated Deaths<\/th>\n      <th>Deaths Per Capita<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5e0f19a78867c0a70315" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5e0f19a78867c0a70315">{"x":{"filter":"none","data":[["White","Black","Native","Asian","Pacific Islander","Two or More","Unknown Race","Latino","Unknown Ethnicity"],[242774,41279,929,4236,20,101,103183,16524,182130],[4847.39,5856.03,3446.31,3629.59,299.25,64.76,null,6633.16,null],[4296,875,11,56,1,0,442,142,1287],[85.77,124.2,39.96,48.11,11.55,0,null,56.82,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Identity<\/th>\n      <th>Estimated Cases<\/th>\n      <th>Cases Per Capita<\/th>\n      <th>Estimated Deaths<\/th>\n      <th>Deaths Per Capita<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="notes" class="section level3">
 <h3>Notes</h3>
@@ -441,16 +441,21 @@ div.tocify {
 </div>
 <div id="statewide-vaccinations" class="section level2 tabset tabset-fade tabset-pills padtop">
 <h2 class="tabset tabset-fade tabset-pills padtop">Statewide Vaccinations</h2>
-<p>Missouri currently releases data on race and ethnicity based on the number of people who have initiated vaccinations. Initiated means individuals have received an initial dose of the Moderna or Pfizer vaccines, or the single dose of the Johnson &amp; Johnson vaccine.</p>
-<div id="static-plot" class="section level3">
-<h3>Static Plot</h3>
-<p><img src="img/mo_individual/c_race_vaccine_total.png" width="100%" /></p>
-<p>Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/mo_individual/c_race_vaccine_total.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/mo_individual/c_race_vaccine_total.png" target="_blank">Low-res</a>]</p>
+<p>Missouri currently releases data on race and ethnicity based on the number of people who have initiated or completed vaccinations. Initiated means individuals have received an initial dose of the Moderna or Pfizer vaccines, or the single dose of the Johnson &amp; Johnson vaccine. Completed means individuals have received <em>both</em> doses of the Moderna or Pfizer vaccines, or the single dose of the Johnson &amp; Johnson vaccine.</p>
+<div id="initiated-vaccinations" class="section level3">
+<h3>Initiated Vaccinations</h3>
+<p><img src="img/mo_individual/c_race_vaccine_initiated.png" width="100%" /></p>
+<p>Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/mo_individual/c_race_vaccine_initiated.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/mo_individual/c_race_vaccine_initiated.png" target="_blank">Low-res</a>]</p>
+</div>
+<div id="completed-vaccinations" class="section level3">
+<h3>Completed Vaccinations</h3>
+<p><img src="img/mo_individual/c_race_vaccine_completed.png" width="100%" /></p>
+<p>Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/mo_individual/c_race_vaccine_completed.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/mo_individual/c_race_vaccine_completed.png" target="_blank">Low-res</a>]</p>
 </div>
 <div id="data-table-1" class="section level3">
 <h3>Data Table</h3>
-<div id="htmlwidget-b00e34806ef46b588f8b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b00e34806ef46b588f8b">{"x":{"filter":"none","data":[["Pacific Islander","Asian","White","Latino","Black","Native","Unknown Race","Unknown Ethnicity"],[3525,32218,1179283,58459,99895,2496,367529,367529],[52912,27603,23546,23468,14172,9261,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Identity<\/th>\n      <th>Cumulative Initiated Vaccinations<\/th>\n      <th>Rate per 1,000 Individuals<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6c526e3bd931548f8ee5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6c526e3bd931548f8ee5">{"x":{"filter":"none","data":[["Pacific Islander","Asian","Latino","White","Black","Native","Unknown"],[3688,47839,79898,1453120,135446,3553,417929],[55359,40986,32074,29014,19215,13183,null],[2554,25431,47287,1020810,84919,2042,294284],[38337,21788,18983,20382,12047,7576,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Identity<\/th>\n      <th>Cumulative Initiated Vaccinations<\/th>\n      <th>Initiated Rate per 1,000<\/th>\n      <th>Cumulative Completed Vaccinations<\/th>\n      <th>Completed Rate per 1,000<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="st.-louis" class="section level2 padtop">
@@ -471,8 +476,8 @@ div.tocify {
 </div>
 <div id="data-table-2" class="section level4">
 <h4>Data Table</h4>
-<div id="htmlwidget-c04432fe96b3008afc35" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c04432fe96b3008afc35">{"x":{"filter":"none","data":[["St. Louis","St. Louis","St. Louis","St. Louis","St. Louis","St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City"],["Asian","Black","Two or More","White","Latino","Black","Asian","White","Two or More","Native","Latino"],[1600,18816,1753,41180,2211,6784,328,5093,56,27,817],[38.46,78.3,74.15,60.3,78.12,46.45,32.49,35.38,7.94,36.89,66.08],[null,591,null,1475,null,258,7,150,null,null,null],[null,2.46,null,2.16,null,1.77,0.69,1.04,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>County<\/th>\n      <th>Identity<\/th>\n      <th>Cumulative Cases<\/th>\n      <th>Cases Per Capita<\/th>\n      <th>Cumulative Deaths<\/th>\n      <th>Deaths Per Capita<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8fa3dc051dc3633be253" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8fa3dc051dc3633be253">{"x":{"filter":"none","data":[["St. Louis","St. Louis","St. Louis","St. Louis","St. Louis","St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City"],["Asian","Black","Two or More","White","Latino","Black","Asian","White","Two or More","Native","Latino"],[1609,18889,1753,41304,2217,6784,328,5093,56,27,817],[38.68,78.6,74.15,60.48,78.33,46.45,32.49,35.38,7.94,36.89,66.08],[null,592,null,1477,null,258,8,151,null,null,null],[null,2.46,null,2.16,null,1.77,0.79,1.05,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>County<\/th>\n      <th>Identity<\/th>\n      <th>Cumulative Cases<\/th>\n      <th>Cases Per Capita<\/th>\n      <th>Cumulative Deaths<\/th>\n      <th>Deaths Per Capita<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="notes-1" class="section level4">
 <h4>Notes</h4>
@@ -497,41 +502,13 @@ div.tocify {
 </div>
 <div id="data-table-3" class="section level4">
 <h4>Data Table</h4>
-<div id="htmlwidget-e55b16c29002e745236a" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e55b16c29002e745236a">{"x":{"filter":"none","data":[["St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City"],["Female","Male","Female","Male","Female","Male"],["Black","Black","Asian","Asian","White","White"],[3843,2921,160,166,2656,2420],[48.64,43.57,31.47,33.12,37.43,33.15],[128,130,null,6,60,90],[1.62,1.94,null,1.2,0.85,1.23]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>County<\/th>\n      <th>Gender<\/th>\n      <th>Identity<\/th>\n      <th>Cumulative Cases<\/th>\n      <th>Cases Per Capita<\/th>\n      <th>Cumulative Deaths<\/th>\n      <th>Deaths Per Capita<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-33b3361c900d7b360438" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-33b3361c900d7b360438">{"x":{"filter":"none","data":[["St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City"],["Female","Male","Female","Male","Female","Male"],["Black","Black","Asian","Asian","White","White"],[3843,2921,160,166,2656,2420],[48.64,43.57,31.47,33.12,37.43,33.15],[128,130,null,6,60,91],[1.62,1.94,null,1.2,0.85,1.25]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>County<\/th>\n      <th>Gender<\/th>\n      <th>Identity<\/th>\n      <th>Cumulative Cases<\/th>\n      <th>Cases Per Capita<\/th>\n      <th>Cumulative Deaths<\/th>\n      <th>Deaths Per Capita<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="notes-2" class="section level4">
 <h4>Notes</h4>
 <ul>
 <li>The underlying data for these plots are available from <a href="faq.html#How_Do_I_Download_Your_Data">GitHub</a> in the <code>stl_race_gender_rates.csv</code> table, which is assembled from data provided by the <a href="faq.html#Where_Do_These_Data_Come_From">City of St. Louis</a>.</li>
-<li>The FAQ contains a short explanation of <a href="faq.html#What_are_Per_Capita_Rates">per-capita rates</a>.</li>
-</ul>
-</div>
-</div>
-<div id="disparities-by-zcta-zip-code" class="section level3 tabset tabset-fade tabset-pills padtop">
-<h3 class="tabset tabset-fade tabset-pills padtop">Disparities by ZCTA (Zip Code)</h3>
-<p>These plots show relationships between cases and demographics in ZIP Code Tabulation Areas (ZCTA) in St. Louis. Check the interactive map on the <a href="stl.hml">St. Louis page</a> to see where zip codes are located, or are missing case data.</p>
-<div id="african-american-population" class="section level4">
-<h4>African American Population</h4>
-<p><img src="img/stl_zip/c_race_plot.png" width="100%" /></p>
-<p>Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/c_race_plot.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/c_race_plot.png" target="_blank">Low-res</a>]</p>
-</div>
-<div id="population-below-poverty-line" class="section level4">
-<h4>Population Below Poverty Line</h4>
-<p><img src="img/stl_zip/b_poverty_plot.png" width="100%" /></p>
-<p>Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/b_poverty_plot.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/b_poverty_plot.png" target="_blank">Low-res</a>]</p>
-</div>
-<div id="data-table-4" class="section level4">
-<h4>Data Table</h4>
-<div id="htmlwidget-c5d2281397b9bf84aadd" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c5d2281397b9bf84aadd">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63"],["63005","63011","63017","63021","63025","63026","63031","63033","63034","63038","63040","63042","63043","63044","63049","63069","63074","63088","63101","63102","63103","63104","63105","63106","63107","63108","63109","63110","63111","63112","63113","63114","63115","63116","63117","63118","63119","63120","63122","63123","63124","63125","63126","63127","63128","63129","63130","63131","63132","63133","63134","63135","63136","63137","63138","63139","63140","63141","63143","63144","63146","63147","63121"],[1817,3262,3909,5112,1506,2981,4919,4350,1900,611,841,1794,2241,1222,145,164,1326,901,285,208,697,1456,1242,698,629,1497,2201,1469,1444,1369,920,2974,1088,3326,803,1753,3039,506,3679,5320,966,3310,1352,603,3251,6045,2057,1791,1137,562,1284,1640,3770,1654,1735,1901,33,1776,724,883,2672,770,1938],[101.58,84.87,94.07,90.91,179.56,134.03,103.73,101.18,106.27,86.34,101.84,92.27,99.49,115.98,41.87,33.57,87.04,107.57,86.18,94.5,83.91,73.12,67.75,61.18,66.28,72.3,82.86,80.68,68.3,73.04,80.91,83.81,59.74,75.1,89.44,61.89,89.07,58.22,95.1,104.05,89.22,100.21,91.47,120.94,109.01,112.63,71.15,101.61,84.68,76.61,94.94,74.99,83.02,82.54,93.37,86.67,119.57,86.42,75.64,101.2,88.54,77.54,78.7],[3.15,3.16,4.94,4.08,3.79,6.17,9.7,10.19,8.44,3.93,2.2,12.61,10.29,12.75,11.77,8.28,14.18,9.85,15.64,7.11,17.76,18.89,8.62,49.37,37.8,25,7.01,14.8,35.2,22.43,33.78,17.81,34.74,19.95,6.62,32.34,4.53,44.19,3.93,8.53,4.91,11.46,5.33,5.9,4.27,5.07,15.32,3.84,8.78,40.47,16.68,17.88,24.32,24.01,18.84,11.55,50.36,2.68,12.89,5.12,7.23,31.79,22.7],[1.12,2.1,4.27,2.56,0.56,0.97,33.97,64.27,62.59,1.87,0.92,37.98,10.33,20.6,0.28,4.04,34.71,2.69,53.07,38.98,41.42,46.62,6.48,93.82,91.85,33.86,6.57,30.95,45.97,68.83,94.78,27.69,98.42,20.32,11.23,51.16,7.79,95.79,4.6,2.5,3.08,5.08,2.06,1.78,1.35,1.68,36.63,1.77,36.21,89.04,66.41,65.16,89.5,78.69,77.62,9.01,79.71,6.75,17.07,2.84,12.82,93.91,82.33]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Zip Code<\/th>\n      <th>Cumulative Cases<\/th>\n      <th>Rate per 1,000 Residents<\/th>\n      <th>Poverty Rate (%)<\/th>\n      <th>% African American<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-</div>
-<div id="notes-3" class="section level4">
-<h4>Notes</h4>
-<ul>
-<li>If a ZCTA straddles the city and the county, and only has reported infection numbers in one entity, its estimated partial population will be displayed. Similarly, estimated partial populations for zip codes that straddle outlying counties are used.</li>
-<li>ZCTA stands for "<a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html" target="_blank">ZIP Code Tabulation Area</a>. These are not identical to zip codes, but they are essential for mapping zip codes as regions on a map.</li>
-<li>The underlying data for these plots are available from <a href="faq.html#How_Do_I_Download_Your_Data">GitHub</a> in the <code>zip_stl_city.csv</code> and <code>zip_stl_county.csv</code> tables, which are assembled from data provided by <a href="faq.html#Where_Do_These_Data_Come_From">St. Louis City and County</a>. These data are also available as <code>.geojson</code> files for mapping.</li>
 <li>The FAQ contains a short explanation of <a href="faq.html#What_are_Per_Capita_Rates">per-capita rates</a>.</li>
 </ul>
 </div>

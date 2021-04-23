@@ -19,9 +19,6 @@ library(sf)
 state_data <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "individual", "mo_race_rates.csv"))
 stl_race <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "individual", "stl_race_rates.csv"))
 stl_race_gender <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "individual", "stl_race_gender_rates.csv"))
-zip_snapshot <- st_read(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "zip", "daily_snapshot_city_county.geojson")) %>%
-  filter(is.na(cases) == FALSE)
-st_geometry(zip_snapshot) <- NULL
 
 race_vax <- read_csv(here::here("data", "MO_HEALTH_Covid_Tracking", "data",
                                  "individual", "mo_vaccine_race_rates.csv"),
@@ -81,28 +78,39 @@ DT::datatable(data_table, rownames= FALSE)
   * There is a significant amount of missing data, typically around 16% to 20% on a given day.
 
 ## Statewide Vaccinations {.tabset .tabset-fade .tabset-pills .padtop}
-Missouri currently releases data on race and ethnicity based on the number of people who have initiated vaccinations. Initiated means individuals have received an initial dose of the Moderna or Pfizer vaccines, or the single dose of the Johnson & Johnson vaccine.
+Missouri currently releases data on race and ethnicity based on the number of people who have initiated or completed vaccinations. Initiated means individuals have received an initial dose of the Moderna or Pfizer vaccines, or the single dose of the Johnson & Johnson vaccine. Completed means individuals have received *both* doses of the Moderna or Pfizer vaccines, or the single dose of the Johnson & Johnson vaccine.
 
-### Static Plot
+### Initiated Vaccinations
 
-```{r static-race, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/mo_individual/c_race_vaccine_total.png")
+```{r static-initiated, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/mo_individual/c_race_vaccine_initiated.png")
 ```
 
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/mo_individual/c_race_vaccine_total.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/mo_individual/c_race_vaccine_total.png" target="_blank">Low-res</a>]
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/mo_individual/c_race_vaccine_initiated.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/mo_individual/c_race_vaccine_initiated.png" target="_blank">Low-res</a>]
+
+### Completed Vaccinations
+
+```{r static-completed, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("img/mo_individual/c_race_vaccine_completed.png")
+```
+
+Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/mo_individual/c_race_vaccine_completed.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/mo_individual/c_race_vaccine_completed.png" target="_blank">Low-res</a>]
 
 ### Data Table
 
 ```{r state-vax-table, echo=FALSE, out.width = '100%'}
 race_vax %>%
-  select(value, initiated, iniitiated_rate) %>%
+  select(value, initiated, initiated_rate, completed, completed_rate) %>%
   filter(value %in% c("Two or More") == FALSE) %>%
-  arrange(desc(iniitiated_rate)) %>% 
-  mutate(iniitiated_rate = round(iniitiated_rate, digits = 0)) %>%
+  arrange(desc(initiated_rate)) %>% 
+  mutate(initiated_rate = round(initiated_rate, digits = 0)) %>%
+  mutate(completed_rate = round(completed_rate, digits = 0)) %>%
   rename(
     Identity = value,
     `Cumulative Initiated Vaccinations` = initiated,
-    `Rate per 1,000 Individuals` = iniitiated_rate
+    `Initiated Rate per 1,000` = initiated_rate,
+    `Cumulative Completed Vaccinations` = completed,
+    `Completed Rate per 1,000` = completed_rate
   ) -> data_table
 
 DT::datatable(data_table, rownames= FALSE)
@@ -202,50 +210,3 @@ DT::datatable(data_table, rownames= FALSE)
   * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `stl_race_gender_rates.csv` table, which is assembled from data provided by the [City of St. Louis](faq.html#Where_Do_These_Data_Come_From).
   * The FAQ contains a short explanation of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
 
-### Disparities by ZCTA (Zip Code) {.tabset .tabset-fade .tabset-pills .padtop}
-These plots show relationships between cases and demographics in ZIP Code Tabulation Areas (ZCTA) in St. Louis. Check the interactive map on the [St. Louis page](stl.hml) to see where zip codes are located, or are missing case data.
-
-#### African American Population
-
-```{r stl-zip-race, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/stl_zip/c_race_plot.png")
-```
-
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/c_race_plot.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/c_race_plot.png" target="_blank">Low-res</a>]
-
-#### Population Below Poverty Line
-
-```{r stl-zip-poverty, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("img/stl_zip/b_poverty_plot.png")
-```
-
-Download: [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/high_res/stl_zip/b_poverty_plot.png" target="_blank">High-res</a>] [<a href="https://raw.githubusercontent.com/slu-openGIS/covid_daily_viz/master/results/low_res/stl_zip/b_poverty_plot.png" target="_blank">Low-res</a>]
-
-#### Data Table
-
-```{r zip-data-table, echo=FALSE, out.width = '100%'}
-zip_snapshot %>%
-  select(GEOID_ZCTA, cases, case_rate, pvty_pct, blk_pct) %>%
-  mutate(
-    case_rate = round(case_rate, digits = 2),
-    pvty_pct = round(pvty_pct, digits = 2),
-    blk_pct = round(blk_pct, digits = 2)
-  ) %>%
-  rename(
-    `Zip Code` = GEOID_ZCTA,
-    `Cumulative Cases` = cases,
-    `Rate per 1,000 Residents` = case_rate,
-    `Poverty Rate (%)` = pvty_pct,
-    `% African American` = blk_pct
-  ) -> data_table
-
-DT::datatable(data_table)
-```
-
-#### Notes
-
-  * If a ZCTA straddles the city and the county, and only has reported infection numbers in one entity, its estimated partial population will be displayed. Similarly, estimated partial populations for zip codes that straddle outlying counties are used.
-  * ZCTA stands for "<a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html" target="_blank">ZIP Code Tabulation Area</a>. These are not identical to zip codes, but they are essential for mapping zip codes as regions on a map.
-  * The underlying data for these plots are available from [GitHub](faq.html#How_Do_I_Download_Your_Data) in the `zip_stl_city.csv` and `zip_stl_county.csv` tables, which are assembled from data provided by [St. Louis City and County](faq.html#Where_Do_These_Data_Come_From). These data are also available as `.geojson` files for mapping.
-  * The FAQ contains a short explanation of [per-capita rates](faq.html#What_are_Per_Capita_Rates).
-  
