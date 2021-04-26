@@ -96,7 +96,8 @@ save_plots(filename = "results/low_res/kc_metro/b_case_rate.png", plot = p, pres
 
 ## subset data
 county_subset <- filter(county_data, report_date >= values$plot_date) %>%
-  filter(report_date < as.Date("2021-03-08") | report_date >= as.Date("2021-03-15"))
+  filter(report_date < as.Date("2021-03-08") | report_date >= as.Date("2021-03-15")) %>%
+  filter(report_date < as.Date("2021-04-17") | report_date >= as.Date("2021-04-24"))
 
 ## address negative values
 county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))

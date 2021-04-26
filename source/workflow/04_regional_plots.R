@@ -6,7 +6,8 @@
 region_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/region/region_meso.csv",
                         col_types = cols(region = col_character()
                         )) %>%
-  filter(report_date < as.Date("2021-03-08") | report_date >= as.Date("2021-03-15"))
+  filter(report_date < as.Date("2021-03-08") | report_date >= as.Date("2021-03-15")) %>%
+  filter(report_date < as.Date("2021-04-17") | report_date >= as.Date("2021-04-24"))
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 

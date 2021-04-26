@@ -63,7 +63,8 @@ save_plots(filename = "results/low_res/county_nemo/b_case_rate.png", plot = p, p
 ## subset data
 county_subset <- filter(county_data, report_date >= values$plot_date) %>%
   filter(geoid %in% county_focal) %>%
-  filter(report_date < as.Date("2021-03-08") | report_date >= as.Date("2021-03-15"))
+  filter(report_date < as.Date("2021-03-08") | report_date >= as.Date("2021-03-15")) %>%
+  filter(report_date < as.Date("2021-04-17") | report_date >= as.Date("2021-04-24"))
 
 county_subset <- filter(county_subset, report_date < as.Date("2021-03-25") | 
                           report_date >= as.Date("2021-04-02"))
