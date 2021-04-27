@@ -6,6 +6,7 @@
 region_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/region/region_meso.csv",
                         col_types = cols(region = col_character()
                         )) %>%
+  filter(report_date < as.Date("2021-01-11") | report_date >= as.Date("2021-01-18")) %>%
   filter(report_date < as.Date("2021-03-08") | report_date >= as.Date("2021-03-15")) %>%
   filter(report_date < as.Date("2021-04-17") | report_date >= as.Date("2021-04-24"))
 
@@ -28,7 +29,7 @@ state_values <- list(
     max(),
   peak_x = -80, # 0
   peak_y = 140, # 400
-  current_x = -90, # -105
+  current_x = -100, # -105
   current_y = 4000, # 1000
   current_display = TRUE
 )
@@ -55,7 +56,7 @@ stl_values <- list(
     max(),
   peak_x = -100, 
   peak_y = 500, 
-  current_x = -145, 
+  current_x = -155, 
   current_y = -1000,
   current_display = TRUE
 )
@@ -82,7 +83,7 @@ kc_values <- list(
     max(),
   peak_x = -105, 
   peak_y = 1200, 
-  current_x = -145, 
+  current_x = -155, 
   current_y = -1000,
   current_display = TRUE
 )
@@ -109,7 +110,7 @@ os_values <- list(
     max(),
   peak_x = -70, 
   peak_y = 200, 
-  current_x = -145, 
+  current_x = -155, 
   current_y = -1000,
   current_display = TRUE
 )

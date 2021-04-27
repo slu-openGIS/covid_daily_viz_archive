@@ -54,6 +54,7 @@ save_plots(filename = "results/low_res/metro/b_case_rate.png", plot = p, preset 
 
 ## subset data
 metro_subset <- filter(metro_data, report_date >= values$plot_date) %>%
+  filter(report_date < as.Date("2021-01-11") | report_date >= as.Date("2021-01-18")) %>%
   filter(report_date < as.Date("2021-03-08") | report_date >= as.Date("2021-03-15")) %>%
   filter(report_date < as.Date("2021-04-17") | report_date >= as.Date("2021-04-24"))
 
