@@ -24,15 +24,15 @@ regional_count <- function(.data, region, point_data, state_data, region_data, p
     geom_point(data = point_data, mapping = aes(x = report_date, y = case_avg, color = factor_var), 
                size = 4, show.legend = FALSE) +
     geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8) +
-    geom_text_repel(data = label, mapping = aes(x = report_date, y = y_val, label = text),
+    geom_label_repel(data = label, mapping = aes(x = report_date, y = y_val, label = text),
                     nudge_y = 100, nudge_x = -70, size = 5) +
     geom_point(data = state_data$peak_tbl, mapping = aes(x = report_date, y = case_avg), 
                size = 4, shape = 16) +
     geom_point(data = region_data$peak_tbl, mapping = aes(x = report_date, y = case_avg), 
                size = 4, shape = 16) +
-    geom_text_repel(data = state_data$peak_tbl, mapping = aes(x = report_date, y = case_avg, label = text),
+    geom_label_repel(data = state_data$peak_tbl, mapping = aes(x = report_date, y = case_avg, label = text),
                     nudge_y = state_data$peak_y, nudge_x = state_data$peak_x, size = 5) +
-    geom_text_repel(data = region_data$peak_tbl, mapping = aes(x = report_date, y = case_avg, label = text),
+    geom_label_repel(data = region_data$peak_tbl, mapping = aes(x = report_date, y = case_avg, label = text),
                     nudge_y = region_data$peak_y, nudge_x = region_data$peak_x, size = 5) +
     scale_color_manual(values = palette, name = "Region") +
     scale_y_continuous(limits = c(0, state_data$top_val), breaks = seq(0, state_data$top_val, by = 500)) +
@@ -49,13 +49,13 @@ regional_count <- function(.data, region, point_data, state_data, region_data, p
   
   # add current points
   if (state_data$current_display == TRUE){
-    p <- p + geom_text_repel(data = state_data$current_tbl, 
+    p <- p + geom_label_repel(data = state_data$current_tbl, 
                              mapping = aes(x = report_date, y = case_avg, label = text), 
                              nudge_y = state_data$current_y, nudge_x = state_data$current_x, size = 5) 
   }
   
   if (region_data$current_display == TRUE){
-    p <- p + geom_text_repel(data = region_data$current_tbl, 
+    p <- p + geom_label_repel(data = region_data$current_tbl, 
                              mapping = aes(x = report_date, y = case_avg, label = text), 
                              nudge_y = region_data$current_y, nudge_x = region_data$current_x, size = 5)   
   }
