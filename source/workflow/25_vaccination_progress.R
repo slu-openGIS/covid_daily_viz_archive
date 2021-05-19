@@ -69,5 +69,31 @@ rm(p)
 
 # =============================================================================
 
+covid_totals %>%
+  mutate(initiated_pct = initiated/sum(initiated)) %>%
+  mutate(completed_pct = completed/sum(completed)) %>%
+  select(category, initiated_pct, completed_pct) %>%
+  pivot_longer(cols = c("initiated_pct", "completed_pct"), 
+               names_to = "value", values_to = "pct") %>%
+  mutate(value = ifelse(value == "initiated_pct", "Initiated", "Completed")) %>%
+  mutate(label = paste0(as.character(round(pct*100, digits = 0)), "%")) -> covid_totals_pct
 
+covid_totals %>% 
+  pivot_longer(cols = c("initiated", "completed"), names_to = "value", values_to = "count") %>%
+  mutate(value = ifelse(value == "initiated", "Initiated", "Completed")) -> covid_totals_long
 
+left_join(covid_totals_long, covid_totals_pct, by = c("category", "value")) %>%
+  mutate(category = fct_relevel(category,"Unknown or Out-of-state Jurisdiction", "Missouri, Unknown Jurisdiction", "Missouri, Known Jurisdiction")) -> covid_totals_long
+
+p <- ggplot(covid_totals_long, mapping = aes(y = value, x = count, fill = category)) +
+  geom_col() +
+  geom_text(mapping = aes(label = label), show.legend = FALSE) + 
+  labs(
+    title = "Vaccination ",
+    subtitle = paste0("Current as of ", as.character(date)),
+    x = "",
+    y = "",
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the State of Missouri"
+  ) +
+  theme(legend.position="bottom") +
+  guides(fill = guide_legend(nrow = 3,byrow = TRUE))
