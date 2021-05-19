@@ -1,19 +1,22 @@
 
 # load data
-initiated <-  read_csv("data/MO_HEALTH_Covid_Tracking/data/individual/mo_vaccine_race_rates.csv")
-totals <- read_csv(paste0("data/MO_HEALTH_Covid_Tracking/data/source/mo_daily_vaccines/mo_total_vaccines_",
-                          as.character(date), ".csv"))
 pop <- read_csv("data/MO_HEALTH_Covid_Tracking/data/source/state_pop.csv")
 
 # =============================================================================
 
 ## tidy values
-complete <- totals %>%
-  select(complete) %>%
+complete <- covid_totals %>%
+  filter(category %in% c("Unknown or Out-of-state Jurisdiction") == FALSE) %>%
+  group_by(report_date) %>%
+  summarise(total = sum(completed)) %>%
+  select(total) %>%
   pull()
 
-initiated <- totals %>%
-  select(initiated) %>%
+initiated <- covid_totals %>%
+  filter(category %in% c("Unknown or Out-of-state Jurisdiction") == FALSE) %>%
+  group_by(report_date) %>%
+  summarise(total = sum(initiated)) %>%
+  select(total) %>%
   pull()
 
 pop <- pop %>%
@@ -33,7 +36,7 @@ pct <- mutate(pct, subvalue = fct_relevel(subvalue, "Remaining", "Complete"))
 pct <- mutate(pct, value = str_wrap(value, width = 12))
 
 # clean-up
-rm(complete, initiated, pop, totals)
+rm(complete, initiated, pop)
 
 # =============================================================================
 
@@ -52,7 +55,7 @@ p <- ggplot(pct, mapping = aes(y = value, x = pct, fill = subvalue)) +
     subtitle = paste0("Current as of ", as.character(date)),
     x = "",
     y = "",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via the State of Missouri"
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the State of Missouri\nThis plot represents the most conservative view of vaccination progress by including only those\n    with known Missouri addresses."
   ) +
   sequoia_theme(base_size = 22, background = "white")
 
@@ -63,4 +66,8 @@ ggsave(filename = "results/low_res/state/r_vaccine_compare.png", plot = p,
 
 rm(pct)
 rm(p)
+
+# =============================================================================
+
+
 

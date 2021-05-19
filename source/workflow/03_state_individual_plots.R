@@ -111,33 +111,43 @@ rm(top_val, p)
 
 # load data
 covid_race <-  read_csv("data/MO_HEALTH_Covid_Tracking/data/individual/mo_vaccine_race_rates.csv")
+covid_totals <- read_csv(paste0("data/MO_HEALTH_Covid_Tracking/data/source/mo_daily_vaccines/",
+                                "mo_total_vaccines_", date, ".csv"))
 
 # =============================================================================
 
 missing <- list(
-  initiated_unkn = covid_race %>%
-    filter(value == "Unknown") %>%
+  initiated_race = covid_race %>%
+    filter(value == "Unknown, Race") %>%
     select(initiated) %>%
     pull(),
-  initiated_total = covid_race %>%
-    filter(value %in% c("Latino") == FALSE) %>%
-    group_by(geoid) %>%
+  initiated_latino = covid_race %>%
+    filter(value == "Unknown, Ethnicity") %>%
+    select(initiated) %>%
+    pull(),
+  initiated_total = covid_totals %>%
+    filter(category %in% c("Unknown or Out-of-state Jurisdiction") == FALSE) %>%
+    group_by(report_date) %>%
     summarise(total = sum(initiated)) %>%
     select(total) %>%
     pull(),
-  completed_unkn = covid_race %>%
-    filter(value == "Unknown") %>%
+  completed_race = covid_race %>%
+    filter(value == "Unknown, Race") %>%
     select(completed) %>%
     pull(),
-  completed_total = covid_race %>%
-    filter(value %in% c("Latino") == FALSE) %>%
-    group_by(geoid) %>%
+  completed_latino = covid_race %>%
+    filter(value == "Unknown, Ethnicity") %>%
+    select(completed) %>%
+    pull(),
+  completed_total = covid_totals %>%
+    filter(category %in% c("Unknown or Out-of-state Jurisdiction") == FALSE) %>%
+    group_by(report_date) %>%
     summarise(total = sum(completed)) %>%
     select(total) %>%
     pull()
 )
 
-covid_race <- filter(covid_race, value %in% c("Unknown", "Two or More") == FALSE)
+covid_race <- filter(covid_race, value %in% c("Unknown, Ethnicity", "Unknown, Race", "Other Race", "Two or More") == FALSE)
 
 # =============================================================================
 
@@ -166,7 +176,8 @@ p <- ggplot(data = covid_race, mapping = aes(x = reorder(value, -initiated_rate)
         x = "Race",
         y = "Vaccinations per 100,000 Individuals",
         caption = paste0("Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the U.S. Census Bureau",
-                         "\nStatewide, ", round(missing$initiated_unkn/missing$initiated_total*100, 2),"% of race data are missing")) +
+                         "\nStatewide, ", round(missing$initiated_race/missing$initiated_total*100, 2),"% of race data and ",
+                         round(missing$initiated_latino/missing$initiated_total*100, 2), "% of ethnicity data are missing")) +
       sequoia_theme(base_size = 22, background = "white", map = FALSE)
 
 ## save plot
@@ -191,7 +202,8 @@ p <- ggplot(data = covid_race, mapping = aes(x = reorder(value, -completed_rate)
     x = "Race",
     y = "Vaccinations per 100,000 Individuals",
     caption = paste0("Plot by Christopher Prener, Ph.D.\nData via the State of Missouri and the U.S. Census Bureau",
-                     "\nStatewide, ", round(missing$completed_unkn/missing$completed_total*100, 2),"% of race data are missing")) +
+                     "\nStatewide, ", round(missing$completed_race/missing$completed_total*100, 2),"% of race data and ",
+                     round(missing$completed_latino/missing$completed_total*100, 2), "% of ethnicity data are missing")) +
   sequoia_theme(base_size = 22, background = "white", map = FALSE)
 
 ## save plot
