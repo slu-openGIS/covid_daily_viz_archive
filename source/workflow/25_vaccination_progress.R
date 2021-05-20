@@ -82,18 +82,43 @@ covid_totals %>%
   pivot_longer(cols = c("initiated", "completed"), names_to = "value", values_to = "count") %>%
   mutate(value = ifelse(value == "initiated", "Initiated", "Completed")) -> covid_totals_long
 
-left_join(covid_totals_long, covid_totals_pct, by = c("category", "value")) %>%
-  mutate(category = fct_relevel(category,"Unknown or Out-of-state Jurisdiction", "Missouri, Unknown Jurisdiction", "Missouri, Known Jurisdiction")) -> covid_totals_long
+initiated_label <- paste0("Initiated Vaccinations (n = ", formatC(sum(covid_totals$initiated), format="d", big.mark=","), ")")
+completed_label <- paste0("Completed Vaccinations (n = ", formatC(sum(covid_totals$completed), format="d", big.mark=","), ")")
 
-p <- ggplot(covid_totals_long, mapping = aes(y = value, x = count, fill = category)) +
-  geom_col() +
-  geom_text(mapping = aes(label = label), show.legend = FALSE) + 
+left_join(covid_totals_long, covid_totals_pct, by = c("category", "value")) %>%
+  mutate(category = fct_relevel(category,"Unknown or Out-of-state Jurisdiction", "Missouri, Unknown Jurisdiction", "Missouri, Known Jurisdiction")) %>%
+  mutate(value = ifelse(value == "Initiated", initiated_label, completed_label)) %>%
+  mutate(value = fct_relevel(value, initiated_label, completed_label)) -> covid_totals_long
+
+
+
+p <- covid_totals_long %>%
+  mutate(count_2 = round_any(count/10000, accuracy = 1, f = ceiling)) %>%
+  ggplot(., aes(fill=category, values=count_2)) +
+  geom_waffle(color = "white", size=.75, n_rows = 6) +
+  scale_fill_manual(values = c(brewer.pal(n = 5, name = "Reds")[2],
+                               brewer.pal(n = 5, name = "Purples")[2], 
+                               brewer.pal(n = 5, name = "Purples")[5]), 
+                    name = "Geography") +
+  facet_wrap(~value, ncol=1)  +
+  scale_x_discrete(expand=c(0,0)) +
+  scale_y_discrete(expand=c(0,0)) +
+  coord_equal() +
   labs(
-    title = "Vaccination ",
-    subtitle = paste0("Current as of ", as.character(date)),
-    x = "",
-    y = "",
-    caption = "Plot by Christopher Prener, Ph.D.\nData via the State of Missouri"
+    title = "Geographic Breakdown of Missouri Vaccination Counts",
+    subtitle = paste0("Current as of ", as.character(date),"\nEach box is equivalent to 10,000 individuals"),
+    caption = "Plot by Christopher Prener, Ph.D.\nData via the State of Missouri\nThis plot does not capture Missouri residents who recieve vaccinations in another state or who recieve vaccinations at a Federal\n    facility such as a Veterans Administration hospital or clinic.\nCounts are rounded up to the nearest 10,000 individuals to generate boxes for this plot.\nMissouri, Unknown jurisdiction refers to partially complete addresses where Missouri was listed for state.\nUnknown jurisdiction refers to vaccinations where no address was provided."
   ) +
-  theme(legend.position="bottom") +
-  guides(fill = guide_legend(nrow = 3,byrow = TRUE))
+  sequoia_theme(base_size = 22, background = "white", legend_size = 1) +
+  theme(
+    legend.position = "bottom",
+    legend.justification = "left"
+  ) +
+  guides(fill = guide_legend(nrow = 1, byrow = TRUE, reverse = TRUE))
+
+save_plots(filename = "results/high_res/state/s_vaccine_geography.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/state/s_vaccine_geography.png", plot = p, preset = "lg", dpi = 72)
+
+# =============================================================================
+
+rm(p, covid_totals, covid_totals_long, covid_totals_pct, initiated_label, completed_label)
