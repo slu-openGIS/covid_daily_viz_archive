@@ -112,7 +112,10 @@ p <- covid_totals_long %>%
   sequoia_theme(base_size = 22, background = "white", legend_size = 1) +
   theme(
     legend.position = "bottom",
-    legend.justification = "left"
+    legend.justification = "left",
+    strip.background = element_rect(fill="white"),
+    strip.text = element_text(angle = 0, hjust = 0),
+    panel.spacing = unit(2, "lines")
   ) +
   guides(fill = guide_legend(nrow = 1, byrow = TRUE, reverse = TRUE))
 

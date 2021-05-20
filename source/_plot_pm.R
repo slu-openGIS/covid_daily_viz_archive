@@ -46,6 +46,7 @@ library(sf)             # mapping tools
 ### other packages
 library(ggrepel)        # map labeling
 library(RColorBrewer)   # color palettes
+library(waffle)         # waffle plot
 
 ## functions
 source("source/functions/get_coords.R")        # convert sf geometry to x,y columns
