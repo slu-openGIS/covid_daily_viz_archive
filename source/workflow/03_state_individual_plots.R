@@ -126,7 +126,7 @@ missing <- list(
     select(initiated) %>%
     pull(),
   initiated_total = covid_totals %>%
-    filter(category %in% c("Unknown or Out-of-state Jurisdiction") == FALSE) %>%
+    filter(category %in% c("No Address Given", "Out-of-State") == FALSE) %>%
     group_by(report_date) %>%
     summarise(total = sum(initiated)) %>%
     select(total) %>%
@@ -140,7 +140,7 @@ missing <- list(
     select(completed) %>%
     pull(),
   completed_total = covid_totals %>%
-    filter(category %in% c("Unknown or Out-of-state Jurisdiction") == FALSE) %>%
+    filter(category %in% c("No Address Given", "Out-of-State") == FALSE) %>%
     group_by(report_date) %>%
     summarise(total = sum(completed)) %>%
     select(total) %>%
