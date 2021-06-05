@@ -13,13 +13,22 @@
 
 <title>Health Disparities</title>
 
-<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -45,11 +54,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -62,32 +66,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
@@ -99,10 +77,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -119,40 +93,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -180,7 +127,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -192,7 +139,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -203,10 +150,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -218,7 +178,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -344,7 +303,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -399,7 +358,7 @@ div.tocify {
   </script>
 </head>
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -424,8 +383,8 @@ div.tocify {
 </div>
 <div id="data-table" class="section level3">
 <h3>Data Table</h3>
-<div id="htmlwidget-2db50092fe62069c4a54" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2db50092fe62069c4a54">{"x":{"filter":"none","data":[["White","Black","Native","Asian","Pacific Islander","Two or More","Unknown Race","Latino","Unknown Ethnicity"],[247210,42995,958,4318,20,105,98221,16780,174723],[4935.97,6099.51,3554.23,3699.63,304.25,67.52,null,6736.19,null],[4325,900,12,56,1,0,432,145,1274],[86.35,127.69,43.48,47.69,10.99,0,null,58.21,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Identity<\/th>\n      <th>Estimated Cases<\/th>\n      <th>Cases Per Capita<\/th>\n      <th>Estimated Deaths<\/th>\n      <th>Deaths Per Capita<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9701a633f4ed3e7ff6f1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9701a633f4ed3e7ff6f1">{"x":{"filter":"none","data":[["White","Black","Native","Asian","Pacific Islander","Two or More","Unknown Race","Latino","Unknown Ethnicity"],[247364,43030,959,4316,20,105,98061,16784,174474],[4939.03,6104.43,3557.22,3697.45,303.95,67.45,null,6737.61,null],[4324,901,12,56,1,0,432,146,1275],[86.34,127.78,43.44,47.64,10.98,0,null,58.45,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Identity<\/th>\n      <th>Estimated Cases<\/th>\n      <th>Cases Per Capita<\/th>\n      <th>Estimated Deaths<\/th>\n      <th>Deaths Per Capita<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="notes" class="section level3">
 <h3>Notes</h3>
@@ -454,8 +413,8 @@ div.tocify {
 </div>
 <div id="data-table-1" class="section level3">
 <h3>Data Table</h3>
-<div id="htmlwidget-85a1d6280f15ae104122" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-85a1d6280f15ae104122">{"x":{"filter":"none","data":[["Pacific Islander","Asian","Latino","White","Black","Native","Other Race","Unknown, Ethnicity","Unknown, Race"],[3653,52408,90740,1553894,166146,3758,63420,390217,310141],[54833,44901,36426,31026,23570,13943,null,null,null],[2789,37928,69345,1309324,126674,2753,49137,324718,265586],[41864,32495,27838,26143,17971,10214,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Identity<\/th>\n      <th>Cumulative Initiated Vaccinations<\/th>\n      <th>Initiated Rate per 1,000<\/th>\n      <th>Cumulative Completed Vaccinations<\/th>\n      <th>Completed Rate per 1,000<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-afb440c75415009f9b7c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-afb440c75415009f9b7c">{"x":{"filter":"none","data":[["Pacific Islander","Asian","Latino","White","Black","Native","Other Race","Unknown, Ethnicity","Unknown, Race"],[3664,52621,91241,1558490,167078,3771,63673,390796,310471],[54998,45083,36628,31118,23703,13992,null,null,null],[2797,38123,69782,1314549,127613,2770,49351,325467,266163],[41984,32662,28013,26247,18104,10278,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Identity<\/th>\n      <th>Cumulative Initiated Vaccinations<\/th>\n      <th>Initiated Rate per 1,000<\/th>\n      <th>Cumulative Completed Vaccinations<\/th>\n      <th>Completed Rate per 1,000<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="st.-louis" class="section level2 padtop">
@@ -476,8 +435,8 @@ div.tocify {
 </div>
 <div id="data-table-2" class="section level4">
 <h4>Data Table</h4>
-<div id="htmlwidget-e352aa9a57d903eff909" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e352aa9a57d903eff909">{"x":{"filter":"none","data":[["St. Louis","St. Louis","St. Louis","St. Louis","St. Louis","St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City"],["Asian","Black","Two or More","White","Latino","Black","Asian","White","Two or More","Native","Latino"],[1736,20504,1802,43435,2350,7385,345,5257,59,28,827],[41.73,85.32,76.22,63.6,83.03,50.56,34.17,36.52,8.36,38.25,66.89],[null,627,null,1551,null,286,8,159,null,null,null],[null,2.61,null,2.27,null,1.96,0.79,1.1,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>County<\/th>\n      <th>Identity<\/th>\n      <th>Cumulative Cases<\/th>\n      <th>Cases Per Capita<\/th>\n      <th>Cumulative Deaths<\/th>\n      <th>Deaths Per Capita<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f45daccd699f3bc42d9b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f45daccd699f3bc42d9b">{"x":{"filter":"none","data":[["St. Louis","St. Louis","St. Louis","St. Louis","St. Louis","St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City"],["Asian","Black","Two or More","White","Latino","Black","Asian","White","Two or More","Native","Latino"],[1741,20550,1802,43453,2355,7385,345,5257,59,28,827],[41.85,85.51,76.22,63.62,83.21,50.56,34.17,36.52,8.36,38.25,66.89],[null,627,null,1551,null,286,8,159,null,null,null],[null,2.61,null,2.27,null,1.96,0.79,1.1,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>County<\/th>\n      <th>Identity<\/th>\n      <th>Cumulative Cases<\/th>\n      <th>Cases Per Capita<\/th>\n      <th>Cumulative Deaths<\/th>\n      <th>Deaths Per Capita<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="notes-1" class="section level4">
 <h4>Notes</h4>
@@ -502,8 +461,8 @@ div.tocify {
 </div>
 <div id="data-table-3" class="section level4">
 <h4>Data Table</h4>
-<div id="htmlwidget-7615ad4759f5415e25e6" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7615ad4759f5415e25e6">{"x":{"filter":"none","data":[["St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City"],["Female","Male","Female","Male","Female","Male"],["Black","Black","Asian","Asian","White","White"],[4209,3156,172,171,2744,2496],[53.27,47.07,33.83,34.12,38.67,34.2],[141,145,null,6,63,96],[1.78,2.16,null,1.2,0.89,1.32]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>County<\/th>\n      <th>Gender<\/th>\n      <th>Identity<\/th>\n      <th>Cumulative Cases<\/th>\n      <th>Cases Per Capita<\/th>\n      <th>Cumulative Deaths<\/th>\n      <th>Deaths Per Capita<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d9b77db321e3dbbcb0e9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d9b77db321e3dbbcb0e9">{"x":{"filter":"none","data":[["St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City","St. Louis City"],["Female","Male","Female","Male","Female","Male"],["Black","Black","Asian","Asian","White","White"],[4209,3156,172,171,2744,2496],[53.27,47.07,33.83,34.12,38.67,34.2],[141,145,null,6,63,96],[1.78,2.16,null,1.2,0.89,1.32]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>County<\/th>\n      <th>Gender<\/th>\n      <th>Identity<\/th>\n      <th>Cumulative Cases<\/th>\n      <th>Cases Per Capita<\/th>\n      <th>Cumulative Deaths<\/th>\n      <th>Deaths Per Capita<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="notes-2" class="section level4">
 <h4>Notes</h4>
@@ -548,7 +507,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

@@ -115,7 +115,7 @@ pre %>%
 
 #### Interactive Plot
 
-```{r excess-mortality-us, echo=FALSE, out.width = '100%'}
+```{r excess-mortality-us, echo=FALSE, out.width = '100%', eval = FALSE}
 #### Historical Data from: CDC wonder and NVSS = 1999 through 2019
 df<-read.csv(here::here("data", "totaldeaths_timeseries.csv"))
 df$date<-format(as.Date(paste("1", substr(df$Month.Code, start=6, stop=8), substr(df$Month.Code, start=1, stop=4), sep = "-"), format = "%d-%m-%Y"), "%Y-%m")

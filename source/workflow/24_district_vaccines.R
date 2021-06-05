@@ -60,13 +60,13 @@ save_plots(filename = "results/low_res/district/b_vaccine_complete.png", plot = 
 # plot completed dose rates
 
 ## define top_val
-top_val <- round_any(x = max(district$last7_rate, na.rm = TRUE), accuracy = 5, f = ceiling)
+top_val <- round_any(x = max(district$last7_rate, na.rm = TRUE), accuracy = 2, f = ceiling)
 
 ## create plot
 p <- ggplot(data = district, mapping = aes(x = reorder(district, -last7_rate), y = last7_rate)) +
   geom_bar(position = "dodge", stat = "identity", width = .65, show.legend = FALSE,
            fill = RColorBrewer::brewer.pal(4, "Set1")[4]) +
-  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 5)) +
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 2)) +
   labs(
     title = "New Vaccinations by MO Highway Patrol District",
     subtitle = paste0("Current as of ", as.character(date)),
