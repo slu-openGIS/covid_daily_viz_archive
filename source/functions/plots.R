@@ -67,7 +67,7 @@ regional_count <- function(.data, region, point_data, state_data, region_data, p
 
 # state/county plot e - facet rate ####
 
-facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_upper_limit, highlight, plot_date, date, title, caption){
+facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_upper_limit, highlight, plot_date, date, title, caption, last3 = FALSE){
   
   # create name
   if (type == "metro" | type == "metro HHS"){
@@ -154,10 +154,16 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
     caption_string <- paste0(caption,"\nVertical line represents addition of antigen test data for most Missouri counties on 2021-03-08")
   }
   
+  if (last3 == FALSE){
+    date_label_val <- "%b"
+  } else if (last3 == TRUE){
+    date_label_val <- "%d %b"
+  }
+  
   # finish plot
   p <- p +
     scale_colour_manual(values = pal, name = scale_name) +
-    scale_x_date(date_breaks = x_breaks, date_labels = "%b") +
+    scale_x_date(date_breaks = x_breaks, date_labels = date_label_val) +
     scale_y_continuous(limits = c(0,y_upper_limit), breaks = seq(0, y_upper_limit, by = y_breaks)) + 
     labs(
       title = title,
@@ -177,53 +183,53 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
     
     if (subtype == "Southeast"){
       p <- p + labs(
-        subtitle = paste0("Southeast Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+        subtitle = paste0("Southeast Missouri Focus\n",as.character(plot_date), 
+                          " through ", as.character(date))
       )
     } else if (subtype == "Mid-Missouri"){
       p <- p + labs(
-        subtitle = paste0("Mid-Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+        subtitle = paste0("Mid-Missouri Focus\n",as.character(plot_date), 
+                          " through ", as.character(date))
       )
     } else if (subtype == "St. Joseph"){
       p <- p + labs(
-        subtitle = paste0("St. Joseph and Northwestern Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+        subtitle = paste0("St. Joseph and Northwestern Missouri Focus\n",as.character(plot_date), 
+                          " through ", as.character(date))
       )
     } else if (subtype == "Northern"){
       p <- p + labs(
-        subtitle = paste0("Northern Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+        subtitle = paste0("Northern Missouri Focus\n",as.character(plot_date), 
+                          " through ", as.character(date))
       )
     } else if (subtype == "Ozark"){
       p <- p + labs(
-        subtitle = paste0("Lake of the Ozarks and South-Central Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+        subtitle = paste0("Lake of the Ozarks and South-Central Missouri Focus\n",as.character(plot_date), 
+                          " through ", as.character(date))
       )
     } else if (subtype == "Southwest"){
       p <- p + labs(
-        subtitle = paste0("Southwest Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+        subtitle = paste0("Southwest Missouri Focus\n",as.character(plot_date), 
+                          " through ", as.character(date))
       )
     } else if (subtype == "Cape"){
       p <- p + labs(
-        subtitle = paste0("Cape Girardeau Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+        subtitle = paste0("Cape Girardeau Focus\n",as.character(plot_date), 
+                          " through ", as.character(date))
       )
     } else if (subtype == "West-Central"){
       p <- p + labs(
-        subtitle = paste0("West-Central Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+        subtitle = paste0("West-Central Missouri Focus\n",as.character(plot_date), 
+                          " through ", as.character(date))
       )
     } else if (subtype == "Springfield"){
       p <- p + labs(
-        subtitle = paste0("Springfield Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+        subtitle = paste0("Springfield Focus\n",as.character(plot_date), 
+                          " through ", as.character(date))
       )
     } else if (subtype == "Ozark Mountains"){
       p <- p + labs(
-        subtitle = paste0("Ozark Mountains Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+        subtitle = paste0("Ozark Mountains Focus\n",as.character(plot_date), 
+                          " through ", as.character(date))
       )
     } else if (subtype == "Kansas City"){
       p <- p + labs(
@@ -231,8 +237,8 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
       )
     } else if (subtype == "Northeastern"){
       p <- p + labs(
-        subtitle = paste0("Northeastern Missouri Focus\n",as.character(values$plot_date), 
-                          " through ", as.character(values$date))
+        subtitle = paste0("Northeastern Missouri Focus\n",as.character(plot_date), 
+                          " through ", as.character(date))
       )
     }
     
