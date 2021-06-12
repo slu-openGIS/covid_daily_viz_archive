@@ -72,7 +72,7 @@ county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0,
 ## modify Livingston and Sullivan counties
 county_subset <- mutate(county_subset,
                         case_avg_rate = ifelse(geoid == 29117 & 
-                                                 (report_date == "2020-09-05" | report_date == "2020-09-10"), 200, case_avg_rate),
+                                                 (report_date == "2020-09-05" | report_date == "2020-09-10"), 225, case_avg_rate),
                                                  # (report_date == "2020-09-04" | report_date == "2020-09-10"), 160, case_avg_rate),
                         case_avg_rate = ifelse(geoid == 29117 & 
                                                  (report_date >= "2020-09-06" & report_date <= "2020-09-09"), NA, case_avg_rate)
@@ -113,7 +113,7 @@ p <- facet_rate(county_subset,
                 plot_date = values$plot_date,
                 date = values$date,
                 title = "Pace of New COVID-19 Cases in Select Missouri Counties",
-                caption = values$caption_text_census)
+                caption = paste0(values$caption_text_census,"\nValues above 225 for Livingston county truncated to increase readability"))
 
 # paste0(values$caption_text_census,"\nValues above 160 for Livingston and Sullivan counties truncated to increase readability")
 
