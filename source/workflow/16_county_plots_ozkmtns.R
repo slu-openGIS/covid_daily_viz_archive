@@ -10,15 +10,16 @@ county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.c
 # =============================================================================
 
 # define cols object
-cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2], 
+cols <- c("St. Louis" = values$pal[2], 
           "Kansas City" = values$pal[3], "Ozark" = values$pal[4], 
           "Howell" = values$pal[5], "Texas" = values$pal[6], 
           "Wright" = values$pal[7], "Shannon" = values$pal[8],
           "Carter" = values$pal[9], "Ripley" = values$pal[10],
-          "Reynolds" = values$pal[11], "Oregon" = values$pal[12])
+          "Reynolds" = values$pal[11], "Oregon" = values$pal[12],
+          "Douglas" = values$pal[13])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", regional_geoids$ozark_mtns)
+county_focal <- c("29189", "29511", regional_geoids$ozark_mtns)
 
 # =============================================================================
 
@@ -82,8 +83,8 @@ top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accurac
 
 ## re-order counties
 counties <- unique(county_subset$county)
-unique_counties <- counties[!counties %in% c("Kansas City", "St. Louis", "St. Louis City")]
-unique_counties <- c(unique_counties, c("Kansas City", "St. Louis", "St. Louis City"))
+unique_counties <- counties[!counties %in% c("Kansas City", "St. Louis")]
+unique_counties <- c(unique_counties, c("Kansas City", "St. Louis"))
 
 county_subset <- mutate(county_subset, county_fct = fct_relevel(county, unique_counties))
 

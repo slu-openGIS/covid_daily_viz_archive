@@ -10,15 +10,16 @@ county_data <- read_csv("data/MO_HEALTH_Covid_Tracking/data/county/county_full.c
 # =============================================================================
 
 # define cols
-cols <- c("St. Louis City" = values$pal[1], "St. Louis" = values$pal[2], 
+cols <- c("St. Louis" = values$pal[2], 
           "Kansas City" = values$pal[3], "Sullivan" = values$pal[4], 
           "Adair" = values$pal[5], "Grundy" = values$pal[6], 
           "Macon" = values$pal[7], "Randolph" = values$pal[8], 
           "Linn" = values$pal[9], "Schuyler" = values$pal[10], 
-          "Livingston" = values$pal[11], "Putnam" = values$pal[12])
+          "Livingston" = values$pal[11], "Putnam" = values$pal[12],
+          "Mercer" = values$pal[13])
 
 # define focal metros
-county_focal <- c("29510", "29189", "29511", regional_geoids$nomo)
+county_focal <- c("29189", "29511", regional_geoids$nomo)
 
 # =============================================================================
 
@@ -91,8 +92,8 @@ top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accurac
 
 ## re-order counties
 counties <- unique(county_subset$county)
-unique_counties <- counties[!counties %in% c("Kansas City", "St. Louis", "St. Louis City")]
-unique_counties <- c(unique_counties, c("Kansas City", "St. Louis", "St. Louis City"))
+unique_counties <- counties[!counties %in% c("Kansas City", "St. Louis")]
+unique_counties <- c(unique_counties, c("Kansas City", "St. Louis"))
 
 county_subset <- mutate(county_subset, county_fct = fct_relevel(county, unique_counties))
 
@@ -137,8 +138,8 @@ top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accurac
 
 ## re-order counties
 counties <- unique(county_subset$county)
-unique_counties <- counties[!counties %in% c("Kansas City", "St. Louis", "St. Louis City")]
-unique_counties <- c(unique_counties, c("Kansas City", "St. Louis", "St. Louis City"))
+unique_counties <- counties[!counties %in% c("Kansas City", "St. Louis")]
+unique_counties <- c(unique_counties, c("Kansas City", "St. Louis"))
 
 county_subset <- mutate(county_subset, county_fct = fct_relevel(county, unique_counties))
 
