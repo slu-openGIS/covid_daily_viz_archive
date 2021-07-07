@@ -28,7 +28,7 @@ metro_hosp <- mutate(metro_hosp, factor_var = fct_reorder2(short_name, report_da
 p <- facet_rate(metro_hosp, 
                 type = "metro HHS", 
                 pal = cols, 
-                x_breaks = values$date_breaks,
+                x_breaks = values$date_breaks_hosp,
                 y_breaks = 50,
                 y_upper_limit = top_val,
                 highlight = unique(metro_hosp$geoid),

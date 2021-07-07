@@ -28,6 +28,7 @@ values <- list(
   
   plot_date = "2020-03-10",
   date_breaks = "1 month",
+  date_breaks_hosp = "2 months",
   date_breaks_long = "1 month",
   date_breaks_log = 20,
   date_breaks_facet = "3 months",

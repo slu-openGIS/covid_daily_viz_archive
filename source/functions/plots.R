@@ -151,7 +151,13 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
     caption_string <- caption
   } else if (type != "metro HHS"){
     y_string <- "7-Day Average Rate per 100,000"
-    caption_string <- paste0(caption,"\nVertical line represents addition of antigen test data for most Missouri counties on 2021-03-08")
+    
+    if (last3 == FALSE){
+      caption_string <- paste0(caption,"\nVertical line represents addition of antigen test data for most Missouri counties on 2021-03-08")
+    } else if (last3 == TRUE){
+      caption_string <- caption
+    }
+    
   }
   
   if (last3 == FALSE){
@@ -242,6 +248,10 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
       )
     }
     
+  }
+  
+  if (last3 == TRUE){
+    p <- p + labs(subtitle = paste0(p$labels$subtitle, " (Last Three Weeks)"))
   }
   
   # add facet

@@ -138,7 +138,7 @@ county_subset <- filter(county_data, report_date >= values$date-20) %>%
 county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
 
 ## define top_val
-top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 25, f = ceiling)
+top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 20, f = ceiling)
 
 ## re-order counties
 counties <- unique(county_subset$county)
@@ -157,8 +157,8 @@ p <- facet_rate(county_subset,
                 type = "county", 
                 subtype = "Northern",
                 pal = cols, 
-                x_breaks = "1 week",
-                y_breaks = 25,
+                x_breaks = "7 days",
+                y_breaks = 20,
                 y_upper_limit = top_val,
                 highlight = county_focal,
                 plot_date = values$date-20,
@@ -168,8 +168,8 @@ p <- facet_rate(county_subset,
                 last3 = TRUE)
 
 ## save plot
-save_plots(filename = "results/high_res/county_nomo/e_new_case_last14.png", plot = p, preset = "lg")
-save_plots(filename = "results/low_res/county_nomo/e_new_case_last14.png", plot = p, preset = "lg", dpi = 72)
+save_plots(filename = "results/high_res/county_nomo/e_new_case_last21.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/county_nomo/e_new_case_last21.png", plot = p, preset = "lg", dpi = 72)
 
 # =============================================================================
 
