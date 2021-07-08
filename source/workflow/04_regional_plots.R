@@ -83,7 +83,7 @@ kc_values <- list(
     max(),
   peak_x = -105, 
   peak_y = 1200, 
-  current_x = -240, 
+  current_x = -250, 
   current_y = -1000,
   current_display = TRUE
 )
