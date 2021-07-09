@@ -25,7 +25,7 @@ regional_count <- function(.data, region, point_data, state_data, region_data, p
                size = 4, show.legend = FALSE) +
     geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8) +
     geom_label_repel(data = label, mapping = aes(x = report_date, y = y_val, label = text),
-                    nudge_y = 100, nudge_x = -70, size = 5) +
+                    nudge_y = 100, nudge_x = -85, size = 5) +
     geom_point(data = state_data$peak_tbl, mapping = aes(x = report_date, y = case_avg), 
                size = 4, shape = 16) +
     geom_point(data = region_data$peak_tbl, mapping = aes(x = report_date, y = case_avg), 
@@ -324,7 +324,7 @@ cumulative_rate <- function(.data, point_data, type, subtype = NULL, plot_values
   p <- p + 
     geom_vline(xintercept = as.Date("2021-03-08"), lwd = .8) +
     geom_text_repel(data = label, mapping = aes(x = report_date, y = y_val, label = text),
-                    nudge_y = 100, nudge_x = -140, size = 5) +
+                    nudge_y = 100, nudge_x = -160, size = 5) +
     scale_colour_manual(values = pal, name = scale_name) +
     scale_x_date(date_breaks = plot_values$date_breaks, date_labels = "%b") +
     scale_y_continuous(limits = c(0,y_upper_limit), breaks = seq(0, y_upper_limit, by = plot_values$county_rate_val)) + 
