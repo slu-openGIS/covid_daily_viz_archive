@@ -30,7 +30,7 @@ values <- list(
   date_breaks = "1 month",
   date_breaks_hosp = "2 months",
   date_breaks_long = "1 month",
-  date_breaks_log = 20,
+  date_breaks_log = 50,
   date_breaks_facet = "3 months",
   x_angle = 25,
   
@@ -109,6 +109,7 @@ library(scales)         # plot scales
 library(zoo)            # rolling means
 
 ## functions
+source("source/functions/calculate_days.R")    # calculate days since infections
 source("source/functions/map_breaks.R")        # creating map beaks
 source("source/functions/plots.R")             # standardized plots
 source("source/functions/round_any.R")         # rounding
