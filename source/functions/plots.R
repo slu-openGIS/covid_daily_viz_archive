@@ -246,6 +246,10 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
         subtitle = paste0("Northeastern Missouri Focus\n",as.character(plot_date), 
                           " through ", as.character(date))
       )
+    } else if (subtype == "St. Louis"){
+      p <- p + labs(
+        subtitle = paste0(as.character(plot_date), " through ", as.character(date))
+      )
     }
     
   }

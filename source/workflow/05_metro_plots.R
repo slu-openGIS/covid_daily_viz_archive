@@ -143,6 +143,42 @@ save_plots(filename = "results/low_res/metro/e_new_case.png", plot = p, preset =
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
+# per-capita 7-day average ####
+
+## subset data
+metro_subset <- filter(metro_data, report_date >= values$date-20)
+
+## address negative values
+metro_subset <- mutate(metro_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
+
+## define top_val
+top_val <- round_any(x = max(metro_subset$case_avg_rate, na.rm = TRUE), accuracy = 10, f = ceiling)
+
+## create factors
+metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, case_avg_rate))
+
+## create plot
+p <- facet_rate(metro_subset, 
+                type = "metro", 
+                pal = cols, 
+                x_breaks = values$date_breaks_facet,
+                y_breaks = 10,
+                y_upper_limit = top_val,
+                highlight = unique(metro_subset$geoid),
+                plot_date = values$plot_date,
+                date = values$date,
+                title = "Pace of New COVID-19 Cases by Metro Area",
+                caption = values$caption_text_census,
+                last3 = TRUE)
+
+# values$caption_text_census
+
+## save plot
+# save_plots(filename = "results/high_res/metro/e_new_case_last21.png", plot = p, preset = "lg")
+# save_plots(filename = "results/low_res/metro/e_new_case_last21.png", plot = p, preset = "lg", dpi = 72)
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
 # create days from first day where average confirmed infections were at least 5
 
 ## subset data

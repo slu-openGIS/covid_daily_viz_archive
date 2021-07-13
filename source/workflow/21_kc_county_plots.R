@@ -136,6 +136,42 @@ save_plots(filename = "results/low_res/kc_metro/e_new_case.png", plot = p, prese
 
 #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
 
+# plot 7-day average rate ####
+
+## subset data
+county_subset <- filter(county_data, report_date >= values$date-20) %>%
+  filter(geoid %in% county_focal)
+
+## address negative values
+county_subset <- mutate(county_subset, case_avg_rate = ifelse(case_avg_rate < 0, 0, case_avg_rate))
+
+## define top_val
+top_val <- round_any(x = max(county_subset$case_avg_rate, na.rm = TRUE), accuracy = 10, f = ceiling)
+
+## create factors
+county_subset <- mutate(county_subset, factor_var = fct_reorder2(county, report_date, case_avg_rate))
+
+## create plot
+p <- facet_rate(county_subset, 
+                type = "county", 
+                subtype = "Kansas City",
+                pal = cols, 
+                x_breaks = values$date_breaks_3days,
+                y_breaks = 10,
+                y_upper_limit = top_val,
+                highlight = county_focal,
+                plot_date = values$date-20,
+                date = values$date,
+                title = "Pace of New COVID-19 Cases in Select Missouri Counties",
+                caption = values$caption_text_census,
+                last3 = TRUE)
+
+## save plot
+save_plots(filename = "results/high_res/kc_metro/e_new_case_last21.png", plot = p, preset = "lg")
+save_plots(filename = "results/low_res/kc_metro/e_new_case_last21.png", plot = p, preset = "lg", dpi = 72)
+
+#===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===# #===#
+
 # cumulative mortality, map ####
 
 ## create breaks
