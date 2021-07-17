@@ -69,8 +69,8 @@ mo_data %>%
   mutate(deaths_ltc_pct = deaths_ltc_all/deaths*100) -> mo_data
 ```
 
-<div class="note">
-<b>This section was last updated on `r last_update$current_date`. The nursing home data are current as of `r last_update$last_date[2]`.</b>
+<div class="alert">
+<b>This section will not be updated again until at least 2021-07-29. I apologize for the inconvenience. -Chris.</b>
 </div>
 <br>
 

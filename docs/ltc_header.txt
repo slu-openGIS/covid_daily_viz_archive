@@ -1,0 +1,4 @@
+<div class="note">
+<b>This section was last updated on `r last_update$current_date`. The nursing home data are current as of `r last_update$last_date[2]`.</b>
+</div>
+<br>

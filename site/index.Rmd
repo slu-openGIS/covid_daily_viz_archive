@@ -74,7 +74,7 @@ load(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "source", "hhs",
 ```
 
 <div class="alert">
-<b>Updates have resumed as of 2021-07-05. Please note, however, that St. Louis Pandemic Task Force hospitalization data will not resume updates until 2021-07-06. Likewise, there have been delays in reporting across the board because of the holiday weekend, so many counties are showing slight downward trends in their 7-day averages right now. This is artifact from the holiday weekend, and I anticipate that many of these decreases will be erased when the site is updated on Wednesday, 2021-07-07. -Chris </b>
+<b>Updates to nursing home and vaccination disparities data have been paused as of 2021-07-16. I am hopeful that they can return around 2021-07-29. I apologize for the inconvenience. -Chris </b>
 </div>
 <br>
 
