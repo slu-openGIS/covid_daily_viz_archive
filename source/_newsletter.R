@@ -58,7 +58,7 @@ rm(sign)
 county_data %>%
   select(county, case_avg_rate) %>%
   arrange(desc(case_avg_rate)) %>%
-  slice(head(row_number(), 8)) %>%
+  slice(head(row_number(), 10)) %>%
   mutate(text = ifelse(row_number() == 1, paste0(county, " (", round(case_avg_rate, digits = 2), " per 100,000),"), NA)) %>%
   mutate(text = ifelse(row_number() == n(), paste0("and ", county, " (", round(case_avg_rate, digits = 2), ")"), text)) %>%
   mutate(text = ifelse(is.na(text) == TRUE, paste0(county, " (", round(case_avg_rate, digits = 2), "),"), text)) %>%
