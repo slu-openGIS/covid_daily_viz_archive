@@ -10,13 +10,13 @@ district <-  read_csv("data/MO_HEALTH_Covid_Tracking/data/district/daily_snapsho
 # plot first dose rates
 
 ## define top_val
-top_val <- round_any(x = max(district$initiated_rate, na.rm = TRUE), accuracy = 20, f = ceiling)
+top_val <- round_any(x = max(district$initiated_rate, na.rm = TRUE), accuracy = 25, f = ceiling)
 
 ## create plot
 p <- ggplot(data = district, mapping = aes(x = reorder(district, -initiated_rate), y = initiated_rate)) +
   geom_bar(position = "dodge", stat = "identity", width = .65, show.legend = FALSE,
            fill = RColorBrewer::brewer.pal(4, "Set1")[4]) +
-  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 20)) +
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 25)) +
   labs(
     title = "Initiated Vaccinations by MO Highway Patrol District",
     subtitle = paste0("Current as of ", as.character(date)),
@@ -35,13 +35,13 @@ save_plots(filename = "results/low_res/district/a_vaccine_initial.png", plot = p
 # plot completed dose rates
 
 ## define top_val
-top_val <- round_any(x = max(district$complete_rate, na.rm = TRUE), accuracy = 20, f = ceiling)
+top_val <- round_any(x = max(district$complete_rate, na.rm = TRUE), accuracy = 25, f = ceiling)
 
 ## create plot
 p <- ggplot(data = district, mapping = aes(x = reorder(district, -complete_rate), y = complete_rate)) +
   geom_bar(position = "dodge", stat = "identity", width = .65, show.legend = FALSE,
            fill = RColorBrewer::brewer.pal(4, "Set1")[4]) +
-  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 20)) +
+  scale_y_continuous(limits = c(0, top_val), breaks = seq(0, top_val, by = 25)) +
   labs(
     title = "Completed Vaccinations by MO Highway Patrol District",
     subtitle = paste0("Current as of ", as.character(date)),
