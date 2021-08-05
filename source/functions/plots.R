@@ -119,7 +119,7 @@ facet_rate <- function(.data, type, subtype = NULL, pal, x_breaks, y_breaks, y_u
       # create data frame
       vline_df <- data.frame(
         report_date = rep(as.Date("2021-03-08"), 9),
-        county = c("Caldwell", "Cass", "Clay", "Clinton", "Jackson",
+        county = c("Bates", "Cass", "Clay", "Clinton", "Jackson",
                    "Kansas City", "Lafayette", "Platte", "Ray")
       )
       
