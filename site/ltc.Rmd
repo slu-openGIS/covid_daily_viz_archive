@@ -69,11 +69,6 @@ mo_data %>%
   mutate(deaths_ltc_pct = deaths_ltc_all/deaths*100) -> mo_data
 ```
 
-<div class="alert">
-<b>This section will not be updated again until at least 2021-07-29. I apologize for the inconvenience. -Chris.</b>
-</div>
-<br>
-
 COVID-19 has been implicated in substantial morbidity and mortality in nursing home residents since the onset of the outbreak in the United States. However, it is still unknown as to how the cases are distributed geographically and if clusters are correlated with overall geographic burden of COVID-19 cases. Moreover, the State of Missouri and local county health departments have refused, generally, to name nursing homes and long term care facilities (LTCs) associated with COVID-19 outbreaks. Using the Centers for Medicare and Medicaid Services (CMS) nursing home COVID-19 data set, which is <a href="https://data.cms.gov/Special-Programs-Initiatives-COVID-19-Nursing-Home/COVID-19-Nursing-Home-Dataset/s2uc-8wxp" target="_blank">publicly available</a>, my colleague <a href="https://www.slu.edu/slucor/faculty/wiemken-timothy.php" target="_blank">Timothy Wiemken</a> and I have put together the following maps and tables that illustrate the extent of COVID-19 within facilities and relative to the counties these facilities reside in.
 
 ## Missouri Overview {.padtop}

@@ -73,11 +73,6 @@ load(here::here("data", "MO_HEALTH_Covid_Tracking", "data", "source", "hhs",
                 "last_update.rda"))
 ```
 
-<div class="alert">
-<b>Updates to nursing home and vaccination disparities data have been paused as of 2021-07-16. I am hopeful that they can return around 2021-07-29. I apologize for the inconvenience. -Chris </b>
-</div>
-<br>
-
 <div class="note">
 <b>The site was last updated on `r Sys.Date()`. All county, metro, and state level morbidity and mortality data are current as of `r Sys.Date()-1`. ZIP code, disparity, and St. Louis hospitalization data are all current as of `r Sys.Date()`. Hospitalization data at the regional and metro levels are all current as of `r last_update$last_date`. </b>
 </div>
