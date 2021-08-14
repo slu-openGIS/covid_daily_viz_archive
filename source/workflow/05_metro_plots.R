@@ -232,7 +232,7 @@ p <- ggplot(data = metro_subset) +
 metro_subset <- filter(metro_data, report_date >= values$plot_date)
 
 ## define top_val
-top_val <- round_any(x = max(metro_subset$mortality_rate), accuracy = .1, f = ceiling)
+top_val <- round_any(x = max(metro_subset$mortality_rate), accuracy = .2, f = ceiling)
 
 ## create factors
 metro_subset <- mutate(metro_subset, factor_var = fct_reorder2(short_name, report_date, mortality_rate))
@@ -245,7 +245,7 @@ p <- ggplot() +
              size = 4, show.legend = FALSE) +
   scale_colour_manual(values = cols, name = "Metro Area") +
   scale_x_date(date_breaks = values$date_breaks, date_labels = "%b") +
-  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .1)) +
+  scale_y_continuous(limits = c(0,top_val), breaks = seq(0, top_val, by = .2)) +
   labs(
     title = "Reported COVID-19 Mortality by Metro Area",
     subtitle = paste0(as.character(values$plot_date), " through ", as.character(values$date)),
