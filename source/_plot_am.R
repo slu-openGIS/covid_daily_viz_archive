@@ -44,7 +44,7 @@ values <- list(
   county_log_x = -3,
   county_log_y = .4,
   
-  regional_current_x = -310,
+  regional_current_x = -320,
   
   caption_text = "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project",
   caption_text_census = "Plot by Christopher Prener, Ph.D.\nData via the New York Times COVID-19 Project and the U.S. Census Bureau",
